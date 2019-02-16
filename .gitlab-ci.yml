@@ -14,7 +14,8 @@ deploy_master:
         - ./mvnw install
         - npm i
         - SPRING_PROFILES_ACTIVE=$ENV_PROFILE ./mvnw -Pprod clean package -DskipTests
-        - java -jar target/gps-app-0.0.1-SNAPSHOT.war > nohup.out &
+        - java -jar target/gps-app-0.0.1-SNAPSHOT.war &
+        - exit
     environment:
         name: master
         url: 50.116.45.115:8080
