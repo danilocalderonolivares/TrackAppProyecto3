@@ -1,0 +1,338 @@
+{
+	"variables": [],
+	"info": {
+		"name": "todoAPI",
+		"_postman_id": "fb0e3325-7387-32e9-c078-22cd05860c13",
+		"description": "Pedidos para el api del todo list",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAll",
+			"request": {
+				"url": "localhost:8080/api/todo/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Solicitar todos los registros"
+			},
+			"response": [
+				{
+					"id": "87c49fd1-3622-47da-bf8c-333a3f0fb007",
+					"name": "getAll",
+					"originalRequest": {
+						"url": "localhost:8080/api/todo/",
+						"method": "GET",
+						"header": [],
+						"body": {}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 02 Feb 2019 00:55:05 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 248,
+					"body": "[{\"id\":2,\"category\":\"task\",\"description\":\"You must complete this task 2\",\"status\":\"incomplete\",\"createdDate\":\"2019-01-31\"},{\"id\":3,\"category\":\"task\",\"description\":\"Pay bills\",\"status\":\"complete\",\"createdDate\":\"2019-02-01\"}]"
+				}
+			]
+		},
+		{
+			"name": "getOneById",
+			"request": {
+				"url": "localhost:8080/api/todo/3",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\t\"category\": \"task\",\n        \"description\": \"Pay bills\",\n        \"status\": \"incomplete\",\n        \"createdDate\": \"2019-02-01\"\n}"
+				},
+				"description": "Trae un registro por ID"
+			},
+			"response": [
+				{
+					"id": "053c0b84-feb7-43cf-9b6b-a16af690fe24",
+					"name": "getOneById",
+					"originalRequest": {
+						"url": "localhost:8080/api/todo/3",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\"category\": \"task\",\n        \"description\": \"Pay bills\",\n        \"status\": \"incomplete\",\n        \"createdDate\": \"2019-02-01\"\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 02 Feb 2019 00:57:37 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 35,
+					"body": "{\"id\":3,\"category\":\"task\",\"description\":\"Pay bills\",\"status\":\"complete\",\"createdDate\":\"2019-02-01\"}"
+				}
+			]
+		},
+		{
+			"name": "getAllByCategory",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/api/todo/?category=task",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"todo",
+						""
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "task",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Trae todos los registros que cumplan con la categoria que se envia por parametro"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllByDescription",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/api/todo/?description=Pay%20Bills",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"todo",
+						""
+					],
+					"query": [
+						{
+							"key": "description",
+							"value": "Pay%20Bills",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Trae todos los registros que cumplan con la descripción que se envia por parametro"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllByStatus",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/api/todo/?status=incomplete",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"todo",
+						""
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "incomplete",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Trae todos los registros que cumplan con el estado que se envia por parametro"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllByCreatedDate",
+			"request": {
+				"url": {
+					"raw": "localhost:8080/api/todo/?createdDate=2019-02-01",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"todo",
+						""
+					],
+					"query": [
+						{
+							"key": "createdDate",
+							"value": "2019-02-01",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Trae todos los registros que cumplan con la fecha de creación que se envia por parametro"
+			},
+			"response": []
+		},
+		{
+			"name": "post",
+			"request": {
+				"url": "localhost:8080/api/todo/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"category\": \"task\",\n    \"description\": \"Pay bills2\",\n    \"status\": \"incomplete\",\n    \"createdDate\": \"2019-02-01\"\n}"
+				},
+				"description": "Crea un registro nuevo"
+			},
+			"response": []
+		},
+		{
+			"name": "put",
+			"request": {
+				"url": "localhost:8080/api/todo/",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3,\n    \"category\": \"task\",\n    \"description\": \"Pay bills\",\n    \"status\": \"complete\",\n    \"createdDate\": \"2019-02-01\"\n}"
+				},
+				"description": "Edita un registro"
+			},
+			"response": [
+				{
+					"id": "24b8c917-56bf-4f0a-bb9e-d12c8970c337",
+					"name": "put",
+					"originalRequest": {
+						"url": "localhost:8080/api/todo/",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 3,\n    \"category\": \"task\",\n    \"description\": \"Pay bills\",\n    \"status\": \"complete\",\n    \"createdDate\": \"2019-02-01\"\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json;charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 02 Feb 2019 01:07:22 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "transfer-encoding",
+							"key": "transfer-encoding",
+							"value": "chunked",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 25,
+					"body": "{\"id\":3,\"category\":\"task\",\"description\":\"Pay bills\",\"status\":\"complete\",\"createdDate\":\"2019-02-01\"}"
+				}
+			]
+		},
+		{
+			"name": "delete",
+			"request": {
+				"url": "localhost:8080/api/todo/5",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": "Borra un registro"
+			},
+			"response": []
+		}
+	]
+}

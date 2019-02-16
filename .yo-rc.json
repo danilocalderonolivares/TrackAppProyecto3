@@ -1,0 +1,35 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "com.pillars.gpsapp"
+        },
+        "jhipsterVersion": "5.8.1",
+        "applicationType": "monolith",
+        "baseName": "GPSApp",
+        "packageName": "com.pillars.gpsapp",
+        "packageFolder": "com/pillars/gpsapp",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "ehcache",
+        "enableHibernateCache": false,
+        "websocket": false,
+        "databaseType": "mongodb",
+        "devDatabaseType": "mongodb",
+        "prodDatabaseType": "mongodb",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": false,
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "NzQ1ZjZlODM1ZTE1MWRiOWE1ZjJkZDNlNGZmOTY3ZmFlOTA1NzhlMGRkNTViYWRjOTk3NTdmNDhhNmVkZWFhOGI0ZmQzYWI2YzFhM2FlYzQ1NzU1YjU4MGQzNmZkZjA3ZGZlODFkYTUxZGFiOGM1MzJhMDIxYTEwOTYzZWQ5MGM=",
+        "clientFramework": "angularX",
+        "useSass": true,
+        "clientPackageManager": "npm",
+        "testFrameworks": [],
+        "jhiPrefix": "jhi",
+        "entitySuffix": "",
+        "dtoSuffix": "DTO",
+        "otherModules": [],
+        "enableTranslation": false
+    }
+}
