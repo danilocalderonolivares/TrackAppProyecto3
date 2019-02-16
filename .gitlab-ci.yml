@@ -10,7 +10,7 @@ deploy_master:
     stage: deploy
     script:
         - chmod 777 -R ./
-        - rsync -rlDv --delete ./ /home/rigo/gpsapp
+        - rsync -rlDv -q --delete ./ /home/rigo/gpsapp
         - ./mnw install
         - npm i
         - SPRING_PROFILES_ACTIVE=$ENV_PROFILE ./mvnw -Pprod clean package -DskipTests
