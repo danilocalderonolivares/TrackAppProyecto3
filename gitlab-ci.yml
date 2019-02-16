@@ -1,0 +1,20 @@
+before_script:
+    - . ~/.nvm/nvm.sh
+    - nvm use 10.13.0
+    - npm install -g forever
+    - npm install -D event-stream
+
+stages:
+    - test
+    - deploy
+
+deploy_master:
+    stage: deploy
+    script:
+        - rsync -rlDv --delete ./ /home/rigo/gpsapp
+        - SPRING_PROFILES_ACTIVE=$ENV_PROFILE ./mvnw -Pprod clean package -DskipTests
+    environment:
+        name: master
+        url: 50.116.45.115:8080
+    only:
+        - master
