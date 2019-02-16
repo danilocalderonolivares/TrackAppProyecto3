@@ -13,6 +13,7 @@ deploy_master:
     script:
         - rsync -rlDv --delete ./ /home/rigo/gpsapp
         - SPRING_PROFILES_ACTIVE=$ENV_PROFILE ./mvnw -Pprod clean package -DskipTests
+        - java -jar target/gps-app-0.0.1-SNAPSHOT.war &
     environment:
         name: master
         url: 50.116.45.115:8080
