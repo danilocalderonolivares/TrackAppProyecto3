@@ -11,8 +11,10 @@ deploy_master:
     script:
         - chmod 777 -R ./
         - rsync -rlDv --delete ./ /home/rigo/gpsapp
+        - ./mnw install
+        - npm i
         - SPRING_PROFILES_ACTIVE=$ENV_PROFILE ./mvnw -Pprod clean package -DskipTests
-        - java -jar target/gps-app-0.0.1-SNAPSHOT.war &
+        - java -jar target/gps-app-0.0.1-SNAPSHOT.war > nohup.out &
     environment:
         name: master
         url: 50.116.45.115:8080
