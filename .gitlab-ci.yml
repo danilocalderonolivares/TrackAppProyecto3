@@ -9,6 +9,7 @@ stages:
 deploy_master:
     stage: deploy
     script:
+        - chmod 777 -R ./
         - rsync -rlDv --delete ./ /home/rigo/gpsapp
         - SPRING_PROFILES_ACTIVE=$ENV_PROFILE ./mvnw -Pprod clean package -DskipTests
         - java -jar target/gps-app-0.0.1-SNAPSHOT.war &
