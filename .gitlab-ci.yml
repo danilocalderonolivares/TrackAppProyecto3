@@ -11,7 +11,7 @@ deploy_master:
     script:
         - chmod 777 -R ./
         - rsync -rlDv -q --delete ./ /home/rigo/gpsapp
-        - ./mnw install
+        - ./mvnw install
         - npm i
         - SPRING_PROFILES_ACTIVE=$ENV_PROFILE ./mvnw -Pprod clean package -DskipTests
         - java -jar target/gps-app-0.0.1-SNAPSHOT.war > nohup.out &
