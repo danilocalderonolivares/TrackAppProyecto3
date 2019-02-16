@@ -1,8 +1,6 @@
 before_script:
     - . ~/.nvm/nvm.sh
     - nvm use 10.15.0
-    - npm install -g forever
-    - npm install -D event-stream
 
 stages:
     - test
