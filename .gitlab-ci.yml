@@ -13,7 +13,7 @@ deploy_master:
         - rsync -rlDv -q --delete ./ /home/rigo/gpsapp
         - ./mvnw install
         - npm i
-        - SPRING_PROFILES_ACTIVE=$ENV_PROFILE ./mvnw -Pprod clean package -DskipTests
+        - SPRING_PROFILES_ACTIVE=prod ./mvnw -Pprod clean package -DskipTests
         - java -jar target/gps-app-0.0.1-SNAPSHOT.war &
         - exit
     environment:
