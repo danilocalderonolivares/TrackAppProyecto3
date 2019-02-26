@@ -1,0 +1,41 @@
+{
+    "name": "Ruta",
+    "fields": [
+        {
+            "fieldName": "nombre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "borrado",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "ubicaciones",
+            "otherEntityName": "ubicacion",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "ubicacion"
+        }
+    ],
+    "changelogDate": "20190226065458",
+    "entityTableName": "ruta",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

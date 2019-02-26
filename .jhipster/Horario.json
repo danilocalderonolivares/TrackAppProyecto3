@@ -1,0 +1,78 @@
+{
+    "name": "Horario",
+    "fields": [
+        {
+            "fieldName": "lunesInico",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "lunesFin",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "martesInico",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "martesFin",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "miercolesInico",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "miercolesFin",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "juevesInico",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "juevesFin",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "viernesInico",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "viernesFin",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "sabadoInico",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "sabadoFin",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "domingoInico",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "domingoFin",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "empleado",
+            "otherEntityName": "empleado",
+            "otherEntityRelationshipName": "horarios"
+        }
+    ],
+    "changelogDate": "20190226065500",
+    "entityTableName": "horario",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

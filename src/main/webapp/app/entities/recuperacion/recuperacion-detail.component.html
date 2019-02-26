@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="recuperacion">
+            <h2><span>Recuperacion</span> {{recuperacion.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Activo</span></dt>
+                <dd>
+                    <span>{{recuperacion.activo}}</span>
+                </dd>
+                <dt><span>Borrado</span></dt>
+                <dd>
+                    <span>{{recuperacion.borrado}}</span>
+                </dd>
+                <dt><span>Admin</span></dt>
+                <dd>
+                    <div *ngIf="recuperacion.admin">
+                        <a [routerLink]="['/administrador', recuperacion.admin?.id, 'view']">{{recuperacion.admin?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Empleado</span></dt>
+                <dd>
+                    <div *ngIf="recuperacion.empleado">
+                        <a [routerLink]="['/empleado', recuperacion.empleado?.id, 'view']">{{recuperacion.empleado?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/recuperacion', recuperacion.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="empleado">
+            <h2><span>Empleado</span> {{empleado.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nombre</span></dt>
+                <dd>
+                    <span>{{empleado.nombre}}</span>
+                </dd>
+                <dt><span>Apellidos</span></dt>
+                <dd>
+                    <span>{{empleado.apellidos}}</span>
+                </dd>
+                <dt><span>Correo</span></dt>
+                <dd>
+                    <span>{{empleado.correo}}</span>
+                </dd>
+                <dt><span>Tipo</span></dt>
+                <dd>
+                    <span>{{empleado.tipo}}</span>
+                </dd>
+                <dt><span>Password</span></dt>
+                <dd>
+                    <span>{{empleado.password}}</span>
+                </dd>
+                <dt><span>Borrado</span></dt>
+                <dd>
+                    <span>{{empleado.borrado}}</span>
+                </dd>
+                <dt><span>Admin</span></dt>
+                <dd>
+                    <div *ngIf="empleado.admin">
+                        <a [routerLink]="['/administrador', empleado.admin?.id, 'view']">{{empleado.admin?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Ubicacion</span></dt>
+                <dd>
+                    <div *ngIf="empleado.ubicacion">
+                        <a [routerLink]="['/ubicacion', empleado.ubicacion?.id, 'view']">{{empleado.ubicacion?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Horarios</span></dt>
+                <dd>
+                    <div *ngIf="empleado.horarios">
+                        <a [routerLink]="['/horario', empleado.horarios?.id, 'view']">{{empleado.horarios?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/empleado', empleado.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
