@@ -1,0 +1,105 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-empleado-heading">Create or edit a Empleado</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!empleado.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="empleado.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="field_nombre"
+                        [(ngModel)]="empleado.nombre" required/>
+                    <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nombre?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_apellidos">Apellidos</label>
+                    <input type="text" class="form-control" name="apellidos" id="field_apellidos"
+                        [(ngModel)]="empleado.apellidos" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_correo">Correo</label>
+                    <input type="text" class="form-control" name="correo" id="field_correo"
+                        [(ngModel)]="empleado.correo" required/>
+                    <div [hidden]="!(editForm.controls.correo?.dirty && editForm.controls.correo?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.correo?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tipo">Tipo</label>
+                    <input type="text" class="form-control" name="tipo" id="field_tipo"
+                        [(ngModel)]="empleado.tipo" required/>
+                    <div [hidden]="!(editForm.controls.tipo?.dirty && editForm.controls.tipo?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.tipo?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_password">Password</label>
+                    <input type="text" class="form-control" name="password" id="field_password"
+                        [(ngModel)]="empleado.password" required/>
+                    <div [hidden]="!(editForm.controls.password?.dirty && editForm.controls.password?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.password?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_borrado">Borrado</label>
+                    <input type="checkbox" class="form-control" name="borrado" id="field_borrado"
+                        [(ngModel)]="empleado.borrado" />
+                    <div [hidden]="!(editForm.controls.borrado?.dirty && editForm.controls.borrado?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.borrado?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_admin">Admin</label>
+                    <select class="form-control" id="field_admin" name="admin" [(ngModel)]="empleado.admin">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="administradorOption.id === empleado.admin?.id ? empleado.admin : administradorOption" *ngFor="let administradorOption of admins; trackBy: trackAdministradorById">{{administradorOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ubicacion">Ubicacion</label>
+                    <select class="form-control" id="field_ubicacion" name="ubicacion" [(ngModel)]="empleado.ubicacion">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="ubicacionOption.id === empleado.ubicacion?.id ? empleado.ubicacion : ubicacionOption" *ngFor="let ubicacionOption of ubicacions; trackBy: trackUbicacionById">{{ubicacionOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_horarios">Horarios</label>
+                    <select class="form-control" id="field_horarios" name="horarios" [(ngModel)]="empleado.horarios" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="horarioOption.id === empleado.horarios?.id ? empleado.horarios : horarioOption" *ngFor="let horarioOption of horarios; trackBy: trackHorarioById">{{horarioOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

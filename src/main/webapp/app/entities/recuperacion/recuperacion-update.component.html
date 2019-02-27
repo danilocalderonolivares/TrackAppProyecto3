@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-recuperacion-heading">Create or edit a Recuperacion</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!recuperacion.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="recuperacion.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_activo">Activo</label>
+                    <input type="checkbox" class="form-control" name="activo" id="field_activo"
+                        [(ngModel)]="recuperacion.activo" />
+                    <div [hidden]="!(editForm.controls.activo?.dirty && editForm.controls.activo?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.activo?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_borrado">Borrado</label>
+                    <input type="checkbox" class="form-control" name="borrado" id="field_borrado"
+                        [(ngModel)]="recuperacion.borrado" />
+                    <div [hidden]="!(editForm.controls.borrado?.dirty && editForm.controls.borrado?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.borrado?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_admin">Admin</label>
+                    <select class="form-control" id="field_admin" name="admin" [(ngModel)]="recuperacion.admin">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="administradorOption.id === recuperacion.admin?.id ? recuperacion.admin : administradorOption" *ngFor="let administradorOption of admins; trackBy: trackAdministradorById">{{administradorOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_empleado">Empleado</label>
+                    <select class="form-control" id="field_empleado" name="empleado" [(ngModel)]="recuperacion.empleado">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="empleadoOption.id === recuperacion.empleado?.id ? recuperacion.empleado : empleadoOption" *ngFor="let empleadoOption of empleados; trackBy: trackEmpleadoById">{{empleadoOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

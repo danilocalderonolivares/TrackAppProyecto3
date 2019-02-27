@@ -1,0 +1,46 @@
+{
+    "name": "Recuperacion",
+    "fields": [
+        {
+            "fieldName": "activo",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "borrado",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "admin",
+            "otherEntityName": "administrador",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "recuperacion"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "empleado",
+            "otherEntityName": "empleado",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "recuperacion"
+        }
+    ],
+    "changelogDate": "20190226065457",
+    "entityTableName": "recuperacion",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

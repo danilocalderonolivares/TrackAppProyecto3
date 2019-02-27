@@ -1,0 +1,30 @@
+{
+    "name": "Ubicacion",
+    "fields": [
+        {
+            "fieldName": "longitud",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "latitud",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "ruta",
+            "otherEntityName": "ruta",
+            "otherEntityRelationshipName": "ubicaciones"
+        }
+    ],
+    "changelogDate": "20190226065451",
+    "entityTableName": "ubicacion",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

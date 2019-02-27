@@ -1,0 +1,135 @@
+{
+    "name": "Tarea",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "inicio",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fin",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "usarRuta",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "horaInicio",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "horaFin",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "notaExtra",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "firma",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "activa",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "completada",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "borrado",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "subtarea",
+            "otherEntityName": "subTarea",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "tarea"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "empleado",
+            "otherEntityName": "empleado",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "tarea"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "ubicacion",
+            "otherEntityName": "ubicacion",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "tarea"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "cliente",
+            "otherEntityName": "cliente",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "tarea"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "ruta",
+            "otherEntityName": "ruta",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "tarea"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "logs",
+            "otherEntityName": "log",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "log"
+        }
+    ],
+    "changelogDate": "20190226065450",
+    "entityTableName": "tarea",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
