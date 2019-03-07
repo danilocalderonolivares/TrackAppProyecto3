@@ -1,0 +1,35 @@
+@media print {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    @page {
+        size: Letter landscape;
+        margin: 0mm;
+    }
+    html,
+    body {
+        height: 100%;
+    }
+
+    .layout__bar,
+    .panel__options,
+    .print--hide,
+    .navbar,
+    .layout__menu,
+    .boton,
+    .fa {
+        display: none;
+    }
+}
+
+@media screen {
+    .screen--hide {
+        display: none;
+    }
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid $grisc;
+}

@@ -1,0 +1,131 @@
+%border-radius-top {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+%border-radius-bottom {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.img-responsive {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.img-center {
+    display: block;
+    margin: 0 auto;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.no-border {
+    border: 0;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.no-display {
+    display: none;
+}
+
+.sombra {
+    box-shadow: 0 2px 2px 0 $sombra1, 0 1px 5px 0 $sombra2, 0 3px 1px -2px $sombra3;
+}
+
+.sombra-media {
+    box-shadow: 0 2px 4px transparentize($negro4, 0.5), 0 4px 8px transparentize($gris6, 0.7);
+}
+
+.deshabilitado {
+    cursor: not-allowed;
+    opacity: 0.6;
+
+    * {
+        pointer-events: none;
+    }
+}
+
+.float--right {
+    float: right;
+    position: relative;
+}
+
+.float--left {
+    float: left;
+    position: relative;
+}
+
+.input__tabla {
+    max-width: 165px;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.no--list-style {
+    list-style: none;
+}
+
+.ul--no-padding {
+    padding: 0;
+}
+
+.ul--no-margin {
+    margin: 0;
+}
+
+%colorgraph {
+    &::after {
+        background-image: $gradient;
+        content: '';
+        display: block;
+        height: 3px;
+        width: 100%;
+    }
+}
+
+.hr {
+    @extend %colorgraph;
+    border: 3px;
+
+    &::after {
+        background-image: $gradient-pastel;
+        height: 1px;
+    }
+}
+
+.no-padding-bottom {
+    padding-bottom: 0;
+}
+
+.grid--padding {
+    [class^='col-'] {
+        padding-left: 0;
+        &:last-child {
+            padding-right: 0;
+        }
+    }
+}
+
+.inline {
+    display: inline;
+}
+
+.clear-both {
+    clear: both;
+}

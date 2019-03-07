@@ -1,0 +1,96 @@
+@mixin boton-expecial($tipo, $color-icono, $icono, $animacion-icono, $texto) {
+    @extend #{$tipo};
+
+    &::before {
+        @extend %font-awesome;
+        color: $color-icono;
+        content: $icono;
+        display: inline-block;
+        text-shadow: 0 1px 1px $sombra1;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: optimizeLegibility;
+        font-weight: 500;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    &::after {
+        @extend %sans;
+        display: inline-block;
+        text-shadow: 0 1px 1px $sombra1;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: optimizeLegibility;
+        font-weight: 500;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    @media (min-width: $reflex-md) {
+        &::after {
+            content: $texto;
+            padding-left: 0.5em;
+        }
+    }
+}
+
+.boton--guardar {
+    @include boton-expecial('.boton--verde', $kiwi-vivo, '\f019', '.flip', 'Guardar');
+}
+
+.boton--aceptar {
+    @include boton-expecial('.boton--verde', $kiwi-vivo, '\f058', '.flip', 'Aceptar');
+}
+
+.boton--cancelar {
+    @include boton-expecial('.boton--negro4', $rosado-vivo, '\f05e', '.rubberBand', 'Cancelar');
+}
+
+.boton--nuevo {
+    @include boton-expecial('.boton--cyan', $cyan-pastel, '\f15b', '.flipInX', 'Nuevo');
+}
+
+.boton--eliminar {
+    @include boton-expecial('.boton--rojo', $rojo-pastel, '\f1f8', '.swing', 'Eliminar');
+}
+
+.boton--editar {
+    @include boton-expecial('.boton--azul', $indigo-opaco, '\f040', '.tada', 'Editar');
+}
+
+.boton--buscar {
+    @include boton-expecial('.boton--celeste', $indigo, '\f002', '.pulse', 'Buscar');
+}
+
+.boton--excel {
+    @include boton-expecial('.boton--negro4', $verde-vivo, '\f1c3', '.pulse', 'Exportar a Excel');
+    background: $excel;
+}
+
+.boton--imprimir {
+    @include boton-expecial('.boton--negro4', $naranja-vivo, '\f02f', '', 'Imprimir');
+}
+
+.boton--siguiente {
+    @include boton-expecial('.boton--negro4', $cyan-vivo, '\f061', '', 'Siguiente');
+}
+
+.boton--anterior {
+    @include boton-expecial('.boton--negro4', $cyan-vivo, '\f060', '', 'Anterior');
+}
+
+.boton--volver {
+    @extend .boton--s;
+    @include boton-expecial('.boton--negro4', $grisa, '\f3e5', '', 'Volver');
+}
+
+.boton--enviar {
+    @include boton-expecial('.boton--cyan', $blanco, '\f1d8', '', 'Enviar');
+}
+
+.boton--musgo {
+    @include boton-color($musgo-tema, $blanco);
+}
+
+.boton--celeste-tema {
+    @include boton-color($celeste-tema, $blanco);
+}

@@ -1,0 +1,327 @@
+.boton {
+    @extend %sans;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.9em;
+    padding: 0.4em 0.6em;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+
+    span {
+        display: none;
+    }
+
+    @media (min-width: $reflex-md) {
+        span {
+            display: inline;
+        }
+    }
+
+    &:active {
+        animation-delay: 0s !important;
+        animation-duration: 0.45s !important;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+    &::-moz-focus-inner {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.boton--xs {
+    font-size: 0.7em;
+    padding: 0.3em 0.5em;
+}
+
+.boton--s {
+    font-size: 0.75em;
+    padding: 0.5em 0.7em;
+}
+
+.boton--l {
+    font-size: 1.2em;
+    padding: 0.7em 1em;
+}
+
+.boton--xl {
+    font-size: 1.5em;
+}
+
+@mixin boton-color($fondo, $letra) {
+    background: $fondo;
+    border: 1px solid darken($fondo, 10%);
+    color: $letra;
+    transition: ease 0.05s all;
+    margin-right: 5px;
+    box-shadow: 0px 4px 0 darken($fondo, 7%), 0px 5px 0px darken($fondo, 19%), 0 7px 4px 0 $sombra1;
+
+    &:hover {
+        border: 1px solid $fondo;
+        background: lighten($fondo, 10%);
+    }
+
+    &:active {
+        outline: none;
+        background: $fondo;
+        border: 1px solid darken($fondo, 15%);
+        box-shadow: 0px 2px 0 darken($fondo, 7%), 0px 3px 0px darken($fondo, 19%), 0 5px 4px 0 $sombra1;
+        transform: translateY(2px);
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &:disabled {
+        background: transparentize(darken($fondo, 10%), 0.3);
+        border-bottom: 0;
+        box-shadow: 0 0 0 $negro;
+        color: transparentize($letra, 0.3);
+        pointer-events: none;
+        outline: none;
+        &:hover {
+            background: transparentize(darken($fondo, 10%), 0.3);
+            box-shadow: 0 0 0 $negro;
+        }
+    }
+}
+
+@mixin boton-invertido($color) {
+    @extend .text--bold;
+    background: $negro4;
+    box-shadow: inset 0 0 0 2px $color;
+    color: lighten($color, 15%);
+
+    &:hover {
+        box-shadow: inset 0 0 0 2px $color, inset 0 0 3px 2px lighten($color, 10%);
+        text-shadow: 0 0 2px lighten($color, 10%);
+    }
+
+    &:disabled {
+        background: transparentize(darken($negro4, 10%), 0.3);
+        border-bottom: 0;
+        color: transparentize($color, 0.3);
+    }
+}
+
+.boton--negro {
+    @include boton-color($negro2, $blanco);
+}
+
+.boton--negro2 {
+    @include boton-color($negro2, $blanco);
+}
+
+.boton--negro4 {
+    @include boton-color($negro4, $blanco);
+}
+
+.boton--gris6 {
+    @include boton-color($gris6, $blanco);
+}
+
+.boton--gris8 {
+    @include boton-color($gris8, $negro);
+}
+
+.boton--grisa {
+    @include boton-color($grisa, $negro2);
+}
+
+.boton--grisc {
+    @include boton-color($grisc, $negro2);
+}
+
+.boton--grisd {
+    @include boton-color($grisd, $negro2);
+}
+
+.boton--grise {
+    @include boton-color($grise, $negro2);
+}
+
+.boton--blanco {
+    @include boton-color($blanco, $negro2);
+}
+
+.boton--lila {
+    @include boton-color($lila, $blanco);
+}
+
+.boton--morado {
+    @include boton-color($morado, $blanco);
+}
+
+.boton--indigo {
+    @include boton-color($indigo, $blanco);
+}
+
+.boton--azul {
+    @include boton-color($azul, $blanco);
+}
+
+.boton--celeste {
+    @include boton-color($celeste, $blanco);
+}
+
+.boton--cyan {
+    @include boton-color($cyan, $blanco);
+}
+
+.boton--turquesa {
+    @include boton-color($turquesa, $blanco);
+}
+
+.boton--verde {
+    @include boton-color($verde, $blanco);
+}
+
+.boton--kiwi {
+    @include boton-color($kiwi, $negro2);
+}
+
+.boton--lima {
+    @include boton-color($lima, $negro2);
+}
+
+.boton--amarillo {
+    @include boton-color($amarillo, $negro2);
+}
+
+.boton--ambar {
+    @include boton-color($ambar, $negro2);
+}
+
+.boton--naranja {
+    @include boton-color($naranja, $blanco);
+}
+
+.boton--tomate {
+    @include boton-color($tomate, $blanco);
+}
+
+.boton--rojo {
+    @include boton-color($rojo, $blanco);
+}
+
+.boton--rosado {
+    @include boton-color($rosado, $blanco);
+}
+
+.boton--negro-o {
+    @include boton-invertido($negro);
+}
+
+.boton--negro2-o {
+    @include boton-invertido($negro2);
+}
+
+.boton--negro4-o {
+    @include boton-invertido($negro4);
+}
+
+.boton--lila-o {
+    @include boton-invertido($lila-vivo);
+}
+
+.boton--morado-o {
+    @include boton-invertido($morado-vivo);
+}
+
+.boton--indigo-o {
+    @include boton-invertido($indigo-vivo);
+}
+
+.boton--azul-o {
+    @include boton-invertido($azul-vivo);
+}
+
+.boton--celeste-o {
+    @include boton-invertido($celeste-vivo);
+}
+
+.boton--cyan-o {
+    @include boton-invertido($cyan-vivo);
+}
+
+.boton--turquesa-o {
+    @include boton-invertido($turquesa-vivo);
+}
+
+.boton--verde-o {
+    @include boton-invertido($verde-vivo);
+}
+
+.boton--kiwi-o {
+    @include boton-invertido($kiwi-vivo);
+}
+
+.boton--lima-o {
+    @include boton-invertido($lima-vivo);
+}
+
+.boton--amarillo-o {
+    @include boton-invertido($amarillo-vivo);
+}
+
+.boton--ambar-o {
+    @include boton-invertido($ambar-vivo);
+}
+
+.boton--naranja-o {
+    @include boton-invertido($naranja-vivo);
+}
+
+.boton--tomate-o {
+    @include boton-invertido($tomate-vivo);
+}
+
+.boton--rojo-o {
+    @include boton-invertido($rojo-vivo);
+}
+
+.boton--rosado-o {
+    @include boton-invertido($rosado-vivo);
+}
+
+.boton--blanco-o {
+    @include boton-invertido($grisd);
+}
+
+.boton--redondo {
+    border-radius: 100px;
+    padding: 1em;
+}
+
+.boton-group {
+    @extend .sombra;
+    border-radius: 4px;
+    display: inline-flex;
+
+    .boton {
+        border-radius: 0;
+        border-right: 1px solid $sombra1;
+        box-shadow: 0 0 0 0;
+        margin: 0;
+
+        &:first-child {
+            border-bottom-left-radius: 4px;
+            border-top-left-radius: 4px;
+        }
+
+        &:last-child {
+            border-bottom-right-radius: 4px;
+            border-right: 0;
+            border-top-right-radius: 4px;
+        }
+    }
+}
