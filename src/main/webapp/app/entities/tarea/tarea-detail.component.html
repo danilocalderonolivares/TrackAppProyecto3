@@ -5,11 +5,11 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Title</span></dt>
+                <dt><span>Titulo</span></dt>
                 <dd>
                     <span>{{tarea.title}}</span>
                 </dd>
-                <dt><span>Descripcion</span></dt>
+                <dt><span>Descripción</span></dt>
                 <dd>
                     <span>{{tarea.descripcion}}</span>
                 </dd>
@@ -49,10 +49,6 @@
                 <dd>
                     <span>{{tarea.completada}}</span>
                 </dd>
-                <dt><span>Borrado</span></dt>
-                <dd>
-                    <span>{{tarea.borrado}}</span>
-                </dd>
                 <dt><span>Subtarea</span></dt>
                 <dd>
                     <div *ngIf="tarea.subtarea">
@@ -77,16 +73,10 @@
                         <a [routerLink]="['/cliente', tarea.cliente?.id, 'view']">{{tarea.cliente?.id}}</a>
                     </div>
                 </dd>
-                <dt><span>Ruta</span></dt>
-                <dd>
+                <dt *ngIf="tarea.usarRuta"><span>Ruta</span></dt>
+                <dd *ngIf="tarea.usarRuta">
                     <div *ngIf="tarea.ruta">
                         <a [routerLink]="['/ruta', tarea.ruta?.id, 'view']">{{tarea.ruta?.id}}</a>
-                    </div>
-                </dd>
-                <dt><span>Logs</span></dt>
-                <dd>
-                    <div *ngIf="tarea.logs">
-                        <a [routerLink]="['/log', tarea.logs?.id, 'view']">{{tarea.logs?.id}}</a>
                     </div>
                 </dd>
             </dl>

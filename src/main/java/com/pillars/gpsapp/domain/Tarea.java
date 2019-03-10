@@ -42,11 +42,9 @@ public class Tarea implements Serializable {
     @Field("usar_ruta")
     private Boolean usarRuta;
 
-    @NotNull
     @Field("hora_inicio")
     private LocalDate horaInicio;
 
-    @NotNull
     @Field("hora_fin")
     private LocalDate horaFin;
 
