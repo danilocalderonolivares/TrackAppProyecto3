@@ -34,6 +34,7 @@ deploy_master:
 run_Release:
     stage: run
     script:
+        - pwd
         - sh scripts/startMVNdev.sh
     environment:
         name: Release
@@ -44,6 +45,7 @@ run_Release:
 run_master:
     stage: run
     script:
+        - pwd
         - sh scripts/startMVN.sh
     environment:
         name: master
