@@ -5,6 +5,7 @@ before_script:
 stages:
     - test
     - deploy
+    - run
 
 deploy_Release:
     stage: deploy
@@ -12,8 +13,6 @@ deploy_Release:
         - chmod 777 -R ./
         - rsync -rlDv -q --delete ./ /home/rigo/gpsapp
         - ./mvnw clean package -DskipTests
-        - sh scripts/startMVNdev.sh
-        - exit
     environment:
         name: Release
         url: 50.116.45.115:8080
@@ -26,8 +25,28 @@ deploy_master:
         - chmod 777 -R ./
         - rsync -rlDv -q --delete ./ /home/rigo/gpsapp
         - ./mvnw clean package -DskipTests
+    environment:
+        name: master
+        url: 50.116.45.115:9090
+    only:
+        - master
+
+run_Release:
+    stage: run
+    script:
+        - pwd
+        - sh scripts/startMVNdev.sh
+    environment:
+        name: Release
+        url: 50.116.45.115:8080
+    only:
+        - Release
+
+run_master:
+    stage: run
+    script:
+        - pwd
         - sh scripts/startMVN.sh
-        - exit
     environment:
         name: master
         url: 50.116.45.115:9090
