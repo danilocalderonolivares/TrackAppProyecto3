@@ -40,7 +40,7 @@ deploy_master:
 run_Release:
     stage: run
     script:
-        - sh ./scripts/startMVNdev.sh
+        - sh ./scripts/startMVNdev.sh &
     environment:
         name: Release
         url: 50.116.45.115:8080
@@ -50,7 +50,7 @@ run_Release:
 run_master:
     stage: run
     script:
-        - sh ./scripts/startMVN.sh
+        - sh ./scripts/startMVN.sh &
     environment:
         name: master
         url: 50.116.45.115:9090
