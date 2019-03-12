@@ -12,7 +12,7 @@ deploy_Release:
         - chmod 777 -R ./
         - rsync -rlDv -q --delete ./ /home/rigo/gpsapp
         - ./mvnw clean package -DskipTests
-        - sh scripts/startMVNdev.sh
+        - sh ./scripts/startMVNdev.sh
         - exit
     environment:
         name: Release
@@ -26,7 +26,7 @@ deploy_master:
         - chmod 777 -R ./
         - rsync -rlDv -q --delete ./ /home/rigo/gpsapp
         - SPRING_PROFILES_ACTIVE=prod ./mvnw -Pprod clean package -DskipTests
-        - sh scripts/startMVN.sh
+        - sh ./scripts/startMVN.sh
         - exit
     environment:
         name: master
