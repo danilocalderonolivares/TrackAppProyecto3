@@ -40,11 +40,11 @@ public class Mensaje implements Serializable {
 
     @DBRef
     @Field("admin")
-    private Administrador admin;
+    private User admin;
 
     @DBRef
     @Field("empleado")
-    private Empleado empleado;
+    private User empleado;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -107,29 +107,29 @@ public class Mensaje implements Serializable {
         this.borrado = borrado;
     }
 
-    public Administrador getAdmin() {
+    public User getAdmin() {
         return admin;
     }
 
-    public Mensaje admin(Administrador administrador) {
+    public Mensaje admin(User administrador) {
         this.admin = administrador;
         return this;
     }
 
-    public void setAdmin(Administrador administrador) {
+    public void setAdmin(User administrador) {
         this.admin = administrador;
     }
 
-    public Empleado getEmpleado() {
+    public User getEmpleado() {
         return empleado;
     }
 
-    public Mensaje empleado(Empleado empleado) {
+    public Mensaje empleado(User empleado) {
         this.empleado = empleado;
         return this;
     }
 
-    public void setEmpleado(Empleado empleado) {
+    public void setEmpleado(User empleado) {
         this.empleado = empleado;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove

@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import { IEmpleado } from 'app/shared/model/empleado.model';
+import { IUser } from 'app/core';
 
 export interface IHorario {
     id?: string;
@@ -17,7 +17,7 @@ export interface IHorario {
     sabadoFin?: Moment;
     domingoInico?: Moment;
     domingoFin?: Moment;
-    empleados?: IEmpleado[];
+    empleados?: IUser[];
 }
 
 export class Horario implements IHorario {
@@ -37,6 +37,6 @@ export class Horario implements IHorario {
         public sabadoFin?: Moment,
         public domingoInico?: Moment,
         public domingoFin?: Moment,
-        public empleados?: IEmpleado[]
+        public empleados?: IUser[]
     ) {}
 }

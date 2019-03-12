@@ -1,22 +1,15 @@
-import { IAdministrador } from 'app/shared/model/administrador.model';
-import { IEmpleado } from 'app/shared/model/empleado.model';
+import { IUser } from 'app/core';
 
 export interface IRecuperacion {
     id?: string;
     activo?: boolean;
     borrado?: boolean;
-    admin?: IAdministrador;
-    empleado?: IEmpleado;
+    admin?: IUser;
+    empleado?: IUser;
 }
 
 export class Recuperacion implements IRecuperacion {
-    constructor(
-        public id?: string,
-        public activo?: boolean,
-        public borrado?: boolean,
-        public admin?: IAdministrador,
-        public empleado?: IEmpleado
-    ) {
+    constructor(public id?: string, public activo?: boolean, public borrado?: boolean, public admin?: IUser, public empleado?: IUser) {
         this.activo = this.activo || false;
         this.borrado = this.borrado || false;
     }
