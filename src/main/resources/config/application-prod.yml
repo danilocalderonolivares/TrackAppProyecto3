@@ -58,6 +58,7 @@ spring:
 # ===================================================================
 server:
     port: 9090
+    address: 50.116.45.115
     compression:
         enabled: true
         mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json

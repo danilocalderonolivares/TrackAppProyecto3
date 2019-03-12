@@ -11,8 +11,8 @@ deploy_Release:
     script:
         - chmod 777 -R ./
         - rsync -rlDv -q --delete ./ /home/rigo/gpsapp
-        - SPRING_PROFILES_ACTIVE=dev ./mvnw -Pprod clean package -DskipTests
-        - java -jar target/gps-app-0.0.1-SNAPSHOT.war &
+        - ./mvnw clean package -DskipTests
+        - sh scripts/startMVNdev.sh
         - exit
     environment:
         name: Release
@@ -25,10 +25,8 @@ deploy_master:
     script:
         - chmod 777 -R ./
         - rsync -rlDv -q --delete ./ /home/rigo/gpsapp
-        - ./mvnw install
-        - npm i
         - SPRING_PROFILES_ACTIVE=prod ./mvnw -Pprod clean package -DskipTests
-        - java -jar target/gps-app-0.0.1-SNAPSHOT.war &
+        - sh scripts/startMVN.sh
         - exit
     environment:
         name: master
