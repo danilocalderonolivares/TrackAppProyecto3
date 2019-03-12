@@ -15,8 +15,6 @@ deploy_Release:
         - ./mvnw clean package -DskipTests
     artifacts:
         paths:
-            - node_modules/
-            - node/
             - target/
     environment:
         name: Release
@@ -32,8 +30,6 @@ deploy_master:
         - ./mvnw clean package -DskipTests
     artifacts:
         paths:
-            - node_modules/
-            - node/
             - target/
     environment:
         name: master
