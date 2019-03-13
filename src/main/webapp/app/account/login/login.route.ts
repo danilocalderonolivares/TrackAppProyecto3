@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
-import { loginComponent } from './login.component';
+import { LoginComponent } from './login.component';
 
 export const loginRoute: Route = {
     path: 'login',
-    component: loginComponent,
+    component: LoginComponent,
     data: {
         authorities: [],
         pageTitle: 'signin'

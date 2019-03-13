@@ -5,9 +5,10 @@ import { JhiEventManager } from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-login',
-    templateUrl: './login.component.html'
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.css']
 })
-export class loginComponent implements OnInit {
+export class LoginComponent implements OnInit {
     authenticationError: boolean;
     password: string;
     rememberMe: boolean;
@@ -37,8 +38,7 @@ export class loginComponent implements OnInit {
         this.loginService
             .login({
                 username: this.username,
-                password: this.password,
-                rememberMe: this.rememberMe
+                password: this.password
             })
             .then(() => {
                 this.eventManager.broadcast({

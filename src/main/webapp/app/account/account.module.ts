@@ -5,7 +5,7 @@ import { GpsAppSharedModule } from 'app/shared';
 
 import {
     PasswordStrengthBarComponent,
-    loginComponent,
+    LoginComponent,
     RegisterComponent,
     ActivateComponent,
     PasswordComponent,
@@ -19,7 +19,7 @@ import {
     imports: [GpsAppSharedModule, RouterModule.forChild(accountState)],
     declarations: [
         ActivateComponent,
-        loginComponent,
+        LoginComponent,
         RegisterComponent,
         PasswordComponent,
         PasswordStrengthBarComponent,

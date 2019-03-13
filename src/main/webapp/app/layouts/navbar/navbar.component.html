@@ -1,13 +1,14 @@
+<link rel="stylesheet" href="../../content/css/bootstrap.min.css">
 <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
     <div class="container">
-        <a class="navbar-brand" routerLink="/" >GPSApp</a>
+        <a class="navbar-brand"  routerLink="/" >GPSApp</a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"></button>
        <div [ngSwitch]="isAuthenticated()">
            <div class="collapse navbar-collapse" id="navcol-1" *ngSwitchCase="false">
-               <a class="btn btn-primary ml-auto" role="button" (click)="login()" id="login" style="color: white">Sign In</a>
+               <a class="btn btn-primary ml-auto" role="button" (click)="login()" style="color: white" id="login" >Sign in</a>
            </div>
            <div class="collapse navbar-collapse" id="btnLogout" *ngSwitchCase="true">
-               <a class="btn btn-primary ml-auto" (click)="logout()" id="logout" >Logout</a>
+               <a class="btn btn-primary ml-auto" (click)="logout()" style="color: white" id="logout" >Logout</a>
            </div>
 
        </div>

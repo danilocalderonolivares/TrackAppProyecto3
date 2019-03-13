@@ -1,3 +1,27 @@
+<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/sandstone/bootstrap.min.css" rel="stylesheet" integrity="sha384-G3Fme2BM4boCE9tHx9zHvcxaQoAkksPQa/8oyn1Dzqv7gdcXChereUsXGx6LtbqA" crossorigin="anonymous">
 <div class="container">
-    <h1>Login page</h1>
+        <div class="card border-primary mt-4 col-8">
+            <div class="card-header text-center">
+                <h1><strong>GPSApp</strong></h1>
+            </div>
+            <div class="card-body">
+                <div class="card-title">
+                    <h1>Ingrese sus credenciales</h1>
+                </div>
+                <form >
+                    <div class="form-group">
+                        <label class="username-label" for="username">Correo*</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Correo"
+                               [(ngModel)]="username">
+                    </div>
+                </form>
+                <div class="form-group">
+                    <label for="password">Contraseña*</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña"
+                           [(ngModel)]="password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block "(click)="login()"><h6 class="text-center">Inciar sesión</h6></button>
+            </div>
+        </div>
+
 </div>
