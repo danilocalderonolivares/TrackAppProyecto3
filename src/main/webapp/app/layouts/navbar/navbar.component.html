@@ -10,6 +10,25 @@
            <div class="collapse navbar-collapse" id="btnLogout" *ngSwitchCase="true">
                <a class="btn btn-primary ml-auto" (click)="logout()" style="color: white" id="logout" >Logout</a>
            </div>
+           <div class="collapse navbar-collapse" id="btnTarea" *ngSwitchCase="true">
+               <a class="btn btn-secondary ml-auto" routerLink="tarea" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()">
+                   <span>Tarea</span>
+               </a>
+           </div>
+           <div class="collapse navbar-collapse" id="btnUbicacion" *ngSwitchCase="true">
+               <a class="btn btn-secondary ml-auto" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
+
+                   <span>User management</span>
+               </a>
+           </div>
+           <div class="collapse navbar-collapse" id="btnUser" *ngSwitchCase="true">
+               <a class="btn btn-secondary" routerLink="ubicacion" routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                   <span>Ubicacion</span>
+               </a>
+           </div>
+
 
        </div>
     </div>
