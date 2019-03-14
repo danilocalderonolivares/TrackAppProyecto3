@@ -42,8 +42,8 @@ spring:
     mail:
         host: smtp.gmail.com
         port: 587
-        username: danilocalderonolivares@gmail.com
-        password: d@nilocalderon93
+        username: gpsapp2019@gmail.com
+        password: pillars2019
         protocol: smtp
         tls: true
         auth: true
