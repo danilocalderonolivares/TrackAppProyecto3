@@ -42,12 +42,12 @@ export class UserMgmtUpdateComponent implements OnInit {
 
     ngOnInit() {
         this.setCustomUserValues();
-        this.loadCustomUserData();
         this.isSaving = false;
         this.route.data.subscribe(({ user }) => {
             this.user = user.body ? user.body : user;
         });
 
+        this.loadCustomUserData();
         this.authorities = [];
         this.userService.authorities().subscribe(authorities => {
             this.authorities = authorities;
@@ -126,11 +126,15 @@ export class UserMgmtUpdateComponent implements OnInit {
     }
 
     private saveCustomUserInfo(result) {
-        this.customUser.id = null;
-        this.customUser.tipo = this.selectedType;
-        this.customUser.horarios = this.selectedSchedule;
-        this.customUser.idUsuarioRelacion = result.body.id;
-        this.empleadoService.create(this.customUser).subscribe(res => console.log(res), () => console.log());
+        if (this.user.id !== null) {
+            this.empleadoService.update(this.customUser).subscribe(res => console.log(res), res => console.log(res));
+        } else {
+            this.customUser.id = null;
+            this.customUser.tipo = this.selectedType;
+            this.customUser.horarios = this.selectedSchedule;
+            this.customUser.idUsuarioRelacion = result.body.id;
+            this.empleadoService.create(this.customUser).subscribe(res => console.log(res), res => console.log(res));
+        }
     }
 
     private onSaveError() {
@@ -143,7 +147,11 @@ export class UserMgmtUpdateComponent implements OnInit {
 
     private loadCustomUserData() {
         if (this.user.id !== null) {
-            this.userService.update(this.user).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
+            const test = this.empleadoService.findUserByIdRelationship(this.user.id).subscribe(res => {
+                this.customUser = res.body as IEmpleado;
+                this.selectedType = this.customUser.tipo;
+                this.selectedSchedule = this.customUser.horarios;
+            });
         }
     }
 }
