@@ -3,9 +3,17 @@
     <router-outlet name="navbar"></router-outlet>
 </div>
 <div class="">
-    <!--<div class="card jh-card">-->
+
+
+    <ng-container *ngIf="isAuthenticated() == false; else elseTemplate">
+        <router-outlet name="landing"></router-outlet>
+
+    </ng-container>
+    <ng-template #elseTemplate>
+        <router-outlet name="sidebar"></router-outlet>
         <router-outlet></router-outlet>
-        <!--<router-outlet name="popup"></router-outlet>-->
-    <!--</div>-->
+
+    </ng-template>
+
 
 </div>

@@ -20,6 +20,8 @@ import { GpsAppEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
+import { LandingComponent } from './layouts/landing/landing.component';
 
 @NgModule({
     imports: [
@@ -38,7 +40,15 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         GpsAppEntityModule,
         GpsAppAppRoutingModule
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
+    declarations: [
+        JhiMainComponent,
+        NavbarComponent,
+        ErrorComponent,
+        PageRibbonComponent,
+        FooterComponent,
+        SidebarComponent,
+        LandingComponent
+    ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
