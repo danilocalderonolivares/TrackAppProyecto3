@@ -7,6 +7,7 @@ import { Horario, IHorario } from 'app/shared/model/horario.model';
 import { ITipoEmpleado, TipoEmpleado } from 'app/shared/model/tipo-empleado.model';
 import { filter, map } from 'rxjs/operators';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { EmpleadoService } from 'app/entities/empleado';
 import { UbicacionService } from 'app/entities/ubicacion';
 import { HorarioService } from 'app/entities/horario';
 import { TipoEmpleadoService } from 'app/entities/tipo-empleado';
@@ -35,15 +36,18 @@ export class UserMgmtUpdateComponent implements OnInit {
         protected ubicacionService: UbicacionService,
         protected horarioService: HorarioService,
         protected tipoEmpleadoService: TipoEmpleadoService,
-        protected jhiAlertService: JhiAlertService
+        protected jhiAlertService: JhiAlertService,
+        protected empleadoService: EmpleadoService
     ) {}
 
     ngOnInit() {
         this.setCustomUserValues();
+        this.loadCustomUserData();
         this.isSaving = false;
         this.route.data.subscribe(({ user }) => {
             this.user = user.body ? user.body : user;
         });
+
         this.authorities = [];
         this.userService.authorities().subscribe(authorities => {
             this.authorities = authorities;
@@ -117,7 +121,16 @@ export class UserMgmtUpdateComponent implements OnInit {
 
     private onSaveSuccess(result) {
         this.isSaving = false;
+        this.saveCustomUserInfo(result);
         this.previousState();
+    }
+
+    private saveCustomUserInfo(result) {
+        this.customUser.id = null;
+        this.customUser.tipo = this.selectedType;
+        this.customUser.horarios = this.selectedSchedule;
+        this.customUser.idUsuarioRelacion = result.body.id;
+        this.empleadoService.create(this.customUser).subscribe(res => console.log(res), () => console.log());
     }
 
     private onSaveError() {
@@ -126,5 +139,11 @@ export class UserMgmtUpdateComponent implements OnInit {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    private loadCustomUserData() {
+        if (this.user.id !== null) {
+            this.userService.update(this.user).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
+        }
     }
 }

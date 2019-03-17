@@ -35,4 +35,8 @@ export class EmpleadoService {
     delete(id: string): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
+
+    findUserByIdRelationship(id: string): Observable<EntityResponseType> {
+        return this.http.get<IEmpleado>(`${this.resourceUrl + '/findByRelationshipId'}/${id}`, { observe: 'response' });
+    }
 }

@@ -109,4 +109,18 @@ public class EmpleadoResource {
         empleadoRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
+
+    @GetMapping("/empleados/findByRelationshipId/{id}")
+    public ResponseEntity<Empleado> getEmpleadoByRelationshipId(@PathVariable String id) {
+        log.debug("REST request to get Empleado : {}", id);
+        Optional<Empleado> empleado = empleadoRepository.findByRelationshipId(id);
+        return ResponseUtil.wrapOrNotFound(empleado);
+    }
+
+    /**
+     * DELETE  /empleados/:id : delete the "id" empleado.
+     *
+     * @param id the id of the empleado to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
 }
