@@ -47,6 +47,12 @@ public class RutaResourceIntTest {
     private static final Boolean DEFAULT_BORRADO = false;
     private static final Boolean UPDATED_BORRADO = true;
 
+    private static final String DEFAULT_PUNTO_INICIO = "AAAAAAAAAA";
+    private static final String UPDATED_PUNTO_INICIO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PUNTO_L_LEGADA = "AAAAAAAAAA";
+    private static final String UPDATED_PUNTO_L_LEGADA = "BBBBBBBBBB";
+
     @Autowired
     private RutaRepository rutaRepository;
 
@@ -88,7 +94,9 @@ public class RutaResourceIntTest {
         Ruta ruta = new Ruta()
             .nombre(DEFAULT_NOMBRE)
             .descripcion(DEFAULT_DESCRIPCION)
-            .borrado(DEFAULT_BORRADO);
+            .borrado(DEFAULT_BORRADO)
+            .puntoInicio(DEFAULT_PUNTO_INICIO)
+            .puntoLLegada(DEFAULT_PUNTO_L_LEGADA);
         return ruta;
     }
 
@@ -115,6 +123,8 @@ public class RutaResourceIntTest {
         assertThat(testRuta.getNombre()).isEqualTo(DEFAULT_NOMBRE);
         assertThat(testRuta.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
         assertThat(testRuta.isBorrado()).isEqualTo(DEFAULT_BORRADO);
+        assertThat(testRuta.getPuntoInicio()).isEqualTo(DEFAULT_PUNTO_INICIO);
+        assertThat(testRuta.getPuntoLLegada()).isEqualTo(DEFAULT_PUNTO_L_LEGADA);
     }
 
     @Test
@@ -170,6 +180,40 @@ public class RutaResourceIntTest {
     }
 
     @Test
+    public void checkPuntoInicioIsRequired() throws Exception {
+        int databaseSizeBeforeTest = rutaRepository.findAll().size();
+        // set the field null
+        ruta.setPuntoInicio(null);
+
+        // Create the Ruta, which fails.
+
+        restRutaMockMvc.perform(post("/api/rutas")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(ruta)))
+            .andExpect(status().isBadRequest());
+
+        List<Ruta> rutaList = rutaRepository.findAll();
+        assertThat(rutaList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    public void checkPuntoLLegadaIsRequired() throws Exception {
+        int databaseSizeBeforeTest = rutaRepository.findAll().size();
+        // set the field null
+        ruta.setPuntoLLegada(null);
+
+        // Create the Ruta, which fails.
+
+        restRutaMockMvc.perform(post("/api/rutas")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(ruta)))
+            .andExpect(status().isBadRequest());
+
+        List<Ruta> rutaList = rutaRepository.findAll();
+        assertThat(rutaList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     public void getAllRutas() throws Exception {
         // Initialize the database
         rutaRepository.save(ruta);
@@ -181,7 +225,9 @@ public class RutaResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(ruta.getId())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION.toString())))
-            .andExpect(jsonPath("$.[*].borrado").value(hasItem(DEFAULT_BORRADO.booleanValue())));
+            .andExpect(jsonPath("$.[*].borrado").value(hasItem(DEFAULT_BORRADO.booleanValue())))
+            .andExpect(jsonPath("$.[*].puntoInicio").value(hasItem(DEFAULT_PUNTO_INICIO.toString())))
+            .andExpect(jsonPath("$.[*].puntoLLegada").value(hasItem(DEFAULT_PUNTO_L_LEGADA.toString())));
     }
     
     @Test
@@ -196,7 +242,9 @@ public class RutaResourceIntTest {
             .andExpect(jsonPath("$.id").value(ruta.getId()))
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION.toString()))
-            .andExpect(jsonPath("$.borrado").value(DEFAULT_BORRADO.booleanValue()));
+            .andExpect(jsonPath("$.borrado").value(DEFAULT_BORRADO.booleanValue()))
+            .andExpect(jsonPath("$.puntoInicio").value(DEFAULT_PUNTO_INICIO.toString()))
+            .andExpect(jsonPath("$.puntoLLegada").value(DEFAULT_PUNTO_L_LEGADA.toString()));
     }
 
     @Test
@@ -218,7 +266,9 @@ public class RutaResourceIntTest {
         updatedRuta
             .nombre(UPDATED_NOMBRE)
             .descripcion(UPDATED_DESCRIPCION)
-            .borrado(UPDATED_BORRADO);
+            .borrado(UPDATED_BORRADO)
+            .puntoInicio(UPDATED_PUNTO_INICIO)
+            .puntoLLegada(UPDATED_PUNTO_L_LEGADA);
 
         restRutaMockMvc.perform(put("/api/rutas")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -232,6 +282,8 @@ public class RutaResourceIntTest {
         assertThat(testRuta.getNombre()).isEqualTo(UPDATED_NOMBRE);
         assertThat(testRuta.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
         assertThat(testRuta.isBorrado()).isEqualTo(UPDATED_BORRADO);
+        assertThat(testRuta.getPuntoInicio()).isEqualTo(UPDATED_PUNTO_INICIO);
+        assertThat(testRuta.getPuntoLLegada()).isEqualTo(UPDATED_PUNTO_L_LEGADA);
     }
 
     @Test

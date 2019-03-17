@@ -19,14 +19,6 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "admin",
-            "otherEntityName": "administrador",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "recuperacion"
-        },
-        {
-            "relationshipType": "one-to-one",
             "relationshipName": "empleado",
             "otherEntityName": "empleado",
             "otherEntityField": "id",

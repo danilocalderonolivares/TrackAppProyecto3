@@ -1,0 +1,29 @@
+{
+    "name": "TipoEmpleado",
+    "fields": [
+        {
+            "fieldName": "nombreTipo",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "empleado",
+            "otherEntityName": "empleado",
+            "otherEntityRelationshipName": "tipo"
+        }
+    ],
+    "changelogDate": "20190316231520",
+    "entityTableName": "tipo_empleado",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

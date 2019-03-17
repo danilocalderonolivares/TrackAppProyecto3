@@ -15,6 +15,7 @@
             <thead>
             <tr>
             <th><span>ID</span></th>
+            <th><span>Nombre</span></th>
             <th><span>Lunes Inico</span></th>
             <th><span>Lunes Fin</span></th>
             <th><span>Martes Inico</span></th>
@@ -35,20 +36,21 @@
             <tbody>
             <tr *ngFor="let horario of horarios ;trackBy: trackId">
                 <td><a [routerLink]="['/horario', horario.id, 'view' ]">{{horario.id}}</a></td>
-                <td>{{horario.lunesInico | date:'mediumDate'}}</td>
-                <td>{{horario.lunesFin | date:'mediumDate'}}</td>
-                <td>{{horario.martesInico | date:'mediumDate'}}</td>
-                <td>{{horario.martesFin | date:'mediumDate'}}</td>
-                <td>{{horario.miercolesInico | date:'mediumDate'}}</td>
-                <td>{{horario.miercolesFin | date:'mediumDate'}}</td>
-                <td>{{horario.juevesInico | date:'mediumDate'}}</td>
-                <td>{{horario.juevesFin | date:'mediumDate'}}</td>
-                <td>{{horario.viernesInico | date:'mediumDate'}}</td>
-                <td>{{horario.viernesFin | date:'mediumDate'}}</td>
-                <td>{{horario.sabadoInico | date:'mediumDate'}}</td>
-                <td>{{horario.sabadoFin | date:'mediumDate'}}</td>
-                <td>{{horario.domingoInico | date:'mediumDate'}}</td>
-                <td>{{horario.domingoFin | date:'mediumDate'}}</td>
+                <td>{{horario.nombre}}</td>
+                <td>{{horario.lunesInico}}</td>
+                <td>{{horario.lunesFin}}</td>
+                <td>{{horario.martesInico}}</td>
+                <td>{{horario.martesFin}}</td>
+                <td>{{horario.miercolesInico}}</td>
+                <td>{{horario.miercolesFin}}</td>
+                <td>{{horario.juevesInico}}</td>
+                <td>{{horario.juevesFin}}</td>
+                <td>{{horario.viernesInico}}</td>
+                <td>{{horario.viernesFin}}</td>
+                <td>{{horario.sabadoInico}}</td>
+                <td>{{horario.sabadoFin}}</td>
+                <td>{{horario.domingoInico}}</td>
+                <td>{{horario.domingoFin}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

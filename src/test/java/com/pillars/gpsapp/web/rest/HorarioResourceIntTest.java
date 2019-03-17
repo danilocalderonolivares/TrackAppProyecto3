@@ -20,8 +20,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.Validator;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
 
 
@@ -40,47 +38,50 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = GpsApp.class)
 public class HorarioResourceIntTest {
 
-    private static final LocalDate DEFAULT_LUNES_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_LUNES_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_NOMBRE = "AAAAAAAAAA";
+    private static final String UPDATED_NOMBRE = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_LUNES_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_LUNES_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_LUNES_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_LUNES_INICO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_MARTES_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_MARTES_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_LUNES_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_LUNES_FIN = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_MARTES_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_MARTES_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_MARTES_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_MARTES_INICO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_MIERCOLES_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_MIERCOLES_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_MARTES_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_MARTES_FIN = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_MIERCOLES_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_MIERCOLES_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_MIERCOLES_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_MIERCOLES_INICO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_JUEVES_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_JUEVES_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_MIERCOLES_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_MIERCOLES_FIN = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_JUEVES_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_JUEVES_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_JUEVES_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_JUEVES_INICO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_VIERNES_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_VIERNES_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_JUEVES_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_JUEVES_FIN = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_VIERNES_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_VIERNES_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_VIERNES_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_VIERNES_INICO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_SABADO_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_SABADO_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_VIERNES_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_VIERNES_FIN = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_SABADO_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_SABADO_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_SABADO_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_SABADO_INICO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_DOMINGO_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DOMINGO_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_SABADO_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_SABADO_FIN = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_DOMINGO_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DOMINGO_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_DOMINGO_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_DOMINGO_INICO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_DOMINGO_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_DOMINGO_FIN = "BBBBBBBBBB";
 
     @Autowired
     private HorarioRepository horarioRepository;
@@ -121,6 +122,7 @@ public class HorarioResourceIntTest {
      */
     public static Horario createEntity() {
         Horario horario = new Horario()
+            .nombre(DEFAULT_NOMBRE)
             .lunesInico(DEFAULT_LUNES_INICO)
             .lunesFin(DEFAULT_LUNES_FIN)
             .martesInico(DEFAULT_MARTES_INICO)
@@ -158,6 +160,7 @@ public class HorarioResourceIntTest {
         List<Horario> horarioList = horarioRepository.findAll();
         assertThat(horarioList).hasSize(databaseSizeBeforeCreate + 1);
         Horario testHorario = horarioList.get(horarioList.size() - 1);
+        assertThat(testHorario.getNombre()).isEqualTo(DEFAULT_NOMBRE);
         assertThat(testHorario.getLunesInico()).isEqualTo(DEFAULT_LUNES_INICO);
         assertThat(testHorario.getLunesFin()).isEqualTo(DEFAULT_LUNES_FIN);
         assertThat(testHorario.getMartesInico()).isEqualTo(DEFAULT_MARTES_INICO);
@@ -193,6 +196,23 @@ public class HorarioResourceIntTest {
     }
 
     @Test
+    public void checkNombreIsRequired() throws Exception {
+        int databaseSizeBeforeTest = horarioRepository.findAll().size();
+        // set the field null
+        horario.setNombre(null);
+
+        // Create the Horario, which fails.
+
+        restHorarioMockMvc.perform(post("/api/horarios")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(horario)))
+            .andExpect(status().isBadRequest());
+
+        List<Horario> horarioList = horarioRepository.findAll();
+        assertThat(horarioList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     public void getAllHorarios() throws Exception {
         // Initialize the database
         horarioRepository.save(horario);
@@ -202,6 +222,7 @@ public class HorarioResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(horario.getId())))
+            .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
             .andExpect(jsonPath("$.[*].lunesInico").value(hasItem(DEFAULT_LUNES_INICO.toString())))
             .andExpect(jsonPath("$.[*].lunesFin").value(hasItem(DEFAULT_LUNES_FIN.toString())))
             .andExpect(jsonPath("$.[*].martesInico").value(hasItem(DEFAULT_MARTES_INICO.toString())))
@@ -228,6 +249,7 @@ public class HorarioResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(horario.getId()))
+            .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
             .andExpect(jsonPath("$.lunesInico").value(DEFAULT_LUNES_INICO.toString()))
             .andExpect(jsonPath("$.lunesFin").value(DEFAULT_LUNES_FIN.toString()))
             .andExpect(jsonPath("$.martesInico").value(DEFAULT_MARTES_INICO.toString()))
@@ -261,6 +283,7 @@ public class HorarioResourceIntTest {
         // Update the horario
         Horario updatedHorario = horarioRepository.findById(horario.getId()).get();
         updatedHorario
+            .nombre(UPDATED_NOMBRE)
             .lunesInico(UPDATED_LUNES_INICO)
             .lunesFin(UPDATED_LUNES_FIN)
             .martesInico(UPDATED_MARTES_INICO)
@@ -285,6 +308,7 @@ public class HorarioResourceIntTest {
         List<Horario> horarioList = horarioRepository.findAll();
         assertThat(horarioList).hasSize(databaseSizeBeforeUpdate);
         Horario testHorario = horarioList.get(horarioList.size() - 1);
+        assertThat(testHorario.getNombre()).isEqualTo(UPDATED_NOMBRE);
         assertThat(testHorario.getLunesInico()).isEqualTo(UPDATED_LUNES_INICO);
         assertThat(testHorario.getLunesFin()).isEqualTo(UPDATED_LUNES_FIN);
         assertThat(testHorario.getMartesInico()).isEqualTo(UPDATED_MARTES_INICO);
