@@ -1,6 +1,8 @@
 package com.pillars.gpsapp.web.rest;
 import com.pillars.gpsapp.domain.Empleado;
+import com.pillars.gpsapp.domain.User;
 import com.pillars.gpsapp.repository.EmpleadoRepository;
+import com.pillars.gpsapp.repository.UserRepository;
 import com.pillars.gpsapp.web.rest.errors.BadRequestAlertException;
 import com.pillars.gpsapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -108,6 +110,13 @@ public class EmpleadoResource {
         log.debug("REST request to delete Empleado : {}", id);
         empleadoRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
+    }
+
+    @DeleteMapping("/empleados/deleteByRelationId/{id}")
+    public ResponseEntity<Void> deleteByRelationId(@PathVariable String id) {
+        log.debug("REST request to delete Empleado : {}", id);
+        empleadoRepository.deleteByRelationshipId(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME,id)).build();
     }
 
     @GetMapping("/empleados/findByRelationshipId/{id}")

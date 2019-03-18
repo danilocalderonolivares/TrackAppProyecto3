@@ -14,4 +14,7 @@ import java.util.Optional;
 public interface EmpleadoRepository extends MongoRepository<Empleado, String> {
     @Query("{'idUsuarioRelacion' : ?0}")
     Optional<Empleado> findByRelationshipId(String idRelacion);
+
+    @Query("{'idUsuarioRelacion' : ?0}")
+    void deleteByRelationshipId(String idRelacion);
 }
