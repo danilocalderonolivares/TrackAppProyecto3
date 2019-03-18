@@ -47,6 +47,34 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'horario',
                 loadChildren: './horario/horario.module#GpsAppHorarioModule'
+            },
+            {
+                path: 'ubicacion',
+                loadChildren: './ubicacion/ubicacion.module#GpsAppUbicacionModule'
+            },
+            {
+                path: 'cliente',
+                loadChildren: './cliente/cliente.module#GpsAppClienteModule'
+            },
+            {
+                path: 'empleado',
+                loadChildren: './empleado/empleado.module#GpsAppEmpleadoModule'
+            },
+            {
+                path: 'mensaje',
+                loadChildren: './mensaje/mensaje.module#GpsAppMensajeModule'
+            },
+            {
+                path: 'recuperacion',
+                loadChildren: './recuperacion/recuperacion.module#GpsAppRecuperacionModule'
+            },
+            {
+                path: 'ruta',
+                loadChildren: './ruta/ruta.module#GpsAppRutaModule'
+            },
+            {
+                path: 'horario',
+                loadChildren: './horario/horario.module#GpsAppHorarioModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

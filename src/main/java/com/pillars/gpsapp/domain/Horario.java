@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -23,6 +24,10 @@ public class Horario implements Serializable {
     
     @Id
     private String id;
+
+    @NotNull
+    @Field("nombre")
+    private String nombre;
 
     @Field("lunes_inico")
     private LocalDate lunesInico;
@@ -76,6 +81,19 @@ public class Horario implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Horario nombre(String nombre) {
+        this.nombre = nombre;
+        return this;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public LocalDate getLunesInico() {
@@ -310,6 +328,7 @@ public class Horario implements Serializable {
     public String toString() {
         return "Horario{" +
             "id=" + getId() +
+            ", nombre='" + getNombre() + "'" +
             ", lunesInico='" + getLunesInico() + "'" +
             ", lunesFin='" + getLunesFin() + "'" +
             ", martesInico='" + getMartesInico() + "'" +

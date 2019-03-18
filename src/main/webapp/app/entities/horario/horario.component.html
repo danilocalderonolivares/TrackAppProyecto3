@@ -15,6 +15,7 @@
             <thead>
             <tr>
             <th><span>ID</span></th>
+            <th><span>Nombre</span></th>
             <th><span>Lunes Inico</span></th>
             <th><span>Lunes Fin</span></th>
             <th><span>Martes Inico</span></th>
@@ -35,6 +36,7 @@
             <tbody>
             <tr *ngFor="let horario of horarios ;trackBy: trackId">
                 <td><a [routerLink]="['/horario', horario.id, 'view' ]">{{horario.id}}</a></td>
+                <td>{{horario.nombre}}</td>
                 <td>{{horario.lunesInico | date:'mediumDate'}}</td>
                 <td>{{horario.lunesFin | date:'mediumDate'}}</td>
                 <td>{{horario.martesInico | date:'mediumDate'}}</td>

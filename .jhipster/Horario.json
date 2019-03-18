@@ -2,6 +2,13 @@
     "name": "Horario",
     "fields": [
         {
+            "fieldName": "nombre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "lunesInico",
             "fieldType": "LocalDate"
         },

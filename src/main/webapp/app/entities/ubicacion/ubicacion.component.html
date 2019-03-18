@@ -17,6 +17,7 @@
             <th><span>ID</span></th>
             <th><span>Longitud</span></th>
             <th><span>Latitud</span></th>
+            <th><span>Nombre Direccion</span></th>
             <th></th>
             </tr>
             </thead>
@@ -25,6 +26,7 @@
                 <td><a [routerLink]="['/ubicacion', ubicacion.id, 'view' ]">{{ubicacion.id}}</a></td>
                 <td>{{ubicacion.longitud}}</td>
                 <td>{{ubicacion.latitud}}</td>
+                <td>{{ubicacion.nombreDireccion}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

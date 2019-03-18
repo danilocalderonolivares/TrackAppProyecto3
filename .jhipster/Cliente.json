@@ -21,7 +21,10 @@
         },
         {
             "fieldName": "correo",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "esEmpresa",

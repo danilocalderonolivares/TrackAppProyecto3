@@ -22,6 +22,9 @@ public class Empleado implements Serializable {
     @Id
     private String id;
 
+    @Field("id_usuario_relacion")
+    private String idUsuarioRelacion;
+
     @NotNull
     @Field("nombre")
     private String nombre;
@@ -30,24 +33,11 @@ public class Empleado implements Serializable {
     private String apellidos;
 
     @NotNull
-    @Field("correo")
-    private String correo;
-
-    @NotNull
     @Field("tipo")
     private String tipo;
 
-    @NotNull
-    @Field("password")
-    private String password;
-
-    @NotNull
     @Field("borrado")
     private Boolean borrado;
-
-    @DBRef
-    @Field("admin")
-    private Administrador admin;
 
     @DBRef
     @Field("ubicacion")
@@ -65,6 +55,19 @@ public class Empleado implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getIdUsuarioRelacion() {
+        return idUsuarioRelacion;
+    }
+
+    public Empleado idUsuarioRelacion(String idUsuarioRelacion) {
+        this.idUsuarioRelacion = idUsuarioRelacion;
+        return this;
+    }
+
+    public void setIdUsuarioRelacion(String idUsuarioRelacion) {
+        this.idUsuarioRelacion = idUsuarioRelacion;
     }
 
     public String getNombre() {
@@ -93,19 +96,6 @@ public class Empleado implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public Empleado correo(String correo) {
-        this.correo = correo;
-        return this;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
     public String getTipo() {
         return tipo;
     }
@@ -119,19 +109,6 @@ public class Empleado implements Serializable {
         this.tipo = tipo;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public Empleado password(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Boolean isBorrado() {
         return borrado;
     }
@@ -143,19 +120,6 @@ public class Empleado implements Serializable {
 
     public void setBorrado(Boolean borrado) {
         this.borrado = borrado;
-    }
-
-    public Administrador getAdmin() {
-        return admin;
-    }
-
-    public Empleado admin(Administrador administrador) {
-        this.admin = administrador;
-        return this;
-    }
-
-    public void setAdmin(Administrador administrador) {
-        this.admin = administrador;
     }
 
     public Ubicacion getUbicacion() {
@@ -209,11 +173,10 @@ public class Empleado implements Serializable {
     public String toString() {
         return "Empleado{" +
             "id=" + getId() +
+            ", idUsuarioRelacion='" + getIdUsuarioRelacion() + "'" +
             ", nombre='" + getNombre() + "'" +
             ", apellidos='" + getApellidos() + "'" +
-            ", correo='" + getCorreo() + "'" +
             ", tipo='" + getTipo() + "'" +
-            ", password='" + getPassword() + "'" +
             ", borrado='" + isBorrado() + "'" +
             "}";
     }

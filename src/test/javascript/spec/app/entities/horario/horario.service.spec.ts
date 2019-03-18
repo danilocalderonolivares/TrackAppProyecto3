@@ -27,6 +27,7 @@ describe('Service Tests', () => {
 
             elemDefault = new Horario(
                 'ID',
+                'AAAAAAA',
                 currentDate,
                 currentDate,
                 currentDate,
@@ -125,6 +126,7 @@ describe('Service Tests', () => {
             it('should update a Horario', async () => {
                 const returnedFromService = Object.assign(
                     {
+                        nombre: 'BBBBBB',
                         lunesInico: currentDate.format(DATE_FORMAT),
                         lunesFin: currentDate.format(DATE_FORMAT),
                         martesInico: currentDate.format(DATE_FORMAT),
@@ -173,6 +175,7 @@ describe('Service Tests', () => {
             it('should return a list of Horario', async () => {
                 const returnedFromService = Object.assign(
                     {
+                        nombre: 'BBBBBB',
                         lunesInico: currentDate.format(DATE_FORMAT),
                         lunesFin: currentDate.format(DATE_FORMAT),
                         martesInico: currentDate.format(DATE_FORMAT),

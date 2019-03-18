@@ -19,7 +19,6 @@
             <th><span>Fecha Envio</span></th>
             <th><span>Visto</span></th>
             <th><span>Borrado</span></th>
-            <th><span>Admin</span></th>
             <th><span>Empleado</span></th>
             <th></th>
             </tr>
@@ -31,11 +30,6 @@
                 <td>{{mensaje.fechaEnvio | date:'mediumDate'}}</td>
                 <td>{{mensaje.visto}}</td>
                 <td>{{mensaje.borrado}}</td>
-                <td>
-                    <div *ngIf="mensaje.admin">
-                        <a [routerLink]="['../administrador', mensaje.admin?.id, 'view' ]" >{{mensaje.admin?.id}}</a>
-                    </div>
-                </td>
                 <td>
                     <div *ngIf="mensaje.empleado">
                         <a [routerLink]="['../empleado', mensaje.empleado?.id, 'view' ]" >{{mensaje.empleado?.id}}</a>

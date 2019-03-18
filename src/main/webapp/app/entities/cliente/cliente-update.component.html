@@ -1,73 +1,90 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-cliente-heading">Create or edit a Cliente</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!cliente.id">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="cliente.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_nombre">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" id="field_nombre"
-                        [(ngModel)]="cliente.nombre" required/>
-                    <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.nombre?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_cedula">Cedula</label>
-                    <input type="text" class="form-control" name="cedula" id="field_cedula"
-                        [(ngModel)]="cliente.cedula" required/>
-                    <div [hidden]="!(editForm.controls.cedula?.dirty && editForm.controls.cedula?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.cedula?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_direccion">Direccion</label>
-                    <input type="text" class="form-control" name="direccion" id="field_direccion"
-                        [(ngModel)]="cliente.direccion" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_correo">Correo</label>
-                    <input type="text" class="form-control" name="correo" id="field_correo"
-                        [(ngModel)]="cliente.correo" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_esEmpresa">Es Empresa</label>
-                    <input type="checkbox" class="form-control" name="esEmpresa" id="field_esEmpresa"
-                        [(ngModel)]="cliente.esEmpresa" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_borrado">Borrado</label>
-                    <input type="checkbox" class="form-control" name="borrado" id="field_borrado"
-                        [(ngModel)]="cliente.borrado" />
-                </div>
+<div class="justify-content-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+                    <h1 id="jhi-cliente-heading">Información básica</h1>
+                    <div>
+                        <jhi-alert-error></jhi-alert-error>
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_esEmpresa">Es Empresa</label>
+                            <input type="checkbox" class="form-control" name="esEmpresa" id="field_esEmpresa"
+                                   [(ngModel)]="cliente.esEmpresa" />
+                        </div>
+                        <div class="form-group" [hidden]="!cliente.id">
+                            <label for="id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id"
+                                   [(ngModel)]="cliente.id" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_nombre">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" id="field_nombre"
+                                   [(ngModel)]="cliente.nombre" required/>
+                            <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.nombre?.errors?.required">
+                                    Nombre requerido.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_cedula">Cédula</label>
+                            <input type="text" class="form-control" name="cedula" id="field_cedula"
+                                   [(ngModel)]="cliente.cedula" required/>
+                            <div [hidden]="!(editForm.controls.cedula?.dirty && editForm.controls.cedula?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.cedula?.errors?.required">
+                                    Cédula requerida.
+                                </small>
+                            </div>
+                        </div>
 
+                        <div class="form-group">
+                            <label class="form-control-label" for="field_correo">Correo</label>
+                            <input type="text" class="form-control" name="correo" id="field_correo"
+                                   [(ngModel)]="cliente.correo" required/>
+                            <div [hidden]="!(editForm.controls.correo?.dirty && editForm.controls.correo?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.correo?.errors?.required">
+                                    Correo requerida.
+                                </small>
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group">-->
+                            <!--<label class="form-control-label" for="field_borrado">Borrado</label>-->
+                            <!--<input type="checkbox" class="form-control" name="borrado" id="field_borrado"-->
+                                   <!--[(ngModel)]="cliente.borrado" />-->
+                        <!--</div>-->
+
+
+                    </div>
+                    <div>
+                        <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                        </button>
+                        <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h1>Ubicación</h1>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_ubicacion">Ubicacion</label>
+                    <label class="form-control-label" for="field_direccion">Dirección (opcional)</label>
+                    <input type="text" class="form-control" name="direccion" id="field_direccion"
+                           [(ngModel)]="cliente.direccion" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ubicacion">Ubicación</label>
                     <select class="form-control" id="field_ubicacion" name="ubicacion" [(ngModel)]="cliente.ubicacion">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="ubicacionOption.id === cliente.ubicacion?.id ? cliente.ubicacion : ubicacionOption" *ngFor="let ubicacionOption of ubicacions; trackBy: trackUbicacionById">{{ubicacionOption.id}}</option>
                     </select>
                 </div>
             </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
-                </button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>

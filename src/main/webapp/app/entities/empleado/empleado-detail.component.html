@@ -5,6 +5,10 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
+                <dt><span>Id Usuario Relacion</span></dt>
+                <dd>
+                    <span>{{empleado.idUsuarioRelacion}}</span>
+                </dd>
                 <dt><span>Nombre</span></dt>
                 <dd>
                     <span>{{empleado.nombre}}</span>
@@ -13,27 +17,13 @@
                 <dd>
                     <span>{{empleado.apellidos}}</span>
                 </dd>
-                <dt><span>Correo</span></dt>
-                <dd>
-                    <span>{{empleado.correo}}</span>
-                </dd>
                 <dt><span>Tipo</span></dt>
                 <dd>
                     <span>{{empleado.tipo}}</span>
                 </dd>
-                <dt><span>Password</span></dt>
-                <dd>
-                    <span>{{empleado.password}}</span>
-                </dd>
                 <dt><span>Borrado</span></dt>
                 <dd>
                     <span>{{empleado.borrado}}</span>
-                </dd>
-                <dt><span>Admin</span></dt>
-                <dd>
-                    <div *ngIf="empleado.admin">
-                        <a [routerLink]="['/administrador', empleado.admin?.id, 'view']">{{empleado.admin?.id}}</a>
-                    </div>
                 </dd>
                 <dt><span>Ubicacion</span></dt>
                 <dd>

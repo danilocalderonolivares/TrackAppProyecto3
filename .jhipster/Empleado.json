@@ -2,6 +2,10 @@
     "name": "Empleado",
     "fields": [
         {
+            "fieldName": "idUsuarioRelacion",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "nombre",
             "fieldType": "String",
             "fieldValidateRules": [
@@ -13,13 +17,6 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "correo",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "tipo",
             "fieldType": "String",
             "fieldValidateRules": [
@@ -27,29 +24,11 @@
             ]
         },
         {
-            "fieldName": "password",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "borrado",
-            "fieldType": "Boolean",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Boolean"
         }
     ],
     "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "admin",
-            "otherEntityName": "administrador",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "empleado"
-        },
         {
             "relationshipType": "one-to-one",
             "relationshipName": "ubicacion",

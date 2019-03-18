@@ -3,6 +3,7 @@ import { IEmpleado } from 'app/shared/model/empleado.model';
 
 export interface IHorario {
     id?: string;
+    nombre?: string;
     lunesInico?: Moment;
     lunesFin?: Moment;
     martesInico?: Moment;
@@ -23,6 +24,7 @@ export interface IHorario {
 export class Horario implements IHorario {
     constructor(
         public id?: string,
+        public nombre?: string,
         public lunesInico?: Moment,
         public lunesFin?: Moment,
         public martesInico?: Moment,
