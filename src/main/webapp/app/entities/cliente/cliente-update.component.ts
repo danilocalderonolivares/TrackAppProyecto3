@@ -11,13 +11,19 @@ import { UbicacionService } from 'app/entities/ubicacion';
 
 @Component({
     selector: 'jhi-cliente-update',
-    templateUrl: './cliente-update.component.html'
+    templateUrl: './cliente-update.component.html',
+    styleUrls: ['./cliente.css']
 })
 export class ClienteUpdateComponent implements OnInit {
     cliente: ICliente;
     isSaving: boolean;
-
     ubicacions: IUbicacion[];
+    // google maps zoom level
+    zoom: number = 10;
+
+    lat: number = 9.9359219;
+    lng: number = -84.0919663761358;
+    locationChosen = false;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -90,5 +96,10 @@ export class ClienteUpdateComponent implements OnInit {
 
     trackUbicacionById(index: number, item: IUbicacion) {
         return item.id;
+    }
+    mapClicked(event) {
+        this.lat = event.coords.lat;
+        this.lng = event.coords.lng;
+        this.locationChosen = true;
     }
 }

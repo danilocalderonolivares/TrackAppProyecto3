@@ -1,4 +1,4 @@
-<div class="justify-content-center">
+<div class="justify-content-center mt-4">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -7,7 +7,7 @@
                     <div>
                         <jhi-alert-error></jhi-alert-error>
                         <div class="form-group">
-                            <label class="form-control-label" for="field_esEmpresa">Es Empresa</label>
+                            <label class="form-control-label" for="field_esEmpresa">¿Es una empresa?</label>
                             <input type="checkbox" class="form-control" name="esEmpresa" id="field_esEmpresa"
                                    [(ngModel)]="cliente.esEmpresa" />
                         </div>
@@ -78,11 +78,18 @@
                            [(ngModel)]="cliente.direccion" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_ubicacion">Ubicación</label>
-                    <select class="form-control" id="field_ubicacion" name="ubicacion" [(ngModel)]="cliente.ubicacion">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="ubicacionOption.id === cliente.ubicacion?.id ? cliente.ubicacion : ubicacionOption" *ngFor="let ubicacionOption of ubicacions; trackBy: trackUbicacionById">{{ubicacionOption.id}}</option>
-                    </select>
+                    <label class="form-control-label">Ubicación</label>
+                    <agm-map [latitude]="lat"
+                             [longitude]="lng"
+                             [zoom]="zoom"
+                             (mapClick)="mapClicked($event)">
+                        <agm-marker [latitude]="lat"
+                                    [longitude]="lng"
+                                    *ngIf="locationChosen">
+
+                        </agm-marker>
+                    </agm-map>
+
                 </div>
             </div>
         </div>
