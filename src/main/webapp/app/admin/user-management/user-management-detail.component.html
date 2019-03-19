@@ -2,7 +2,7 @@
     <div class="col-8">
         <div *ngIf="user">
             <h2>
-                <span>Usuario</span> [<b>{{user.login}}</b>]
+                <span>Usuario</span> <b>{{user.login}}</b>
             </h2>
             <dl class="row-md jh-entity-details">
                 <dt><span>Nombre de usuario</span></dt>
@@ -17,13 +17,13 @@
                 <dt><span>Nombre</span></dt>
                 <dd>{{user.firstName}}</dd>
                 <dt><span>Apellido</span></dt>
-                <dd>{{user.lastName}}</dd>
+                <dd>{{customUser.apellidos}}</dd>
                 <dt><span>Email</span></dt>
                 <dd>{{user.email}}</dd>
                 <dt><span>Tipo usuario</span></dt>
-                <!--<dd>{{user.email}}</dd>-->
+                <dd>{{customUser.tipo.nombreTipo}}</dd>
                 <dt><span>Horario</span></dt>
-                <!--<dd>{{user.email}}</dd>-->
+                <dd>{{customUser.horarios.nombre}}</dd>
                 <!--<dt><span>Created By</span></dt>
                 <dd>{{user.createdBy}}</dd>
                 <dt><span>Created Date</span></dt>

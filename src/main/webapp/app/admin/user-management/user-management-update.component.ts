@@ -127,6 +127,8 @@ export class UserMgmtUpdateComponent implements OnInit {
 
     private saveCustomUserInfo(result) {
         if (this.user.id !== null) {
+            this.customUser.tipo = this.selectedType;
+            this.customUser.horarios = this.selectedSchedule;
             this.empleadoService.update(this.customUser).subscribe(res => console.log(res), res => console.log(res));
         } else {
             this.customUser.id = null;
@@ -147,7 +149,7 @@ export class UserMgmtUpdateComponent implements OnInit {
 
     private loadCustomUserData() {
         if (this.user.id !== null) {
-            const test = this.empleadoService.findUserByIdRelationship(this.user.id).subscribe(res => {
+            this.empleadoService.findUserByIdRelationship(this.user.id).subscribe(res => {
                 this.customUser = res.body as IEmpleado;
                 this.selectedType = this.customUser.tipo;
                 this.selectedSchedule = this.customUser.horarios;

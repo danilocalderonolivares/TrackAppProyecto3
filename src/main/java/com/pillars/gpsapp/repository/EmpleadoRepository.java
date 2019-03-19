@@ -1,5 +1,6 @@
 package com.pillars.gpsapp.repository;
 import com.pillars.gpsapp.domain.Empleado;
+import org.springframework.data.mongodb.repository.DeleteQuery;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,9 @@ public interface EmpleadoRepository extends MongoRepository<Empleado, String> {
     @Query("{'idUsuarioRelacion' : ?0}")
     Optional<Empleado> findByRelationshipId(String idRelacion);
 
-    @Query("{'idUsuarioRelacion' : ?0}")
+    @Query("{'tipo' : ?0}")
+    Optional<Empleado> findByTypeId(String idTipo);
+
+    @DeleteQuery("{'idUsuarioRelacion' : ?0}")
     void deleteByRelationshipId(String idRelacion);
 }

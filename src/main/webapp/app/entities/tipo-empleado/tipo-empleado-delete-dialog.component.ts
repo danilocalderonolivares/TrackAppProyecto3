@@ -6,19 +6,36 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { ITipoEmpleado } from 'app/shared/model/tipo-empleado.model';
 import { TipoEmpleadoService } from './tipo-empleado.service';
+import { IEmpleado } from 'app/shared/model/empleado.model';
+import { EmpleadoService } from 'app/entities/empleado';
 
 @Component({
     selector: 'jhi-tipo-empleado-delete-dialog',
     templateUrl: './tipo-empleado-delete-dialog.component.html'
 })
-export class TipoEmpleadoDeleteDialogComponent {
+export class TipoEmpleadoDeleteDialogComponent implements OnInit {
     tipoEmpleado: ITipoEmpleado;
+    empleadosDependencia: IEmpleado[];
 
     constructor(
         protected tipoEmpleadoService: TipoEmpleadoService,
         public activeModal: NgbActiveModal,
-        protected eventManager: JhiEventManager
+        protected eventManager: JhiEventManager,
+        protected empleadoService: EmpleadoService
     ) {}
+
+    ngOnInit() {
+        this.verifyEmployeesDependencies();
+    }
+
+    verifyEmployeesDependencies() {
+        this.empleadoService.findUserByIdType(this.tipoEmpleado.id).subscribe(res => {
+            this.empleadosDependencia = res.body as IEmpleado[];
+            this.setValuesToShow();
+        });
+    }
+
+    setValuesToShow() {}
 
     clear() {
         this.activeModal.dismiss('cancel');

@@ -126,6 +126,13 @@ public class EmpleadoResource {
         return ResponseUtil.wrapOrNotFound(empleado);
     }
 
+    @GetMapping("/empleados/findByTypeId/{id}")
+    public ResponseEntity<Empleado> getEmpleadoByTypeId(@PathVariable String id) {
+        log.debug("REST request to get Empleado : {}", id);
+        Optional<Empleado> empleado = empleadoRepository.findByTypeId(id);
+        return ResponseUtil.wrapOrNotFound(empleado);
+    }
+
     /**
      * DELETE  /empleados/:id : delete the "id" empleado.
      *
