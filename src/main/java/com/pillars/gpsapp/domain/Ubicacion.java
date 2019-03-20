@@ -1,15 +1,13 @@
 package com.pillars.gpsapp.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -29,9 +27,10 @@ public class Ubicacion implements Serializable {
     @Field("latitud")
     private Double latitud;
 
-    @DBRef
-    @Field("ruta")
-    private Set<Ruta> rutas = new HashSet<>();
+    @NotNull
+    @Field("nombre_direccion")
+    private String nombreDireccion;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -67,29 +66,17 @@ public class Ubicacion implements Serializable {
         this.latitud = latitud;
     }
 
-    public Set<Ruta> getRutas() {
-        return rutas;
+    public String getNombreDireccion() {
+        return nombreDireccion;
     }
 
-    public Ubicacion rutas(Set<Ruta> rutas) {
-        this.rutas = rutas;
+    public Ubicacion nombreDireccion(String nombreDireccion) {
+        this.nombreDireccion = nombreDireccion;
         return this;
     }
 
-    public Ubicacion addRuta(Ruta ruta) {
-        this.rutas.add(ruta);
-        ruta.setUbicaciones(this);
-        return this;
-    }
-
-    public Ubicacion removeRuta(Ruta ruta) {
-        this.rutas.remove(ruta);
-        ruta.setUbicaciones(null);
-        return this;
-    }
-
-    public void setRutas(Set<Ruta> rutas) {
-        this.rutas = rutas;
+    public void setNombreDireccion(String nombreDireccion) {
+        this.nombreDireccion = nombreDireccion;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -119,6 +106,7 @@ public class Ubicacion implements Serializable {
             "id=" + getId() +
             ", longitud=" + getLongitud() +
             ", latitud=" + getLatitud() +
+            ", nombreDireccion='" + getNombreDireccion() + "'" +
             "}";
     }
 }

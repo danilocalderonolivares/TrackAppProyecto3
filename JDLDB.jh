@@ -1,0 +1,115 @@
+entity Tarea {
+	id String required,
+	title String required,
+    descripcion String,
+    inicio LocalDate required,
+    fin LocalDate required,
+    usarRuta Boolean required,
+    horaInicio LocalDate required,
+    horaFin LocalDate required,
+    notaExtra String,
+    firma String,
+    activa Boolean required,
+    completada Boolean required,
+    borrado Boolean
+}
+
+entity Ubicacion {
+	id String required,
+	longitud Double,
+    latitud Double,
+    nombreDireccion String required
+}
+
+entity SubTarea {
+	id String required,
+    descripcion String required,
+    completado Boolean required
+}
+
+entity Cliente {
+	id String required,
+    nombre String required,
+    cedula String required,
+    direccion String,
+    correo String required,
+    esEmpresa Boolean,
+    borrado Boolean
+}
+
+entity Empleado {
+	idUsuarioRelacion String,
+    nombre String required,
+    apellidos String required
+}
+
+entity Mensaje {
+	id String required,
+    texto String required,
+    fechaEnvio LocalDate required,
+    visto Boolean required,
+    borrado Boolean required
+}
+
+entity Recuperacion {
+	id String required,
+    activo Boolean required,
+    borrado Boolean required
+}
+
+entity Ruta {
+	id String required,
+    nombre String required,
+    descripcion String,
+    borrado Boolean required,
+    puntoInicio String required,
+    puntoLLegada String required
+}
+
+entity Log {
+	id String required,
+    mensaje String required,
+    fecha LocalDate required
+}
+
+entity TipoEmpleado {
+	id String required,
+    nombreTipo String required
+}
+
+entity Horario {
+	id String required,
+    nombre String required,
+    lunesInico String,
+    lunesFin String,
+    martesInico String,
+    martesFin String,
+    miercolesInico String,
+    miercolesFin String,
+    juevesInico String,
+    juevesFin String,
+    viernesInico String,
+    viernesFin String,
+    sabadoInico String,
+    sabadoFin String,
+    domingoInico String,
+    domingoFin String
+}
+
+relationship OneToOne {
+	Tarea{subtarea} to SubTarea,
+    Tarea{empleado} to Empleado,
+    Tarea{ubicacion} to Ubicacion,
+    Tarea{cliente} to Cliente,
+    Mensaje{empleado} to Empleado,
+    Recuperacion{empleado} to Empleado,
+    Cliente{ubicacion} to Ubicacion,
+    Empleado{ubicacion} to Ubicacion,
+    Tarea{ruta} to Ruta
+}
+
+relationship OneToMany {
+    Horario to Empleado{horarios},
+    TipoEmpleado to Empleado{tipo}
+    Log to Tarea{logs}
+}

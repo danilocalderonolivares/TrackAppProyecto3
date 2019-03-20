@@ -1,7 +1,6 @@
 package com.pillars.gpsapp.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -33,10 +32,13 @@ public class Ruta implements Serializable {
     @Field("borrado")
     private Boolean borrado;
 
-    @DBRef
-    @Field("ubicaciones")
-    @JsonIgnoreProperties("ubicacions")
-    private Ubicacion ubicaciones;
+    @NotNull
+    @Field("punto_inicio")
+    private String puntoInicio;
+
+    @NotNull
+    @Field("punto_l_legada")
+    private String puntoLLegada;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -86,17 +88,30 @@ public class Ruta implements Serializable {
         this.borrado = borrado;
     }
 
-    public Ubicacion getUbicaciones() {
-        return ubicaciones;
+    public String getPuntoInicio() {
+        return puntoInicio;
     }
 
-    public Ruta ubicaciones(Ubicacion ubicacion) {
-        this.ubicaciones = ubicacion;
+    public Ruta puntoInicio(String puntoInicio) {
+        this.puntoInicio = puntoInicio;
         return this;
     }
 
-    public void setUbicaciones(Ubicacion ubicacion) {
-        this.ubicaciones = ubicacion;
+    public void setPuntoInicio(String puntoInicio) {
+        this.puntoInicio = puntoInicio;
+    }
+
+    public String getPuntoLLegada() {
+        return puntoLLegada;
+    }
+
+    public Ruta puntoLLegada(String puntoLLegada) {
+        this.puntoLLegada = puntoLLegada;
+        return this;
+    }
+
+    public void setPuntoLLegada(String puntoLLegada) {
+        this.puntoLLegada = puntoLLegada;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -127,6 +142,8 @@ public class Ruta implements Serializable {
             ", nombre='" + getNombre() + "'" +
             ", descripcion='" + getDescripcion() + "'" +
             ", borrado='" + isBorrado() + "'" +
+            ", puntoInicio='" + getPuntoInicio() + "'" +
+            ", puntoLLegada='" + getPuntoLLegada() + "'" +
             "}";
     }
 }

@@ -32,6 +32,7 @@ public class Cliente implements Serializable {
     @Field("direccion")
     private String direccion;
 
+    @NotNull
     @Field("correo")
     private String correo;
 

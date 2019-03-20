@@ -185,6 +185,23 @@ public class ClienteResourceIntTest {
     }
 
     @Test
+    public void checkCorreoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = clienteRepository.findAll().size();
+        // set the field null
+        cliente.setCorreo(null);
+
+        // Create the Cliente, which fails.
+
+        restClienteMockMvc.perform(post("/api/clientes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(cliente)))
+            .andExpect(status().isBadRequest());
+
+        List<Cliente> clienteList = clienteRepository.findAll();
+        assertThat(clienteList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     public void getAllClientes() throws Exception {
         // Initialize the database
         clienteRepository.save(cliente);

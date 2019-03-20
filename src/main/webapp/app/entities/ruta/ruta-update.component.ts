@@ -3,11 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { JhiAlertService } from 'ng-jhipster';
 import { IRuta } from 'app/shared/model/ruta.model';
 import { RutaService } from './ruta.service';
-import { IUbicacion } from 'app/shared/model/ubicacion.model';
-import { UbicacionService } from 'app/entities/ubicacion';
 
 @Component({
     selector: 'jhi-ruta-update',
@@ -17,27 +14,13 @@ export class RutaUpdateComponent implements OnInit {
     ruta: IRuta;
     isSaving: boolean;
 
-    ubicacions: IUbicacion[];
-
-    constructor(
-        protected jhiAlertService: JhiAlertService,
-        protected rutaService: RutaService,
-        protected ubicacionService: UbicacionService,
-        protected activatedRoute: ActivatedRoute
-    ) {}
+    constructor(protected rutaService: RutaService, protected activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ ruta }) => {
             this.ruta = ruta;
         });
-        this.ubicacionService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IUbicacion[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IUbicacion[]>) => response.body)
-            )
-            .subscribe((res: IUbicacion[]) => (this.ubicacions = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -64,13 +47,5 @@ export class RutaUpdateComponent implements OnInit {
 
     protected onSaveError() {
         this.isSaving = false;
-    }
-
-    protected onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackUbicacionById(index: number, item: IUbicacion) {
-        return item.id;
     }
 }
