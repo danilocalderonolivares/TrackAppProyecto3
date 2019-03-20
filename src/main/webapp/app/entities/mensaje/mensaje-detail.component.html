@@ -21,12 +21,6 @@
                 <dd>
                     <span>{{mensaje.borrado}}</span>
                 </dd>
-                <dt><span>Admin</span></dt>
-                <dd>
-                    <div *ngIf="mensaje.admin">
-                        <a [routerLink]="['/administrador', mensaje.admin?.id, 'view']">{{mensaje.admin?.id}}</a>
-                    </div>
-                </dd>
                 <dt><span>Empleado</span></dt>
                 <dd>
                     <div *ngIf="mensaje.empleado">

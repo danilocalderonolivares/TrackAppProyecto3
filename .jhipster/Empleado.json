@@ -2,6 +2,10 @@
     "name": "Empleado",
     "fields": [
         {
+            "fieldName": "idUsuarioRelacion",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "nombre",
             "fieldType": "String",
             "fieldValidateRules": [
@@ -10,46 +14,13 @@
         },
         {
             "fieldName": "apellidos",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "correo",
             "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "tipo",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "password",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "borrado",
-            "fieldType": "Boolean",
             "fieldValidateRules": [
                 "required"
             ]
         }
     ],
     "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "admin",
-            "otherEntityName": "administrador",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "empleado"
-        },
         {
             "relationshipType": "one-to-one",
             "relationshipName": "ubicacion",
@@ -64,6 +35,13 @@
             "otherEntityName": "horario",
             "otherEntityField": "id",
             "otherEntityRelationshipName": "horario"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "tipo",
+            "otherEntityName": "tipoEmpleado",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "tipoEmpleado"
         }
     ],
     "changelogDate": "20190226065454",

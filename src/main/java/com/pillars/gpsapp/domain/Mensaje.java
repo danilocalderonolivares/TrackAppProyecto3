@@ -39,10 +39,6 @@ public class Mensaje implements Serializable {
     private Boolean borrado;
 
     @DBRef
-    @Field("admin")
-    private Administrador admin;
-
-    @DBRef
     @Field("empleado")
     private Empleado empleado;
 
@@ -105,19 +101,6 @@ public class Mensaje implements Serializable {
 
     public void setBorrado(Boolean borrado) {
         this.borrado = borrado;
-    }
-
-    public Administrador getAdmin() {
-        return admin;
-    }
-
-    public Mensaje admin(Administrador administrador) {
-        this.admin = administrador;
-        return this;
-    }
-
-    public void setAdmin(Administrador administrador) {
-        this.admin = administrador;
     }
 
     public Empleado getEmpleado() {

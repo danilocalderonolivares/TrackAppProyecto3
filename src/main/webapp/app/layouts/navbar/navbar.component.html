@@ -88,6 +88,12 @@
                         </a>
                     </li>
                     <li>
+                        <a class="dropdown-item" routerLink="tipo-empleado" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span>Tipo Empleado</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item" routerLink="horario" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                             <span>Horario</span>
