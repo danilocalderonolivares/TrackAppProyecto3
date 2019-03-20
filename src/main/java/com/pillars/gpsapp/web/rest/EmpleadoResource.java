@@ -1,8 +1,6 @@
 package com.pillars.gpsapp.web.rest;
 import com.pillars.gpsapp.domain.Empleado;
-import com.pillars.gpsapp.domain.User;
 import com.pillars.gpsapp.repository.EmpleadoRepository;
-import com.pillars.gpsapp.repository.UserRepository;
 import com.pillars.gpsapp.web.rest.errors.BadRequestAlertException;
 import com.pillars.gpsapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -11,10 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.Query;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -120,17 +118,24 @@ public class EmpleadoResource {
     }
 
     @GetMapping("/empleados/findByRelationshipId/{id}")
-    public ResponseEntity<Empleado> getEmpleadoByRelationshipId(@PathVariable String id) {
+    public ResponseEntity<Empleado> getEmpleadosByRelationshipId(@PathVariable String id) {
         log.debug("REST request to get Empleado : {}", id);
         Optional<Empleado> empleado = empleadoRepository.findByRelationshipId(id);
         return ResponseUtil.wrapOrNotFound(empleado);
     }
 
     @GetMapping("/empleados/findByTypeId/{id}")
-    public ResponseEntity<Empleado> getEmpleadoByTypeId(@PathVariable String id) {
+    public List<Empleado> getEmpleadosByTypeId(@PathVariable String id) {
         log.debug("REST request to get Empleado : {}", id);
-        Optional<Empleado> empleado = empleadoRepository.findByTypeId(id);
-        return ResponseUtil.wrapOrNotFound(empleado);
+        List<Empleado> empleados = empleadoRepository.findBytipo(id);
+        return empleados;
+    }
+
+    @GetMapping("/empleados/findByScheduleId/{id}")
+    public List<Empleado> getEmpleadosfindByScheduleId(@PathVariable String id) {
+        log.debug("REST request to get Empleado : {}", id);
+        List<Empleado> empleados = empleadoRepository.findByScheduleId(id);
+        return empleados;
     }
 
     /**

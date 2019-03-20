@@ -16,6 +16,8 @@ import { EmpleadoService } from 'app/entities/empleado';
 export class TipoEmpleadoDeleteDialogComponent implements OnInit {
     tipoEmpleado: ITipoEmpleado;
     empleadosDependencia: IEmpleado[];
+    mensajeMostrar: string;
+    botonEliminar: boolean;
 
     constructor(
         protected tipoEmpleadoService: TipoEmpleadoService,
@@ -30,12 +32,21 @@ export class TipoEmpleadoDeleteDialogComponent implements OnInit {
 
     verifyEmployeesDependencies() {
         this.empleadoService.findUserByIdType(this.tipoEmpleado.id).subscribe(res => {
-            this.empleadosDependencia = res.body as IEmpleado[];
+            this.empleadosDependencia = [];
+            this.empleadosDependencia = res.body;
             this.setValuesToShow();
         });
     }
 
-    setValuesToShow() {}
+    setValuesToShow() {
+        if (this.empleadosDependencia[0] != null) {
+            this.mensajeMostrar = 'Existen usuarios dentro de este tipo, operación no permitida';
+            this.botonEliminar = true;
+        } else {
+            this.mensajeMostrar = 'Esta seguro que desea eliminar este tipo de usuario?';
+            this.botonEliminar = false;
+        }
+    }
 
     clear() {
         this.activeModal.dismiss('cancel');
