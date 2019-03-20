@@ -17,7 +17,7 @@ import java.util.Objects;
 public class Recuperacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     private String id;
 
@@ -30,12 +30,8 @@ public class Recuperacion implements Serializable {
     private Boolean borrado;
 
     @DBRef
-    @Field("admin")
-    private User admin;
-
-    @DBRef
     @Field("empleado")
-    private User empleado;
+    private Empleado empleado;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -72,29 +68,16 @@ public class Recuperacion implements Serializable {
         this.borrado = borrado;
     }
 
-    public User getAdmin() {
-        return admin;
-    }
-
-    public Recuperacion admin(User administrador) {
-        this.admin = administrador;
-        return this;
-    }
-
-    public void setAdmin(User administrador) {
-        this.admin = administrador;
-    }
-
-    public User getEmpleado() {
+    public Empleado getEmpleado() {
         return empleado;
     }
 
-    public Recuperacion empleado(User empleado) {
+    public Recuperacion empleado(Empleado empleado) {
         this.empleado = empleado;
         return this;
     }
 
-    public void setEmpleado(User empleado) {
+    public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
