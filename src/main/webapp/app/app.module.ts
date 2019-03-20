@@ -18,8 +18,12 @@ import { GpsAppHomeModule } from './home/home.module';
 import { GpsAppAccountModule } from './account/account.module';
 import { GpsAppEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
+import { GpsAppWebCustomModule } from './webcustom/web-custom.module';
+
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
+import { MapaService } from './webcustom/empleados/mapa/mapa.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -36,7 +40,9 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         GpsAppAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         GpsAppEntityModule,
-        GpsAppAppRoutingModule
+        GpsAppWebCustomModule,
+        GpsAppAppRoutingModule,
+        FormsModule
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
     providers: [
@@ -59,7 +65,8 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
             provide: HTTP_INTERCEPTORS,
             useClass: NotificationInterceptor,
             multi: true
-        }
+        },
+        MapaService
     ],
     bootstrap: [JhiMainComponent]
 })
