@@ -29,15 +29,9 @@ public class Empleado implements Serializable {
     @Field("nombre")
     private String nombre;
 
+    @NotNull
     @Field("apellidos")
     private String apellidos;
-
-    @NotNull
-    @Field("tipo")
-    private String tipo;
-
-    @Field("borrado")
-    private Boolean borrado;
 
     @DBRef
     @Field("ubicacion")
@@ -47,6 +41,11 @@ public class Empleado implements Serializable {
     @Field("horarios")
     @JsonIgnoreProperties("horarios")
     private Horario horarios;
+
+    @DBRef
+    @Field("tipo")
+    @JsonIgnoreProperties("tipoEmpleados")
+    private TipoEmpleado tipo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -96,32 +95,6 @@ public class Empleado implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public Empleado tipo(String tipo) {
-        this.tipo = tipo;
-        return this;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public Boolean isBorrado() {
-        return borrado;
-    }
-
-    public Empleado borrado(Boolean borrado) {
-        this.borrado = borrado;
-        return this;
-    }
-
-    public void setBorrado(Boolean borrado) {
-        this.borrado = borrado;
-    }
-
     public Ubicacion getUbicacion() {
         return ubicacion;
     }
@@ -146,6 +119,19 @@ public class Empleado implements Serializable {
 
     public void setHorarios(Horario horario) {
         this.horarios = horario;
+    }
+
+    public TipoEmpleado getTipo() {
+        return tipo;
+    }
+
+    public Empleado tipo(TipoEmpleado tipoEmpleado) {
+        this.tipo = tipoEmpleado;
+        return this;
+    }
+
+    public void setTipo(TipoEmpleado tipoEmpleado) {
+        this.tipo = tipoEmpleado;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -176,8 +162,6 @@ public class Empleado implements Serializable {
             ", idUsuarioRelacion='" + getIdUsuarioRelacion() + "'" +
             ", nombre='" + getNombre() + "'" +
             ", apellidos='" + getApellidos() + "'" +
-            ", tipo='" + getTipo() + "'" +
-            ", borrado='" + isBorrado() + "'" +
             "}";
     }
 }

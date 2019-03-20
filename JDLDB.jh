@@ -40,9 +40,7 @@ entity Cliente {
 entity Empleado {
 	idUsuarioRelacion String,
     nombre String required,
-    apellidos String,
-    tipo String required,
-    borrado Boolean
+    apellidos String required
 }
 
 entity Mensaje {
@@ -74,23 +72,28 @@ entity Log {
     fecha LocalDate required
 }
 
+entity TipoEmpleado {
+	id String required,
+    nombreTipo String required
+}
+
 entity Horario {
 	id String required,
     nombre String required,
-    lunesInico LocalDate,
-    lunesFin LocalDate,
-    martesInico LocalDate,
-    martesFin LocalDate,
-    miercolesInico LocalDate,
-    miercolesFin LocalDate,
-    juevesInico LocalDate,
-    juevesFin LocalDate,
-    viernesInico LocalDate,
-    viernesFin LocalDate,
-    sabadoInico LocalDate,
-    sabadoFin LocalDate,
-    domingoInico LocalDate,
-    domingoFin LocalDate
+    lunesInico String,
+    lunesFin String,
+    martesInico String,
+    martesFin String,
+    miercolesInico String,
+    miercolesFin String,
+    juevesInico String,
+    juevesFin String,
+    viernesInico String,
+    viernesFin String,
+    sabadoInico String,
+    sabadoFin String,
+    domingoInico String,
+    domingoFin String
 }
 
 relationship OneToOne {
@@ -106,6 +109,7 @@ relationship OneToOne {
 }
 
 relationship OneToMany {
-    Horario to Empleado{horarios}
+    Horario to Empleado{horarios},
+    TipoEmpleado to Empleado{tipo}
     Log to Tarea{logs}
 }

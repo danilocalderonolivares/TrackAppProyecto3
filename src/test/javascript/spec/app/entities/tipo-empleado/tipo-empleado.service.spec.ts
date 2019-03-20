@@ -4,41 +4,24 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
-import { HorarioService } from 'app/entities/horario/horario.service';
-import { IHorario, Horario } from 'app/shared/model/horario.model';
+import { TipoEmpleadoService } from 'app/entities/tipo-empleado/tipo-empleado.service';
+import { ITipoEmpleado, TipoEmpleado } from 'app/shared/model/tipo-empleado.model';
 
 describe('Service Tests', () => {
-    describe('Horario Service', () => {
+    describe('TipoEmpleado Service', () => {
         let injector: TestBed;
-        let service: HorarioService;
+        let service: TipoEmpleadoService;
         let httpMock: HttpTestingController;
-        let elemDefault: IHorario;
+        let elemDefault: ITipoEmpleado;
         beforeEach(() => {
             TestBed.configureTestingModule({
                 imports: [HttpClientTestingModule]
             });
             injector = getTestBed();
-            service = injector.get(HorarioService);
+            service = injector.get(TipoEmpleadoService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Horario(
-                'ID',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA',
-                'AAAAAAA'
-            );
+            elemDefault = new TipoEmpleado('ID', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -53,7 +36,7 @@ describe('Service Tests', () => {
                 req.flush(JSON.stringify(returnedFromService));
             });
 
-            it('should create a Horario', async () => {
+            it('should create a TipoEmpleado', async () => {
                 const returnedFromService = Object.assign(
                     {
                         id: 'ID'
@@ -62,31 +45,17 @@ describe('Service Tests', () => {
                 );
                 const expected = Object.assign({}, returnedFromService);
                 service
-                    .create(new Horario(null))
+                    .create(new TipoEmpleado(null))
                     .pipe(take(1))
                     .subscribe(resp => expect(resp).toMatchObject({ body: expected }));
                 const req = httpMock.expectOne({ method: 'POST' });
                 req.flush(JSON.stringify(returnedFromService));
             });
 
-            it('should update a Horario', async () => {
+            it('should update a TipoEmpleado', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        nombre: 'BBBBBB',
-                        lunesInico: 'BBBBBB',
-                        lunesFin: 'BBBBBB',
-                        martesInico: 'BBBBBB',
-                        martesFin: 'BBBBBB',
-                        miercolesInico: 'BBBBBB',
-                        miercolesFin: 'BBBBBB',
-                        juevesInico: 'BBBBBB',
-                        juevesFin: 'BBBBBB',
-                        viernesInico: 'BBBBBB',
-                        viernesFin: 'BBBBBB',
-                        sabadoInico: 'BBBBBB',
-                        sabadoFin: 'BBBBBB',
-                        domingoInico: 'BBBBBB',
-                        domingoFin: 'BBBBBB'
+                        nombreTipo: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -100,24 +69,10 @@ describe('Service Tests', () => {
                 req.flush(JSON.stringify(returnedFromService));
             });
 
-            it('should return a list of Horario', async () => {
+            it('should return a list of TipoEmpleado', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        nombre: 'BBBBBB',
-                        lunesInico: 'BBBBBB',
-                        lunesFin: 'BBBBBB',
-                        martesInico: 'BBBBBB',
-                        martesFin: 'BBBBBB',
-                        miercolesInico: 'BBBBBB',
-                        miercolesFin: 'BBBBBB',
-                        juevesInico: 'BBBBBB',
-                        juevesFin: 'BBBBBB',
-                        viernesInico: 'BBBBBB',
-                        viernesFin: 'BBBBBB',
-                        sabadoInico: 'BBBBBB',
-                        sabadoFin: 'BBBBBB',
-                        domingoInico: 'BBBBBB',
-                        domingoFin: 'BBBBBB'
+                        nombreTipo: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -134,7 +89,7 @@ describe('Service Tests', () => {
                 httpMock.verify();
             });
 
-            it('should delete a Horario', async () => {
+            it('should delete a TipoEmpleado', async () => {
                 const rxPromise = service.delete('123').subscribe(resp => expect(resp.ok));
 
                 const req = httpMock.expectOne({ method: 'DELETE' });

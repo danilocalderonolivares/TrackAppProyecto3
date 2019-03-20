@@ -1,15 +1,15 @@
 import { IUbicacion } from 'app/shared/model/ubicacion.model';
 import { IHorario } from 'app/shared/model/horario.model';
+import { ITipoEmpleado } from 'app/shared/model/tipo-empleado.model';
 
 export interface IEmpleado {
     id?: string;
     idUsuarioRelacion?: string;
     nombre?: string;
     apellidos?: string;
-    tipo?: string;
-    borrado?: boolean;
     ubicacion?: IUbicacion;
     horarios?: IHorario;
+    tipo?: ITipoEmpleado;
 }
 
 export class Empleado implements IEmpleado {
@@ -18,11 +18,8 @@ export class Empleado implements IEmpleado {
         public idUsuarioRelacion?: string,
         public nombre?: string,
         public apellidos?: string,
-        public tipo?: string,
-        public borrado?: boolean,
         public ubicacion?: IUbicacion,
-        public horarios?: IHorario
-    ) {
-        this.borrado = this.borrado || false;
-    }
+        public horarios?: IHorario,
+        public tipo?: ITipoEmpleado
+    ) {}
 }

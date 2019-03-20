@@ -14,18 +14,10 @@
         },
         {
             "fieldName": "apellidos",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "tipo",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
-        },
-        {
-            "fieldName": "borrado",
-            "fieldType": "Boolean"
         }
     ],
     "relationships": [
@@ -43,6 +35,13 @@
             "otherEntityName": "horario",
             "otherEntityField": "id",
             "otherEntityRelationshipName": "horario"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "tipo",
+            "otherEntityName": "tipoEmpleado",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "tipoEmpleado"
         }
     ],
     "changelogDate": "20190226065454",

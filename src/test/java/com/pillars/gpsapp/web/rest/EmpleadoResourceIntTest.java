@@ -47,12 +47,6 @@ public class EmpleadoResourceIntTest {
     private static final String DEFAULT_APELLIDOS = "AAAAAAAAAA";
     private static final String UPDATED_APELLIDOS = "BBBBBBBBBB";
 
-    private static final String DEFAULT_TIPO = "AAAAAAAAAA";
-    private static final String UPDATED_TIPO = "BBBBBBBBBB";
-
-    private static final Boolean DEFAULT_BORRADO = false;
-    private static final Boolean UPDATED_BORRADO = true;
-
     @Autowired
     private EmpleadoRepository empleadoRepository;
 
@@ -94,9 +88,7 @@ public class EmpleadoResourceIntTest {
         Empleado empleado = new Empleado()
             .idUsuarioRelacion(DEFAULT_ID_USUARIO_RELACION)
             .nombre(DEFAULT_NOMBRE)
-            .apellidos(DEFAULT_APELLIDOS)
-            .tipo(DEFAULT_TIPO)
-            .borrado(DEFAULT_BORRADO);
+            .apellidos(DEFAULT_APELLIDOS);
         return empleado;
     }
 
@@ -123,8 +115,6 @@ public class EmpleadoResourceIntTest {
         assertThat(testEmpleado.getIdUsuarioRelacion()).isEqualTo(DEFAULT_ID_USUARIO_RELACION);
         assertThat(testEmpleado.getNombre()).isEqualTo(DEFAULT_NOMBRE);
         assertThat(testEmpleado.getApellidos()).isEqualTo(DEFAULT_APELLIDOS);
-        assertThat(testEmpleado.getTipo()).isEqualTo(DEFAULT_TIPO);
-        assertThat(testEmpleado.isBorrado()).isEqualTo(DEFAULT_BORRADO);
     }
 
     @Test
@@ -163,10 +153,10 @@ public class EmpleadoResourceIntTest {
     }
 
     @Test
-    public void checkTipoIsRequired() throws Exception {
+    public void checkApellidosIsRequired() throws Exception {
         int databaseSizeBeforeTest = empleadoRepository.findAll().size();
         // set the field null
-        empleado.setTipo(null);
+        empleado.setApellidos(null);
 
         // Create the Empleado, which fails.
 
@@ -191,9 +181,7 @@ public class EmpleadoResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(empleado.getId())))
             .andExpect(jsonPath("$.[*].idUsuarioRelacion").value(hasItem(DEFAULT_ID_USUARIO_RELACION.toString())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
-            .andExpect(jsonPath("$.[*].apellidos").value(hasItem(DEFAULT_APELLIDOS.toString())))
-            .andExpect(jsonPath("$.[*].tipo").value(hasItem(DEFAULT_TIPO.toString())))
-            .andExpect(jsonPath("$.[*].borrado").value(hasItem(DEFAULT_BORRADO.booleanValue())));
+            .andExpect(jsonPath("$.[*].apellidos").value(hasItem(DEFAULT_APELLIDOS.toString())));
     }
     
     @Test
@@ -208,9 +196,7 @@ public class EmpleadoResourceIntTest {
             .andExpect(jsonPath("$.id").value(empleado.getId()))
             .andExpect(jsonPath("$.idUsuarioRelacion").value(DEFAULT_ID_USUARIO_RELACION.toString()))
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
-            .andExpect(jsonPath("$.apellidos").value(DEFAULT_APELLIDOS.toString()))
-            .andExpect(jsonPath("$.tipo").value(DEFAULT_TIPO.toString()))
-            .andExpect(jsonPath("$.borrado").value(DEFAULT_BORRADO.booleanValue()));
+            .andExpect(jsonPath("$.apellidos").value(DEFAULT_APELLIDOS.toString()));
     }
 
     @Test
@@ -232,9 +218,7 @@ public class EmpleadoResourceIntTest {
         updatedEmpleado
             .idUsuarioRelacion(UPDATED_ID_USUARIO_RELACION)
             .nombre(UPDATED_NOMBRE)
-            .apellidos(UPDATED_APELLIDOS)
-            .tipo(UPDATED_TIPO)
-            .borrado(UPDATED_BORRADO);
+            .apellidos(UPDATED_APELLIDOS);
 
         restEmpleadoMockMvc.perform(put("/api/empleados")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -248,8 +232,6 @@ public class EmpleadoResourceIntTest {
         assertThat(testEmpleado.getIdUsuarioRelacion()).isEqualTo(UPDATED_ID_USUARIO_RELACION);
         assertThat(testEmpleado.getNombre()).isEqualTo(UPDATED_NOMBRE);
         assertThat(testEmpleado.getApellidos()).isEqualTo(UPDATED_APELLIDOS);
-        assertThat(testEmpleado.getTipo()).isEqualTo(UPDATED_TIPO);
-        assertThat(testEmpleado.isBorrado()).isEqualTo(UPDATED_BORRADO);
     }
 
     @Test

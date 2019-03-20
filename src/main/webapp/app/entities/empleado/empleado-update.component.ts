@@ -10,6 +10,8 @@ import { IUbicacion } from 'app/shared/model/ubicacion.model';
 import { UbicacionService } from 'app/entities/ubicacion';
 import { IHorario } from 'app/shared/model/horario.model';
 import { HorarioService } from 'app/entities/horario';
+import { ITipoEmpleado } from 'app/shared/model/tipo-empleado.model';
+import { TipoEmpleadoService } from 'app/entities/tipo-empleado';
 
 @Component({
     selector: 'jhi-empleado-update',
@@ -23,11 +25,14 @@ export class EmpleadoUpdateComponent implements OnInit {
 
     horarios: IHorario[];
 
+    tipoempleados: ITipoEmpleado[];
+
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected empleadoService: EmpleadoService,
         protected ubicacionService: UbicacionService,
         protected horarioService: HorarioService,
+        protected tipoEmpleadoService: TipoEmpleadoService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -68,6 +73,13 @@ export class EmpleadoUpdateComponent implements OnInit {
                 map((response: HttpResponse<IHorario[]>) => response.body)
             )
             .subscribe((res: IHorario[]) => (this.horarios = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.tipoEmpleadoService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<ITipoEmpleado[]>) => mayBeOk.ok),
+                map((response: HttpResponse<ITipoEmpleado[]>) => response.body)
+            )
+            .subscribe((res: ITipoEmpleado[]) => (this.tipoempleados = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -105,6 +117,10 @@ export class EmpleadoUpdateComponent implements OnInit {
     }
 
     trackHorarioById(index: number, item: IHorario) {
+        return item.id;
+    }
+
+    trackTipoEmpleadoById(index: number, item: ITipoEmpleado) {
         return item.id;
     }
 }

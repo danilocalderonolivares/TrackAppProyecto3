@@ -1,0 +1,54 @@
+<div>
+    <h2 id="page-heading">
+        <span>Tipo Empleados</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-tipo-empleado" [routerLink]="['/tipo-empleado/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Tipo Empleado
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="tipoEmpleados">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Nombre Tipo</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let tipoEmpleado of tipoEmpleados ;trackBy: trackId">
+                <td><a [routerLink]="['/tipo-empleado', tipoEmpleado.id, 'view' ]">{{tipoEmpleado.id}}</a></td>
+                <td>{{tipoEmpleado.nombreTipo}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/tipo-empleado', tipoEmpleado.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/tipo-empleado', tipoEmpleado.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'tipo-empleado', { outlets: { popup: tipoEmpleado.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

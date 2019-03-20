@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -30,46 +29,46 @@ public class Horario implements Serializable {
     private String nombre;
 
     @Field("lunes_inico")
-    private LocalDate lunesInico;
+    private String lunesInico;
 
     @Field("lunes_fin")
-    private LocalDate lunesFin;
+    private String lunesFin;
 
     @Field("martes_inico")
-    private LocalDate martesInico;
+    private String martesInico;
 
     @Field("martes_fin")
-    private LocalDate martesFin;
+    private String martesFin;
 
     @Field("miercoles_inico")
-    private LocalDate miercolesInico;
+    private String miercolesInico;
 
     @Field("miercoles_fin")
-    private LocalDate miercolesFin;
+    private String miercolesFin;
 
     @Field("jueves_inico")
-    private LocalDate juevesInico;
+    private String juevesInico;
 
     @Field("jueves_fin")
-    private LocalDate juevesFin;
+    private String juevesFin;
 
     @Field("viernes_inico")
-    private LocalDate viernesInico;
+    private String viernesInico;
 
     @Field("viernes_fin")
-    private LocalDate viernesFin;
+    private String viernesFin;
 
     @Field("sabado_inico")
-    private LocalDate sabadoInico;
+    private String sabadoInico;
 
     @Field("sabado_fin")
-    private LocalDate sabadoFin;
+    private String sabadoFin;
 
     @Field("domingo_inico")
-    private LocalDate domingoInico;
+    private String domingoInico;
 
     @Field("domingo_fin")
-    private LocalDate domingoFin;
+    private String domingoFin;
 
     @DBRef
     @Field("empleado")
@@ -96,185 +95,185 @@ public class Horario implements Serializable {
         this.nombre = nombre;
     }
 
-    public LocalDate getLunesInico() {
+    public String getLunesInico() {
         return lunesInico;
     }
 
-    public Horario lunesInico(LocalDate lunesInico) {
+    public Horario lunesInico(String lunesInico) {
         this.lunesInico = lunesInico;
         return this;
     }
 
-    public void setLunesInico(LocalDate lunesInico) {
+    public void setLunesInico(String lunesInico) {
         this.lunesInico = lunesInico;
     }
 
-    public LocalDate getLunesFin() {
+    public String getLunesFin() {
         return lunesFin;
     }
 
-    public Horario lunesFin(LocalDate lunesFin) {
+    public Horario lunesFin(String lunesFin) {
         this.lunesFin = lunesFin;
         return this;
     }
 
-    public void setLunesFin(LocalDate lunesFin) {
+    public void setLunesFin(String lunesFin) {
         this.lunesFin = lunesFin;
     }
 
-    public LocalDate getMartesInico() {
+    public String getMartesInico() {
         return martesInico;
     }
 
-    public Horario martesInico(LocalDate martesInico) {
+    public Horario martesInico(String martesInico) {
         this.martesInico = martesInico;
         return this;
     }
 
-    public void setMartesInico(LocalDate martesInico) {
+    public void setMartesInico(String martesInico) {
         this.martesInico = martesInico;
     }
 
-    public LocalDate getMartesFin() {
+    public String getMartesFin() {
         return martesFin;
     }
 
-    public Horario martesFin(LocalDate martesFin) {
+    public Horario martesFin(String martesFin) {
         this.martesFin = martesFin;
         return this;
     }
 
-    public void setMartesFin(LocalDate martesFin) {
+    public void setMartesFin(String martesFin) {
         this.martesFin = martesFin;
     }
 
-    public LocalDate getMiercolesInico() {
+    public String getMiercolesInico() {
         return miercolesInico;
     }
 
-    public Horario miercolesInico(LocalDate miercolesInico) {
+    public Horario miercolesInico(String miercolesInico) {
         this.miercolesInico = miercolesInico;
         return this;
     }
 
-    public void setMiercolesInico(LocalDate miercolesInico) {
+    public void setMiercolesInico(String miercolesInico) {
         this.miercolesInico = miercolesInico;
     }
 
-    public LocalDate getMiercolesFin() {
+    public String getMiercolesFin() {
         return miercolesFin;
     }
 
-    public Horario miercolesFin(LocalDate miercolesFin) {
+    public Horario miercolesFin(String miercolesFin) {
         this.miercolesFin = miercolesFin;
         return this;
     }
 
-    public void setMiercolesFin(LocalDate miercolesFin) {
+    public void setMiercolesFin(String miercolesFin) {
         this.miercolesFin = miercolesFin;
     }
 
-    public LocalDate getJuevesInico() {
+    public String getJuevesInico() {
         return juevesInico;
     }
 
-    public Horario juevesInico(LocalDate juevesInico) {
+    public Horario juevesInico(String juevesInico) {
         this.juevesInico = juevesInico;
         return this;
     }
 
-    public void setJuevesInico(LocalDate juevesInico) {
+    public void setJuevesInico(String juevesInico) {
         this.juevesInico = juevesInico;
     }
 
-    public LocalDate getJuevesFin() {
+    public String getJuevesFin() {
         return juevesFin;
     }
 
-    public Horario juevesFin(LocalDate juevesFin) {
+    public Horario juevesFin(String juevesFin) {
         this.juevesFin = juevesFin;
         return this;
     }
 
-    public void setJuevesFin(LocalDate juevesFin) {
+    public void setJuevesFin(String juevesFin) {
         this.juevesFin = juevesFin;
     }
 
-    public LocalDate getViernesInico() {
+    public String getViernesInico() {
         return viernesInico;
     }
 
-    public Horario viernesInico(LocalDate viernesInico) {
+    public Horario viernesInico(String viernesInico) {
         this.viernesInico = viernesInico;
         return this;
     }
 
-    public void setViernesInico(LocalDate viernesInico) {
+    public void setViernesInico(String viernesInico) {
         this.viernesInico = viernesInico;
     }
 
-    public LocalDate getViernesFin() {
+    public String getViernesFin() {
         return viernesFin;
     }
 
-    public Horario viernesFin(LocalDate viernesFin) {
+    public Horario viernesFin(String viernesFin) {
         this.viernesFin = viernesFin;
         return this;
     }
 
-    public void setViernesFin(LocalDate viernesFin) {
+    public void setViernesFin(String viernesFin) {
         this.viernesFin = viernesFin;
     }
 
-    public LocalDate getSabadoInico() {
+    public String getSabadoInico() {
         return sabadoInico;
     }
 
-    public Horario sabadoInico(LocalDate sabadoInico) {
+    public Horario sabadoInico(String sabadoInico) {
         this.sabadoInico = sabadoInico;
         return this;
     }
 
-    public void setSabadoInico(LocalDate sabadoInico) {
+    public void setSabadoInico(String sabadoInico) {
         this.sabadoInico = sabadoInico;
     }
 
-    public LocalDate getSabadoFin() {
+    public String getSabadoFin() {
         return sabadoFin;
     }
 
-    public Horario sabadoFin(LocalDate sabadoFin) {
+    public Horario sabadoFin(String sabadoFin) {
         this.sabadoFin = sabadoFin;
         return this;
     }
 
-    public void setSabadoFin(LocalDate sabadoFin) {
+    public void setSabadoFin(String sabadoFin) {
         this.sabadoFin = sabadoFin;
     }
 
-    public LocalDate getDomingoInico() {
+    public String getDomingoInico() {
         return domingoInico;
     }
 
-    public Horario domingoInico(LocalDate domingoInico) {
+    public Horario domingoInico(String domingoInico) {
         this.domingoInico = domingoInico;
         return this;
     }
 
-    public void setDomingoInico(LocalDate domingoInico) {
+    public void setDomingoInico(String domingoInico) {
         this.domingoInico = domingoInico;
     }
 
-    public LocalDate getDomingoFin() {
+    public String getDomingoFin() {
         return domingoFin;
     }
 
-    public Horario domingoFin(LocalDate domingoFin) {
+    public Horario domingoFin(String domingoFin) {
         this.domingoFin = domingoFin;
         return this;
     }
 
-    public void setDomingoFin(LocalDate domingoFin) {
+    public void setDomingoFin(String domingoFin) {
         this.domingoFin = domingoFin;
     }
 

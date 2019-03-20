@@ -18,10 +18,9 @@
             <th><span>Id Usuario Relacion</span></th>
             <th><span>Nombre</span></th>
             <th><span>Apellidos</span></th>
-            <th><span>Tipo</span></th>
-            <th><span>Borrado</span></th>
             <th><span>Ubicacion</span></th>
             <th><span>Horarios</span></th>
+            <th><span>Tipo</span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,8 +30,6 @@
                 <td>{{empleado.idUsuarioRelacion}}</td>
                 <td>{{empleado.nombre}}</td>
                 <td>{{empleado.apellidos}}</td>
-                <td>{{empleado.tipo}}</td>
-                <td>{{empleado.borrado}}</td>
                 <td>
                     <div *ngIf="empleado.ubicacion">
                         <a [routerLink]="['../ubicacion', empleado.ubicacion?.id, 'view' ]" >{{empleado.ubicacion?.id}}</a>
@@ -41,6 +38,11 @@
                 <td>
                     <div *ngIf="empleado.horarios">
                         <a [routerLink]="['../horario', empleado.horarios?.id, 'view' ]" >{{empleado.horarios?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="empleado.tipo">
+                        <a [routerLink]="['../tipo-empleado', empleado.tipo?.id, 'view' ]" >{{empleado.tipo?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

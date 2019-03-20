@@ -20,8 +20,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.Validator;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
 
 
@@ -43,47 +41,47 @@ public class HorarioResourceIntTest {
     private static final String DEFAULT_NOMBRE = "AAAAAAAAAA";
     private static final String UPDATED_NOMBRE = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_LUNES_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_LUNES_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_LUNES_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_LUNES_INICO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_LUNES_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_LUNES_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_LUNES_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_LUNES_FIN = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_MARTES_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_MARTES_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_MARTES_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_MARTES_INICO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_MARTES_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_MARTES_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_MARTES_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_MARTES_FIN = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_MIERCOLES_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_MIERCOLES_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_MIERCOLES_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_MIERCOLES_INICO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_MIERCOLES_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_MIERCOLES_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_MIERCOLES_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_MIERCOLES_FIN = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_JUEVES_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_JUEVES_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_JUEVES_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_JUEVES_INICO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_JUEVES_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_JUEVES_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_JUEVES_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_JUEVES_FIN = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_VIERNES_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_VIERNES_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_VIERNES_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_VIERNES_INICO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_VIERNES_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_VIERNES_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_VIERNES_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_VIERNES_FIN = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_SABADO_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_SABADO_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_SABADO_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_SABADO_INICO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_SABADO_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_SABADO_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_SABADO_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_SABADO_FIN = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_DOMINGO_INICO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DOMINGO_INICO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_DOMINGO_INICO = "AAAAAAAAAA";
+    private static final String UPDATED_DOMINGO_INICO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_DOMINGO_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DOMINGO_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_DOMINGO_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_DOMINGO_FIN = "BBBBBBBBBB";
 
     @Autowired
     private HorarioRepository horarioRepository;

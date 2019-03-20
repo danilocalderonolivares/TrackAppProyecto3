@@ -17,14 +17,6 @@
                 <dd>
                     <span>{{empleado.apellidos}}</span>
                 </dd>
-                <dt><span>Tipo</span></dt>
-                <dd>
-                    <span>{{empleado.tipo}}</span>
-                </dd>
-                <dt><span>Borrado</span></dt>
-                <dd>
-                    <span>{{empleado.borrado}}</span>
-                </dd>
                 <dt><span>Ubicacion</span></dt>
                 <dd>
                     <div *ngIf="empleado.ubicacion">
@@ -35,6 +27,12 @@
                 <dd>
                     <div *ngIf="empleado.horarios">
                         <a [routerLink]="['/horario', empleado.horarios?.id, 'view']">{{empleado.horarios?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Tipo</span></dt>
+                <dd>
+                    <div *ngIf="empleado.tipo">
+                        <a [routerLink]="['/tipo-empleado', empleado.tipo?.id, 'view']">{{empleado.tipo?.id}}</a>
                     </div>
                 </dd>
             </dl>

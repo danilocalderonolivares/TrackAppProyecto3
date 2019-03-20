@@ -1,23 +1,22 @@
-import { Moment } from 'moment';
 import { IEmpleado } from 'app/shared/model/empleado.model';
 
 export interface IHorario {
     id?: string;
     nombre?: string;
-    lunesInico?: Moment;
-    lunesFin?: Moment;
-    martesInico?: Moment;
-    martesFin?: Moment;
-    miercolesInico?: Moment;
-    miercolesFin?: Moment;
-    juevesInico?: Moment;
-    juevesFin?: Moment;
-    viernesInico?: Moment;
-    viernesFin?: Moment;
-    sabadoInico?: Moment;
-    sabadoFin?: Moment;
-    domingoInico?: Moment;
-    domingoFin?: Moment;
+    lunesInico?: string;
+    lunesFin?: string;
+    martesInico?: string;
+    martesFin?: string;
+    miercolesInico?: string;
+    miercolesFin?: string;
+    juevesInico?: string;
+    juevesFin?: string;
+    viernesInico?: string;
+    viernesFin?: string;
+    sabadoInico?: string;
+    sabadoFin?: string;
+    domingoInico?: string;
+    domingoFin?: string;
     empleados?: IEmpleado[];
 }
 
@@ -25,20 +24,20 @@ export class Horario implements IHorario {
     constructor(
         public id?: string,
         public nombre?: string,
-        public lunesInico?: Moment,
-        public lunesFin?: Moment,
-        public martesInico?: Moment,
-        public martesFin?: Moment,
-        public miercolesInico?: Moment,
-        public miercolesFin?: Moment,
-        public juevesInico?: Moment,
-        public juevesFin?: Moment,
-        public viernesInico?: Moment,
-        public viernesFin?: Moment,
-        public sabadoInico?: Moment,
-        public sabadoFin?: Moment,
-        public domingoInico?: Moment,
-        public domingoFin?: Moment,
+        public lunesInico?: string,
+        public lunesFin?: string,
+        public martesInico?: string,
+        public martesFin?: string,
+        public miercolesInico?: string,
+        public miercolesFin?: string,
+        public juevesInico?: string,
+        public juevesFin?: string,
+        public viernesInico?: string,
+        public viernesFin?: string,
+        public sabadoInico?: string,
+        public sabadoFin?: string,
+        public domingoInico?: string,
+        public domingoFin?: string,
         public empleados?: IEmpleado[]
     ) {}
 }
