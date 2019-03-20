@@ -19,12 +19,12 @@ export class ClienteUpdateComponent implements OnInit {
     isSaving: boolean;
     ubicacions: IUbicacion[];
     // google maps zoom level
-    zoom: number = 10;
+    zoom: number = 15;
 
     lat: number = 9.9359219;
     lng: number = -84.0919663761358;
     locationChosen = false;
-
+    address: string;
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected clienteService: ClienteService,
@@ -71,6 +71,7 @@ export class ClienteUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         if (this.cliente.id !== undefined) {
+            this.cliente.ubicacion = {};
             this.subscribeToSaveResponse(this.clienteService.update(this.cliente));
         } else {
             this.subscribeToSaveResponse(this.clienteService.create(this.cliente));
@@ -100,6 +101,24 @@ export class ClienteUpdateComponent implements OnInit {
     mapClicked(event) {
         this.lat = event.coords.lat;
         this.lng = event.coords.lng;
+
         this.locationChosen = true;
+        this.locationSelect();
+        this.cliente.ubicacion = {
+            nombreDireccion: this.cliente.direccion,
+            latitud: this.lat,
+            longitud: this.lng
+        };
+    }
+
+    locationSelect() {
+        this.clienteService.getAddress(this.lat, this.lng).subscribe(
+            res => {
+                this.cliente.direccion = res.results[0].formatted_address;
+            },
+            err => {
+                console.log(err);
+            }
+        );
     }
 }

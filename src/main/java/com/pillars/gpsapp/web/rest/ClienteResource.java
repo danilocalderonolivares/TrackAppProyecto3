@@ -1,6 +1,7 @@
 package com.pillars.gpsapp.web.rest;
 import com.pillars.gpsapp.domain.Cliente;
 import com.pillars.gpsapp.repository.ClienteRepository;
+import com.pillars.gpsapp.repository.UbicacionRepository;
 import com.pillars.gpsapp.web.rest.errors.BadRequestAlertException;
 import com.pillars.gpsapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -28,9 +29,11 @@ public class ClienteResource {
     private static final String ENTITY_NAME = "cliente";
 
     private final ClienteRepository clienteRepository;
+    private final UbicacionRepository ubicacionRepository;
 
-    public ClienteResource(ClienteRepository clienteRepository) {
+    public ClienteResource(ClienteRepository clienteRepository, UbicacionRepository ubicacionRepository) {
         this.clienteRepository = clienteRepository;
+        this.ubicacionRepository = ubicacionRepository;
     }
 
     /**
@@ -46,6 +49,7 @@ public class ClienteResource {
         if (cliente.getId() != null) {
             throw new BadRequestAlertException("A new cliente cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        ubicacionRepository.save(cliente.getUbicacion());
         Cliente result = clienteRepository.save(cliente);
         return ResponseEntity.created(new URI("/api/clientes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

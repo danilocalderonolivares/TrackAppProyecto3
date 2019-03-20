@@ -17,7 +17,7 @@
                                    [(ngModel)]="cliente.id" readonly />
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label" for="field_nombre">Nombre</label>
+                            <label class="form-control-label" for="field_nombre">Nombre *</label>
                             <input type="text" class="form-control" name="nombre" id="field_nombre"
                                    [(ngModel)]="cliente.nombre" required/>
                             <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label" for="field_cedula">Cédula</label>
+                            <label class="form-control-label" for="field_cedula">Cédula*</label>
                             <input type="text" class="form-control" name="cedula" id="field_cedula"
                                    [(ngModel)]="cliente.cedula" required/>
                             <div [hidden]="!(editForm.controls.cedula?.dirty && editForm.controls.cedula?.invalid)">
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-control-label" for="field_correo">Correo</label>
+                            <label class="form-control-label" for="field_correo">Correo*</label>
                             <input type="text" class="form-control" name="correo" id="field_correo"
                                    [(ngModel)]="cliente.correo" required/>
                             <div [hidden]="!(editForm.controls.correo?.dirty && editForm.controls.correo?.invalid)">
@@ -73,21 +73,28 @@
             <div class="col-md-6">
                 <h1>Ubicación</h1>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_direccion">Dirección (opcional)</label>
-                    <input type="text" class="form-control" name="direccion" id="field_direccion"
-                           [(ngModel)]="cliente.direccion" />
+                    <label class="form-control-label" for="field_direccion">Dirección*</label>
+                    <input type="text"
+                           class="form-control"
+                           name="direccion" id="field_direccion"
+                           [(ngModel)]="cliente.direccion"
+                           placeholder="Elija una posición en el mapa para ingresar la dirección"
+                           readonly required/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label">Ubicación</label>
-                    <agm-map [latitude]="lat"
+                    <agm-map
+                             [latitude]="lat"
                              [longitude]="lng"
                              [zoom]="zoom"
                              (mapClick)="mapClicked($event)">
-                        <agm-marker [latitude]="lat"
+                        <agm-marker
+                                    [latitude]="lat"
                                     [longitude]="lng"
                                     *ngIf="locationChosen">
-
                         </agm-marker>
+
+
                     </agm-map>
 
                 </div>

@@ -4,6 +4,7 @@ import com.pillars.gpsapp.GpsApp;
 
 import com.pillars.gpsapp.domain.Cliente;
 import com.pillars.gpsapp.repository.ClienteRepository;
+import com.pillars.gpsapp.repository.UbicacionRepository;
 import com.pillars.gpsapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -60,6 +61,9 @@ public class ClienteResourceIntTest {
     private ClienteRepository clienteRepository;
 
     @Autowired
+   private UbicacionRepository ubicacionRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -78,7 +82,8 @@ public class ClienteResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ClienteResource clienteResource = new ClienteResource(clienteRepository);
+
+        final ClienteResource clienteResource = new ClienteResource(clienteRepository,ubicacionRepository);
         this.restClienteMockMvc = MockMvcBuilders.standaloneSetup(clienteResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
