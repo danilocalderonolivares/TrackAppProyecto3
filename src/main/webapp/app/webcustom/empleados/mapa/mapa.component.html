@@ -1,3 +1,6 @@
+<label for="autoComplete">Ingrese una ubicación</label>
+<input ngx-google-places-autocomplete class="form-control" id="autoComplete" name="autoComplete" placeholder="Ingrese una ubicación" #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+<br>
 <agm-map [latitude]="this.mapaService.lat"
          [longitude]="this.mapaService.lng"
          [zoom]="zoom"

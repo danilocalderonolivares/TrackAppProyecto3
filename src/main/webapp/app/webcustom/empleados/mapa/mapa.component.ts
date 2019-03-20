@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapaService } from './mapa.service';
 import { MouseEvent } from '@agm/core';
+import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
 
 @Component({
     selector: 'jhi-mapa',
@@ -9,6 +11,7 @@ import { MouseEvent } from '@agm/core';
 })
 export class MapaComponent implements OnInit {
     zoom: number = 15;
+    @ViewChild('placesRef') placesRef: GooglePlaceDirective;
 
     constructor(protected mapaService: MapaService) {}
 
@@ -21,5 +24,10 @@ export class MapaComponent implements OnInit {
 
     setLabel(nombre: string, apellido: string) {
         return nombre.charAt(0) + apellido.charAt(0);
+    }
+
+    public handleAddressChange(address: Address) {
+        this.mapaService.lat = address.geometry.location.lat();
+        this.mapaService.lng = address.geometry.location.lng();
     }
 }
