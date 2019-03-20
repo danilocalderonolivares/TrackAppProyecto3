@@ -1,0 +1,22 @@
+<agm-map [latitude]="this.mapaService.lat"
+         [longitude]="this.mapaService.lng"
+         [zoom]="zoom"
+         (mapClick)="onChoseLocation($event)">
+    <agm-marker
+        *ngFor="let empleado of this.mapaService.empleados"
+        [latitude]="empleado.ubicacion.lat"
+        [longitude]="empleado.ubicacion.lng"
+        [label]="setLabel(empleado.nombre, empleado.apellido)">
+
+        <agm-info-window>
+            <strong>
+                <a (click)="this.mapaService.onEmployeeCliked(empleado)"
+                   [routerLink]="['/empleados', empleado.id]">
+                {{empleado.nombre +' '+ empleado.apellido}}
+                </a>
+            </strong>
+            <br>
+            <strong>{{empleado.tarea}}</strong>
+        </agm-info-window>
+    </agm-marker>
+</agm-map>

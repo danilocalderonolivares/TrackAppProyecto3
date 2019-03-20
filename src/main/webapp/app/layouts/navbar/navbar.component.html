@@ -8,6 +8,16 @@
     </a>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
+            <!--empleados-->
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'" class="nav-item" routerLinkActive="active" routerLink="empleados">
+                <a class="nav-link" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="user"></fa-icon>
+                        <span>Empleados</span>
+                    </span>
+                </a>
+            </li>
+            <!--home-->
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
                     <span>
