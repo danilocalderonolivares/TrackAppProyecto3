@@ -32,7 +32,7 @@ entity Cliente {
     nombre String required,
     cedula String required,
     direccion String,
-    correo String,
+    correo String required,
     esEmpresa Boolean,
     borrado Boolean
 }

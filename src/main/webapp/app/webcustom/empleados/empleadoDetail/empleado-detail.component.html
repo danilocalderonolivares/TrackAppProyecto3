@@ -1,0 +1,17 @@
+<h1 style="text-align: center; margin-top: 30px">Empleado</h1>
+
+<div class="d-flex justify-content-around" style="margin: 50px 0px 30px 0px">
+    <div class="container" class="col-3">
+        <div class="card" *ngFor="let emp of this.mapaService.empleados">
+            <div class="card-body">
+                <div class="panel-heading"><h3><strong>{{emp.tipo}}</strong></h3></div>npm
+                <hr>
+                <p class="card-text" >{{emp.nombre +' '+ emp.apellido}}</p>
+                <p class="card-text" >{{emp.tarea}}</p>
+            </div>
+        </div>
+    </div>
+
+    <jhi-mapa></jhi-mapa>
+
+</div>

@@ -69,32 +69,12 @@ import { RouterModule } from '@angular/router';
                 loadChildren: './ruta/ruta.module#GpsAppRutaModule'
             },
             {
-                path: 'horario',
-                loadChildren: './horario/horario.module#GpsAppHorarioModule'
-            },
-            {
-                path: 'empleado',
-                loadChildren: './empleado/empleado.module#GpsAppEmpleadoModule'
-            },
-            {
-                path: 'empleado',
-                loadChildren: './empleado/empleado.module#GpsAppEmpleadoModule'
-            },
-            {
                 path: 'tipo-empleado',
                 loadChildren: './tipo-empleado/tipo-empleado.module#GpsAppTipoEmpleadoModule'
             },
             {
-                path: 'tarea',
-                loadChildren: './tarea/tarea.module#GpsAppTareaModule'
-            },
-            {
-                path: 'ubicacion',
-                loadChildren: './ubicacion/ubicacion.module#GpsAppUbicacionModule'
-            },
-            {
-                path: 'sub-tarea',
-                loadChildren: './sub-tarea/sub-tarea.module#GpsAppSubTareaModule'
+                path: 'horario',
+                loadChildren: './horario/horario.module#GpsAppHorarioModule'
             },
             {
                 path: 'cliente',
