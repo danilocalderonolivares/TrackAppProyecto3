@@ -1,29 +1,29 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <div *ngIf="user">
+        <div *ngIf="customUser">
             <h2>
-                <span>Usuario</span> <b>{{user.login}}</b>
+                <span>Usuario</span> <b>{{customUser.user.login}}</b>
             </h2>
             <dl class="row-md jh-entity-details">
                 <dt><span>Nombre de usuario</span></dt>
                 <dd>
-                    <span>{{user.login}}</span>
+                    <span>{{customUser.user.login}}</span>
                     <jhi-boolean
-                        [value]="user.activated"
+                        [value]="customUser.user.activated"
                         textTrue="Activado"
                         textFalse="Desactivado">
                     </jhi-boolean>
                 </dd>
                 <dt><span>Nombre</span></dt>
-                <dd>{{user.firstName}}</dd>
+                <dd>{{customUser.user.firstName}}</dd>
                 <dt><span>Apellido</span></dt>
-                <dd>{{customUser.apellidos}}</dd>
+                <dd>{{customUser.empleado.apellidos}}</dd>
                 <dt><span>Email</span></dt>
-                <dd>{{user.email}}</dd>
+                <dd>{{customUser.user.email}}</dd>
                 <dt><span>Tipo usuario</span></dt>
-                <dd>{{customUser.tipo.nombreTipo}}</dd>
+                <dd>{{customUser.empleado.tipo.nombreTipo}}</dd>
                 <dt><span>Horario</span></dt>
-                <dd>{{customUser.horarios.nombre}}</dd>
+                <dd>{{customUser.empleado.horarios.nombre}}</dd>
                 <!--<dt><span>Created By</span></dt>
                 <dd>{{user.createdBy}}</dd>
                 <dt><span>Created Date</span></dt>
@@ -35,7 +35,7 @@
                 <dt><span>Accesos</span></dt>
                 <dd>
                     <ul class="list-unstyled">
-                        <li *ngFor="let authority of user.authorities">
+                        <li *ngFor="let authority of customUser.user.authorities">
                             <span class="badge badge-info">{{authority}}</span>
                         </li>
                     </ul>
