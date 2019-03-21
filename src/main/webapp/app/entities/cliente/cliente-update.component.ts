@@ -20,6 +20,7 @@ export class ClienteUpdateComponent implements OnInit {
     ubicacions: IUbicacion[];
     // google maps zoom level
     zoom: number = 15;
+    nombDireccion: string;
 
     lat: number = 9.9359219;
     lng: number = -84.0919663761358;
@@ -103,18 +104,19 @@ export class ClienteUpdateComponent implements OnInit {
         this.lng = event.coords.lng;
 
         this.locationChosen = true;
-        this.locationSelect();
+
         this.cliente.ubicacion = {
-            nombreDireccion: this.cliente.direccion,
             latitud: this.lat,
             longitud: this.lng
         };
+        this.locationSelect();
     }
 
     locationSelect() {
         this.clienteService.getAddress(this.lat, this.lng).subscribe(
             res => {
                 this.cliente.direccion = res.results[0].formatted_address;
+                this.cliente.ubicacion.nombreDireccion = res.results[0].formatted_address;
             },
             err => {
                 console.log(err);
