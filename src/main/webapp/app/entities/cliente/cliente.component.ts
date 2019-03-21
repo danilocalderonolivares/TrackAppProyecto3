@@ -48,6 +48,7 @@ export class ClienteComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.registerChangeInClientes();
         this.eventManager.destroy(this.eventSubscriber);
     }
 
