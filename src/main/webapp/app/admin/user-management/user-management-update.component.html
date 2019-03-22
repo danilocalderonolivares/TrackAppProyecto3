@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_nombre">Nombre</label>
                     <input type="text" class="form-control" name="nombre" id="field_nombre"
-                           [(ngModel)]="user.firstName" required/>
+                           [(ngModel)]="customUser.nombre" required/>
                     <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
                         <small class="form-text text-danger"
                                [hidden]="!editForm.controls.nombre?.errors?.required">
