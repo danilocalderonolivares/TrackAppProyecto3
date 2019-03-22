@@ -5,10 +5,14 @@
 <div class="">
 
 
-    <ng-container *ngIf="isAuthenticated() != false; else elseTemplate">
-        <router-outlet name="sidebar"></router-outlet>
-        <router-outlet></router-outlet>
+    <ng-container *ngIf="isAuthenticated() != false; else elseTemplate" class="">
 
+        <div class="container">
+            <div class="wrapper ">
+                 <router-outlet name="sidebar"></router-outlet>
+                   <router-outlet></router-outlet>
+            </div>
+        </div>
     </ng-container>
     <ng-template #elseTemplate>
         <router-outlet></router-outlet>
