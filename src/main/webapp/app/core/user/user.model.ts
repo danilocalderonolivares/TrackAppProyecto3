@@ -1,5 +1,3 @@
-import { UserExtra } from 'app/core/user/userExtra.model';
-
 export interface IUser {
     id?: any;
     login?: string;
