@@ -29,12 +29,9 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
 import { MapaService } from './webcustom/empleados/mapa/mapa.service';
 import { FormsModule } from '@angular/forms';
 
-import { CalendarCompModule } from './webcustom/calendar/calendar-layout/calendar-layout.module';
-
 @NgModule({
     imports: [
         BrowserModule,
-        CalendarCompModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         NgJhipsterModule.forRoot({
             // set below to true to make alerts look like toast
