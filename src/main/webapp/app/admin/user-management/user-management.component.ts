@@ -169,6 +169,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
             const customUser = this.userCustomInfo.find(currentUser => currentUser.idUsuarioRelacion === user.id);
             if (customUser !== null) {
                 this.fullUserInfo.push(new UserCustomUser(user, customUser));
+            } else {
             }
         }
     }
