@@ -28,11 +28,11 @@ export class CalendarComponent implements OnInit {
 
     view: string = 'month';
 
-    locale: string = 'en';
+    locale: string = 'es';
 
     viewDate: Date = new Date();
 
-    tareas$: Observable<Array<CalendarEvent<{ tarea: ITarea }>>>;
+    tareas$: Observable<Array<CalendarEvent<{ tarea: ITarea }>>> = from([]);
 
     activeDayIsOpen: boolean = false;
 
@@ -61,48 +61,27 @@ export class CalendarComponent implements OnInit {
             .set('inicio.gte', format(getStart(this.viewDate), 'YYYY-MM-DD'))
             .set('fin.lte', format(getEnd(this.viewDate), 'YYYY-MM-DD'));
 
-        this.tareas$ = this.http.get(this.resourceUrl, { params, observe: 'response' }).pipe(
+        this.tareas$ = this.http.get(this.resourceUrl, { params }).pipe(
             map(({ results }: { results: ITarea[] }) => {
-                return results.map((film: ITarea) => {
-                    return {
-                        title: film.title,
-                        start: new Date(film.release_date + getTimezoneOffsetString(this.viewDate)),
-                        color: colors.yellow,
-                        allDay: true,
-                        meta: {
-                            film
-                        }
-                    };
-                });
-            })
-        );
-
-        /*this.tareas$ = this.tareaService
-            .query({
-                'inicio.gte': format(getStart(this.viewDate), 'YYYY-MM-DD'),
-                'fin.lte': format(getEnd(this.viewDate), 'YYYY-MM-DD')
-            })
-            .pipe(
-                filter((res: HttpResponse<ITarea[]>) => res.ok),
-                map((res: HttpResponse<ITarea[]>) => {
-                    console.log(res.body);
-                    return res.body.map((tarea: ITarea) => {
-                        return {
-                            title: tarea.title,
-                            start: new Date(
-                                tarea.inicio + getTimezoneOffsetString(this.viewDate)
-                            ),
-                            end: new Date(
-                                tarea.inicio + getTimezoneOffsetString(this.viewDate)
-                            ),
+                console.log('*****************', results);
+                if (results) {
+                    return results.map((film: ITarea) => {
+                        console.log(film);
+                        const calendarEventToAdd: CalendarEvent = {
+                            title: film.title,
+                            start: new Date(film.inicio + getTimezoneOffsetString(this.viewDate)),
                             color: colors.yellow,
+                            allDay: true,
                             meta: {
-                                tarea
+                                film
                             }
                         };
+                        return calendarEventToAdd;
                     });
-                })
-            )*/
+                }
+                return [];
+            })
+        );
     }
 
     /*fetchEvents(): void {

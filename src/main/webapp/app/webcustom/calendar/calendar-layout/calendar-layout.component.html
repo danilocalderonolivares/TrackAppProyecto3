@@ -13,11 +13,11 @@
     </div>
 </ng-template>
 
-<div *ngIf="events$ | async; else loading; let events">
+<div *ngIf="tareas$ | async; else loading; let tareas">
     <mwl-calendar-month-view
         *ngIf="view === 'month'"
         [viewDate]="viewDate"
-        [events]="events"
+        [events]="tareas"
         [locale]="locale"
         [activeDayIsOpen]="activeDayIsOpen"
         (dayClicked)="dayClicked($event.day)"
@@ -28,7 +28,7 @@
         *ngIf="view === 'week'"
         [viewDate]="viewDate"
         [locale]="locale"
-        [events]="events"
+        [events]="tareas"
         (eventClicked)="eventClicked($event.event)"
     >
     </mwl-calendar-week-view>
@@ -36,7 +36,7 @@
         *ngIf="view === 'day'"
         [viewDate]="viewDate"
         [locale]="locale"
-        [events]="events"
+        [events]="tareas"
         (eventClicked)="eventClicked($event.event)"
     >
     </mwl-calendar-day-view>
