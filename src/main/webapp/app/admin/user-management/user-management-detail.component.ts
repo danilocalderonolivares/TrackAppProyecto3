@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { User } from 'app/core';
 import { EmpleadoService } from 'app/entities/empleado';
 import { UserCustomUser } from 'app/shared/model/user_CustomUser.model';
