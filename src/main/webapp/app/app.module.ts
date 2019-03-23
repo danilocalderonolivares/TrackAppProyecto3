@@ -1,4 +1,8 @@
 import './vendor.ts';
+import 'core-js/es6/reflect';
+import 'core-js/es7/reflect';
+import 'zone.js/dist/zone';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,9 +29,12 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
 import { MapaService } from './webcustom/empleados/mapa/mapa.service';
 import { FormsModule } from '@angular/forms';
 
+import { CalendarCompModule } from './webcustom/calendar/calendar-layout/calendar-layout.module';
+
 @NgModule({
     imports: [
         BrowserModule,
+        CalendarCompModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         NgJhipsterModule.forRoot({
             // set below to true to make alerts look like toast
@@ -75,3 +82,16 @@ export class GpsAppAppModule {
         this.dpConfig.minDate = { year: moment().year() - 100, month: 1, day: 1 };
     }
 }
+
+platformBrowserDynamic()
+    .bootstrapModule(GpsAppAppModule)
+    .then(ref => {
+        // Ensure Angular destroys itself on hot reloads.
+        if (window['ngRef']) {
+            window['ngRef'].destroy();
+        }
+        window['ngRef'] = ref;
+
+        // Otherwise, log the boot error
+    })
+    .catch(err => console.error(err));

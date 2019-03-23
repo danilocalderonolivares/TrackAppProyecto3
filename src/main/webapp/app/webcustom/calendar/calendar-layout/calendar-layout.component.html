@@ -1,0 +1,43 @@
+<jhi-app-calendar-header
+    [(view)]="view"
+    [(viewDate)]="viewDate"
+    (viewDateChange)="fetchEvents()"
+    (viewChange)="fetchEvents()"
+>
+</jhi-app-calendar-header>
+
+<ng-template #loading>
+    <div class="text-center">
+        <i class="fa fa-spin fa-spinner fa-5x"></i> <br />
+        Loading events...
+    </div>
+</ng-template>
+
+<div *ngIf="events$ | async; else loading; let events">
+    <mwl-calendar-month-view
+        *ngIf="view === 'month'"
+        [viewDate]="viewDate"
+        [events]="events"
+        [locale]="locale"
+        [activeDayIsOpen]="activeDayIsOpen"
+        (dayClicked)="dayClicked($event.day)"
+        (eventClicked)="eventClicked($event.event)"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+        *ngIf="view === 'week'"
+        [viewDate]="viewDate"
+        [locale]="locale"
+        [events]="events"
+        (eventClicked)="eventClicked($event.event)"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+        *ngIf="view === 'day'"
+        [viewDate]="viewDate"
+        [locale]="locale"
+        [events]="events"
+        (eventClicked)="eventClicked($event.event)"
+    >
+    </mwl-calendar-day-view>
+</div>
