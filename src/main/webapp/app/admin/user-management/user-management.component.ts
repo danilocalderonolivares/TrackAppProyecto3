@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Directive, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -169,6 +169,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
             const customUser = this.userCustomInfo.find(currentUser => currentUser.idUsuarioRelacion === user.id);
             if (customUser !== null) {
                 this.fullUserInfo.push(new UserCustomUser(user, customUser));
+            } else {
             }
         }
     }
