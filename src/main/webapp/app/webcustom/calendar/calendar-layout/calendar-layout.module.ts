@@ -1,3 +1,5 @@
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -6,6 +8,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { CalendarHeader } from '../calendar-header/calendar-header.module';
 import { CalendarComponent } from './calendar-layout.component';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
+registerLocaleData(localeEs);
 
 @NgModule({
     imports: [
