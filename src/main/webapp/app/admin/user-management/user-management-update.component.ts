@@ -19,7 +19,6 @@ import { JhiAlertService } from 'ng-jhipster';
 })
 export class UserMgmtUpdateComponent implements OnInit {
     user: User;
-    languages: any[];
     authorities: any[];
     isSaving: boolean;
     customUser: IEmpleado;
