@@ -2,21 +2,64 @@
 <div>
     <router-outlet name="navbar"></router-outlet>
 </div>
-<div class="">
-
-
-    <ng-container *ngIf="isAuthenticated() != false; else elseTemplate" class="">
-
-        <div class="container">
-            <div class="wrapper ">
-                 <router-outlet name="sidebar"></router-outlet>
-                   <router-outlet></router-outlet>
+    <ng-container *ngIf="isAuthenticated() != false; else elseTemplate">
+        <link rel="stylesheet" href="../../../content/css/sidebar/black-dashboard.css?v=1.0.0">
+        <div class="sidebar">
+            <div class="sidebar-wrapper" style="background-color: #007bff;">
+                <div class="logo text-center">
+                    <a routerLink="/" class="simple-text logo-normal">
+                        GPSApp
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li class="">
+                        <a routerLink="tarea"  class="simple-text">
+                            <h5>Tarea</h5>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a routerLink="ubicacion"  class="simple-text">
+                            <h5>Ubicación</h5>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a routerLink="sub-tarea"  class="simple-text">
+                            <h5>SubTarea</h5>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a routerLink="cliente"  class="simple-text">
+                            <h5>Cliente</h5>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a routerLink="admin/user-management"  class="simple-text">
+                            <h5>Empleado</h5>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a routerLink="ruta"  class="simple-text">
+                            <h5>Ruta</h5>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="horario"  class="simple-text">
+                            <h5>Horario</h5>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
+       <div class="main-panel">
+           <div class="content">
+               <router-outlet></router-outlet>
+           </div>
+       </div>
     </ng-container>
     <ng-template #elseTemplate>
+
         <router-outlet></router-outlet>
     </ng-template>
 
 
-</div>
+

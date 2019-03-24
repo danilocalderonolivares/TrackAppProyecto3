@@ -3,7 +3,7 @@
 <div class="container">
         <div class="card border-primary mt-4 col-8">
             <div class="card-header text-center">
-                <h1><strong>GPSApp</strong></h1>
+                <h1><strong></strong></h1>
             </div>
             <div class="card-body">
                 <div class="card-title">
@@ -12,14 +12,29 @@
                 <form >
                     <div class="form-group">
                         <label class="username-label" for="username">Correo*</label>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Correo"
-                               [(ngModel)]="username">
+                        <input type="text"
+                               class="form-control"
+                               name="username" id="username"
+                               placeholder="Correo"
+                               [(ngModel)]="username"
+                               #emailInput="ngModel">
+                        <div *ngIf="emailInput.dirty">
+                            <small class="form-text text-danger"
+                                   *ngIf="emailInput.errors.required">
+                                Su correo es requerido!
+                            </small>
+                        </div>
                     </div>
                 </form>
                 <div class="form-group">
                     <label for="password">Contraseña*</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña"
-                           [(ngModel)]="password">
+                    <input type="password"
+                           class="form-control"
+                           name="password"
+                           id="password"
+                           placeholder="Contraseña"
+                           [(ngModel)]="password"
+                           #contraseñaInput="ngModel">
                 </div>
                 <button type="submit" class="btn btn-primary btn-block "(click)="login()"><h6 class="text-center">Inciar sesión</h6></button>
             </div>
