@@ -17,11 +17,13 @@
                 <dd>
                     <span>{{ruta.borrado}}</span>
                 </dd>
-                <dt><span>Ubicaciones</span></dt>
+                <dt><span>Punto Inicio</span></dt>
                 <dd>
-                    <div *ngIf="ruta.ubicaciones">
-                        <a [routerLink]="['/ubicacion', ruta.ubicaciones?.id, 'view']">{{ruta.ubicaciones?.id}}</a>
-                    </div>
+                    <span>{{ruta.puntoInicio}}</span>
+                </dd>
+                <dt><span>Punto L Legada</span></dt>
+                <dd>
+                    <span>{{ruta.puntoLLegada}}</span>
                 </dd>
             </dl>
 

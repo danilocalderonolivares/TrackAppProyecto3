@@ -18,17 +18,23 @@
             "fieldValidateRules": [
                 "required"
             ]
-        }
-    ],
-    "relationships": [
+        },
         {
-            "relationshipType": "many-to-one",
-            "relationshipName": "ubicaciones",
-            "otherEntityName": "ubicacion",
-            "otherEntityField": "id",
-            "otherEntityRelationshipName": "ubicacion"
+            "fieldName": "puntoInicio",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "puntoLLegada",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
+    "relationships": [],
     "changelogDate": "20190226065458",
     "entityTableName": "ruta",
     "dto": "no",

@@ -1,10 +1,10 @@
 import { Moment } from 'moment';
 import { ISubTarea } from 'app/shared/model/sub-tarea.model';
-import { IEmpleado } from 'app/shared/model/empleado.model';
 import { IUbicacion } from 'app/shared/model/ubicacion.model';
 import { ICliente } from 'app/shared/model/cliente.model';
 import { IRuta } from 'app/shared/model/ruta.model';
 import { ILog } from 'app/shared/model/log.model';
+import { IUser } from 'app/core';
 
 export interface ITarea {
     id?: string;
@@ -21,11 +21,14 @@ export interface ITarea {
     completada?: boolean;
     borrado?: boolean;
     subtarea?: ISubTarea;
-    empleado?: IEmpleado;
+    empleado?: IUser;
     ubicacion?: IUbicacion;
     cliente?: ICliente;
     ruta?: IRuta;
     logs?: ILog;
+    start?: Date;
+    end?: Date;
+    color?: string;
 }
 
 export class Tarea implements ITarea {
@@ -44,11 +47,14 @@ export class Tarea implements ITarea {
         public completada?: boolean,
         public borrado?: boolean,
         public subtarea?: ISubTarea,
-        public empleado?: IEmpleado,
+        public empleado?: IUser,
         public ubicacion?: IUbicacion,
         public cliente?: ICliente,
         public ruta?: IRuta,
-        public logs?: ILog
+        public logs?: ILog,
+        public start?: Date,
+        public end?: Date,
+        public color?: string
     ) {
         this.usarRuta = this.usarRuta || false;
         this.activa = this.activa || false;

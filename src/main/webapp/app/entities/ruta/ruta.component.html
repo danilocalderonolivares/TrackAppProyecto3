@@ -18,7 +18,8 @@
             <th><span>Nombre</span></th>
             <th><span>Descripcion</span></th>
             <th><span>Borrado</span></th>
-            <th><span>Ubicaciones</span></th>
+            <th><span>Punto Inicio</span></th>
+            <th><span>Punto L Legada</span></th>
             <th></th>
             </tr>
             </thead>
@@ -28,11 +29,8 @@
                 <td>{{ruta.nombre}}</td>
                 <td>{{ruta.descripcion}}</td>
                 <td>{{ruta.borrado}}</td>
-                <td>
-                    <div *ngIf="ruta.ubicaciones">
-                        <a [routerLink]="['../ubicacion', ruta.ubicaciones?.id, 'view' ]" >{{ruta.ubicaciones?.id}}</a>
-                    </div>
-                </td>
+                <td>{{ruta.puntoInicio}}</td>
+                <td>{{ruta.puntoLLegada}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

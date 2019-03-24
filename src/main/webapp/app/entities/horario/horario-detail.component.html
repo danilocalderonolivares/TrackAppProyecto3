@@ -1,11 +1,15 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="horario">
-            <h2><span>Horario</span> {{horario.id}}</h2>
+            <h2><span>Horario</span> {{horario.nombre}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Lunes Inico</span></dt>
+                <dt><span>Nombre</span></dt>
+                <dd>
+                    <span>{{horario.nombre}}</span>
+                </dd>
+                <dt><span>Lunes Inicio</span></dt>
                 <dd>
                     <span>{{horario.lunesInico}}</span>
                 </dd>
@@ -13,7 +17,7 @@
                 <dd>
                     <span>{{horario.lunesFin}}</span>
                 </dd>
-                <dt><span>Martes Inico</span></dt>
+                <dt><span>Martes Inicio</span></dt>
                 <dd>
                     <span>{{horario.martesInico}}</span>
                 </dd>
@@ -21,7 +25,7 @@
                 <dd>
                     <span>{{horario.martesFin}}</span>
                 </dd>
-                <dt><span>Miercoles Inico</span></dt>
+                <dt><span>Miercoles Inicio</span></dt>
                 <dd>
                     <span>{{horario.miercolesInico}}</span>
                 </dd>
@@ -29,7 +33,7 @@
                 <dd>
                     <span>{{horario.miercolesFin}}</span>
                 </dd>
-                <dt><span>Jueves Inico</span></dt>
+                <dt><span>Jueves Inicio</span></dt>
                 <dd>
                     <span>{{horario.juevesInico}}</span>
                 </dd>
@@ -37,7 +41,7 @@
                 <dd>
                     <span>{{horario.juevesFin}}</span>
                 </dd>
-                <dt><span>Viernes Inico</span></dt>
+                <dt><span>Viernes Inicio</span></dt>
                 <dd>
                     <span>{{horario.viernesInico}}</span>
                 </dd>
@@ -45,7 +49,7 @@
                 <dd>
                     <span>{{horario.viernesFin}}</span>
                 </dd>
-                <dt><span>Sabado Inico</span></dt>
+                <dt><span>Sabado Inicio</span></dt>
                 <dd>
                     <span>{{horario.sabadoInico}}</span>
                 </dd>
@@ -53,7 +57,7 @@
                 <dd>
                     <span>{{horario.sabadoFin}}</span>
                 </dd>
-                <dt><span>Domingo Inico</span></dt>
+                <dt><span>Domingo Inicio</span></dt>
                 <dd>
                     <span>{{horario.domingoInico}}</span>
                 </dd>
@@ -66,13 +70,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Regresar</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/horario', horario.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Editar</span>
             </button>
         </div>
     </div>

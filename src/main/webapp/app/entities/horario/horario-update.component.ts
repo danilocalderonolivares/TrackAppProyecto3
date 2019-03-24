@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import * as moment from 'moment';
 import { IHorario } from 'app/shared/model/horario.model';
 import { HorarioService } from './horario.service';
 
@@ -14,20 +13,6 @@ import { HorarioService } from './horario.service';
 export class HorarioUpdateComponent implements OnInit {
     horario: IHorario;
     isSaving: boolean;
-    lunesInicoDp: any;
-    lunesFinDp: any;
-    martesInicoDp: any;
-    martesFinDp: any;
-    miercolesInicoDp: any;
-    miercolesFinDp: any;
-    juevesInicoDp: any;
-    juevesFinDp: any;
-    viernesInicoDp: any;
-    viernesFinDp: any;
-    sabadoInicoDp: any;
-    sabadoFinDp: any;
-    domingoInicoDp: any;
-    domingoFinDp: any;
 
     constructor(protected horarioService: HorarioService, protected activatedRoute: ActivatedRoute) {}
 

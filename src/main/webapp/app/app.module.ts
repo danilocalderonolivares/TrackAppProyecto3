@@ -1,4 +1,8 @@
 import './vendor.ts';
+import 'core-js/es6/reflect';
+import 'core-js/es7/reflect';
+import 'zone.js/dist/zone';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,10 +22,14 @@ import { GpsAppHomeModule } from './home/home.module';
 import { GpsAppAccountModule } from './account/account.module';
 import { GpsAppEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
+import { GpsAppWebCustomModule } from './webcustom/web-custom.module';
+
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { LandingComponent } from './layouts/landing/landing.component';
+import { MapaService } from './webcustom/empleados/mapa/mapa.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -38,7 +46,9 @@ import { LandingComponent } from './layouts/landing/landing.component';
         GpsAppAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         GpsAppEntityModule,
-        GpsAppAppRoutingModule
+        GpsAppWebCustomModule,
+        GpsAppAppRoutingModule,
+        FormsModule
     ],
     declarations: [
         JhiMainComponent,
@@ -69,7 +79,8 @@ import { LandingComponent } from './layouts/landing/landing.component';
             provide: HTTP_INTERCEPTORS,
             useClass: NotificationInterceptor,
             multi: true
-        }
+        },
+        MapaService
     ],
     bootstrap: [JhiMainComponent]
 })
@@ -78,3 +89,16 @@ export class GpsAppAppModule {
         this.dpConfig.minDate = { year: moment().year() - 100, month: 1, day: 1 };
     }
 }
+
+platformBrowserDynamic()
+    .bootstrapModule(GpsAppAppModule)
+    .then(ref => {
+        // Ensure Angular destroys itself on hot reloads.
+        if (window['ngRef']) {
+            window['ngRef'].destroy();
+        }
+        window['ngRef'] = ref;
+
+        // Otherwise, log the boot error
+    })
+    .catch(err => console.error(err));

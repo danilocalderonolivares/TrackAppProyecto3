@@ -48,6 +48,7 @@ export class AdministradorComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.registerChangeInAdministradors();
         this.eventManager.destroy(this.eventSubscriber);
     }
 

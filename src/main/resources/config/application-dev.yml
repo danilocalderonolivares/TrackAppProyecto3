@@ -19,7 +19,6 @@ logging:
         io.github.jhipster: DEBUG
         com.pillars.gpsapp: DEBUG
 
-
 spring:
     profiles:
         active: dev
@@ -59,6 +58,7 @@ spring:
 server:
     port: 18080
 
+
 # ===================================================================
 # JHipster specific properties
 #
@@ -90,7 +90,7 @@ jhipster:
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: GPSApp@localhost
-        base-url: http://192.168.51.62:18080
+        base-url: http://192.168.0.23:9000
     metrics:
         logs: # Reports metrics in the logs
             enabled: false

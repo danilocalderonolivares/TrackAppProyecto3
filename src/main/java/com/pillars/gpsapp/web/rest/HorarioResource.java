@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -40,7 +41,7 @@ public class HorarioResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/horarios")
-    public ResponseEntity<Horario> createHorario(@RequestBody Horario horario) throws URISyntaxException {
+    public ResponseEntity<Horario> createHorario(@Valid @RequestBody Horario horario) throws URISyntaxException {
         log.debug("REST request to save Horario : {}", horario);
         if (horario.getId() != null) {
             throw new BadRequestAlertException("A new horario cannot already have an ID", ENTITY_NAME, "idexists");
@@ -61,7 +62,7 @@ public class HorarioResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/horarios")
-    public ResponseEntity<Horario> updateHorario(@RequestBody Horario horario) throws URISyntaxException {
+    public ResponseEntity<Horario> updateHorario(@Valid @RequestBody Horario horario) throws URISyntaxException {
         log.debug("REST request to update Horario : {}", horario);
         if (horario.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

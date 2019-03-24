@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { ActivatedRoute, Router } from '@angular/router';
 import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
-
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { AccountService, UserService, User } from 'app/core';
 import { UserMgmtDeleteDialogComponent } from 'app/admin';
+import { Empleado } from 'app/shared/model/empleado.model';
+import { EmpleadoService } from 'app/entities/empleado';
+import { UserCustomUser } from 'app/shared/model/user_CustomUser.model';
 
 @Component({
     selector: 'jhi-user-mgmt',
@@ -16,6 +17,7 @@ import { UserMgmtDeleteDialogComponent } from 'app/admin';
 export class UserMgmtComponent implements OnInit, OnDestroy {
     currentAccount: any;
     users: User[];
+    userCustomInfo: Empleado[];
     error: any;
     success: any;
     routeData: any;
@@ -26,6 +28,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    fullUserInfo: UserCustomUser[];
 
     constructor(
         private userService: UserService,
@@ -35,7 +38,8 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
         private activatedRoute: ActivatedRoute,
         private router: Router,
         private eventManager: JhiEventManager,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private empleadoService: EmpleadoService
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -130,12 +134,44 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
                 // Left blank intentionally, nothing to do here
             }
         );
+
+        this.deleteCustomUserInfo(user);
+    }
+
+    deleteCustomUserInfo(user) {
+        this.empleadoService.deleteByIdRelacion(user.id).subscribe(res => {
+            console.log(res);
+        });
     }
 
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
         this.users = data;
+        this.loadCustomUserInfo();
+    }
+
+    loadCustomUserInfo() {
+        this.empleadoService
+            .query({
+                page: this.page - 1,
+                size: this.itemsPerPage,
+                sort: this.sort()
+            })
+            .subscribe((res: HttpResponse<Empleado[]>) => this.fillUserFullInfo(res), (res: HttpResponse<any>) => this.onError(res.body));
+    }
+
+    fillUserFullInfo(res) {
+        this.fullUserInfo = [];
+        this.userCustomInfo = res.body;
+
+        for (const user of this.users) {
+            const customUser = this.userCustomInfo.find(currentUser => currentUser.idUsuarioRelacion === user.id);
+            if (customUser !== null) {
+                this.fullUserInfo.push(new UserCustomUser(user, customUser));
+            } else {
+            }
+        }
     }
 
     private onError(error) {

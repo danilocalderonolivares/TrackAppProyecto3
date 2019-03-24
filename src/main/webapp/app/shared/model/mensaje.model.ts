@@ -1,5 +1,4 @@
 import { Moment } from 'moment';
-import { IAdministrador } from 'app/shared/model/administrador.model';
 import { IEmpleado } from 'app/shared/model/empleado.model';
 
 export interface IMensaje {
@@ -8,7 +7,6 @@ export interface IMensaje {
     fechaEnvio?: Moment;
     visto?: boolean;
     borrado?: boolean;
-    admin?: IAdministrador;
     empleado?: IEmpleado;
 }
 
@@ -19,7 +17,6 @@ export class Mensaje implements IMensaje {
         public fechaEnvio?: Moment,
         public visto?: boolean,
         public borrado?: boolean,
-        public admin?: IAdministrador,
         public empleado?: IEmpleado
     ) {
         this.visto = this.visto || false;
