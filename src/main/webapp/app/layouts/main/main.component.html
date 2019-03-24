@@ -1,12 +1,104 @@
 <jhi-page-ribbon></jhi-page-ribbon>
 <div>
     <router-outlet name="navbar"></router-outlet>
+
 </div>
-<div class="container-fluid">
-    <div class="card jh-card">
-        <router-outlet></router-outlet>
-        <router-outlet name="popup"></router-outlet>
+<ng-container *ngIf="isAuthenticated() != false; else elseTemplate">
+    <link rel="stylesheet" href="../../../content/css/sidebar/black-dashboard.css?v=1.0.0">
+
+    <div class="sidebar">
+        <div class="sidebar-wrapper" style="background-color: #007bff;">
+            <div class="logo text-center">
+                <a routerLink="/" class="simple-text logo-normal">
+                    GPSApp
+                </a>
+            </div>
+            <ul class="nav">
+                <li class="">
+                    <a routerLink="tarea">
+                             <span>
+                                <span>Tarea</span>
+                            </span>
+                    </a>
+                </li>
+                <li class="">
+                    <a routerLink="ubicacion">
+                             <span>
+                                <span>Ubicación</span>
+                            </span>
+                    </a>
+                </li>
+                <li class="">
+                    <a routerLink="sub-tarea">
+                             <span>
+                                <span>Subtarea</span>
+                            </span>
+                    </a>
+                </li>
+                <li class="">
+                    <a routerLink="cliente">
+                            <span>
+                                <span>Cliente</span>
+                            </span>
+                    </a>
+                </li>
+                <li class="">
+                    <a routerLink="admin/user-management">
+                        <p>Empleado</p>
+                    </a>
+                </li>
+                <li class="">
+                    <a routerLink="ruta">
+                              <span>
+                                <span>Ruta</span>
+                            </span>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="horario" class="simple-text">
+                            <span>
+                                <span>Horario</span>
+                            </span>
+
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="calendario">
+                            <span>
+                                <fa-icon icon="calendar-alt"></fa-icon>
+                                 <span>Calendario</span>
+                            </span>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="tipo-empleado" class="simple-text">
+                            <span>
+                                <span>Tipo Empleado</span>
+                            </span>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="empleados" class="simple-text">
+                        <span>
+                            <fa-icon icon="user"></fa-icon>
+                            <span>Empleados</span>
+                        </span>
+
+                    </a>
+                </li>
+
+            </ul>
+        </div>
     </div>
-    <jhi-footer></jhi-footer>
-</div>
+    <div class="main-panel">
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</ng-container>
+<ng-template #elseTemplate>
+    <router-outlet></router-outlet>
+</ng-template>
+<router-outlet name="popup"></router-outlet>
+
 

@@ -26,6 +26,8 @@ import { GpsAppWebCustomModule } from './webcustom/web-custom.module';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
+import { LandingComponent } from './layouts/landing/landing.component';
 import { MapaService } from './webcustom/empleados/mapa/mapa.service';
 import { FormsModule } from '@angular/forms';
 
@@ -48,7 +50,15 @@ import { FormsModule } from '@angular/forms';
         GpsAppAppRoutingModule,
         FormsModule
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
+    declarations: [
+        JhiMainComponent,
+        NavbarComponent,
+        ErrorComponent,
+        PageRibbonComponent,
+        FooterComponent,
+        SidebarComponent,
+        LandingComponent
+    ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
