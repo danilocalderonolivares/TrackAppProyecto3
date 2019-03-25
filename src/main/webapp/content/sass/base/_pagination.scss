@@ -1,0 +1,51 @@
+.pagination {
+    @extend %sans;
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.pagination > li {
+    display: inline;
+}
+.pagination > li > a,
+.pagination > li > span {
+    @extend .boton;
+    @extend .boton--negro4;
+    margin: 0 0.25em;
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+    background: $magenta;
+    cursor: auto;
+    box-shadow: inset 0 -3px 6px -3px darken($magenta, 25%), inset 0 3px 6px -3px lighten($magenta, 25%), 0 2px 2px -1px $sombra1,
+        0 4px 5px -3px $sombra2, 0 6px 1px -5px $sombra3;
+    color: $blanco;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+    cursor: not-allowed;
+    background: transparentize(darken($negro4, 10%), 0.3);
+    border-bottom: 0;
+    box-shadow: inset 0 -7px 6px -3px lighten($negro4, 20%), inset 0 4px 6px -3px darken($negro4, 25%);
+    color: transparentize($grisc, 0.3);
+    &:hover {
+        background: transparentize(darken($negro4, 10%), 0.3);
+        box-shadow: inset 0 -3px 6px -3px lighten($negro4, 20%), inset 0 4px 6px -3px darken($negro4, 25%);
+    }
+}
+
+.VuePagination__pagination-item-prev-chunk,
+.VuePagination__pagination-item-next-chunk,
+.VuePagination__count {
+    display: none !important;
+}

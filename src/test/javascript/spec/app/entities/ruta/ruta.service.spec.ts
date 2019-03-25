@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(RutaService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Ruta('ID', 'AAAAAAA', 'AAAAAAA', false);
+            elemDefault = new Ruta('ID', 'AAAAAAA', 'AAAAAAA', false, 'AAAAAAA', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -57,7 +57,9 @@ describe('Service Tests', () => {
                     {
                         nombre: 'BBBBBB',
                         descripcion: 'BBBBBB',
-                        borrado: true
+                        borrado: true,
+                        puntoInicio: 'BBBBBB',
+                        puntoLLegada: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -76,7 +78,9 @@ describe('Service Tests', () => {
                     {
                         nombre: 'BBBBBB',
                         descripcion: 'BBBBBB',
-                        borrado: true
+                        borrado: true,
+                        puntoInicio: 'BBBBBB',
+                        puntoLLegada: 'BBBBBB'
                     },
                     elemDefault
                 );

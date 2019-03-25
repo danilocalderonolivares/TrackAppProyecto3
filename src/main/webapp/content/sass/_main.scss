@@ -1,0 +1,29 @@
+@import '../../node_modules/normalize.css/normalize';
+@import 'tema/globales';
+@import 'base/colores';
+@import 'base/fondos';
+@import 'base/tipografia';
+@import 'base/alertas';
+@import 'base/forms';
+@import 'base/botones';
+@import 'base/tablas';
+@import 'base/helpers';
+@import 'base/splash';
+@import 'base/panel';
+@import 'base/modals';
+@import 'base/tabs';
+@import 'base/dropdown';
+@import 'base/pagination';
+@import 'base/listas';
+
+//TEMA
+@import 'tema/botones';
+@import 'tema/tipografia';
+@import 'tema/colores';
+@import 'tema/fullcalendar';
+@import 'tema/multiselect';
+
+// Documentación http://leejordan.github.io/reflex/docs/
+@import '../../node_modules/reflex-grid/scss/reflex';
+@import '../../node_modules/animate.css/animate';
+@import '../../node_modules/sweetalert2/dist/sweetalert2.min';

@@ -17,7 +17,7 @@ import java.util.Objects;
 public class Recuperacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     private String id;
 
@@ -28,10 +28,6 @@ public class Recuperacion implements Serializable {
     @NotNull
     @Field("borrado")
     private Boolean borrado;
-
-    @DBRef
-    @Field("admin")
-    private Administrador admin;
 
     @DBRef
     @Field("empleado")
@@ -70,19 +66,6 @@ public class Recuperacion implements Serializable {
 
     public void setBorrado(Boolean borrado) {
         this.borrado = borrado;
-    }
-
-    public Administrador getAdmin() {
-        return admin;
-    }
-
-    public Recuperacion admin(Administrador administrador) {
-        this.admin = administrador;
-        return this;
-    }
-
-    public void setAdmin(Administrador administrador) {
-        this.admin = administrador;
     }
 
     public Empleado getEmpleado() {

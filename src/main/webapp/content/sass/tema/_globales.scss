@@ -1,0 +1,62 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+$reflex-md: 992px !default;
+
+html,
+body,
+main {
+    display: block;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: always;
+}
+
+.calendarioSinEventos {
+    .cal-wrapper {
+        width: 50% !important;
+        padding: 0 !important;
+        margin: 0 25% !important;
+    }
+    .events-wrapper {
+        display: none !important;
+    }
+}
+
+body:after,
+.package--beta:after {
+    content: 'beta';
+    position: fixed;
+    width: 120px;
+    height: 35px;
+    background: #ff9800;
+    top: 7px;
+    right: -35px;
+    text-align: center;
+    font-size: 16px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+    line-height: 35px;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 100;
+}

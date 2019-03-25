@@ -2,60 +2,67 @@
     "name": "Horario",
     "fields": [
         {
+            "fieldName": "nombre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "lunesInico",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         },
         {
             "fieldName": "lunesFin",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         },
         {
             "fieldName": "martesInico",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         },
         {
             "fieldName": "martesFin",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         },
         {
             "fieldName": "miercolesInico",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         },
         {
             "fieldName": "miercolesFin",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         },
         {
             "fieldName": "juevesInico",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         },
         {
             "fieldName": "juevesFin",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         },
         {
             "fieldName": "viernesInico",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         },
         {
             "fieldName": "viernesFin",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         },
         {
             "fieldName": "sabadoInico",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         },
         {
             "fieldName": "sabadoFin",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         },
         {
             "fieldName": "domingoInico",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         },
         {
             "fieldName": "domingoFin",
-            "fieldType": "LocalDate"
+            "fieldType": "String"
         }
     ],
     "relationships": [

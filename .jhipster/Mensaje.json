@@ -33,14 +33,6 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "admin",
-            "otherEntityName": "administrador",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "mensaje"
-        },
-        {
-            "relationshipType": "one-to-one",
             "relationshipName": "empleado",
             "otherEntityName": "empleado",
             "otherEntityField": "id",

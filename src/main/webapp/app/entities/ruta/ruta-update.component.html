@@ -36,14 +36,29 @@
                         </small>
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label class="form-control-label" for="field_ubicaciones">Ubicaciones</label>
-                    <select class="form-control" id="field_ubicaciones" name="ubicaciones" [(ngModel)]="ruta.ubicaciones" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="ubicacionOption.id === ruta.ubicaciones?.id ? ruta.ubicaciones : ubicacionOption" *ngFor="let ubicacionOption of ubicacions; trackBy: trackUbicacionById">{{ubicacionOption.id}}</option>
-                    </select>
+                    <label class="form-control-label" for="field_puntoInicio">Punto Inicio</label>
+                    <input type="text" class="form-control" name="puntoInicio" id="field_puntoInicio"
+                        [(ngModel)]="ruta.puntoInicio" required/>
+                    <div [hidden]="!(editForm.controls.puntoInicio?.dirty && editForm.controls.puntoInicio?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.puntoInicio?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_puntoLLegada">Punto L Legada</label>
+                    <input type="text" class="form-control" name="puntoLLegada" id="field_puntoLLegada"
+                        [(ngModel)]="ruta.puntoLLegada" required/>
+                    <div [hidden]="!(editForm.controls.puntoLLegada?.dirty && editForm.controls.puntoLLegada?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.puntoLLegada?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(EmpleadoService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Empleado('ID', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', false);
+            elemDefault = new Empleado('ID', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -55,12 +55,9 @@ describe('Service Tests', () => {
             it('should update a Empleado', async () => {
                 const returnedFromService = Object.assign(
                     {
+                        idUsuarioRelacion: 'BBBBBB',
                         nombre: 'BBBBBB',
-                        apellidos: 'BBBBBB',
-                        correo: 'BBBBBB',
-                        tipo: 'BBBBBB',
-                        password: 'BBBBBB',
-                        borrado: true
+                        apellidos: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -77,12 +74,9 @@ describe('Service Tests', () => {
             it('should return a list of Empleado', async () => {
                 const returnedFromService = Object.assign(
                     {
+                        idUsuarioRelacion: 'BBBBBB',
                         nombre: 'BBBBBB',
-                        apellidos: 'BBBBBB',
-                        correo: 'BBBBBB',
-                        tipo: 'BBBBBB',
-                        password: 'BBBBBB',
-                        borrado: true
+                        apellidos: 'BBBBBB'
                     },
                     elemDefault
                 );

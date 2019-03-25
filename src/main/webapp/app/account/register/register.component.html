@@ -112,6 +112,33 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" for="admin">Admin</label>
+                    <input type="text" class="form-control" id="Admin" name="Admin" ngModel placeholder="administrador"
+                           [(ngModel)]="registerAccount.admin" minlength=4 maxlength=50>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="ubicacion">Ubicacion</label>
+                    <input type="text" class="form-control" id="ubicacion" name="ubicacion" ngModel placeholder="ubicacion"
+                           [(ngModel)]="registerAccount.ubicacion">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="horario">Horarios</label>
+                    <input type="text" class="form-control" id="horario" name="horario" ngModel placeholder="horarios"
+                           [(ngModel)]="registerAccount.horario" >
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_borrado">Borrado</label>
+                    <input type="checkbox" class="form-control" name="borrado" id="field_borrado"
+                           [(ngModel)]="registerAccount.borrado" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tipo">Tipo</label>
+                    <input type="text" class="form-control" name="tipo" id="field_tipo"
+                           [(ngModel)]="registerAccount.tipo"/>
+                </div>
+
                 <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary">Register</button>
             </form>
             <p></p>

@@ -1,0 +1,96 @@
+.radio {
+    input {
+        @extend %switchcheck;
+
+        &:checked + label {
+            &::before {
+                @extend .animated;
+                @extend .rubberBand;
+                font-weight: 900;
+                animation-delay: 0s !important;
+                content: '\f192';
+            }
+        }
+    }
+
+    label {
+        color: $negro4;
+        cursor: pointer;
+        padding-left: 2em;
+        position: relative;
+
+        &::before {
+            @extend %font-awesome;
+            content: '\f111';
+            font-size: 1.5em;
+            left: 0;
+            position: absolute;
+            top: 0.1em;
+            transition: all 0.5s;
+        }
+    }
+}
+
+.radio--lila {
+    @include checkbox--color($lila);
+}
+
+.radio--morado {
+    @include checkbox--color($morado);
+}
+
+.radio--indigo {
+    @include checkbox--color($indigo);
+}
+
+.radio--azul {
+    @include checkbox--color($azul);
+}
+
+.radio--celeste {
+    @include checkbox--color($celeste);
+}
+
+.radio--cyan {
+    @include checkbox--color($cyan);
+}
+
+.radio--turquesa {
+    @include checkbox--color($turquesa);
+}
+
+.radio--verde {
+    @include checkbox--color($verde);
+}
+
+.radio--kiwi {
+    @include checkbox--color($kiwi);
+}
+
+.radio--lima {
+    @include checkbox--color($lima);
+}
+
+.radio--amarillo {
+    @include checkbox--color($amarillo);
+}
+
+.radio--ambar {
+    @include checkbox--color($ambar);
+}
+
+.radio--naranja {
+    @include checkbox--color($naranja);
+}
+
+.radio--tomate {
+    @include checkbox--color($tomate);
+}
+
+.radio--rojo {
+    @include checkbox--color($rojo);
+}
+
+.radio--rosado {
+    @include checkbox--color($rosado);
+}

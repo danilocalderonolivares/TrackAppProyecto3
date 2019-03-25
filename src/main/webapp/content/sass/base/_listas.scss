@@ -1,0 +1,33 @@
+.lista {
+    @extend .text;
+    list-style: none;
+}
+
+.lista__item {
+    border: 1px solid $grisc;
+    border-bottom: 0;
+    padding: 0.5em;
+
+    &:first-child {
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+
+    &:last-child {
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        border-bottom: 1px solid $grisc;
+    }
+}
+
+.lista--clickeable {
+    .lista__item {
+        cursor: pointer;
+        &:hover {
+            background: transparentize($cyan, 0.75);
+        }
+        &:active {
+            background: transparentize($cyan-vivo, 0.5);
+        }
+    }
+}

@@ -71,7 +71,7 @@ public class Tarea implements Serializable {
 
     @DBRef
     @Field("empleado")
-    private Empleado empleado;
+    private User empleado;
 
     @DBRef
     @Field("ubicacion")
@@ -268,16 +268,16 @@ public class Tarea implements Serializable {
         this.subtarea = subTarea;
     }
 
-    public Empleado getEmpleado() {
+    public User getEmpleado() {
         return empleado;
     }
 
-    public Tarea empleado(Empleado empleado) {
+    public Tarea empleado(User empleado) {
         this.empleado = empleado;
         return this;
     }
 
-    public void setEmpleado(Empleado empleado) {
+    public void setEmpleado(User empleado) {
         this.empleado = empleado;
     }
 

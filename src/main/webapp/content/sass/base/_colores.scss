@@ -1,0 +1,269 @@
+$blanco: #ffffff;
+$negro: #0f0f0f;
+$negro2: #222222;
+$negro4: #444444;
+$gris6: #666666;
+$gris8: #888888;
+$grisa: #aaaaaa;
+$grisc: #cccccc;
+$grisd: #dddddd;
+$grise: #eeeeee;
+$gris-fondo: #f0f4f4;
+$sombra1: rgba(0, 0, 0, 0.14);
+$sombra2: rgba(0, 0, 0, 0.12);
+$sombra3: rgba(0, 0, 0, 0.2);
+
+$ciris-naranja: rgb(235, 91, 37);
+$ciris-lima: rgb(161, 177, 30);
+$ciris-verde: rgb(101, 178, 46);
+$ciris-celeste: rgb(0, 139, 167);
+$ciris-azul: rgb(0, 86, 137);
+$ciris-gris: rgb(134, 134, 134);
+$ciris-negro: rgb(87, 87, 87);
+
+$excel: #01723a;
+
+$lila: #9c27b0;
+$morado: #673ab7;
+$indigo: #3f51b5;
+$azul: #2196f3;
+$celeste: #03a9f4;
+$cyan: #00bcd4;
+$turquesa: #009688;
+$verde: #4caf50;
+$kiwi: #8bc34a;
+$lima: #cddc39;
+$amarillo: #ffeb3b;
+$ambar: #ffc107;
+$naranja: #ff9800;
+$tomate: #ff5722;
+$rojo: #f44336;
+$rosado: #e91e63;
+$magenta: #e5097f;
+
+//Colores vivos
+$lila-vivo: #aa00ff;
+$morado-vivo: #6200ea;
+$indigo-vivo: #304ffe;
+$azul-vivo: #2962ff;
+$celeste-vivo: #0091ea;
+$cyan-vivo: #00b8d4;
+$turquesa-vivo: #00bfa5;
+$verde-vivo: #00c853;
+$kiwi-vivo: #64dd17;
+$lima-vivo: #aeea00;
+$amarillo-vivo: #ffd600;
+$ambar-vivo: #ffab00;
+$naranja-vivo: #ff6d00;
+$tomate-vivo: #ff3d00;
+$rojo-vivo: #ff1744;
+$rosado-vivo: #f50057;
+
+//colores pastel
+$lila-pastel: #ce93d8;
+$morado-pastel: #b39ddb;
+$indigo-pastel: #9fa8da;
+$azul-pastel: #90caf9;
+$celeste-pastel: #81d4fa;
+$cyan-pastel: #80deea;
+$turquesa-pastel: #80cbc4;
+$verde-pastel: #a5d6a7;
+$kiwi-pastel: #c5e1a5;
+$lima-pastel: #e6ee9c;
+$amarillo-pastel: #fff59d;
+$ambar-pastel: #ffe082;
+$naranja-pastel: #ffcc80;
+$tomate-pastel: #ffab91;
+$rojo-pastel: #ef9a9a;
+$rosado-pastel: #f48fb1;
+
+//colores opacos
+$lila-opaco: #4a148c;
+$morado-opaco: #311b92;
+$indigo-opaco: #1a237e;
+$azul-opaco: #0d47a1;
+$celeste-opaco: #01579b;
+$cyan-opaco: #006064;
+$turquesa-opaco: #004d40;
+$verde-opaco: #1b5e20;
+$kiwi-opaco: #33691e;
+$lima-opaco: #827717;
+$amarillo-opaco: #f57f17;
+$ambar-opaco: #ff6f00;
+$naranja-opaco: #e65100;
+$tomate-opaco: #bf360c;
+$rojo-opaco: #b71c1c;
+$rosado-opaco: #880e4f;
+
+$ciris-verde-gradiente: linear-gradient($ciris-lima, $ciris-verde);
+$ciris-azul-gradiente: linear-gradient($ciris-celeste, $ciris-azul);
+
+$gradient: linear-gradient(
+    to right,
+    $lila,
+    $lila 6.66%,
+    $morado 6.66%,
+    $morado 13.33%,
+    $indigo 13.33%,
+    $indigo 19.99%,
+    $azul 19.99%,
+    $azul 26.65%,
+    $celeste 26.65%,
+    $celeste 33.33%,
+    $cyan 33.33%,
+    $cyan 39.99%,
+    $turquesa 39.99%,
+    $turquesa 46.65%,
+    $verde 46.65%,
+    $verde 53.33%,
+    $kiwi 53.33%,
+    $kiwi 59.99%,
+    $lima 59.99%,
+    $lima 66.65%,
+    $amarillo 66.65%,
+    $amarillo 73.33%,
+    $ambar 73.33%,
+    $ambar 79.99%,
+    $naranja 79.99%,
+    $naranja 86.66%,
+    $tomate 86.66%,
+    $tomate 93.33%,
+    $rojo 93.33%,
+    $rojo 100%
+);
+
+$gradient-vivo: linear-gradient(
+    to right,
+    $lila-vivo,
+    $lila-vivo 6.66%,
+    $morado-vivo 6.66%,
+    $morado-vivo 13.33%,
+    $indigo-vivo 13.33%,
+    $indigo-vivo 19.99%,
+    $azul-vivo 19.99%,
+    $azul-vivo 26.65%,
+    $celeste-vivo 26.65%,
+    $celeste-vivo 33.33%,
+    $cyan-vivo 33.33%,
+    $cyan-vivo 39.99%,
+    $turquesa-vivo 39.99%,
+    $turquesa-vivo 46.65%,
+    $verde-vivo 46.65%,
+    $verde-vivo 53.33%,
+    $kiwi-vivo 53.33%,
+    $kiwi-vivo 59.99%,
+    $lima-vivo 59.99%,
+    $lima-vivo 66.65%,
+    $amarillo-vivo 66.65%,
+    $amarillo-vivo 73.33%,
+    $ambar-vivo 73.33%,
+    $ambar-vivo 79.99%,
+    $naranja-vivo 79.99%,
+    $naranja-vivo 86.66%,
+    $tomate-vivo 86.66%,
+    $tomate-vivo 93.33%,
+    $rojo-vivo 93.33%,
+    $rojo-vivo 100%
+);
+
+$gradient-pastel: linear-gradient(
+    to right,
+    $lila-pastel,
+    $lila-pastel 6.66%,
+    $morado-pastel 6.66%,
+    $morado-pastel 13.33%,
+    $indigo-pastel 13.33%,
+    $indigo-pastel 19.99%,
+    $azul-pastel 19.99%,
+    $azul-pastel 26.65%,
+    $celeste-pastel 26.65%,
+    $celeste-pastel 33.33%,
+    $cyan-pastel 33.33%,
+    $cyan-pastel 39.99%,
+    $turquesa-pastel 39.99%,
+    $turquesa-pastel 46.65%,
+    $verde-pastel 46.65%,
+    $verde-pastel 53.33%,
+    $kiwi-pastel 53.33%,
+    $kiwi-pastel 59.99%,
+    $lima-pastel 59.99%,
+    $lima-pastel 66.65%,
+    $amarillo-pastel 66.65%,
+    $amarillo-pastel 73.33%,
+    $ambar-pastel 73.33%,
+    $ambar-pastel 79.99%,
+    $naranja-pastel 79.99%,
+    $naranja-pastel 86.66%,
+    $tomate-pastel 86.66%,
+    $tomate-pastel 93.33%,
+    $rojo-pastel 93.33%,
+    $rojo-pastel 100%
+);
+
+$gradient-opaco: linear-gradient(
+    to right,
+    $lila-opaco,
+    $lila-opaco 6.66%,
+    $morado-opaco 6.66%,
+    $morado-opaco 13.33%,
+    $indigo-opaco 13.33%,
+    $indigo-opaco 19.99%,
+    $azul-opaco 19.99%,
+    $azul-opaco 26.65%,
+    $celeste-opaco 26.65%,
+    $celeste-opaco 33.33%,
+    $cyan-opaco 33.33%,
+    $cyan-opaco 39.99%,
+    $turquesa-opaco 39.99%,
+    $turquesa-opaco 46.65%,
+    $verde-opaco 46.65%,
+    $verde-opaco 53.33%,
+    $kiwi-opaco 53.33%,
+    $kiwi-opaco 59.99%,
+    $lima-opaco 59.99%,
+    $lima-opaco 66.65%,
+    $amarillo-opaco 66.65%,
+    $amarillo-opaco 73.33%,
+    $ambar-opaco 73.33%,
+    $ambar-opaco 79.99%,
+    $naranja-opaco 79.99%,
+    $naranja-opaco 86.66%,
+    $tomate-opaco 86.66%,
+    $tomate-opaco 93.33%,
+    $rojo-opaco 93.33%,
+    $rojo-opaco 100%
+);
+
+$gradient-vivo-vertical: linear-gradient(
+    to bottom,
+    $lila-vivo,
+    $lila-vivo 6.66%,
+    $morado-vivo 6.66%,
+    $morado-vivo 13.33%,
+    $indigo-vivo 13.33%,
+    $indigo-vivo 19.99%,
+    $azul-vivo 19.99%,
+    $azul-vivo 26.65%,
+    $celeste-vivo 26.65%,
+    $celeste-vivo 33.33%,
+    $cyan-vivo 33.33%,
+    $cyan-vivo 39.99%,
+    $turquesa-vivo 39.99%,
+    $turquesa-vivo 46.65%,
+    $verde-vivo 46.65%,
+    $verde-vivo 53.33%,
+    $kiwi-vivo 53.33%,
+    $kiwi-vivo 59.99%,
+    $lima-vivo 59.99%,
+    $lima-vivo 66.65%,
+    $amarillo-vivo 66.65%,
+    $amarillo-vivo 73.33%,
+    $ambar-vivo 73.33%,
+    $ambar-vivo 79.99%,
+    $naranja-vivo 79.99%,
+    $naranja-vivo 86.66%,
+    $tomate-vivo 86.66%,
+    $tomate-vivo 93.33%,
+    $rojo-vivo 93.33%,
+    $rojo-vivo 100%
+);

@@ -5,19 +5,54 @@ before_script:
 stages:
     - test
     - deploy
+    - run
+
+deploy_Release:
+    stage: deploy
+    script:
+        - chmod 777 -R ./
+        - rsync -rlDv -q --delete ./ /home/rigo/gpsapp
+        - ./mvnw clean package -DskipTests
+    artifacts:
+        paths:
+            - target/
+    environment:
+        name: Release
+        url: 50.116.45.115:8080
+    only:
+        - Release
 
 deploy_master:
     stage: deploy
     script:
         - chmod 777 -R ./
         - rsync -rlDv -q --delete ./ /home/rigo/gpsapp
-        - ./mvnw install
-        - npm i
-        - SPRING_PROFILES_ACTIVE=prod ./mvnw -Pprod clean package -DskipTests
-        - java -jar target/gps-app-0.0.1-SNAPSHOT.war &
-        - exit
+        - ./mvnw clean package -DskipTests
+    artifacts:
+        paths:
+            - target/
     environment:
         name: master
+        url: 50.116.45.115:9090
+    only:
+        - master
+
+run_Release:
+    stage: run
+    script:
+        - nohup sh ./scripts/startMVNdev.sh &
+    environment:
+        name: Release
         url: 50.116.45.115:8080
+    only:
+        - Release
+
+run_master:
+    stage: run
+    script:
+        - nohup sh ./scripts/startMVN.sh &
+    environment:
+        name: master
+        url: 50.116.45.115:9090
     only:
         - master
