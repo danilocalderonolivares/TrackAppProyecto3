@@ -5,10 +5,24 @@
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"></button>
        <div [ngSwitch]="isAuthenticated()">
            <div class="collapse navbar-collapse" id="navcol-1" *ngSwitchCase="false">
-               <a class="btn btn-primary ml-auto" role="button" (click)="login()" style="color: white" id="login" >Entrar</a>
+               <a class="btn btn-primary ml-auto" role="button" (click)="login()" style="color: white" id="login" >
+                   <span>
+                       <span>
+                           <fa-icon [icon]="entrat"></fa-icon>
+                                    Entrar
+                       </span>
+                   </span>
+               </a>
            </div>
            <div class="collapse navbar-collapse" id="btnLogout" *ngSwitchCase="true">
-               <a class="btn btn-primary ml-auto" (click)="logout()" style="color: white" id="logout" >Salir</a>
+               <a class="btn btn-primary ml-auto" (click)="logout()" style="color: white" id="logout" >
+                    <span>
+                       <span>
+                           <fa-icon [icon]="salir"></fa-icon>
+                                    Salir
+                       </span>
+                   </span>
+               </a>
            </div>
        </div>
     </div>
