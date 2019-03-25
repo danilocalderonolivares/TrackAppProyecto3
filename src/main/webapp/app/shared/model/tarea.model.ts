@@ -20,7 +20,7 @@ export interface ITarea {
     activa?: boolean;
     completada?: boolean;
     borrado?: boolean;
-    subtarea?: ISubTarea;
+    subtarea?: ISubTarea[];
     empleado?: IUser;
     ubicacion?: IUbicacion;
     cliente?: ICliente;
@@ -46,7 +46,7 @@ export class Tarea implements ITarea {
         public activa?: boolean,
         public completada?: boolean,
         public borrado?: boolean,
-        public subtarea?: ISubTarea,
+        public subtarea?: ISubTarea[],
         public empleado?: IUser,
         public ubicacion?: IUbicacion,
         public cliente?: ICliente,

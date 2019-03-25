@@ -20,6 +20,10 @@ import { RutaService } from 'app/entities/ruta';
 import { ILog } from 'app/shared/model/log.model';
 import { LogService } from 'app/entities/log';
 
+import { reject } from 'lodash';
+import { isEmpty } from 'lodash';
+import { map as _map } from 'lodash';
+
 @Component({
     selector: 'jhi-tarea-update',
     templateUrl: './tarea-update.component.html'
@@ -43,6 +47,8 @@ export class TareaUpdateComponent implements OnInit {
     finDp: any;
     horaInicioDp: any;
     horaFinDp: any;
+
+    nvaSubtarea: string = '';
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -69,18 +75,20 @@ export class TareaUpdateComponent implements OnInit {
             )
             .subscribe(
                 (res: ISubTarea[]) => {
-                    if (!this.tarea.subtarea || !this.tarea.subtarea.id) {
+                    if (isEmpty(this.tarea.subtarea)) {
                         this.subtareas = res;
                     } else {
                         this.subTareaService
-                            .find(this.tarea.subtarea.id)
+                            .query({ 'id.in': _map(this.tarea.subtarea, 'id') })
                             .pipe(
-                                filter((subResMayBeOk: HttpResponse<ISubTarea>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<ISubTarea>) => subResponse.body)
+                                filter((res: HttpResponse<ISubTarea[]>) => res.ok),
+                                map((res: HttpResponse<ISubTarea[]>) => res.body)
                             )
                             .subscribe(
-                                (subRes: ISubTarea) => (this.subtareas = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                                (res: ISubTarea[]) => {
+                                    this.subtareas = res;
+                                },
+                                (res: HttpErrorResponse) => this.onError(res.message)
                             );
                     }
                 },
@@ -201,6 +209,7 @@ export class TareaUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.tarea.subtarea;
         if (this.tarea.id !== undefined) {
             this.subscribeToSaveResponse(this.tareaService.update(this.tarea));
         } else {
@@ -247,5 +256,14 @@ export class TareaUpdateComponent implements OnInit {
 
     trackLogById(index: number, item: ILog) {
         return item.id;
+    }
+
+    addSubtarea(value: string) {
+        this.subtareas.push({ descripcion: value, completado: false });
+        this.nvaSubtarea = '';
+    }
+
+    eliminarSubtarea(index: number) {
+        this.subtareas = reject(this.subtareas, (e, i) => i === index);
     }
 }

@@ -1,4 +1,4 @@
-<div>
+<div style="padding: 10px;">
     <h2 id="page-heading">
         <span>Tareas</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-tarea" [routerLink]="['/tarea/new']">
@@ -37,12 +37,12 @@
                 <td>{{tarea.completada}}</td>
                 <td>
                     <div *ngIf="tarea.empleado">
-                        <a [routerLink]="['../empleado', tarea.empleado?.id, 'view' ]" >{{tarea.empleado?.id}}</a>
+                        <a [routerLink]="['../empleado', tarea.empleado?.id, 'view' ]" >{{tarea.empleado?.firstName}} {{tarea.empleado?.lastName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="tarea.cliente">
-                        <a [routerLink]="['../cliente', tarea.cliente?.id, 'view' ]" >{{tarea.cliente?.id}}</a>
+                        <a [routerLink]="['../cliente', tarea.cliente?.id, 'view' ]" >{{tarea.cliente?.nombre}}</a>
                     </div>
                 </td>
                 <td class="text-right">
