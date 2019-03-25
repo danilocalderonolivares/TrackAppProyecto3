@@ -4,6 +4,7 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { VERSION } from 'app/app.constants';
 import { AccountService, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'jhi-navbar',
@@ -17,7 +18,8 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
-
+    salir = faSignOutAlt;
+    entrat = faSignInAlt;
     constructor(
         private loginService: LoginService,
         private accountService: AccountService,
@@ -46,6 +48,7 @@ export class NavbarComponent implements OnInit {
 
     login() {
         this.modalRef = this.loginModalService.open();
+        // this.router.navigate(['/login']);
     }
 
     logout() {

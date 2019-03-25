@@ -4,7 +4,7 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-tarea" [routerLink]="['/tarea/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
-            Create new Tarea
+            Crear nueva tarea
             </span>
         </button>
     </h2>
@@ -15,8 +15,8 @@
             <thead>
             <tr>
             <th><span>ID</span></th>
-            <th><span>Title</span></th>
-            <th><span>Descripcion</span></th>
+            <th><span>Nombre</span></th>
+            <th><span>Descripción</span></th>
             <th><span>Inicio</span></th>
             <th><span>Fin</span></th>
             <th><span>Usar Ruta</span></th>
@@ -29,7 +29,7 @@
             <th><span>Borrado</span></th>
             <th><span>Subtarea</span></th>
             <th><span>Empleado</span></th>
-            <th><span>Ubicacion</span></th>
+            <th><span>Ubicación</span></th>
             <th><span>Cliente</span></th>
             <th><span>Ruta</span></th>
             <th><span>Logs</span></th>
@@ -87,13 +87,13 @@
                                 [routerLink]="['/tarea', tarea.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
+                            <span class="d-none d-md-inline">Ver</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/tarea', tarea.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
+                            <span class="d-none d-md-inline">Editar</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', 'tarea', { outlets: { popup: tarea.id + '/delete'} }]"
@@ -101,7 +101,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
+                            <span class="d-none d-md-inline">Eliminar</span>
                         </button>
                     </div>
                 </td>

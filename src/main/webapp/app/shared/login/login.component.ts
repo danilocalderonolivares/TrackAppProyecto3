@@ -16,7 +16,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
     rememberMe: boolean;
     username: string;
     credentials: any;
-
+    error: string;
     constructor(
         private eventManager: JhiEventManager,
         private loginService: LoginService,
