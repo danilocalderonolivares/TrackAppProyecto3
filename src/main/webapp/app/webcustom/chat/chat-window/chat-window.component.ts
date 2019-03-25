@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
     styles: []
 })
 export class ChatWindowComponent implements OnInit {
+    message: string;
+
     constructor() {}
 
     ngOnInit() {}
