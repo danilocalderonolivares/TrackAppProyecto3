@@ -9,11 +9,11 @@
                 <dd>
                     <span>{{cliente.nombre}}</span>
                 </dd>
-                <dt><span>Cedula</span></dt>
+                <dt><span>Cédula</span></dt>
                 <dd>
                     <span>{{cliente.cedula}}</span>
                 </dd>
-                <dt><span>Direccion</span></dt>
+                <dt><span>Direccién</span></dt>
                 <dd>
                     <span>{{cliente.direccion}}</span>
                 </dd>
@@ -29,7 +29,7 @@
                 <dd>
                     <span>{{cliente.borrado}}</span>
                 </dd>
-                <dt><span>Ubicacion</span></dt>
+                <dt><span>Ubicacién</span></dt>
                 <dd>
                     <div *ngIf="cliente.ubicacion">
                         <a [routerLink]="['/ubicacion', cliente.ubicacion?.id, 'view']">{{cliente.ubicacion?.id}}</a>
@@ -40,13 +40,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Regresar</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/cliente', cliente.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Editar</span>
             </button>
         </div>
     </div>

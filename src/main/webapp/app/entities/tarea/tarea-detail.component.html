@@ -49,6 +49,10 @@
                 <dd>
                     <span>{{tarea.completada}}</span>
                 </dd>
+                <dt><span>Borrado</span></dt>
+                <dd>
+                    <span>{{tarea.borrado}}</span>
+                </dd>
                 <dt><span>Subtarea</span></dt>
                 <dd>
                     <div *ngIf="tarea.subtarea">
@@ -61,7 +65,7 @@
                         <a [routerLink]="['/empleado', tarea.empleado?.id, 'view']">{{tarea.empleado?.id}}</a>
                     </div>
                 </dd>
-                <dt><span>Ubicacion</span></dt>
+                <dt><span>Ubicación</span></dt>
                 <dd>
                     <div *ngIf="tarea.ubicacion">
                         <a [routerLink]="['/ubicacion', tarea.ubicacion?.id, 'view']">{{tarea.ubicacion?.id}}</a>
@@ -79,18 +83,24 @@
                         <a [routerLink]="['/ruta', tarea.ruta?.id, 'view']">{{tarea.ruta?.id}}</a>
                     </div>
                 </dd>
+                <dt><span>Logs</span></dt>
+                <dd>
+                    <div *ngIf="tarea.logs">
+                        <a [routerLink]="['/log', tarea.logs?.id, 'view']">{{tarea.logs?.id}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Regresar</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/tarea', tarea.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Editar</span>
             </button>
         </div>
     </div>

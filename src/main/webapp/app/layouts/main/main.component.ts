@@ -3,12 +3,29 @@ import { Router, ActivatedRouteSnapshot, NavigationEnd, NavigationError } from '
 
 import { Title } from '@angular/platform-browser';
 import { AccountService } from 'app/core';
+import {
+    faLocationArrow,
+    faUserFriends,
+    faRoute,
+    faCalendarWeek,
+    faCommentDots,
+    faUsersCog,
+    faUsers
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'jhi-main',
     templateUrl: './main.component.html'
 })
 export class JhiMainComponent implements OnInit {
+    location = faLocationArrow;
+    clients = faUserFriends;
+    route = faRoute;
+    schedule = faCalendarWeek;
+    chatIcono = faCommentDots;
+    usersIcon = faUsersCog;
+    userType = faUsers;
+
     constructor(private titleService: Title, private router: Router, private accountService: AccountService) {}
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
