@@ -8,7 +8,7 @@
                         <jhi-alert-error></jhi-alert-error>
                         <div class="form-group">
                             <label class="form-control-label" for="field_esEmpresa">¿Es una empresa?</label>
-                            <input type="checkbox" class="form-control" name="esEmpresa" id="field_esEmpresa"
+                            <input type="checkbox" style="width: 18px;height: 15px;" name="esEmpresa" id="field_esEmpresa"
                                    [(ngModel)]="cliente.esEmpresa" />
                         </div>
                         <div class="form-group" [hidden]="!cliente.id">
@@ -17,7 +17,7 @@
                                    [(ngModel)]="cliente.id" readonly />
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label" for="field_nombre">Nombre *</label>
+                                <label class="form-control-label" for="field_nombre">Nombre *</label>
                             <input type="text" class="form-control" name="nombre" id="field_nombre"
                                    [(ngModel)]="cliente.nombre" required/>
                             <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
@@ -28,7 +28,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label" for="field_cedula">Cédula*</label>
+                            <ng-container *ngIf="cliente.esEmpresa != false; else elseTemplate">
+                                <label class="form-control-label" for="field_cedula">Cédula Jurídica*</label>
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <label class="form-control-label" for="field_cedula">Cédula*</label>
+                            </ng-template>
                             <input type="text" class="form-control" name="cedula" id="field_cedula"
                                    [(ngModel)]="cliente.cedula" required/>
                             <div [hidden]="!(editForm.controls.cedula?.dirty && editForm.controls.cedula?.invalid)">

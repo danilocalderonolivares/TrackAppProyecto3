@@ -18,6 +18,7 @@ export class ClienteUpdateComponent implements OnInit {
     cliente: ICliente;
     isSaving: boolean;
     ubicacions: IUbicacion[];
+    idUbucacion: any;
     // google maps zoom level
     zoom: number = 15;
     nombDireccion: string;
@@ -37,6 +38,12 @@ export class ClienteUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ cliente }) => {
             this.cliente = cliente;
+            this.idUbucacion = cliente.ubicacion.id;
+            if (this.lat != null && this.lat != null) {
+                this.lat = this.cliente.ubicacion.latitud;
+                this.lng = this.cliente.ubicacion.longitud;
+                this.locationChosen = true;
+            }
         });
         this.ubicacionService
             .query({ filter: 'cliente-is-null' })
@@ -47,7 +54,6 @@ export class ClienteUpdateComponent implements OnInit {
             .subscribe(
                 (res: IUbicacion[]) => {
                     if (!this.cliente.ubicacion || !this.cliente.ubicacion.id) {
-                        this.ubicacions = res;
                     } else {
                         this.ubicacionService
                             .find(this.cliente.ubicacion.id)
@@ -72,7 +78,7 @@ export class ClienteUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         if (this.cliente.id !== undefined) {
-            this.cliente.ubicacion = {};
+            this.cliente.ubicacion.id = this.idUbucacion;
             this.subscribeToSaveResponse(this.clienteService.update(this.cliente));
         } else {
             this.subscribeToSaveResponse(this.clienteService.create(this.cliente));
