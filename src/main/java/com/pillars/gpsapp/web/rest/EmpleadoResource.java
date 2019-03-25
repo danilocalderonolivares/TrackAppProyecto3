@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.Query;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -109,4 +109,39 @@ public class EmpleadoResource {
         empleadoRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
+
+    @DeleteMapping("/empleados/deleteByRelationId/{id}")
+    public ResponseEntity<Void> deleteByRelationId(@PathVariable String id) {
+        log.debug("REST request to delete Empleado : {}", id);
+        empleadoRepository.deleteByRelationshipId(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME,id)).build();
+    }
+
+    @GetMapping("/empleados/findByRelationshipId/{id}")
+    public ResponseEntity<Empleado> getEmpleadosByRelationshipId(@PathVariable String id) {
+        log.debug("REST request to get Empleado : {}", id);
+        Optional<Empleado> empleado = empleadoRepository.findByRelationshipId(id);
+        return ResponseUtil.wrapOrNotFound(empleado);
+    }
+
+    @GetMapping("/empleados/findByTypeId/{id}")
+    public List<Empleado> getEmpleadosByTypeId(@PathVariable String id) {
+        log.debug("REST request to get Empleado : {}", id);
+        List<Empleado> empleados = empleadoRepository.findBytipo(id);
+        return empleados;
+    }
+
+    @GetMapping("/empleados/findByScheduleId/{id}")
+    public List<Empleado> getEmpleadosfindByScheduleId(@PathVariable String id) {
+        log.debug("REST request to get Empleado : {}", id);
+        List<Empleado> empleados = empleadoRepository.findByScheduleId(id);
+        return empleados;
+    }
+
+    /**
+     * DELETE  /empleados/:id : delete the "id" empleado.
+     *
+     * @param id the id of the empleado to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
 }

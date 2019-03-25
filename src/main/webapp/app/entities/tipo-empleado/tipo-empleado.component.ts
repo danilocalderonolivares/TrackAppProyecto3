@@ -48,6 +48,7 @@ export class TipoEmpleadoComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.registerChangeInTipoEmpleados();
         this.eventManager.destroy(this.eventSubscriber);
     }
 

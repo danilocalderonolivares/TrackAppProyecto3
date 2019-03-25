@@ -48,6 +48,7 @@ export class SubTareaComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.registerChangeInSubTareas();
         this.eventManager.destroy(this.eventSubscriber);
     }
 

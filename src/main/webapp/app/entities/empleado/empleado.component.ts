@@ -48,6 +48,7 @@ export class EmpleadoComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.registerChangeInEmpleados();
         this.eventManager.destroy(this.eventSubscriber);
     }
 

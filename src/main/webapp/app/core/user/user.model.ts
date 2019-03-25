@@ -1,5 +1,3 @@
-import { UserExtra } from 'app/core/user/userExtra.model';
-
 export interface IUser {
     id?: any;
     login?: string;
@@ -14,7 +12,6 @@ export interface IUser {
     lastModifiedBy?: string;
     lastModifiedDate?: Date;
     password?: string;
-    userExtra?: UserExtra;
 }
 
 export class User implements IUser {
@@ -31,8 +28,7 @@ export class User implements IUser {
         public createdDate?: Date,
         public lastModifiedBy?: string,
         public lastModifiedDate?: Date,
-        public password?: string,
-        public userExtra?: UserExtra
+        public password?: string
     ) {
         this.id = id ? id : null;
         this.login = login ? login : null;
