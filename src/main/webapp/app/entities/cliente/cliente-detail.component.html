@@ -29,7 +29,7 @@
                 <dd>
                     <span>{{cliente.borrado}}</span>
                 </dd>
-                <dt><span>Ubicacion</span></dt>
+                <dt><span>Ubicación</span></dt>
                 <dd>
                     <div *ngIf="cliente.ubicacion">
                         <a [routerLink]="['/ubicacion', cliente.ubicacion?.id, 'view']">{{cliente.ubicacion?.id}}</a>
