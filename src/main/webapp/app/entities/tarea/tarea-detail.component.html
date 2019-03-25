@@ -5,11 +5,11 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Title</span></dt>
+                <dt><span>Nombre</span></dt>
                 <dd>
                     <span>{{tarea.title}}</span>
                 </dd>
-                <dt><span>Descripcion</span></dt>
+                <dt><span>Descripción</span></dt>
                 <dd>
                     <span>{{tarea.descripcion}}</span>
                 </dd>
@@ -65,7 +65,7 @@
                         <a [routerLink]="['/empleado', tarea.empleado?.id, 'view']">{{tarea.empleado?.id}}</a>
                     </div>
                 </dd>
-                <dt><span>Ubicacion</span></dt>
+                <dt><span>Ubicación</span></dt>
                 <dd>
                     <div *ngIf="tarea.ubicacion">
                         <a [routerLink]="['/ubicacion', tarea.ubicacion?.id, 'view']">{{tarea.ubicacion?.id}}</a>
@@ -94,13 +94,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Regresar</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/tarea', tarea.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Editar</span>
             </button>
         </div>
     </div>

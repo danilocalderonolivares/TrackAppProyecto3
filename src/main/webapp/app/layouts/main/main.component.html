@@ -48,8 +48,8 @@
                 <li class="">
                     <a routerLink="admin/user-management">
                         <span>
-                                  <fa-icon icon="user"style="font-size: 1rem;"></fa-icon>
-                                <span>Empleado</span>
+                                  <fa-icon [icon]="usersIcon" style="font-size: 1rem;"></fa-icon>
+                                <span>Manejo Usuarios</span>
                             </span>
                     </a>
                 </li>
@@ -81,6 +81,7 @@
                 <li>
                     <a routerLink="tipo-empleado">
                             <span>
+                                <fa-icon [icon]="userType" style="font-size: 1rem;"></fa-icon>
                                 <span>Tipo Empleado</span>
                             </span>
                     </a>
@@ -89,7 +90,7 @@
                     <a routerLink="empleados" >
                         <span>
                             <fa-icon icon="user" style="font-size: 1rem;"></fa-icon>
-                            <span>Empleados</span>
+                            <span>Localización</span>
                         </span>
 
                     </a>
