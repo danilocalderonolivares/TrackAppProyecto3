@@ -1,6 +1,8 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
+
 import { GpsAppSharedModule } from 'app/shared';
 import {
     TareaComponent,
@@ -15,9 +17,10 @@ import {
 const ENTITY_STATES = [...tareaRoute, ...tareaPopupRoute];
 
 @NgModule({
-    imports: [GpsAppSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [GpsAppSharedModule, RouterModule.forChild(ENTITY_STATES), OwlDateTimeModule, OwlNativeDateTimeModule],
     declarations: [TareaComponent, TareaDetailComponent, TareaUpdateComponent, TareaDeleteDialogComponent, TareaDeletePopupComponent],
     entryComponents: [TareaComponent, TareaUpdateComponent, TareaDeleteDialogComponent, TareaDeletePopupComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    providers: [{ provide: OWL_DATE_TIME_LOCALE, useValue: 'es' }]
 })
 export class GpsAppTareaModule {}

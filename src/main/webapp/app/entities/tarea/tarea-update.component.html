@@ -24,6 +24,38 @@
                         [(ngModel)]="tarea.descripcion" />
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label">
+                        Inicio
+                        <input [(ngModel)]="tarea.inicio"
+                               [max]="tarea.fin"
+                               [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
+                               #dateTime="ngModel"
+                               name="inicio"
+                               required
+                               class="form-control">
+                        <owl-date-time #dt1></owl-date-time>
+                    </label>
+                    <div *ngIf="dateTime.invalid && dateTime.errors.owlDateTimeMax">
+                        Tiene que escoger una fecha anterior a {{tarea.fin | date: 'medium'}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">
+                        Fin
+                        <input [(ngModel)]="tarea.fin"
+                               [min]="tarea.inicio"
+                               [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
+                               #dateTime="ngModel"
+                               name="fin"
+                               required
+                               class="form-control">
+                        <owl-date-time #dt2></owl-date-time>
+                    </label>
+                    <div *ngIf="dateTime.invalid && dateTime.errors.owlDateTimeMin">
+                        Tiene que escoger una fecha posterior a {{tarea.inicio | date: 'medium'}}
+                    </div>
+                </div>
+                <!--div class="form-group">
                     <label class="form-control-label" for="field_inicio">Inicio</label>
                     <div class="input-group">
                         <input id="field_inicio" type="text" class="form-control" name="inicio" ngbDatepicker  #inicioDp="ngbDatepicker" [(ngModel)]="tarea.inicio"
@@ -55,7 +87,7 @@
                             Este campo es requerido
                         </small>
                     </div>
-                </div>
+                </div-->
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" name="usarRuta" id="field_usarRuta"
                            [(ngModel)]="tarea.usarRuta" />

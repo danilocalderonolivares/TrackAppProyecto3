@@ -251,40 +251,6 @@ public class TareaResourceIntTest {
     }
 
     @Test
-    public void checkHoraInicioIsRequired() throws Exception {
-        int databaseSizeBeforeTest = tareaRepository.findAll().size();
-        // set the field null
-        tarea.setHoraInicio(null);
-
-        // Create the Tarea, which fails.
-
-        restTareaMockMvc.perform(post("/api/tareas")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(tarea)))
-            .andExpect(status().isBadRequest());
-
-        List<Tarea> tareaList = tareaRepository.findAll();
-        assertThat(tareaList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    public void checkHoraFinIsRequired() throws Exception {
-        int databaseSizeBeforeTest = tareaRepository.findAll().size();
-        // set the field null
-        tarea.setHoraFin(null);
-
-        // Create the Tarea, which fails.
-
-        restTareaMockMvc.perform(post("/api/tareas")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(tarea)))
-            .andExpect(status().isBadRequest());
-
-        List<Tarea> tareaList = tareaRepository.findAll();
-        assertThat(tareaList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
     public void checkActivaIsRequired() throws Exception {
         int databaseSizeBeforeTest = tareaRepository.findAll().size();
         // set the field null
