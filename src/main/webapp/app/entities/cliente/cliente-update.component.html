@@ -39,13 +39,7 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_correo">Correo</label>
                     <input type="text" class="form-control" name="correo" id="field_correo"
-                        [(ngModel)]="cliente.correo" required/>
-                    <div [hidden]="!(editForm.controls.correo?.dirty && editForm.controls.correo?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.correo?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
+                        [(ngModel)]="cliente.correo" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_esEmpresa">Es Empresa</label>

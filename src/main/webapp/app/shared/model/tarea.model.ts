@@ -1,10 +1,10 @@
 import { Moment } from 'moment';
 import { ISubTarea } from 'app/shared/model/sub-tarea.model';
+import { IEmpleado } from 'app/shared/model/empleado.model';
 import { IUbicacion } from 'app/shared/model/ubicacion.model';
 import { ICliente } from 'app/shared/model/cliente.model';
 import { IRuta } from 'app/shared/model/ruta.model';
 import { ILog } from 'app/shared/model/log.model';
-import { IUser } from 'app/core';
 
 export interface ITarea {
     id?: string;
@@ -21,7 +21,7 @@ export interface ITarea {
     completada?: boolean;
     borrado?: boolean;
     subtarea?: ISubTarea;
-    empleado?: IUser;
+    empleado?: IEmpleado;
     ubicacion?: IUbicacion;
     cliente?: ICliente;
     ruta?: IRuta;
@@ -44,7 +44,7 @@ export class Tarea implements ITarea {
         public completada?: boolean,
         public borrado?: boolean,
         public subtarea?: ISubTarea,
-        public empleado?: IUser,
+        public empleado?: IEmpleado,
         public ubicacion?: IUbicacion,
         public cliente?: ICliente,
         public ruta?: IRuta,

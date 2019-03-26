@@ -73,7 +73,7 @@ public class Tarea implements Serializable {
 
     @DBRef
     @Field("empleado")
-    private User empleado;
+    private Empleado empleado;
 
     @DBRef
     @Field("ubicacion")
@@ -89,7 +89,7 @@ public class Tarea implements Serializable {
 
     @DBRef
     @Field("logs")
-    @JsonIgnoreProperties("logs")
+    @JsonIgnoreProperties("tareas")
     private Log logs;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -270,16 +270,16 @@ public class Tarea implements Serializable {
         this.subtarea = subTarea;
     }
 
-    public User getEmpleado() {
+    public Empleado getEmpleado() {
         return empleado;
     }
 
-    public Tarea empleado(User empleado) {
+    public Tarea empleado(Empleado empleado) {
         this.empleado = empleado;
         return this;
     }
 
-    public void setEmpleado(User empleado) {
+    public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
     }
 

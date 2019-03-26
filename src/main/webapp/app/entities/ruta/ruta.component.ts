@@ -40,6 +40,7 @@ export class RutaComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.rutaService.onEdition = false;
         this.loadAll();
         this.accountService.identity().then(account => {
             this.currentAccount = account;

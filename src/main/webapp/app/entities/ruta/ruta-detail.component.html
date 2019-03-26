@@ -9,34 +9,28 @@
                 <dd>
                     <span>{{ruta.nombre}}</span>
                 </dd>
-                <dt><span>Descripcion</span></dt>
+                <dt><span>Descripción</span></dt>
                 <dd>
                     <span>{{ruta.descripcion}}</span>
                 </dd>
-                <dt><span>Borrado</span></dt>
+                <dt><span>Ubicaciones</span></dt>
                 <dd>
-                    <span>{{ruta.borrado}}</span>
-                </dd>
-                <dt><span>Punto Inicio</span></dt>
-                <dd>
-                    <span>{{ruta.puntoInicio}}</span>
-                </dd>
-                <dt><span>Punto L Legada</span></dt>
-                <dd>
-                    <span>{{ruta.puntoLLegada}}</span>
+                    <ul *ngFor="let ubication of ruta.ubicaciones">
+                        <li>{{ubication.nombreDireccion}}</li>
+                    </ul>
                 </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Volver</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/ruta', ruta.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Editar</span>
             </button>
         </div>
     </div>

@@ -39,12 +39,12 @@ public class Empleado implements Serializable {
 
     @DBRef
     @Field("horarios")
-    @JsonIgnoreProperties("horarios")
+    @JsonIgnoreProperties("empleados")
     private Horario horarios;
 
     @DBRef
     @Field("tipo")
-    @JsonIgnoreProperties("tipoEmpleados")
+    @JsonIgnoreProperties("empleados")
     private TipoEmpleado tipo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
