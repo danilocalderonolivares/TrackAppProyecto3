@@ -26,6 +26,9 @@ export interface ITarea {
     cliente?: ICliente;
     ruta?: IRuta;
     logs?: ILog;
+    start?: Date;
+    end?: Date;
+    color?: string;
 }
 
 export class Tarea implements ITarea {
@@ -48,7 +51,10 @@ export class Tarea implements ITarea {
         public ubicacion?: IUbicacion,
         public cliente?: ICliente,
         public ruta?: IRuta,
-        public logs?: ILog
+        public logs?: ILog,
+        public start?: Date,
+        public end?: Date,
+        public color?: string
     ) {
         this.usarRuta = this.usarRuta || false;
         this.activa = this.activa || false;

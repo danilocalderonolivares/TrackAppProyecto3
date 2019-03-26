@@ -49,6 +49,7 @@ export class RutaComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.registerChangeInRutas();
         this.eventManager.destroy(this.eventSubscriber);
     }
 

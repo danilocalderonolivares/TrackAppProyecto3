@@ -1,4 +1,8 @@
 import './vendor.ts';
+import 'core-js/es6/reflect';
+import 'core-js/es7/reflect';
+import 'zone.js/dist/zone';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,6 +26,8 @@ import { GpsAppWebCustomModule } from './webcustom/web-custom.module';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
+import { LandingComponent } from './layouts/landing/landing.component';
 import { MapaService } from './webcustom/empleados/mapa/mapa.service';
 import { FormsModule } from '@angular/forms';
 
@@ -44,7 +50,15 @@ import { FormsModule } from '@angular/forms';
         GpsAppAppRoutingModule,
         FormsModule
     ],
-    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
+    declarations: [
+        JhiMainComponent,
+        NavbarComponent,
+        ErrorComponent,
+        PageRibbonComponent,
+        FooterComponent,
+        SidebarComponent,
+        LandingComponent
+    ],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
@@ -75,3 +89,16 @@ export class GpsAppAppModule {
         this.dpConfig.minDate = { year: moment().year() - 100, month: 1, day: 1 };
     }
 }
+
+platformBrowserDynamic()
+    .bootstrapModule(GpsAppAppModule)
+    .then(ref => {
+        // Ensure Angular destroys itself on hot reloads.
+        if (window['ngRef']) {
+            window['ngRef'].destroy();
+        }
+        window['ngRef'] = ref;
+
+        // Otherwise, log the boot error
+    })
+    .catch(err => console.error(err));
