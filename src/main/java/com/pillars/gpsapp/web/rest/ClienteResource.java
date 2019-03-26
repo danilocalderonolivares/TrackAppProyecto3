@@ -49,6 +49,7 @@ public class ClienteResource {
         if (cliente.getId() != null) {
             throw new BadRequestAlertException("A new cliente cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        cliente.setBorrado(true);
         ubicacionRepository.save(cliente.getUbicacion());
         Cliente result = clienteRepository.save(cliente);
         return ResponseEntity.created(new URI("/api/clientes/" + result.getId()))

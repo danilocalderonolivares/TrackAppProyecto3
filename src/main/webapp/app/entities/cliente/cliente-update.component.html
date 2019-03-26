@@ -17,7 +17,12 @@
                                    [(ngModel)]="cliente.id" readonly />
                         </div>
                         <div class="form-group">
-                                <label class="form-control-label" for="field_nombre">Nombre *</label>
+                            <ng-container *ngIf="cliente.esEmpresa != false; else elseTemplate1">
+                                <label class="form-control-label" for="field_nombre">Nombre de la empresa*</label>
+                            </ng-container>
+                            <ng-template #elseTemplate1>
+                                <label class="form-control-label" for="field_nombre">Nombre*</label>
+                            </ng-template>
                             <input type="text" class="form-control" name="nombre" id="field_nombre"
                                    [(ngModel)]="cliente.nombre" required/>
                             <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">

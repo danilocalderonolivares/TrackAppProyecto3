@@ -38,12 +38,7 @@ export class ClienteUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ cliente }) => {
             this.cliente = cliente;
-            this.idUbucacion = cliente.ubicacion.id;
-            if (this.lat != null && this.lat != null) {
-                this.lat = this.cliente.ubicacion.latitud;
-                this.lng = this.cliente.ubicacion.longitud;
-                this.locationChosen = true;
-            }
+            this.updateData(this.cliente);
         });
         this.ubicacionService
             .query({ filter: 'cliente-is-null' })
@@ -78,7 +73,6 @@ export class ClienteUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         if (this.cliente.id !== undefined) {
-            this.cliente.ubicacion.id = this.idUbucacion;
             this.subscribeToSaveResponse(this.clienteService.update(this.cliente));
         } else {
             this.subscribeToSaveResponse(this.clienteService.create(this.cliente));
@@ -110,12 +104,9 @@ export class ClienteUpdateComponent implements OnInit {
         this.lng = event.coords.lng;
 
         this.locationChosen = true;
-
-        this.cliente.ubicacion = {
-            latitud: this.lat,
-            longitud: this.lng
-        };
         this.locationSelect();
+        this.cliente.ubicacion.latitud = this.lat;
+        this.cliente.ubicacion.longitud = this.lng;
     }
 
     locationSelect() {
@@ -128,5 +119,13 @@ export class ClienteUpdateComponent implements OnInit {
                 console.log(err);
             }
         );
+    }
+    updateData(clienteData: ICliente) {
+        if (clienteData.id !== undefined) {
+            this.cliente.ubicacion.id = clienteData.ubicacion.id;
+            this.lat = clienteData.ubicacion.latitud;
+            this.lng = clienteData.ubicacion.longitud;
+            this.locationChosen = true;
+        }
     }
 }
