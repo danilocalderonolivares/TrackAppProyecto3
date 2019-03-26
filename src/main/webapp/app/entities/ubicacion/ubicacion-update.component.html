@@ -10,14 +10,34 @@
                         [(ngModel)]="ubicacion.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_longitud">Longitud</label>
-                    <input type="number" class="form-control" name="longitud" id="field_longitud"
-                        [(ngModel)]="ubicacion.longitud" />
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" for="field_latitud">Latitud</label>
                     <input type="number" class="form-control" name="latitud" id="field_latitud"
-                        [(ngModel)]="ubicacion.latitud" />
+                        [(ngModel)]="ubicacion.latitud" required/>
+                    <div [hidden]="!(editForm.controls.latitud?.dirty && editForm.controls.latitud?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.latitud?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.latitud?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_longitud">Longitud</label>
+                    <input type="number" class="form-control" name="longitud" id="field_longitud"
+                        [(ngModel)]="ubicacion.longitud" required/>
+                    <div [hidden]="!(editForm.controls.longitud?.dirty && editForm.controls.longitud?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.longitud?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.longitud?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_nombreDireccion">Nombre Dirección</label>

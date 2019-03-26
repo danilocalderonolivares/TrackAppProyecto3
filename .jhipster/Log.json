@@ -19,9 +19,9 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "tarea",
             "otherEntityName": "tarea",
-            "otherEntityRelationshipName": "logs"
+            "otherEntityRelationshipName": "logs",
+            "relationshipName": "tarea"
         }
     ],
     "changelogDate": "20190226065459",

@@ -23,25 +23,25 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "ubicacion",
             "otherEntityName": "ubicacion",
+            "otherEntityRelationshipName": "empleado",
+            "relationshipName": "ubicacion",
             "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "empleado"
+            "ownerSide": true
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "horarios",
             "otherEntityName": "horario",
-            "otherEntityField": "id",
-            "otherEntityRelationshipName": "horario"
+            "otherEntityRelationshipName": "empleado",
+            "relationshipName": "horarios",
+            "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "tipo",
             "otherEntityName": "tipoEmpleado",
-            "otherEntityField": "id",
-            "otherEntityRelationshipName": "tipoEmpleado"
+            "otherEntityRelationshipName": "empleado",
+            "relationshipName": "tipo",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190226065454",

@@ -72,7 +72,7 @@ export class MapaService {
             this.empleados = this.getEmpleados;
         } else {
             let emp: Empleado[] = new Array();
-            this.empleados.forEach(empleado => {
+            this.getEmpleados.forEach(empleado => {
                 if (empleado.tipo === tipo) {
                     emp.push(empleado);
                 }
@@ -91,9 +91,5 @@ export class MapaService {
             }
         });
         this.empleados = myEmp;
-    }
-
-    cleanEmpDetail() {
-        localStorage.removeItem('empDetail');
     }
 }

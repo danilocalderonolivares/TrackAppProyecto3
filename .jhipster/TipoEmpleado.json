@@ -12,9 +12,9 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "empleado",
             "otherEntityName": "empleado",
-            "otherEntityRelationshipName": "tipo"
+            "otherEntityRelationshipName": "tipo",
+            "relationshipName": "empleado"
         }
     ],
     "changelogDate": "20190316231520",

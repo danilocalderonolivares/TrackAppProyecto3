@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span>Rutas</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ruta" [routerLink]="['/ruta/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ruta" [routerLink]="['/ruta/add-ubications']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
             Crear nueva ruta
@@ -17,9 +17,13 @@
             <th><span>ID</span></th>
             <th><span>Nombre</span></th>
             <th><span>Descripción</span></th>
+<<<<<<< HEAD
+            <th><span>Ubicaciones</span></th>
+=======
             <th><span>Borrado</span></th>
             <th><span>Punto Inicio</span></th>
             <th><span>Punto Llegada</span></th>
+>>>>>>> 221d1243ff7b4d260b8886760269f9088095d8da
             <th></th>
             </tr>
             </thead>
@@ -28,9 +32,11 @@
                 <td><a [routerLink]="['/ruta', ruta.id, 'view' ]">{{ruta.id}}</a></td>
                 <td>{{ruta.nombre}}</td>
                 <td>{{ruta.descripcion}}</td>
-                <td>{{ruta.borrado}}</td>
-                <td>{{ruta.puntoInicio}}</td>
-                <td>{{ruta.puntoLLegada}}</td>
+                <td>
+                    <span *ngFor="let ubicacion of ruta.ubicaciones; let last = last">
+                        {{ubicacion.nombreDireccion}}
+                    </span>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
