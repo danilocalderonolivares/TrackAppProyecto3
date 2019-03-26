@@ -48,7 +48,7 @@ export class TareaUpdateComponent implements OnInit {
     horaInicioDp: any;
     horaFinDp: any;
 
-    nvaSubtarea: string = '';
+    nvaSubtarea = '';
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -81,14 +81,14 @@ export class TareaUpdateComponent implements OnInit {
                         this.subTareaService
                             .query({ 'id.in': _map(this.tarea.subtarea, 'id') })
                             .pipe(
-                                filter((res: HttpResponse<ISubTarea[]>) => res.ok),
-                                map((res: HttpResponse<ISubTarea[]>) => res.body)
+                                filter((res2: HttpResponse<ISubTarea[]>) => res2.ok),
+                                map((res3: HttpResponse<ISubTarea[]>) => res3.body)
                             )
                             .subscribe(
-                                (res: ISubTarea[]) => {
-                                    this.subtareas = res;
+                                (res4: ISubTarea[]) => {
+                                    this.subtareas = res4;
                                 },
-                                (res: HttpErrorResponse) => this.onError(res.message)
+                                (res5: HttpErrorResponse) => this.onError(res5.message)
                             );
                     }
                 },
@@ -209,7 +209,7 @@ export class TareaUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.tarea.subtarea;
+        this.tarea.subtarea = this.subtareas;
         if (this.tarea.id !== undefined) {
             this.subscribeToSaveResponse(this.tareaService.update(this.tarea));
         } else {

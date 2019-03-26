@@ -67,7 +67,6 @@ public class Tarea implements Serializable {
     @Field("borrado")
     private Boolean borrado;
 
-    @DBRef
     @Field("subtarea")
     private Set<SubTarea> subtarea = new HashSet<>();
 

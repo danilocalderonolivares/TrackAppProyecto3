@@ -26,15 +26,15 @@ function getTimezoneOffsetString(date: Date): string {
 export class CalendarComponent implements OnInit {
     public resourceUrl = SERVER_API_URL + 'api/tareas';
 
-    view: string = 'month';
+    view = 'month';
 
-    locale: string = 'es';
+    locale = 'es';
 
     viewDate: Date = new Date();
 
     tareas$: Observable<Array<CalendarEvent<{ tarea: ITarea }>>> = from([]);
 
-    activeDayIsOpen: boolean = false;
+    activeDayIsOpen = false;
 
     constructor(private http: HttpClient, protected tareaService: TareaService, protected jhiAlertService: JhiAlertService) {}
 
