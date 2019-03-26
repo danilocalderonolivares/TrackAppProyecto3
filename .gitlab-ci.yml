@@ -7,6 +7,12 @@ stages:
     - deploy
     - run
 
+test:
+    stage: test
+    script:
+        - ./mvnw clean test
+        - npm test
+
 deploy_Release:
     stage: deploy
     script:
