@@ -17,7 +17,7 @@
             "relationshipName": "empleado"
         }
     ],
-    "changelogDate": "20190320034958",
+    "changelogDate": "20190316231520",
     "entityTableName": "tipo_empleado",
     "dto": "no",
     "pagination": "no",
