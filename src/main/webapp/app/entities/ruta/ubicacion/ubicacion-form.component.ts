@@ -58,8 +58,8 @@ export class UbicacionFormComponent implements OnInit, OnDestroy {
         if (!this.checkIfExist()) {
             this.rutaService.ubicaciones.push(this.rutaService.ubication);
             this.previousState();
+            this.addedUbication = true;
         }
-        this.addedUbication = true;
     }
 
     protected onSaveError() {

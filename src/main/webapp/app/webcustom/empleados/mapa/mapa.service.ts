@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Empleado } from 'app/webcustom/empleados/mapa/empleado.model';
 import { Ubicacion } from 'app/webcustom/empleados/mapa/ubicacion';
+import { EmpleadoService } from 'app/entities/empleado';
 
 @Injectable({
     providedIn: 'root'
@@ -9,6 +10,8 @@ export class MapaService {
     lat: number = 40.8521614;
     lng: number = 14.2681103;
     empleados: Empleado[];
+
+    constructor(public empleadosService: EmpleadoService) {}
 
     // Lista se consigue por medio get a empleados.
 
@@ -64,6 +67,8 @@ export class MapaService {
     }
 
     getEmployees() {
+        // this.empleadosService.query().pipe(map())
+
         this.empleados = this.getEmpleados;
     }
 

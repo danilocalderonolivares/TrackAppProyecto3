@@ -1,62 +1,46 @@
-<div>
-    <h2 id="page-heading">
-        <span>Rutas</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ruta" [routerLink]="['/ruta/add-ubications']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
-            Crear nueva ruta
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
-    <br/>
-    <div class="table-responsive" *ngIf="rutas">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th><span>ID</span></th>
-                <th><span>Nombre</span></th>
-                <th><span>Descripción</span></th>
-                <th><span>Ubicaciones</span></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let ruta of rutas ;trackBy: trackId">
-                <td><a [routerLink]="['/ruta', ruta.id, 'view' ]">{{ruta.id}}</a></td>
-                <td>{{ruta.nombre}}</td>
-                <td>{{ruta.descripcion}}</td>
-                <td>
-                    <span *ngFor="let ubicacion of ruta.ubicaciones; let last = last">
-                        {{ubicacion.nombreDireccion}}
-                    </span>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/ruta', ruta.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">Ver</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/ruta', ruta.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Editar</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'ruta', { outlets: { popup: ruta.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Eliminar</span>
-                        </button>
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-ruta-heading">Crear o editar rutas</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!ruta.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                           [(ngModel)]="ruta.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="field_nombre"
+                           [(ngModel)]="ruta.nombre" required/>
+                    <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.nombre?.errors?.required">
+                            Este campo es requerido.
+                        </small>
                     </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_descripcion">Descripción</label>
+                    <input type="text" class="form-control" name="descripcion" id="field_descripcion"
+                           [(ngModel)]="ruta.descripcion" />
+                </div>
+                <div class="form-group">
+                    <label for="field_ubicaciones">Ubicaciones</label>
+                    <select class="form-control" id="field_ubicaciones" multiple name="ubicaciones">
+                        <option *ngFor="let ubicacionOption of ubicaciones" (click)="onUbicationClicked()">{{ubicacionOption.nombreDireccion}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Guardar</span>
+                </button>
+            </div>
+        </form>
     </div>
 </div>
+
