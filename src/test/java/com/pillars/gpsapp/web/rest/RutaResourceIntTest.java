@@ -9,9 +9,12 @@ import com.pillars.gpsapp.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -20,12 +23,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.Validator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 import static com.pillars.gpsapp.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -47,14 +52,11 @@ public class RutaResourceIntTest {
     private static final Boolean DEFAULT_BORRADO = false;
     private static final Boolean UPDATED_BORRADO = true;
 
-    private static final String DEFAULT_PUNTO_INICIO = "AAAAAAAAAA";
-    private static final String UPDATED_PUNTO_INICIO = "BBBBBBBBBB";
-
-    private static final String DEFAULT_PUNTO_L_LEGADA = "AAAAAAAAAA";
-    private static final String UPDATED_PUNTO_L_LEGADA = "BBBBBBBBBB";
-
     @Autowired
     private RutaRepository rutaRepository;
+
+    @Mock
+    private RutaRepository rutaRepositoryMock;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -94,9 +96,7 @@ public class RutaResourceIntTest {
         Ruta ruta = new Ruta()
             .nombre(DEFAULT_NOMBRE)
             .descripcion(DEFAULT_DESCRIPCION)
-            .borrado(DEFAULT_BORRADO)
-            .puntoInicio(DEFAULT_PUNTO_INICIO)
-            .puntoLLegada(DEFAULT_PUNTO_L_LEGADA);
+            .borrado(DEFAULT_BORRADO);
         return ruta;
     }
 
@@ -123,8 +123,6 @@ public class RutaResourceIntTest {
         assertThat(testRuta.getNombre()).isEqualTo(DEFAULT_NOMBRE);
         assertThat(testRuta.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
         assertThat(testRuta.isBorrado()).isEqualTo(DEFAULT_BORRADO);
-        assertThat(testRuta.getPuntoInicio()).isEqualTo(DEFAULT_PUNTO_INICIO);
-        assertThat(testRuta.getPuntoLLegada()).isEqualTo(DEFAULT_PUNTO_L_LEGADA);
     }
 
     @Test
@@ -163,57 +161,6 @@ public class RutaResourceIntTest {
     }
 
     @Test
-    public void checkBorradoIsRequired() throws Exception {
-        int databaseSizeBeforeTest = rutaRepository.findAll().size();
-        // set the field null
-        ruta.setBorrado(null);
-
-        // Create the Ruta, which fails.
-
-        restRutaMockMvc.perform(post("/api/rutas")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(ruta)))
-            .andExpect(status().isBadRequest());
-
-        List<Ruta> rutaList = rutaRepository.findAll();
-        assertThat(rutaList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    public void checkPuntoInicioIsRequired() throws Exception {
-        int databaseSizeBeforeTest = rutaRepository.findAll().size();
-        // set the field null
-        ruta.setPuntoInicio(null);
-
-        // Create the Ruta, which fails.
-
-        restRutaMockMvc.perform(post("/api/rutas")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(ruta)))
-            .andExpect(status().isBadRequest());
-
-        List<Ruta> rutaList = rutaRepository.findAll();
-        assertThat(rutaList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    public void checkPuntoLLegadaIsRequired() throws Exception {
-        int databaseSizeBeforeTest = rutaRepository.findAll().size();
-        // set the field null
-        ruta.setPuntoLLegada(null);
-
-        // Create the Ruta, which fails.
-
-        restRutaMockMvc.perform(post("/api/rutas")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(ruta)))
-            .andExpect(status().isBadRequest());
-
-        List<Ruta> rutaList = rutaRepository.findAll();
-        assertThat(rutaList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
     public void getAllRutas() throws Exception {
         // Initialize the database
         rutaRepository.save(ruta);
@@ -225,11 +172,42 @@ public class RutaResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(ruta.getId())))
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION.toString())))
-            .andExpect(jsonPath("$.[*].borrado").value(hasItem(DEFAULT_BORRADO.booleanValue())))
-            .andExpect(jsonPath("$.[*].puntoInicio").value(hasItem(DEFAULT_PUNTO_INICIO.toString())))
-            .andExpect(jsonPath("$.[*].puntoLLegada").value(hasItem(DEFAULT_PUNTO_L_LEGADA.toString())));
+            .andExpect(jsonPath("$.[*].borrado").value(hasItem(DEFAULT_BORRADO.booleanValue())));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllRutasWithEagerRelationshipsIsEnabled() throws Exception {
+        RutaResource rutaResource = new RutaResource(rutaRepositoryMock);
+        when(rutaRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        MockMvc restRutaMockMvc = MockMvcBuilders.standaloneSetup(rutaResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restRutaMockMvc.perform(get("/api/rutas?eagerload=true"))
+        .andExpect(status().isOk());
+
+        verify(rutaRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllRutasWithEagerRelationshipsIsNotEnabled() throws Exception {
+        RutaResource rutaResource = new RutaResource(rutaRepositoryMock);
+            when(rutaRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+            MockMvc restRutaMockMvc = MockMvcBuilders.standaloneSetup(rutaResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restRutaMockMvc.perform(get("/api/rutas?eagerload=true"))
+        .andExpect(status().isOk());
+
+            verify(rutaRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     public void getRuta() throws Exception {
         // Initialize the database
@@ -242,9 +220,7 @@ public class RutaResourceIntTest {
             .andExpect(jsonPath("$.id").value(ruta.getId()))
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION.toString()))
-            .andExpect(jsonPath("$.borrado").value(DEFAULT_BORRADO.booleanValue()))
-            .andExpect(jsonPath("$.puntoInicio").value(DEFAULT_PUNTO_INICIO.toString()))
-            .andExpect(jsonPath("$.puntoLLegada").value(DEFAULT_PUNTO_L_LEGADA.toString()));
+            .andExpect(jsonPath("$.borrado").value(DEFAULT_BORRADO.booleanValue()));
     }
 
     @Test
@@ -266,9 +242,7 @@ public class RutaResourceIntTest {
         updatedRuta
             .nombre(UPDATED_NOMBRE)
             .descripcion(UPDATED_DESCRIPCION)
-            .borrado(UPDATED_BORRADO)
-            .puntoInicio(UPDATED_PUNTO_INICIO)
-            .puntoLLegada(UPDATED_PUNTO_L_LEGADA);
+            .borrado(UPDATED_BORRADO);
 
         restRutaMockMvc.perform(put("/api/rutas")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -282,8 +256,6 @@ public class RutaResourceIntTest {
         assertThat(testRuta.getNombre()).isEqualTo(UPDATED_NOMBRE);
         assertThat(testRuta.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
         assertThat(testRuta.isBorrado()).isEqualTo(UPDATED_BORRADO);
-        assertThat(testRuta.getPuntoInicio()).isEqualTo(UPDATED_PUNTO_INICIO);
-        assertThat(testRuta.getPuntoLLegada()).isEqualTo(UPDATED_PUNTO_L_LEGADA);
     }
 
     @Test

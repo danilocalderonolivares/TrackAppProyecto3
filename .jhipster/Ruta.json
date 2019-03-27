@@ -14,27 +14,19 @@
         },
         {
             "fieldName": "borrado",
-            "fieldType": "Boolean",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "puntoInicio",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "puntoLLegada",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Boolean"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "ubicacion",
+            "otherEntityRelationshipName": "rutas",
+            "relationshipName": "ubicaciones",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
     "changelogDate": "20190226065458",
     "entityTableName": "ruta",
     "dto": "no",

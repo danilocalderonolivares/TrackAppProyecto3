@@ -13,24 +13,18 @@
                 <dd>
                     <span>{{ruta.descripcion}}</span>
                 </dd>
-                <dt><span>Borrado</span></dt>
+                <dt><span>Ubicaciones</span></dt>
                 <dd>
-                    <span>{{ruta.borrado}}</span>
-                </dd>
-                <dt><span>Punto Inicio</span></dt>
-                <dd>
-                    <span>{{ruta.puntoInicio}}</span>
-                </dd>
-                <dt><span>Punto Llegada</span></dt>
-                <dd>
-                    <span>{{ruta.puntoLLegada}}</span>
+                    <ul *ngFor="let ubication of ruta.ubicaciones">
+                        <li>{{ubication.nombreDireccion}}</li>
+                    </ul>
                 </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Regresar</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Volver</span>
             </button>
 
             <button type="button"

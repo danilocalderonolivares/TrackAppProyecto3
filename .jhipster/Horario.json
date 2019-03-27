@@ -68,9 +68,9 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "empleado",
             "otherEntityName": "empleado",
-            "otherEntityRelationshipName": "horarios"
+            "otherEntityRelationshipName": "horarios",
+            "relationshipName": "empleado"
         }
     ],
     "changelogDate": "20190226065500",

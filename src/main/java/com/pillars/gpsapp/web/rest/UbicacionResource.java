@@ -109,4 +109,17 @@ public class UbicacionResource {
         ubicacionRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
+
+//    /**
+//     * GET  /ubicacion : get the last inserted ubicacion.
+//     *
+//     * @return the ResponseEntity with status 200 (OK) and the list of ubicacions in body
+//     */
+//    @GetMapping("/ubicacions/last-record")
+//    public Ubicacion getLastInsertedUbicacion() {
+//        log.debug("REST request to get the last inserted ubicacion");
+//        List<Ubicacion> ubications = ubicacionRepository.findAll();
+//        return ubications.get(ubications.size() - 1);
+//    }
+
 }

@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -28,17 +30,12 @@ public class Ruta implements Serializable {
     @Field("descripcion")
     private String descripcion;
 
-    @NotNull
     @Field("borrado")
     private Boolean borrado;
 
-    @NotNull
-    @Field("punto_inicio")
-    private String puntoInicio;
-
-    @NotNull
-    @Field("punto_l_legada")
-    private String puntoLLegada;
+//    @DBRef
+    @Field("ubicaciones")
+    private Set<Ubicacion> ubicaciones = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -88,30 +85,29 @@ public class Ruta implements Serializable {
         this.borrado = borrado;
     }
 
-    public String getPuntoInicio() {
-        return puntoInicio;
+    public Set<Ubicacion> getUbicaciones() {
+        return ubicaciones;
     }
 
-    public Ruta puntoInicio(String puntoInicio) {
-        this.puntoInicio = puntoInicio;
+    public Ruta ubicaciones(Set<Ubicacion> ubicacions) {
+        this.ubicaciones = ubicacions;
         return this;
     }
 
-    public void setPuntoInicio(String puntoInicio) {
-        this.puntoInicio = puntoInicio;
-    }
-
-    public String getPuntoLLegada() {
-        return puntoLLegada;
-    }
-
-    public Ruta puntoLLegada(String puntoLLegada) {
-        this.puntoLLegada = puntoLLegada;
+    public Ruta addUbicaciones(Ubicacion ubicacion) {
+        this.ubicaciones.add(ubicacion);
+        ubicacion.getRutas().add(this);
         return this;
     }
 
-    public void setPuntoLLegada(String puntoLLegada) {
-        this.puntoLLegada = puntoLLegada;
+    public Ruta removeUbicaciones(Ubicacion ubicacion) {
+        this.ubicaciones.remove(ubicacion);
+        ubicacion.getRutas().remove(this);
+        return this;
+    }
+
+    public void setUbicaciones(Set<Ubicacion> ubicacions) {
+        this.ubicaciones = ubicacions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -142,8 +138,6 @@ public class Ruta implements Serializable {
             ", nombre='" + getNombre() + "'" +
             ", descripcion='" + getDescripcion() + "'" +
             ", borrado='" + isBorrado() + "'" +
-            ", puntoInicio='" + getPuntoInicio() + "'" +
-            ", puntoLLegada='" + getPuntoLLegada() + "'" +
             "}";
     }
 }

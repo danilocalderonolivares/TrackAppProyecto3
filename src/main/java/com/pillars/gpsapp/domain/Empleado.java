@@ -33,18 +33,18 @@ public class Empleado implements Serializable {
     @Field("apellidos")
     private String apellidos;
 
-    @DBRef
+//    @DBRef
     @Field("ubicacion")
     private Ubicacion ubicacion;
 
     @DBRef
     @Field("horarios")
-    @JsonIgnoreProperties("horarios")
+    @JsonIgnoreProperties("empleados")
     private Horario horarios;
 
-    @DBRef
+//    @DBRef
     @Field("tipo")
-    @JsonIgnoreProperties("tipoEmpleados")
+    @JsonIgnoreProperties("empleados")
     private TipoEmpleado tipo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

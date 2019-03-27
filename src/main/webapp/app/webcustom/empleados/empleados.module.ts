@@ -7,6 +7,7 @@ import { MapaComponent } from './mapa/mapa.component';
 import { EmpleadoDetailComponent } from './empleadoDetail/empleado-detail.component';
 import { AgmCoreModule } from '@agm/core';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { GpsAppEntityModule } from 'app/entities/entity.module';
 
 @NgModule({
     imports: [
@@ -18,7 +19,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
             libraries: ['places']
         })
     ],
-    declarations: [EmpleadosComponent, MapaComponent, EmpleadoDetailComponent],
+    declarations: [EmpleadosComponent, MapaComponent, EmpleadoDetailComponent, GpsAppEntityModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GpsAppEmpleadosModule {}

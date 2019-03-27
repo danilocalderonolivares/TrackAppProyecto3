@@ -11,6 +11,7 @@ import { RutaDetailComponent } from './ruta-detail.component';
 import { RutaUpdateComponent } from './ruta-update.component';
 import { RutaDeletePopupComponent } from './ruta-delete-dialog.component';
 import { IRuta } from 'app/shared/model/ruta.model';
+import { UbicacionFormComponent } from './ubicacion/ubicacion-form.component';
 
 @Injectable({ providedIn: 'root' })
 export class RutaResolve implements Resolve<IRuta> {
@@ -41,6 +42,18 @@ export const rutaRoute: Routes = [
     {
         path: ':id/view',
         component: RutaDetailComponent,
+        resolve: {
+            ruta: RutaResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'Rutas'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'add-ubications',
+        component: UbicacionFormComponent,
         resolve: {
             ruta: RutaResolve
         },
