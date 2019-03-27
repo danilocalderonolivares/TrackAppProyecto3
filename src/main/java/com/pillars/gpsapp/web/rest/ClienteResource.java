@@ -119,10 +119,7 @@ public class ClienteResource {
     @DeleteMapping("/clientes/{id}")
     public ResponseEntity<Void> deleteCliente(@PathVariable String id) {
         log.debug("REST request to delete Cliente : {}", id);
-        Optional<Cliente> cliente = clienteRepository.findById(id);
-        Cliente clienteUpdate = cliente.get();
-        clienteUpdate.setBorrado(true);
-        clienteRepository.save(clienteUpdate);
+        clienteRepository.deleteById(id);
 
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
