@@ -17,9 +17,10 @@ import { GpsAppEntityModule } from 'app/entities/entity.module';
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyA6qPYcS3xkzoGTXEeljg5g_CE3m0wBTlI',
             libraries: ['places']
-        })
+        }),
+        GpsAppEntityModule
     ],
-    declarations: [EmpleadosComponent, MapaComponent, EmpleadoDetailComponent, GpsAppEntityModule],
+    declarations: [EmpleadosComponent, MapaComponent, EmpleadoDetailComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GpsAppEmpleadosModule {}

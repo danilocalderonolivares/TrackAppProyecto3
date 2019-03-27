@@ -1,20 +1,25 @@
 package com.pillars.gpsapp.web.rest;
+import com.pillars.gpsapp.domain.Authority;
 import com.pillars.gpsapp.domain.Empleado;
+import com.pillars.gpsapp.domain.User;
 import com.pillars.gpsapp.repository.EmpleadoRepository;
+import com.pillars.gpsapp.repository.UserRepository;
 import com.pillars.gpsapp.web.rest.errors.BadRequestAlertException;
 import com.pillars.gpsapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.Query;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing Empleado.
@@ -28,10 +33,18 @@ public class EmpleadoResource {
     private static final String ENTITY_NAME = "empleado";
 
     private final EmpleadoRepository empleadoRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    private Empleado empleado = new Empleado();
+
+    private User user = new User();
 
     public EmpleadoResource(EmpleadoRepository empleadoRepository) {
         this.empleadoRepository = empleadoRepository;
     }
+
+
 
     /**
      * POST  /empleados : Create a new empleado.
@@ -74,9 +87,9 @@ public class EmpleadoResource {
     }
 
     /**
-     * GET  /empleados : get all the empleados.
+     * GET  /empleados : get all the empleados and and admins.
      *
-     * @return the ResponseEntity with status 200 (OK) and the list of empleados in body
+     * @return the ResponseEntity with status 200 (OK) and the list of empleados and admins in body
      */
     @GetMapping("/empleados")
     public List<Empleado> getAllEmpleados() {
@@ -139,9 +152,36 @@ public class EmpleadoResource {
     }
 
     /**
-     * DELETE  /empleados/:id : delete the "id" empleado.
+     * GET  /empleados : get all the empleados.
      *
-     * @param id the id of the empleado to delete
-     * @return the ResponseEntity with status 200 (OK)
+     * @return the ResponseEntity with status 200 (OK) and the list of empleados in body
      */
+    @GetMapping("/empleados-custom")
+    public List<Empleado> getAllEmpleadosCustom() {
+        log.debug("REST request to get all Empleados");
+        List<Empleado> listEmp = empleadoRepository.findAll();
+        List<User> listUsers = userRepository.findAll();
+        return ExtractEmployees(listEmp, listUsers);
+    }
+
+    /**
+     *  This method extract all the employees in the system
+     * @param listEmp
+     * @param listUsers
+     * @return listEmp
+     */
+    private List<Empleado> ExtractEmployees(List<Empleado> listEmp, List<User> listUsers) {
+        List<Empleado> listEmpFinal = new ArrayList<>();
+        for(int i = 0; i <= listUsers.size() - 1; i++){
+            User user = listUsers.get(i);
+            Set<Authority> Authorities = user.getAuthorities();
+            for(Authority authority: Authorities){
+                if(authority.getName().equals("ROLE_USER")){
+                    listEmpFinal.add(listEmp.get(i));
+                }
+            }
+        }
+        return listEmpFinal;
+    }
+
 }

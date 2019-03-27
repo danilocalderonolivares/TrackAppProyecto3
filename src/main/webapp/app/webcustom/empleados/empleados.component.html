@@ -7,14 +7,14 @@
                 <label for="tipo">Seleccione el tipo de empleado</label>
                 <select class="form-control" id="tipo" name="tipo" (change)="this.mapaService.onTypeCliked($event.target.value)">
                     <option>todos</option>
-                    <option *ngFor="let tipo of tipos">{{tipo}}</option>
+                    <option *ngFor="let tipo of this.mapaService.tipos">{{tipo}}</option>
                 </select>
             </div>
             <br>
             <div>
                 <label for="sel2">Seleccione empleado</label>
                 <select multiple class="form-control" id="sel2" name="sellist2">
-                    <option *ngFor="let empleado of this.mapaService.empleados" [routerLink]="['/empleados', empleado.id]">{{empleado.nombre +' '+ empleado.apellido}}</option>
+                    <option *ngFor="let empleado of this.mapaService.empleados" [routerLink]="['/empleados', empleado.id]">{{empleado.nombre +' '+ empleado.apellidos}}</option>
                 </select>
             </div>
 
