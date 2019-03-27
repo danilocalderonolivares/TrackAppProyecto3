@@ -63,8 +63,7 @@ export class TareaUpdateComponent implements OnInit {
         protected clienteService: ClienteService,
         protected rutaService: RutaService,
         protected logService: LogService,
-        protected activatedRoute: ActivatedRoute,
-        protected userService: UserService
+        protected activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
@@ -99,38 +98,20 @@ export class TareaUpdateComponent implements OnInit {
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-        /*this.empleadoService
-            .query({ filter: 'tarea-is-null' })
+
+        this.empleadoService
+            .queryCustom()
             .pipe(
-                filter((mayBeOk: HttpResponse<IEmpleado[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IEmpleado[]>) => response.body)
+                filter((res: HttpResponse<IEmpleado[]>) => res.ok),
+                map((res: HttpResponse<IEmpleado[]>) => res.body)
             )
             .subscribe(
                 (res: IEmpleado[]) => {
-                    if (!this.tarea.empleado || !this.tarea.empleado.id) {
-                        this.empleados = res;
-                    } else {
-                        this.empleadoService
-                            .find(this.tarea.empleado.id)
-                            .pipe(
-                                filter((subResMayBeOk: HttpResponse<IEmpleado>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<IEmpleado>) => subResponse.body)
-                            )
-                            .subscribe(
-                                (subRes: IEmpleado) => (this.empleados = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                            );
-                    }
+                    this.empleados = res;
                 },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );*/
-        this.userService.query().subscribe(
-            (res: HttpResponse<User[]>) => {
-                this.users = res.body;
-                this.loadCustomUserInfo();
-            },
-            (res: HttpResponse<any>) => this.onError(res.body)
-        );
+                (res: HttpErrorResponse) => console.log(res.message)
+            );
+
         if (isEmpty(this.tarea.ubicacion)) {
             this.tarea.ubicacion = new class implements IUbicacion {
                 id: string;
@@ -304,5 +285,9 @@ export class TareaUpdateComponent implements OnInit {
 
     onEmpleadoChange(newValue) {
         this.tarea.empleado = newValue.user;
+    }
+
+    onEmpleadoChangeCustom(empleado: IEmpleado) {
+        this.tarea.empleado = empleado;
     }
 }

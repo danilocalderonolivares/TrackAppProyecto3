@@ -172,8 +172,12 @@
                 </div-->
                 <div class="form-group">
                     <label class="form-control-label" for="field_empleado">Empleado</label>
-                    <select class="form-control" id="field_empleado" name="empleado" [ngModel]="tarea.empleado" (ngModelChange)="onEmpleadoChange($event)">
-                        <option [ngValue]="empleadoOption" *ngFor="let empleadoOption of empleadosBase">{{empleadoOption.empleado.nombre}} {{empleadoOption.empleado.apellidos}}</option>
+                    <!--<select class="form-control" id="field_empleado" name="empleado" (change)="onEmpleadoChangeCustom(empleadoOption)">-->
+                        <!--<option> </option>-->
+                        <!--<option [ngValue]="empleadoOption" *ngFor="let empleadoOption of empleados">{{empleadoOption.nombre}} {{empleadoOption.apellidos}}</option>-->
+                    <!--</select>-->
+                    <select  class="form-control" id="field_empleado" name="empleado" [(ngModel)]="tarea.empleado">
+                        <option [ngValue]="empleadoOption.id === tarea.empleado?.id ? tarea.empleado : empleadoOption" *ngFor="let empleadoOption of empleados; trackBy: trackEmpleadoById">{{empleadoOption.nombre}} {{empleadoOption.apellidos}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -224,18 +228,18 @@
                 </agm-marker>
             </agm-map>
         </div>
-        <div style="margin-top: 10px">
-            <h3>Subtareas</h3>
-            <input type="text" class="form-control" #box (keyup.enter)="addSubtarea(box.value)"
-                   placeholder="Agregar nueva subtarea" [(ngModel)]="nvaSubtarea"/>
-            <div style="margin-top: 10px;">
-                <ul class="list-group">
-                    <li *ngFor="let subtarea of subtareas; index as i; trackBy: trackByFn" class="list-group-item d-flex justify-content-between align-items-center">
-                        {{i+1}}. {{subtarea.descripcion}}
-                        <fa-icon icon="times" (click)="eliminarSubtarea(i)"></fa-icon>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <!--<div style="margin-top: 10px">-->
+            <!--<h3>Subtareas</h3>-->
+            <!--<input type="text" class="form-control" #box (keyup.enter)="addSubtarea(box.value)"-->
+                   <!--placeholder="Agregar nueva subtarea" [(ngModel)]="nvaSubtarea"/>-->
+            <!--<div style="margin-top: 10px;">-->
+                <!--<ul class="list-group">-->
+                    <!--<li *ngFor="let subtarea of subtareas; index as i; trackBy: trackByFn" class="list-group-item d-flex justify-content-between align-items-center">-->
+                        <!--{{i+1}}. {{subtarea.descripcion}}-->
+                        <!--<fa-icon icon="times" (click)="eliminarSubtarea(i)"></fa-icon>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </div>

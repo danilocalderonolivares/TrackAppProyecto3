@@ -14,7 +14,6 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span>ID</span></th>
             <th><span>Titulo</span></th>
             <th><span>Descripción</span></th>
             <th><span>Inicio</span></th>
@@ -28,7 +27,6 @@
             </thead>
             <tbody>
             <tr *ngFor="let tarea of tareas ;trackBy: trackId">
-                <td><a [routerLink]="['/tarea', tarea.id, 'view' ]">{{tarea.id}}</a></td>
                 <td>{{tarea.title}}</td>
                 <td>{{tarea.descripcion}}</td>
                 <td>{{tarea.inicio | date:'mediumDate'}}</td>
@@ -37,7 +35,7 @@
                 <td>{{tarea.completada}}</td>
                 <td>
                     <div *ngIf="tarea.empleado">
-                        <a [routerLink]="['../empleado', tarea.empleado?.id, 'view' ]" >{{tarea.empleado?.firstName}} {{tarea.empleado?.lastName}}</a>
+                        <a>{{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</a>
                     </div>
                 </td>
                 <td>

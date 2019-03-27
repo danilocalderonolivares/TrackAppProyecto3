@@ -46,11 +46,11 @@ public class TareaResourceIntTest {
     private static final String DEFAULT_DESCRIPCION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPCION = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_INICIO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_INICIO = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_INICIO = "AAAAAAAAAA";
+    private static final String UPDATED_INICIO = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_FIN = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_FIN = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_FIN = "AAAAAAAAAA";
+    private static final String UPDATED_FIN = "BBBBBBBBBB";
 
     private static final Boolean DEFAULT_USAR_RUTA = false;
     private static final Boolean UPDATED_USAR_RUTA = true;

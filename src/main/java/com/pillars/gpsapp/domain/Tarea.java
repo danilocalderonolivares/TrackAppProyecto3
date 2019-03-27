@@ -34,11 +34,11 @@ public class Tarea implements Serializable {
 
     @NotNull
     @Field("inicio")
-    private LocalDate inicio;
+    private String inicio;
 
     @NotNull
     @Field("fin")
-    private LocalDate fin;
+    private String fin;
 
     @NotNull
     @Field("usar_ruta")
@@ -125,29 +125,29 @@ public class Tarea implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public LocalDate getInicio() {
+    public String getInicio() {
         return inicio;
     }
 
-    public Tarea inicio(LocalDate inicio) {
+    public Tarea inicio(String inicio) {
         this.inicio = inicio;
         return this;
     }
 
-    public void setInicio(LocalDate inicio) {
+    public void setInicio(String inicio) {
         this.inicio = inicio;
     }
 
-    public LocalDate getFin() {
+    public String getFin() {
         return fin;
     }
 
-    public Tarea fin(LocalDate fin) {
+    public Tarea fin(String fin) {
         this.fin = fin;
         return this;
     }
 
-    public void setFin(LocalDate fin) {
+    public void setFin(String fin) {
         this.fin = fin;
     }
 
