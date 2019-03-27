@@ -37,7 +37,7 @@
                                 <label class="form-control-label" for="field_cedula">Cédula*</label>
                             </ng-template>
                             <input type="text" class="form-control" name="cedula" id="field_cedula"
-                                   [(ngModel)]="cliente.cedula" required/>
+                                   [(ngModel)]="cliente.cedula" required  pattern="[0-9]*" maxlength="15"/>
                             <div [hidden]="!(editForm.controls.cedula?.dirty && editForm.controls.cedula?.invalid)">
                                 <small class="form-text text-danger"
                                        [hidden]="!editForm.controls.cedula?.errors?.required">
@@ -48,14 +48,20 @@
 
                         <div class="form-group">
                             <label class="form-control-label" for="field_correo">Correo*</label>
-                            <input type="text" class="form-control" name="correo" id="field_correo"
-                                   [(ngModel)]="cliente.correo" required/>
+                            <input type="email" class="form-control" name="correo" id="field_correo"
+                                   [(ngModel)]="cliente.correo" required email>
                             <div [hidden]="!(editForm.controls.correo?.dirty && editForm.controls.correo?.invalid)">
                                 <small class="form-text text-danger"
                                        [hidden]="!editForm.controls.correo?.errors?.required">
-                                    Correo requerida.
+                                    Correo requerido.
                                 </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.correo?.errors?.email">
+                                    Este correo es inválido.
+                                </small>
+
                             </div>
+
                         </div>
                     </div>
                     <div>

@@ -24,9 +24,12 @@
                            minlength=5
                            maxlength=254
                     [(ngModel)]="username"
-
-                           username
+                           #usuario="ngModel"
                            required>
+                    <small class="form-text text-danger"
+                    *ngIf="usuario.errors?.required && usuario.touched">
+                        Correo o nombre de usuario es requerida.
+                    </small>
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña*</label>
@@ -36,9 +39,12 @@
                            id="password"
                            placeholder="Contraseña"
                            [(ngModel)]="password"
-
+                           #contrasena="ngModel"
                             required>
-
+                    <small class="form-text text-danger"
+                           *ngIf="contrasena.errors?.required && contrasena.touched">
+                       Contraseña es requerida
+                    </small>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
             </form>
