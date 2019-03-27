@@ -5,7 +5,7 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Nombre</span></dt>
+                <dt><span>Titulo</span></dt>
                 <dd>
                     <span>{{tarea.title}}</span>
                 </dd>
@@ -77,8 +77,8 @@
                         <a [routerLink]="['/cliente', tarea.cliente?.id, 'view']">{{tarea.cliente?.id}}</a>
                     </div>
                 </dd>
-                <dt><span>Ruta</span></dt>
-                <dd>
+                <dt *ngIf="tarea.usarRuta"><span>Ruta</span></dt>
+                <dd *ngIf="tarea.usarRuta">
                     <div *ngIf="tarea.ruta">
                         <a [routerLink]="['/ruta', tarea.ruta?.id, 'view']">{{tarea.ruta?.id}}</a>
                     </div>

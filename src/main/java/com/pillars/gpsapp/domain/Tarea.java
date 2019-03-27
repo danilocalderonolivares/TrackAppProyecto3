@@ -10,7 +10,9 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Tarea.
@@ -42,11 +44,9 @@ public class Tarea implements Serializable {
     @Field("usar_ruta")
     private Boolean usarRuta;
 
-    @NotNull
     @Field("hora_inicio")
     private LocalDate horaInicio;
 
-    @NotNull
     @Field("hora_fin")
     private LocalDate horaFin;
 
@@ -67,15 +67,13 @@ public class Tarea implements Serializable {
     @Field("borrado")
     private Boolean borrado;
 
-    @DBRef
     @Field("subtarea")
-    private SubTarea subtarea;
+    private Set<SubTarea> subtarea = new HashSet<>();
 
     @DBRef
     @Field("empleado")
     private Empleado empleado;
 
-    @DBRef
     @Field("ubicacion")
     private Ubicacion ubicacion;
 
@@ -257,17 +255,27 @@ public class Tarea implements Serializable {
         this.borrado = borrado;
     }
 
-    public SubTarea getSubtarea() {
+    public Set<SubTarea> getTareas() {
         return subtarea;
     }
 
-    public Tarea subtarea(SubTarea subTarea) {
-        this.subtarea = subTarea;
+    public Tarea subtarea(Set<SubTarea> subtareas) {
+        this.subtarea = subtareas;
         return this;
     }
 
-    public void setSubtarea(SubTarea subTarea) {
-        this.subtarea = subTarea;
+    public Tarea addSubtarea(SubTarea subtarea) {
+        this.subtarea.add(subtarea);
+        return this;
+    }
+
+    public Tarea removeTarea(SubTarea subtarea) {
+        this.subtarea.remove(subtarea);
+        return this;
+    }
+
+    public void setSubtareas(Set<SubTarea> subtarea) {
+        this.subtarea = subtarea;
     }
 
     public Empleado getEmpleado() {

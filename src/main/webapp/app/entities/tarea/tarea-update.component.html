@@ -1,7 +1,7 @@
-<div class="row justify-content-center">
-    <div class="col-8">
+<div class="row justify-content-center" style="padding: 10px; width: 100%;">
+    <div class="col-6">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-tarea-heading">Crear - editar tarea</h2>
+            <h2 id="jhi-tarea-heading">Crear o editar Tarea</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!tarea.id">
@@ -9,8 +9,9 @@
                     <input type="text" class="form-control" id="id" name="id" [(ngModel)]="tarea.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_title">Nombre</label>
-                    <input type="text" class="form-control" name="title" id="field_title" [(ngModel)]="tarea.title" required />
+                    <label class="form-control-label" for="field_title">Titulo</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                        [(ngModel)]="tarea.title" required/>
                     <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
                         <small class="form-text text-danger" [hidden]="!editForm.controls.title?.errors?.required">
                             Este campo es requerido
@@ -19,12 +20,46 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_descripcion">Descripción</label>
-                    <input type="text" class="form-control" name="descripcion" id="field_descripcion" [(ngModel)]="tarea.descripcion" />
+                    <input type="text" class="form-control" name="descripcion" id="field_descripcion"
+                        [(ngModel)]="tarea.descripcion" />
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label">
+                        Inicio
+                        <input [(ngModel)]="tarea.inicio"
+                               [max]="tarea.fin"
+                               [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
+                               #dateTime="ngModel"
+                               name="inicio"
+                               required
+                               class="form-control">
+                        <owl-date-time #dt1></owl-date-time>
+                    </label>
+                    <div *ngIf="dateTime.invalid && dateTime.errors.owlDateTimeMax">
+                        Tiene que escoger una fecha anterior a {{tarea.fin | date: 'medium'}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label">
+                        Fin
+                        <input [(ngModel)]="tarea.fin"
+                               [min]="tarea.inicio"
+                               [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
+                               #dateTime="ngModel"
+                               name="fin"
+                               required
+                               class="form-control">
+                        <owl-date-time #dt2></owl-date-time>
+                    </label>
+                    <div *ngIf="dateTime.invalid && dateTime.errors.owlDateTimeMin">
+                        Tiene que escoger una fecha posterior a {{tarea.inicio | date: 'medium'}}
+                    </div>
+                </div>
+                <!--div class="form-group">
                     <label class="form-control-label" for="field_inicio">Inicio</label>
                     <div class="input-group">
-                        <input id="field_inicio" type="text" class="form-control" name="inicio" ngbDatepicker #inicioDp="ngbDatepicker" [(ngModel)]="tarea.inicio" required />
+                        <input id="field_inicio" type="text" class="form-control" name="inicio" ngbDatepicker  #inicioDp="ngbDatepicker" [(ngModel)]="tarea.inicio"
+                        required/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="inicioDp.toggle()">
                                 <fa-icon [icon]="'calendar-alt'"></fa-icon>
@@ -52,17 +87,19 @@
                             Este campo es requerido
                         </small>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_usarRuta">Usar Ruta</label>
-                    <input type="checkbox" class="form-control" name="usarRuta" id="field_usarRuta" [(ngModel)]="tarea.usarRuta" />
+                </div-->
+                <!--div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" name="usarRuta" id="field_usarRuta"
+                           [(ngModel)]="tarea.usarRuta" />
+                    <label class="form-check-label" for="field_usarRuta">Usar Ruta</label>
                     <div [hidden]="!(editForm.controls.usarRuta?.dirty && editForm.controls.usarRuta?.invalid)">
-                        <small class="form-text text-danger" [hidden]="!editForm.controls.usarRuta?.errors?.required">
-                            Este campo es requerido
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.usarRuta?.errors?.required">
+                        This field is required.
                         </small>
                     </div>
-                </div>
-                <div class="form-group">
+                </div-->
+                <!--div class="form-group">
                     <label class="form-control-label" for="field_horaInicio">Hora Inicio</label>
                     <div class="input-group">
                         <input id="field_horaInicio" type="text" class="form-control" name="horaInicio" ngbDatepicker #horaInicioDp="ngbDatepicker" [(ngModel)]="tarea.horaInicio" required />
@@ -122,50 +159,42 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_borrado">Borrado</label>
-                    <input type="checkbox" class="form-control" name="borrado" id="field_borrado" [(ngModel)]="tarea.borrado" />
-                </div>
-                <div class="form-group">
+                    <input type="checkbox" class="form-control" name="borrado" id="field_borrado"
+                        [(ngModel)]="tarea.borrado" />
+                </div-->
+
+                <!--div class="form-group">
                     <label class="form-control-label" for="field_subtarea">Subtarea</label>
                     <select class="form-control" id="field_subtarea" name="subtarea" [(ngModel)]="tarea.subtarea">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="subTareaOption.id === tarea.subtarea?.id ? tarea.subtarea : subTareaOption" *ngFor="let subTareaOption of subtareas; trackBy: trackSubTareaById">{{subTareaOption.id}}</option>
                     </select>
-                </div>
+                </div-->
                 <div class="form-group">
                     <label class="form-control-label" for="field_empleado">Empleado</label>
-                    <select class="form-control" id="field_empleado" name="empleado" [(ngModel)]="tarea.empleado">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="empleadoOption.id === tarea.empleado?.id ? tarea.empleado : empleadoOption" *ngFor="let empleadoOption of empleados; trackBy: trackEmpleadoById">{{empleadoOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_ubicacion">Ubicación</label>
-                    <select class="form-control" id="field_ubicacion" name="ubicacion" [(ngModel)]="tarea.ubicacion">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="ubicacionOption.id === tarea.ubicacion?.id ? tarea.ubicacion : ubicacionOption" *ngFor="let ubicacionOption of ubicacions; trackBy: trackUbicacionById">{{ubicacionOption.id}}</option>
+                    <select class="form-control" id="field_empleado" name="empleado" [ngModel]="tarea.empleado" (ngModelChange)="onEmpleadoChange($event)">
+                        <option [ngValue]="empleadoOption" *ngFor="let empleadoOption of empleadosBase">{{empleadoOption.empleado.nombre}} {{empleadoOption.empleado.apellidos}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_cliente">Cliente</label>
                     <select class="form-control" id="field_cliente" name="cliente" [(ngModel)]="tarea.cliente">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="clienteOption.id === tarea.cliente?.id ? tarea.cliente : clienteOption" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.id}}</option>
+                        <option [ngValue]="clienteOption.id === tarea.cliente?.id ? tarea.cliente : clienteOption" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.nombre}}</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div *ngIf="tarea.usarRuta" class="form-group">
                     <label class="form-control-label" for="field_ruta">Ruta</label>
                     <select class="form-control" id="field_ruta" name="ruta" [(ngModel)]="tarea.ruta">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="rutaOption.id === tarea.ruta?.id ? tarea.ruta : rutaOption" *ngFor="let rutaOption of rutas; trackBy: trackRutaById">{{rutaOption.id}}</option>
+                        <option [ngValue]="rutaOption.id === tarea.ruta?.id ? tarea.ruta : rutaOption" *ngFor="let rutaOption of rutas; trackBy: trackRutaById">{{rutaOption.nombre}}</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <!--div class="form-group">
                     <label class="form-control-label" for="field_logs">Logs</label>
                     <select class="form-control" id="field_logs" name="logs" [(ngModel)]="tarea.logs">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="logOption.id === tarea.logs?.id ? tarea.logs : logOption" *ngFor="let logOption of logs; trackBy: trackLogById">{{logOption.id}}</option>
                     </select>
-                </div>
+                </div-->
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
@@ -176,5 +205,37 @@
                 </button>
             </div>
         </form>
+    </div>
+    <div class="col-6">
+        <div>
+            <h3>Ubicación</h3>
+            <input ngx-google-places-autocomplete class="form-control" id="autoComplete"
+                   name="autoComplete" placeholder="Ingrese una ubicación"
+                   #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+            <br>
+            <agm-map [latitude]="9.935697"
+                     [longitude]="-84.1484506"
+                     [zoom]="zoom"
+                     (mapClick)="onChoseLocation($event)"
+                     style="height: 300px">
+                <agm-marker
+                    [latitude]="tarea.ubicacion.latitud"
+                    [longitude]="tarea.ubicacion.longitud">
+                </agm-marker>
+            </agm-map>
+        </div>
+        <div style="margin-top: 10px">
+            <h3>Subtareas</h3>
+            <input type="text" class="form-control" #box (keyup.enter)="addSubtarea(box.value)"
+                   placeholder="Agregar nueva subtarea" [(ngModel)]="nvaSubtarea"/>
+            <div style="margin-top: 10px;">
+                <ul class="list-group">
+                    <li *ngFor="let subtarea of subtareas; index as i; trackBy: trackByFn" class="list-group-item d-flex justify-content-between align-items-center">
+                        {{i+1}}. {{subtarea.descripcion}}
+                        <fa-icon icon="times" (click)="eliminarSubtarea(i)"></fa-icon>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>

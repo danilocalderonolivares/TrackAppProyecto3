@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { ITarea } from 'app/shared/model/tarea.model';
 import { TareaService } from './tarea.service';
 import { ISubTarea } from 'app/shared/model/sub-tarea.model';
 import { SubTareaService } from 'app/entities/sub-tarea';
-import { IEmpleado } from 'app/shared/model/empleado.model';
+import { Empleado, IEmpleado } from 'app/shared/model/empleado.model';
 import { EmpleadoService } from 'app/entities/empleado';
 import { IUbicacion } from 'app/shared/model/ubicacion.model';
 import { UbicacionService } from 'app/entities/ubicacion';
@@ -19,30 +19,40 @@ import { IRuta } from 'app/shared/model/ruta.model';
 import { RutaService } from 'app/entities/ruta';
 import { ILog } from 'app/shared/model/log.model';
 import { LogService } from 'app/entities/log';
+import { UserService, User } from 'app/core';
+
+import { reject } from 'lodash';
+import { isEmpty } from 'lodash';
+import { find } from 'lodash';
+import { includes } from 'lodash';
+import { compact } from 'lodash';
+import { map as _map } from 'lodash';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
+import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
+import { UserCustomUser } from 'app/shared/model/user_CustomUser.model';
 
 @Component({
     selector: 'jhi-tarea-update',
     templateUrl: './tarea-update.component.html'
 })
 export class TareaUpdateComponent implements OnInit {
+    zoom = 12;
+    @ViewChild('placesRef') placesRef: GooglePlaceDirective;
     tarea: ITarea;
     isSaving: boolean;
-
     subtareas: ISubTarea[];
-
     empleados: IEmpleado[];
-
     ubicacions: IUbicacion[];
-
     clientes: ICliente[];
-
     rutas: IRuta[];
-
     logs: ILog[];
     inicioDp: any;
     finDp: any;
     horaInicioDp: any;
     horaFinDp: any;
+    nvaSubtarea = '';
+    users: User[];
+    empleadosBase: UserCustomUser[];
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -53,7 +63,8 @@ export class TareaUpdateComponent implements OnInit {
         protected clienteService: ClienteService,
         protected rutaService: RutaService,
         protected logService: LogService,
-        protected activatedRoute: ActivatedRoute
+        protected activatedRoute: ActivatedRoute,
+        protected userService: UserService
     ) {}
 
     ngOnInit() {
@@ -69,24 +80,26 @@ export class TareaUpdateComponent implements OnInit {
             )
             .subscribe(
                 (res: ISubTarea[]) => {
-                    if (!this.tarea.subtarea || !this.tarea.subtarea.id) {
+                    if (isEmpty(this.tarea.subtarea)) {
                         this.subtareas = res;
                     } else {
                         this.subTareaService
-                            .find(this.tarea.subtarea.id)
+                            .query({ 'id.in': _map(this.tarea.subtarea, 'id') })
                             .pipe(
-                                filter((subResMayBeOk: HttpResponse<ISubTarea>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<ISubTarea>) => subResponse.body)
+                                filter((res2: HttpResponse<ISubTarea[]>) => res2.ok),
+                                map((res3: HttpResponse<ISubTarea[]>) => res3.body)
                             )
                             .subscribe(
-                                (subRes: ISubTarea) => (this.subtareas = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                                (res4: ISubTarea[]) => {
+                                    this.subtareas = res4;
+                                },
+                                (res5: HttpErrorResponse) => this.onError(res5.message)
                             );
                     }
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-        this.empleadoService
+        /*this.empleadoService
             .query({ filter: 'tarea-is-null' })
             .pipe(
                 filter((mayBeOk: HttpResponse<IEmpleado[]>) => mayBeOk.ok),
@@ -110,32 +123,22 @@ export class TareaUpdateComponent implements OnInit {
                     }
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
-            );
-        this.ubicacionService
-            .query({ filter: 'tarea-is-null' })
-            .pipe(
-                filter((mayBeOk: HttpResponse<IUbicacion[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IUbicacion[]>) => response.body)
-            )
-            .subscribe(
-                (res: IUbicacion[]) => {
-                    if (!this.tarea.ubicacion || !this.tarea.ubicacion.id) {
-                        this.ubicacions = res;
-                    } else {
-                        this.ubicacionService
-                            .find(this.tarea.ubicacion.id)
-                            .pipe(
-                                filter((subResMayBeOk: HttpResponse<IUbicacion>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<IUbicacion>) => subResponse.body)
-                            )
-                            .subscribe(
-                                (subRes: IUbicacion) => (this.ubicacions = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                            );
-                    }
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+            );*/
+        this.userService.query().subscribe(
+            (res: HttpResponse<User[]>) => {
+                this.users = res.body;
+                this.loadCustomUserInfo();
+            },
+            (res: HttpResponse<any>) => this.onError(res.body)
+        );
+        if (isEmpty(this.tarea.ubicacion)) {
+            this.tarea.ubicacion = new class implements IUbicacion {
+                id: string;
+                latitud: number;
+                longitud: number;
+                nombreDireccion: string;
+            }();
+        }
         this.clienteService
             .query({ filter: 'tarea-is-null' })
             .pipe(
@@ -201,9 +204,13 @@ export class TareaUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.tarea.subtarea = this.subtareas;
+        this.tarea.inicio = moment(this.tarea.inicio);
+        this.tarea.fin = moment(this.tarea.fin);
         if (this.tarea.id !== undefined) {
             this.subscribeToSaveResponse(this.tareaService.update(this.tarea));
         } else {
+            this.tarea.activa = true;
             this.subscribeToSaveResponse(this.tareaService.create(this.tarea));
         }
     }
@@ -247,5 +254,55 @@ export class TareaUpdateComponent implements OnInit {
 
     trackLogById(index: number, item: ILog) {
         return item.id;
+    }
+
+    addSubtarea(value: string) {
+        this.subtareas.push(
+            new class implements ISubTarea {
+                completado: boolean = false;
+                descripcion: string = value;
+                id: string;
+            }()
+        );
+        this.nvaSubtarea = '';
+    }
+
+    eliminarSubtarea(index: number) {
+        this.subtareas = reject(this.subtareas, (e, i) => i === index);
+    }
+
+    onChoseLocation(event) {
+        const ubicacion: IUbicacion = {
+            latitud: event.coords.lat,
+            longitud: event.coords.lng
+        };
+        this.tarea.ubicacion = ubicacion;
+    }
+
+    public handleAddressChange(address: Address) {
+        const ubicacion: IUbicacion = {
+            latitud: address.geometry.location.lat(),
+            longitud: address.geometry.location.lng()
+        };
+        this.tarea.ubicacion = ubicacion;
+    }
+
+    loadCustomUserInfo() {
+        this.empleadoService
+            .query()
+            .subscribe((res: HttpResponse<Empleado[]>) => this.fillUserFullInfo(res), (res: HttpResponse<any>) => this.onError(res.body));
+    }
+
+    fillUserFullInfo(res) {
+        this.empleadosBase = compact(
+            _map(this.users, e => {
+                const usuario = find(res.body, { idUsuarioRelacion: e.id });
+                if (usuario && includes(e.authorities, 'ROLE_USER')) return new UserCustomUser(e, usuario);
+            })
+        );
+    }
+
+    onEmpleadoChange(newValue) {
+        this.tarea.empleado = newValue.user;
     }
 }
