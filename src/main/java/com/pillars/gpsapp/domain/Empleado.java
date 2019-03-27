@@ -33,7 +33,7 @@ public class Empleado implements Serializable {
     @Field("apellidos")
     private String apellidos;
 
-    @DBRef
+//    @DBRef
     @Field("ubicacion")
     private Ubicacion ubicacion;
 
@@ -42,7 +42,7 @@ public class Empleado implements Serializable {
     @JsonIgnoreProperties("empleados")
     private Horario horarios;
 
-    @DBRef
+//    @DBRef
     @Field("tipo")
     @JsonIgnoreProperties("empleados")
     private TipoEmpleado tipo;
