@@ -33,7 +33,7 @@ export const tipoEmpleadoRoute: Routes = [
         path: '',
         component: TipoEmpleadoComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'TipoEmpleados'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const tipoEmpleadoRoute: Routes = [
             tipoEmpleado: TipoEmpleadoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'TipoEmpleados'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const tipoEmpleadoRoute: Routes = [
             tipoEmpleado: TipoEmpleadoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'TipoEmpleados'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const tipoEmpleadoRoute: Routes = [
             tipoEmpleado: TipoEmpleadoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'TipoEmpleados'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const tipoEmpleadoPopupRoute: Routes = [
             tipoEmpleado: TipoEmpleadoResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'TipoEmpleados'
         },
         canActivate: [UserRouteAccessService],

@@ -19,13 +19,13 @@
                     <fa-icon [icon]="'sort'"></fa-icon>
                 </th>
                 <th jhiSortBy="firstName"><span>Nombre</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
+
                 </th>
                 <th jhiSortBy="apellidos"><span>Apellido</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
+
                 </th>
                 <th jhiSortBy="nombreTipo"><span>Tipo <br />Usuario</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
+
                 </th>
                 <th>Estado</th>
                 <th><span>Accesos</span></th>
@@ -38,7 +38,7 @@
             <tbody *ngIf="fullUserInfo">
             <tr *ngFor="let user of fullUserInfo; trackBy: trackIdentity">
                 <!--<td><a [routerLink]="['./', user.login, 'view']">{{user.id}}</a></td>-->
-                <td>{{user.user.login}}</td>
+                <td><a [routerLink]="['./', user.user.login, 'view']">{{user.user.login}}</a></td>
                 <td>{{user.user.email}}</td>
                 <td>{{user.empleado.nombre}}</td>
                 <td>{{user.empleado.apellidos}}</td>
