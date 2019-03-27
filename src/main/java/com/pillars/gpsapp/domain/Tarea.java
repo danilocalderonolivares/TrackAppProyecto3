@@ -74,7 +74,6 @@ public class Tarea implements Serializable {
     @Field("empleado")
     private Empleado empleado;
 
-    @DBRef
     @Field("ubicacion")
     private Ubicacion ubicacion;
 
