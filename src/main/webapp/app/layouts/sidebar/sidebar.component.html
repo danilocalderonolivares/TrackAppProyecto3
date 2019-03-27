@@ -37,7 +37,7 @@
                         <h5>Empleado</h5>
                     </a>
                 </li>
-                <li class="">
+                <li *jhiHasAnyAuthority="'ROLE_ADMIN'" class="">
                     <a routerLink="ruta"  class="simple-text">
                         <h5>Ruta</h5>
                     </a>

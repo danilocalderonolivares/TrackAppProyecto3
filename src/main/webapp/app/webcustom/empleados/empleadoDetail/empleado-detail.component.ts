@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MapaService } from 'app/webcustom/empleados/mapa/mapa.service';
-import { Empleado } from 'app/webcustom/empleados/mapa/empleado.model';
 import { ActivatedRoute } from '@angular/router';
+import { IEmpleado } from 'app/shared/model/empleado.model';
 
 @Component({
     selector: 'jhi-empleado',
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
     styles: []
 })
 export class EmpleadoDetailComponent implements OnInit {
-    empDetail: Empleado;
+    empDetail: IEmpleado;
     constructor(protected mapaService: MapaService, private route: ActivatedRoute) {}
 
     ngOnInit() {

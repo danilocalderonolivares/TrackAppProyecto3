@@ -51,4 +51,10 @@ export class EmpleadoService {
     deleteByIdRelacion(id: string): Observable<HttpResponse<any>> {
         return this.http.delete(`${this.resourceUrl + '/deleteByRelationId'}/${id}`, { observe: 'response' });
     }
+
+    //get all employees custom
+    queryCustom(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IEmpleado[]>(this.resourceUrl + '-custom', { params: options, observe: 'response' });
+    }
 }
