@@ -33,7 +33,7 @@ export const clienteRoute: Routes = [
         path: '',
         component: ClienteComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Clientes'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const clienteRoute: Routes = [
             cliente: ClienteResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Clientes'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const clienteRoute: Routes = [
             cliente: ClienteResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Clientes'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const clienteRoute: Routes = [
             cliente: ClienteResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Clientes'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const clientePopupRoute: Routes = [
             cliente: ClienteResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Clientes'
         },
         canActivate: [UserRouteAccessService],

@@ -33,11 +33,11 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "empleado",
             "otherEntityName": "empleado",
+            "otherEntityRelationshipName": "mensaje",
+            "relationshipName": "empleado",
             "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "mensaje"
+            "ownerSide": true
         }
     ],
     "changelogDate": "20190226065456",

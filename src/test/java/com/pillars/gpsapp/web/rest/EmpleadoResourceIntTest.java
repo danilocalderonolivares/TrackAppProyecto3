@@ -4,6 +4,7 @@ import com.pillars.gpsapp.GpsApp;
 
 import com.pillars.gpsapp.domain.Empleado;
 import com.pillars.gpsapp.repository.EmpleadoRepository;
+import com.pillars.gpsapp.repository.UserRepository;
 import com.pillars.gpsapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;

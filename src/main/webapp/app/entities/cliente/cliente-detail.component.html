@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="cliente">
-            <h2><span>Cliente</span> {{cliente.id}}</h2>
+            <h2><span>Cliente</span> {{cliente.nombre}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -9,11 +9,24 @@
                 <dd>
                     <span>{{cliente.nombre}}</span>
                 </dd>
-                <dt><span>Cédula</span></dt>
+                <dt>
+                    <ng-container *ngIf="empresa != true; else elseTemplate2">
+                        <span>
+                            Cédula
+                        </span>
+                    </ng-container>
+                    <ng-template #elseTemplate2>
+                         <span>
+                            Cédula Jurídica
+                        </span>
+                    </ng-template>
+
+
+                </dt>
                 <dd>
                     <span>{{cliente.cedula}}</span>
                 </dd>
-                <dt><span>Direccién</span></dt>
+                <dt><span>Dirección</span></dt>
                 <dd>
                     <span>{{cliente.direccion}}</span>
                 </dd>
@@ -21,20 +34,21 @@
                 <dd>
                     <span>{{cliente.correo}}</span>
                 </dd>
-                <dt><span>Es Empresa</span></dt>
+                <dt><span>Tipo cliente</span></dt>
                 <dd>
-                    <span>{{cliente.esEmpresa}}</span>
+                    <ng-container *ngIf="cliente.esEmpresa != true; else elseTemplate">
+                        <span>
+                            Cliente
+                        </span>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                         <span>
+                            Empresa
+                        </span>
+                    </ng-template>
                 </dd>
-                <dt><span>Borrado</span></dt>
-                <dd>
-                    <span>{{cliente.borrado}}</span>
-                </dd>
-                <dt><span>Ubicacién</span></dt>
-                <dd>
-                    <div *ngIf="cliente.ubicacion">
-                        <a [routerLink]="['/ubicacion', cliente.ubicacion?.id, 'view']">{{cliente.ubicacion?.id}}</a>
-                    </div>
-                </dd>
+
+
             </dl>
 
             <button type="submit"
