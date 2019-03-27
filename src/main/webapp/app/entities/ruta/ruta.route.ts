@@ -34,7 +34,7 @@ export const rutaRoute: Routes = [
         path: '',
         component: RutaComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Rutas'
         },
         canActivate: [UserRouteAccessService]
@@ -46,7 +46,7 @@ export const rutaRoute: Routes = [
             ruta: RutaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Rutas'
         },
         canActivate: [UserRouteAccessService]
@@ -58,7 +58,7 @@ export const rutaRoute: Routes = [
             ruta: RutaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Rutas'
         },
         canActivate: [UserRouteAccessService]
@@ -70,7 +70,7 @@ export const rutaRoute: Routes = [
             ruta: RutaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Rutas'
         },
         canActivate: [UserRouteAccessService]
@@ -82,7 +82,7 @@ export const rutaRoute: Routes = [
             ruta: RutaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Rutas'
         },
         canActivate: [UserRouteAccessService]
@@ -97,7 +97,7 @@ export const rutaPopupRoute: Routes = [
             ruta: RutaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Rutas'
         },
         canActivate: [UserRouteAccessService],
