@@ -14,7 +14,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th><span>ID</span></th>
+                <!--<th><span>ID</span></th>-->
                 <th><span>Nombre</span></th>
                 <th><span>Descripción</span></th>
                 <th><span>Ubicaciones</span></th>
@@ -23,7 +23,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let ruta of rutas ;trackBy: trackId">
-                <td><a [routerLink]="['/ruta', ruta.id, 'view' ]">{{ruta.id}}</a></td>
+                <!--<td><a [routerLink]="['/ruta', ruta.id, 'view' ]">{{ruta.id}}</a></td>-->
                 <td>{{ruta.nombre}}</td>
                 <td>{{ruta.descripcion}}</td>
                 <td>
