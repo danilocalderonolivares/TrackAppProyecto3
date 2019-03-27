@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +50,7 @@ public class ClienteResource {
         if (cliente.getId() != null) {
             throw new BadRequestAlertException("A new cliente cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        cliente.setBorrado(true);
+        cliente.setBorrado(false);
         ubicacionRepository.save(cliente.getUbicacion());
         Cliente result = clienteRepository.save(cliente);
         return ResponseEntity.created(new URI("/api/clientes/" + result.getId()))
@@ -86,8 +87,14 @@ public class ClienteResource {
      */
     @GetMapping("/clientes")
     public List<Cliente> getAllClientes() {
-        log.debug("REST request to get all Clientes");
-        return clienteRepository.findAll();
+            List<Cliente> clientes = clienteRepository.findAll();
+             List<Cliente> clientesFiltrados = new ArrayList<>();
+            for (Cliente cliente : clientes){
+                        if (cliente.isBorrado() != true){
+                            clientesFiltrados.add(cliente);
+                        }
+                }
+        return clientesFiltrados;
     }
 
     /**
@@ -112,7 +119,11 @@ public class ClienteResource {
     @DeleteMapping("/clientes/{id}")
     public ResponseEntity<Void> deleteCliente(@PathVariable String id) {
         log.debug("REST request to delete Cliente : {}", id);
-        clienteRepository.deleteById(id);
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+        Cliente clienteUpdate = cliente.get();
+        clienteUpdate.setBorrado(true);
+        clienteRepository.save(clienteUpdate);
+
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
 }

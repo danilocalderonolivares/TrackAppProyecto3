@@ -1,8 +1,10 @@
 <div class="justify-content-center mt-4">
     <div class="container">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
         <div class="row">
+
             <div class="col-md-6">
-                <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
                     <h1 id="jhi-cliente-heading">Información básica</h1>
                     <div>
                         <jhi-alert-error></jhi-alert-error>
@@ -10,11 +12,6 @@
                             <label class="form-control-label" for="field_esEmpresa">¿Es una empresa?</label>
                             <input type="checkbox" style="width: 18px;height: 15px;" name="esEmpresa" id="field_esEmpresa"
                                    [(ngModel)]="cliente.esEmpresa" />
-                        </div>
-                        <div class="form-group" [hidden]="!cliente.id">
-                            <label for="id">ID</label>
-                            <input type="text" class="form-control" id="id" name="id"
-                                   [(ngModel)]="cliente.id" readonly />
                         </div>
                         <div class="form-group">
                             <ng-container *ngIf="cliente.esEmpresa != false; else elseTemplate1">
@@ -60,14 +57,6 @@
                                 </small>
                             </div>
                         </div>
-
-                        <!--<div class="form-group">-->
-                            <!--<label class="form-control-label" for="field_borrado">Borrado</label>-->
-                            <!--<input type="checkbox" class="form-control" name="borrado" id="field_borrado"-->
-                                   <!--[(ngModel)]="cliente.borrado" />-->
-                        <!--</div>-->
-
-
                     </div>
                     <div>
                         <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
@@ -78,7 +67,7 @@
                         </button>
                     </div>
 
-                </form>
+
             </div>
             <div class="col-md-6">
                 <h1>Ubicación</h1>
@@ -90,6 +79,12 @@
                            [(ngModel)]="cliente.direccion"
                            placeholder="Elija una posición en el mapa para ingresar la dirección"
                            readonly required/>
+                    <div [hidden]="!(editForm.controls.direccion?.dirty && editForm.controls.direccion?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.direccion?.errors?.required">
+                            Ubicación requerida.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label">Ubicación</label>
@@ -109,6 +104,8 @@
 
                 </div>
             </div>
+
         </div>
+        </form>
     </div>
 </div>

@@ -14,8 +14,10 @@ import { ClienteService } from './cliente.service';
 })
 export class ClienteComponent implements OnInit, OnDestroy {
     clientes: ICliente[];
+    clientesBorradoLogico: ICliente[];
     currentAccount: any;
     eventSubscriber: Subscription;
+
     constructor(
         protected clienteService: ClienteService,
         protected jhiAlertService: JhiAlertService,
