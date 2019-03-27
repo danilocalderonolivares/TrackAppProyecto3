@@ -7,6 +7,11 @@ stages:
     - deploy
     - run
 
+test:
+    stage: test
+    script:
+        - ./mvnw clean test
+
 deploy_Release:
     stage: deploy
     script:
