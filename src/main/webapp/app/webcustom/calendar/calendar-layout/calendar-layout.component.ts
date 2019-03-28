@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpParams, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { filter, map } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 import { CalendarEvent } from 'angular-calendar';
 import { isSameMonth, isSameDay, startOfMonth, endOfMonth, startOfWeek, endOfWeek, startOfDay, endOfDay, format } from 'date-fns';
-import { Observable, from } from 'rxjs';
+import { Observable } from 'rxjs';
 import { colors } from './colors';
 import { ITarea } from 'app/shared/model/tarea.model';
 import { TareaService } from 'app/entities/tarea/tarea.service';
@@ -26,23 +26,23 @@ function getTimezoneOffsetString(date: Date): string {
 export class CalendarComponent implements OnInit {
     public resourceUrl = SERVER_API_URL + 'api/tareas';
 
-    view: string = 'month';
+    view = 'month';
 
-    locale: string = 'es';
+    locale = 'es';
 
     viewDate: Date = new Date();
 
-    tareas$: Observable<Array<CalendarEvent<{ tarea: ITarea }>>> = from([]);
+    tareas$: Observable<Array<CalendarEvent<{ tarea: ITarea }>>>;
 
-    activeDayIsOpen: boolean = false;
+    activeDayIsOpen = false;
 
     constructor(private http: HttpClient, protected tareaService: TareaService, protected jhiAlertService: JhiAlertService) {}
 
     ngOnInit(): void {
-        this.loadAll();
+        this.fetchEvents();
     }
 
-    loadAll() {
+    fetchEvents() {
         console.log('*************************LOAD ALL *************************');
 
         const getStart: any = {
@@ -62,18 +62,16 @@ export class CalendarComponent implements OnInit {
             .set('fin.lte', format(getEnd(this.viewDate), 'YYYY-MM-DD'));
 
         this.tareas$ = this.http.get(this.resourceUrl, { params }).pipe(
-            map(({ results }: { results: ITarea[] }) => {
-                console.log('*****************', results);
-                if (results) {
-                    return results.map((film: ITarea) => {
-                        console.log(film);
+            map((res: ITarea[]) => {
+                if (res) {
+                    return res.map((tarea: ITarea) => {
                         const calendarEventToAdd: CalendarEvent = {
-                            title: film.title,
-                            start: new Date(film.inicio + getTimezoneOffsetString(this.viewDate)),
+                            title: tarea.title,
+                            start: new Date(tarea.inicio + getTimezoneOffsetString(this.viewDate)),
+                            end: new Date(tarea.fin + getTimezoneOffsetString(this.viewDate)),
                             color: colors.yellow,
-                            allDay: true,
                             meta: {
-                                film
+                                tarea
                             }
                         };
                         return calendarEventToAdd;
@@ -83,51 +81,6 @@ export class CalendarComponent implements OnInit {
             })
         );
     }
-
-    /*fetchEvents(): void {
-        const getStart: any = {
-            month: startOfMonth,
-            week: startOfWeek,
-            day: startOfDay
-        }[this.view];
-
-        const getEnd: any = {
-            month: endOfMonth,
-            week: endOfWeek,
-            day: endOfDay
-        }[this.view];
-
-        const params = new HttpParams()
-            .set(
-                'primary_release_date.gte',
-                format(getStart(this.viewDate), 'YYYY-MM-DD')
-            )
-            .set(
-                'primary_release_date.lte',
-                format(getEnd(this.viewDate), 'YYYY-MM-DD')
-            )
-            .set('api_key', '0ec33936a68018857d727958dca1424f');
-
-        this.events$ = this.http
-            .get('https://api.themoviedb.org/3/discover/movie', { params })
-            .pipe(
-                map(({ results }: { results: Film[] }) => {
-                    return results.map((film: Film) => {
-                        return {
-                            title: film.title,
-                            start: new Date(
-                                film.release_date + getTimezoneOffsetString(this.viewDate)
-                            ),
-                            color: colors.yellow,
-                            allDay: true,
-                            meta: {
-                                film
-                            }
-                        };
-                    });
-                })
-            );
-    }*/
 
     dayClicked({ date, events }: { date: Date; events: Array<CalendarEvent<{ tarea: ITarea }>> }): void {
         if (isSameMonth(date, this.viewDate)) {
@@ -142,5 +95,9 @@ export class CalendarComponent implements OnInit {
 
     eventClicked(event: CalendarEvent<{ tarea: ITarea }>): void {
         console.log(event.meta.tarea.id);
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
     }
 }
