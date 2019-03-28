@@ -1,0 +1,405 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,500,700,900|Raleway:300,400,700');
+
+%sans {
+    font-family: 'Lato', sans-serif;
+}
+
+%serif {
+    font-family: 'Raleway', serif;
+}
+
+%font-awesome {
+    font-family: 'Font Awesome 5 Pro';
+}
+
+%headers {
+    @extend %serif;
+    color: $negro4;
+    font-weight: normal;
+    margin: 0.5em 0;
+}
+
+.h1 {
+    @extend %headers;
+    font-size: 1.8em;
+    @media (min-width: $reflex-md) {
+        font-size: 2.8em;
+    }
+}
+
+.h2 {
+    @extend %headers;
+    font-size: 1.5em;
+    @media (min-width: $reflex-md) {
+        font-size: 2.4em;
+    }
+}
+
+.h3 {
+    @extend %headers;
+    font-size: 1.3em;
+    @media (min-width: $reflex-md) {
+        font-size: 1.8em;
+    }
+}
+
+.h4 {
+    @extend %headers;
+    font-size: 1.15em;
+    @media (min-width: $reflex-md) {
+        font-size: 1.4em;
+    }
+}
+
+.h5 {
+    @extend %headers;
+    font-size: 1em;
+    @media (min-width: $reflex-md) {
+        font-size: 1em;
+    }
+}
+
+.h6 {
+    @extend %headers;
+    font-size: 0.8em;
+    font-weight: normal;
+    @media (min-width: $reflex-md) {
+        font-size: 1em;
+    }
+}
+
+code {
+    @extend .fondo--negro4;
+    @extend .text--blanco;
+    border-radius: 3px;
+    font-family: monospace;
+    padding: 0.5em 1em;
+    line-height: 2.5em;
+}
+
+.text {
+    @extend %sans;
+    font-weight: 400;
+    color: inherit;
+}
+
+p.text {
+    margin: 0.3em 0;
+}
+
+.text--bold {
+    font-weight: bold;
+}
+
+.text--italic {
+    font-style: italic;
+}
+
+.text--left {
+    text-align: left;
+}
+
+.text--center {
+    text-align: center;
+}
+
+.text--right {
+    text-align: right;
+}
+
+.text--justify {
+    text-align: justify;
+}
+
+.text--underline {
+    text-decoration: underline;
+}
+
+.text--uppercase {
+    text-transform: uppercase;
+}
+
+.text--lowercase {
+    text-transform: lowercase;
+}
+
+.text--capitalize {
+    text-transform: capitalize;
+}
+
+.text--big {
+    font-size: larger;
+}
+
+.text--small {
+    font-size: smaller;
+}
+
+.text--extra-big {
+    font-size: xx-large;
+}
+
+.text--extra-small {
+    font-size: xx-small;
+}
+
+.text--lila {
+    color: $lila !important;
+}
+
+.text--morado {
+    color: $morado !important;
+}
+
+.text--indigo {
+    color: $indigo !important;
+}
+
+.text--azul {
+    color: $azul !important;
+}
+
+.text--celeste {
+    color: $celeste !important;
+}
+
+.text--cyan {
+    color: $cyan !important;
+}
+
+.text--turquesa {
+    color: $turquesa !important;
+}
+
+.text--verde {
+    color: $verde !important;
+}
+
+.text--kiwi {
+    color: $kiwi !important;
+}
+
+.text--lima {
+    color: $lima !important;
+}
+
+.text--amarillo {
+    color: $amarillo !important;
+}
+
+.text--ambar {
+    color: $ambar !important;
+}
+
+.text--naranja {
+    color: $naranja !important;
+}
+
+.text--tomate {
+    color: $tomate !important;
+}
+
+.text--rojo {
+    color: $rojo !important;
+}
+
+.text--rosado {
+    color: $rosado !important;
+}
+
+.text--negro {
+    color: $negro !important;
+}
+
+.text--negro2 {
+    color: $negro2 !important;
+}
+
+.text--negro4 {
+    color: $negro4 !important;
+}
+
+.text--gris6 {
+    color: $gris6 !important;
+}
+
+.text--gris8 {
+    color: $gris8 !important;
+}
+
+.text--grisa {
+    color: $grisa !important;
+}
+
+.text--grisc {
+    color: $grisc !important;
+}
+
+.text--grisd {
+    color: $grisd !important;
+}
+
+.text--grise {
+    color: $grise !important;
+}
+
+.text--blanco {
+    color: $blanco !important;
+}
+
+.badge {
+    @extend %sans;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1;
+    margin-left: 1em;
+    min-width: 10px;
+    padding: 3px 7px;
+    padding-left: 1em;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    &::before {
+        background-color: inherit;
+        background-image: none;
+        content: '';
+        height: 13px;
+        position: absolute;
+        right: 100%;
+        top: 50%;
+        transform: translateY(-50%) translateX(50%) rotate(-45deg);
+        transition: none;
+        width: 13px;
+    }
+
+    &::after {
+        background-color: $blanco;
+        border-radius: 500rem;
+        box-shadow: 0 -1px 1px 0 $sombra1;
+        content: '';
+        height: 0.5em;
+        left: -0.25em;
+        margin-top: -0.25em;
+        position: absolute;
+        top: 50%;
+        width: 0.5em;
+    }
+}
+
+.badge--lila {
+    @extend .fondo--lila;
+    color: $blanco;
+}
+
+.badge--morado {
+    @extend .fondo--morado;
+    color: $blanco;
+}
+
+.badge--indigo {
+    @extend .fondo--indigo;
+    color: $blanco;
+}
+
+.badge--azul {
+    @extend .fondo--azul;
+    color: $blanco;
+}
+
+.badge--celeste {
+    @extend .fondo--celeste;
+    color: $blanco;
+}
+
+.badge--cyan {
+    @extend .fondo--cyan;
+    color: $blanco;
+}
+
+.badge--turquesa {
+    @extend .fondo--turquesa;
+    color: $blanco;
+}
+
+.badge--verde {
+    @extend .fondo--verde;
+    color: $blanco;
+}
+
+.badge--kiwi {
+    @extend .fondo--kiwi;
+    color: $negro;
+}
+
+.badge--lima {
+    @extend .fondo--lima;
+    color: $negro;
+}
+
+.badge--amarillo {
+    @extend .fondo--amarillo;
+    color: $negro;
+}
+
+.badge--ambar {
+    @extend .fondo--ambar;
+    color: $negro;
+}
+
+.badge--naranja {
+    @extend .fondo--naranja;
+    color: $negro;
+}
+
+.badge--tomate {
+    @extend .fondo--tomate;
+    color: $blanco;
+}
+
+.badge--rojo {
+    @extend .fondo--rojo;
+    color: $blanco;
+}
+
+.badge--rosado {
+    @extend .fondo--rosado;
+    color: $blanco;
+}
+
+.badge--negro {
+    @extend .fondo--negro;
+    color: $blanco;
+}
+
+.badge--negro2 {
+    @extend .fondo--negro2;
+    color: $blanco;
+}
+
+.badge--negro4 {
+    @extend .fondo--negro4;
+    color: $blanco;
+}
+
+.badge--gris6 {
+    @extend .fondo--gris6;
+    color: $blanco;
+}
+
+.badge--gris8 {
+    @extend .fondo--gris8;
+    color: $blanco;
+}
+
+.no-results {
+    @extend .text--center;
+    @extend .text--gris8;
+    @extend %serif;
+    font-size: 1.2em;
+    padding-bottom: 1em;
+}

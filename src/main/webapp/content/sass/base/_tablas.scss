@@ -1,0 +1,327 @@
+@import '../tema/colores';
+.tabla {
+    border-collapse: collapse;
+    margin-bottom: 1em;
+    position: relative;
+    width: 100%;
+
+    th,
+    td {
+        vertical-align: center;
+    }
+}
+
+.tabla--responsive {
+    max-width: 100%;
+    overflow: hidden;
+
+    @media only screen and (max-width: $reflex-md) {
+        th,
+        td,
+        tr {
+            display: block;
+        }
+
+        tr {
+            padding: 0.5em 0;
+        }
+    }
+
+    .tabla__header {
+        @media only screen and (max-width: $reflex-md) {
+            border: 0;
+
+            tr {
+                left: -9999px;
+                position: absolute;
+                top: -9999px;
+            }
+        }
+    }
+
+    .tabla__body {
+        @media only screen and (max-width: $reflex-md) {
+            font-size: 80%;
+
+            tr {
+                border: 1px solid $grisc;
+                border-radius: 4px;
+                box-shadow: 0 2px 2px 0 $sombra1, 0 1px 5px 0 $sombra2, 0 3px 1px -2px $sombra3;
+                margin: 1em 0;
+                padding: 1em;
+                position: relative;
+            }
+
+            td {
+                border: 0;
+                min-height: 20px;
+                overflow: hidden;
+                padding: 0;
+                position: relative;
+                text-align: left;
+                white-space: pre-wrap;
+
+                &::before {
+                    color: $musgo-tema;
+                    font-size: 10px;
+                    margin-right: 5px;
+                    text-align: left;
+                    white-space: nowrap;
+                    width: 100%;
+                    word-wrap: break-word;
+                }
+
+                &:last-child {
+                    padding: 0;
+                    position: absolute;
+                    right: 3px;
+                    top: 0;
+
+                    &::before {
+                        content: attr(data-before);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tabla__header,
+.tabla__footer {
+    @extend .h5;
+    @extend .text--bold;
+    background: transparent;
+    border-bottom: 2px solid $indigo-opaco;
+    font-size: 0.9em;
+    position: relative;
+    text-align: left;
+
+    &::after {
+        position: absolute;
+    }
+
+    th,
+    td {
+        padding: 10px 15px;
+    }
+}
+
+.tabla__footer {
+    border-bottom: 0;
+    border-top: 2px solid $grisc;
+}
+
+.tabla__body {
+    @extend %sans;
+    color: $negro4;
+    font-size: 0.85em;
+
+    th,
+    td {
+        padding: 6px 15px;
+    }
+
+    th {
+        font-size: 0.85em;
+    }
+}
+
+.tabla__body--bordered {
+    tr {
+        border-bottom: 1px solid $grisa;
+    }
+}
+
+.tabla__body--grid {
+    tr {
+        border-bottom: 1px solid $grisa;
+    }
+
+    td {
+        border-left: 1px solid $grisa;
+
+        &:last-child {
+            border-right: 1px solid $grisa;
+        }
+    }
+}
+
+.tabla__body--striped {
+    tr {
+        background: $grise;
+    }
+    @media (min-width: $reflex-md) {
+        tr {
+            background: transparent;
+
+            &:nth-child(even) {
+                background-color: transparentize($grise, 0.5);
+            }
+        }
+    }
+}
+
+.tabla__body--small {
+    th,
+    td {
+        padding: 2px 4px;
+    }
+}
+
+.tabla__body--clickable {
+    tr {
+        cursor: pointer;
+
+        &:hover {
+            background: lighten($indigo, 40%);
+        }
+
+        &:active {
+            background: lighten($indigo-vivo, 30%);
+        }
+    }
+}
+
+.tabla__opciones {
+    @extend .text--right;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+        text-align: left;
+    }
+}
+
+.tabla__opciones__elem {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.3em;
+    margin: 0 5px;
+}
+
+.tr--lila,
+.td--lila {
+    @extend .fondo--lila;
+    color: $blanco;
+}
+
+.tr--morado,
+.td--morado {
+    @extend .fondo--morado;
+    color: $blanco;
+}
+
+.tr--indigo,
+.td--indigo {
+    @extend .fondo--indigo;
+    color: $blanco;
+}
+
+.tr--azul,
+.td--azul {
+    @extend .fondo--azul;
+    color: $blanco;
+}
+
+.tr--celeste,
+.td--celeste {
+    @extend .fondo--celeste;
+    color: $blanco;
+}
+
+.tr--cyan,
+.td--cyan {
+    @extend .fondo--cyan;
+    color: $blanco;
+}
+
+.tr--turquesa,
+.td--turquesa {
+    @extend .fondo--turquesa;
+    color: $blanco;
+}
+
+.tr--verde,
+.td--verde {
+    @extend .fondo--verde;
+    color: $blanco;
+}
+
+.tr--kiwi,
+.td--kiwi {
+    @extend .fondo--kiwi;
+    color: $negro;
+}
+
+.tr--lima,
+.td--lima {
+    @extend .fondo--lima;
+    color: $negro;
+}
+
+.tr--amarillo,
+.td--amarillo {
+    @extend .fondo--amarillo;
+    color: $negro;
+}
+
+.tr--ambar,
+.td--ambar {
+    @extend .fondo--ambar;
+    color: $negro;
+}
+
+.tr--naranja,
+.td--naranja {
+    @extend .fondo--naranja;
+    color: $negro;
+}
+
+.tr--tomate,
+.td--tomate {
+    @extend .fondo--tomate;
+    color: $blanco;
+}
+
+.tr--rojo,
+.td--rojo {
+    @extend .fondo--rojo;
+    color: $blanco;
+}
+
+.tr--rosado,
+.td--rosado {
+    @extend .fondo--rosado;
+    color: $blanco;
+}
+
+.tr--negro,
+.td--negro {
+    @extend .fondo--negro;
+    color: $blanco;
+}
+
+.tr--negro2,
+.td--negro2 {
+    @extend .fondo--negro2;
+    color: $blanco;
+}
+
+.tr--negro4,
+.td--negro4 {
+    @extend .fondo--negro4;
+    color: $blanco;
+}
+
+.tr--gris6,
+.td--gris6 {
+    @extend .fondo--gris6;
+    color: $blanco;
+}
+
+.tr--gris8,
+.td--gris8 {
+    @extend .fondo--gris8;
+    color: $blanco;
+}

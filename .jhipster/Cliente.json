@@ -35,11 +35,11 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "ubicacion",
             "otherEntityName": "ubicacion",
+            "otherEntityRelationshipName": "cliente",
+            "relationshipName": "ubicacion",
             "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "cliente"
+            "ownerSide": true
         }
     ],
     "changelogDate": "20190226065453",

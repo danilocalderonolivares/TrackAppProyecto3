@@ -19,19 +19,11 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "admin",
-            "otherEntityName": "administrador",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "recuperacion"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "empleado",
             "otherEntityName": "empleado",
+            "otherEntityRelationshipName": "recuperacion",
+            "relationshipName": "empleado",
             "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "recuperacion"
+            "ownerSide": true
         }
     ],
     "changelogDate": "20190226065457",

@@ -1,0 +1,39 @@
+.splash-screen {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+.splash-screen__window {
+    color: $negro4;
+    height: 250px;
+    padding: 1em;
+    width: 50%;
+}
+
+.splash-screen__hr {
+    background: $gradient;
+    border: 0;
+    border-radius: 3px;
+    height: 6px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.splash-screen__texto,
+.splash-screen__icono {
+    @extend %sans;
+    text-align: center;
+}
+
+.splash-screen__icono {
+    color: $ciris-verde;
+}
+
+.splash-screen__texto--titulo {
+    @extend %serif;
+    font-size: 1.5em;
+}

@@ -48,6 +48,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.registerChangeInHorarios();
         this.eventManager.destroy(this.eventSubscriber);
     }
 

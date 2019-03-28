@@ -7,8 +7,6 @@ import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { IMensaje } from 'app/shared/model/mensaje.model';
 import { MensajeService } from './mensaje.service';
-import { IAdministrador } from 'app/shared/model/administrador.model';
-import { AdministradorService } from 'app/entities/administrador';
 import { IEmpleado } from 'app/shared/model/empleado.model';
 import { EmpleadoService } from 'app/entities/empleado';
 
@@ -20,15 +18,12 @@ export class MensajeUpdateComponent implements OnInit {
     mensaje: IMensaje;
     isSaving: boolean;
 
-    admins: IAdministrador[];
-
     empleados: IEmpleado[];
     fechaEnvioDp: any;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected mensajeService: MensajeService,
-        protected administradorService: AdministradorService,
         protected empleadoService: EmpleadoService,
         protected activatedRoute: ActivatedRoute
     ) {}
@@ -38,31 +33,6 @@ export class MensajeUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ mensaje }) => {
             this.mensaje = mensaje;
         });
-        this.administradorService
-            .query({ filter: 'mensaje-is-null' })
-            .pipe(
-                filter((mayBeOk: HttpResponse<IAdministrador[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IAdministrador[]>) => response.body)
-            )
-            .subscribe(
-                (res: IAdministrador[]) => {
-                    if (!this.mensaje.admin || !this.mensaje.admin.id) {
-                        this.admins = res;
-                    } else {
-                        this.administradorService
-                            .find(this.mensaje.admin.id)
-                            .pipe(
-                                filter((subResMayBeOk: HttpResponse<IAdministrador>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<IAdministrador>) => subResponse.body)
-                            )
-                            .subscribe(
-                                (subRes: IAdministrador) => (this.admins = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                            );
-                    }
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
         this.empleadoService
             .query({ filter: 'mensaje-is-null' })
             .pipe(
@@ -118,10 +88,6 @@ export class MensajeUpdateComponent implements OnInit {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackAdministradorById(index: number, item: IAdministrador) {
-        return item.id;
     }
 
     trackEmpleadoById(index: number, item: IEmpleado) {

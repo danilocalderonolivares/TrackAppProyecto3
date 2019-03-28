@@ -1,0 +1,40 @@
+.tabs {
+    background: url('/static/hero2.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-start;
+    height: 56px;
+}
+
+.tabs__tab {
+    cursor: pointer;
+    color: $blanco;
+    flex-basis: 0;
+    padding: 1em;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-right: 1px solid $negro2;
+
+    &:hover {
+        color: $cyan-vivo;
+        background: transparentize($negro2, 0.3);
+    }
+
+    span {
+        display: none;
+    }
+
+    @media (min-width: $reflex-md) {
+        span {
+            display: inline;
+        }
+    }
+}
+
+.tabs__tab--active {
+    background: transparentize($azul-tema, 0.3);
+    color: $blanco;
+    pointer-events: none;
+}

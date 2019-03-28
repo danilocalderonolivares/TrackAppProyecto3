@@ -60,13 +60,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_admin">Admin</label>
-                    <select class="form-control" id="field_admin" name="admin" [(ngModel)]="mensaje.admin">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="administradorOption.id === mensaje.admin?.id ? mensaje.admin : administradorOption" *ngFor="let administradorOption of admins; trackBy: trackAdministradorById">{{administradorOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" for="field_empleado">Empleado</label>
                     <select class="form-control" id="field_empleado" name="empleado" [(ngModel)]="mensaje.empleado">
                         <option [ngValue]="null"></option>

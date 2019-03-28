@@ -77,50 +77,50 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "subtarea",
             "otherEntityName": "subTarea",
+            "otherEntityRelationshipName": "tarea",
+            "relationshipName": "subtarea",
             "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "tarea"
+            "ownerSide": true
         },
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "empleado",
             "otherEntityName": "empleado",
+            "otherEntityRelationshipName": "tarea",
+            "relationshipName": "empleado",
             "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "tarea"
+            "ownerSide": true
         },
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "ubicacion",
             "otherEntityName": "ubicacion",
+            "otherEntityRelationshipName": "tarea",
+            "relationshipName": "ubicacion",
             "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "tarea"
+            "ownerSide": true
         },
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "cliente",
             "otherEntityName": "cliente",
+            "otherEntityRelationshipName": "tarea",
+            "relationshipName": "cliente",
             "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "tarea"
+            "ownerSide": true
         },
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "ruta",
             "otherEntityName": "ruta",
+            "otherEntityRelationshipName": "tarea",
+            "relationshipName": "ruta",
             "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "tarea"
+            "ownerSide": true
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "logs",
             "otherEntityName": "log",
-            "otherEntityField": "id",
-            "otherEntityRelationshipName": "log"
+            "otherEntityRelationshipName": "tarea",
+            "relationshipName": "logs",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190226065450",

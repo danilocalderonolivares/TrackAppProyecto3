@@ -1,7 +1,6 @@
 package com.pillars.gpsapp.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,6 +8,8 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -29,14 +30,12 @@ public class Ruta implements Serializable {
     @Field("descripcion")
     private String descripcion;
 
-    @NotNull
     @Field("borrado")
     private Boolean borrado;
 
-    @DBRef
+//    @DBRef
     @Field("ubicaciones")
-    @JsonIgnoreProperties("ubicacions")
-    private Ubicacion ubicaciones;
+    private Set<Ubicacion> ubicaciones = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -86,17 +85,29 @@ public class Ruta implements Serializable {
         this.borrado = borrado;
     }
 
-    public Ubicacion getUbicaciones() {
+    public Set<Ubicacion> getUbicaciones() {
         return ubicaciones;
     }
 
-    public Ruta ubicaciones(Ubicacion ubicacion) {
-        this.ubicaciones = ubicacion;
+    public Ruta ubicaciones(Set<Ubicacion> ubicacions) {
+        this.ubicaciones = ubicacions;
         return this;
     }
 
-    public void setUbicaciones(Ubicacion ubicacion) {
-        this.ubicaciones = ubicacion;
+    public Ruta addUbicaciones(Ubicacion ubicacion) {
+        this.ubicaciones.add(ubicacion);
+        ubicacion.getRutas().add(this);
+        return this;
+    }
+
+    public Ruta removeUbicaciones(Ubicacion ubicacion) {
+        this.ubicaciones.remove(ubicacion);
+        ubicacion.getRutas().remove(this);
+        return this;
+    }
+
+    public void setUbicaciones(Set<Ubicacion> ubicacions) {
+        this.ubicaciones = ubicacions;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

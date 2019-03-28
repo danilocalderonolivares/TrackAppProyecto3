@@ -33,7 +33,7 @@ export const subTareaRoute: Routes = [
         path: '',
         component: SubTareaComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'SubTareas'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const subTareaRoute: Routes = [
             subTarea: SubTareaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'SubTareas'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const subTareaRoute: Routes = [
             subTarea: SubTareaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'SubTareas'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const subTareaRoute: Routes = [
             subTarea: SubTareaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'SubTareas'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const subTareaPopupRoute: Routes = [
             subTarea: SubTareaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'SubTareas'
         },
         canActivate: [UserRouteAccessService],

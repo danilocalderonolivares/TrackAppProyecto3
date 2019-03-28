@@ -1,0 +1,27 @@
+%deshabilitado {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+%switchcheck {
+    opacity: 0;
+    position: absolute;
+
+    &:focus + label {
+        outline-color: transparent;
+        padding-right: 5px;
+        text-decoration: underline;
+    }
+
+    &:disabled + label {
+        cursor: default;
+
+        &::before {
+            @extend %deshabilitado;
+        }
+
+        &::after {
+            @extend %deshabilitado;
+        }
+    }
+}

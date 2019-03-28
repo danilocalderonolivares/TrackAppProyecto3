@@ -5,7 +5,7 @@ export interface IRuta {
     nombre?: string;
     descripcion?: string;
     borrado?: boolean;
-    ubicaciones?: IUbicacion;
+    ubicaciones?: IUbicacion[];
 }
 
 export class Ruta implements IRuta {
@@ -14,7 +14,7 @@ export class Ruta implements IRuta {
         public nombre?: string,
         public descripcion?: string,
         public borrado?: boolean,
-        public ubicaciones?: IUbicacion
+        public ubicaciones?: IUbicacion[]
     ) {
         this.borrado = this.borrado || false;
     }

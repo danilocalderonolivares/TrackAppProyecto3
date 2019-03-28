@@ -10,7 +10,9 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Tarea.
@@ -32,21 +34,19 @@ public class Tarea implements Serializable {
 
     @NotNull
     @Field("inicio")
-    private LocalDate inicio;
+    private String inicio;
 
     @NotNull
     @Field("fin")
-    private LocalDate fin;
+    private String fin;
 
     @NotNull
     @Field("usar_ruta")
     private Boolean usarRuta;
 
-    @NotNull
     @Field("hora_inicio")
     private LocalDate horaInicio;
 
-    @NotNull
     @Field("hora_fin")
     private LocalDate horaFin;
 
@@ -67,15 +67,13 @@ public class Tarea implements Serializable {
     @Field("borrado")
     private Boolean borrado;
 
-    @DBRef
     @Field("subtarea")
-    private SubTarea subtarea;
+    private Set<SubTarea> subtarea = new HashSet<>();
 
     @DBRef
     @Field("empleado")
     private Empleado empleado;
 
-    @DBRef
     @Field("ubicacion")
     private Ubicacion ubicacion;
 
@@ -89,7 +87,7 @@ public class Tarea implements Serializable {
 
     @DBRef
     @Field("logs")
-    @JsonIgnoreProperties("logs")
+    @JsonIgnoreProperties("tareas")
     private Log logs;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -127,29 +125,29 @@ public class Tarea implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public LocalDate getInicio() {
+    public String getInicio() {
         return inicio;
     }
 
-    public Tarea inicio(LocalDate inicio) {
+    public Tarea inicio(String inicio) {
         this.inicio = inicio;
         return this;
     }
 
-    public void setInicio(LocalDate inicio) {
+    public void setInicio(String inicio) {
         this.inicio = inicio;
     }
 
-    public LocalDate getFin() {
+    public String getFin() {
         return fin;
     }
 
-    public Tarea fin(LocalDate fin) {
+    public Tarea fin(String fin) {
         this.fin = fin;
         return this;
     }
 
-    public void setFin(LocalDate fin) {
+    public void setFin(String fin) {
         this.fin = fin;
     }
 
@@ -257,17 +255,27 @@ public class Tarea implements Serializable {
         this.borrado = borrado;
     }
 
-    public SubTarea getSubtarea() {
+    public Set<SubTarea> getTareas() {
         return subtarea;
     }
 
-    public Tarea subtarea(SubTarea subTarea) {
-        this.subtarea = subTarea;
+    public Tarea subtarea(Set<SubTarea> subtareas) {
+        this.subtarea = subtareas;
         return this;
     }
 
-    public void setSubtarea(SubTarea subTarea) {
-        this.subtarea = subTarea;
+    public Tarea addSubtarea(SubTarea subtarea) {
+        this.subtarea.add(subtarea);
+        return this;
+    }
+
+    public Tarea removeTarea(SubTarea subtarea) {
+        this.subtarea.remove(subtarea);
+        return this;
+    }
+
+    public void setSubtareas(Set<SubTarea> subtarea) {
+        this.subtarea = subtarea;
     }
 
     public Empleado getEmpleado() {

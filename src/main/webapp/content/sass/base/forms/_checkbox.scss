@@ -1,0 +1,119 @@
+.checkbox {
+    input {
+        @extend %switchcheck;
+        font-weight: 300;
+
+        &:checked + label {
+            &::before {
+                @extend .animated;
+                @extend .rubberBand;
+
+                animation-delay: 0s !important;
+                content: '\f14a';
+            }
+        }
+    }
+
+    label {
+        color: $negro4;
+        cursor: pointer;
+        padding-left: 2em;
+        position: relative;
+
+        &::before {
+            @extend %font-awesome;
+            content: '\f0c8';
+            font-size: 1.5em;
+            left: 0;
+            position: absolute;
+            transition: all 0.5s;
+        }
+    }
+}
+
+@mixin checkbox--color($color) {
+    input {
+        &:checked + label {
+            &::before {
+                color: $color;
+            }
+        }
+    }
+}
+
+.checkbox--lila {
+    @include checkbox--color($lila);
+}
+
+.checkbox--morado {
+    @include checkbox--color($morado);
+}
+
+.checkbox--indigo {
+    @include checkbox--color($indigo);
+}
+
+.checkbox--azul {
+    @include checkbox--color($azul);
+}
+
+.checkbox--celeste {
+    @include checkbox--color($celeste);
+}
+
+.checkbox--cyan {
+    @include checkbox--color($cyan);
+}
+
+.checkbox--turquesa {
+    @include checkbox--color($turquesa);
+}
+
+.checkbox--verde {
+    @include checkbox--color($verde);
+}
+
+.checkbox--kiwi {
+    @include checkbox--color($kiwi);
+}
+
+.checkbox--lima {
+    @include checkbox--color($lima);
+}
+
+.checkbox--amarillo {
+    @include checkbox--color($amarillo);
+}
+
+.checkbox--ambar {
+    @include checkbox--color($ambar);
+}
+
+.checkbox--naranja {
+    @include checkbox--color($naranja);
+}
+
+.checkbox--tomate {
+    @include checkbox--color($tomate);
+}
+
+.checkbox--rojo {
+    @include checkbox--color($rojo);
+}
+
+.checkbox--rosado {
+    @include checkbox--color($rosado);
+}
+
+.checkbox--blanco {
+    @include checkbox--color($blanco);
+}
+
+.checkbox-container--inline {
+    display: flex;
+    justify-content: space-between;
+
+    .checkbox {
+        padding: 0.5em 0;
+    }
+}

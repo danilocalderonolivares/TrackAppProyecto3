@@ -47,7 +47,12 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'horario',
                 loadChildren: './horario/horario.module#GpsAppHorarioModule'
+            },
+            {
+                path: 'tipo-empleado',
+                loadChildren: './tipo-empleado/tipo-empleado.module#GpsAppTipoEmpleadoModule'
             }
+
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])
     ],

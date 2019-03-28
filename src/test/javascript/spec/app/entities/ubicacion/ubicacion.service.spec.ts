@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(UbicacionService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Ubicacion('ID', 0, 0);
+            elemDefault = new Ubicacion('ID', 0, 0, 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -55,8 +55,9 @@ describe('Service Tests', () => {
             it('should update a Ubicacion', async () => {
                 const returnedFromService = Object.assign(
                     {
+                        latitud: 1,
                         longitud: 1,
-                        latitud: 1
+                        nombreDireccion: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -73,8 +74,9 @@ describe('Service Tests', () => {
             it('should return a list of Ubicacion', async () => {
                 const returnedFromService = Object.assign(
                     {
+                        latitud: 1,
                         longitud: 1,
-                        latitud: 1
+                        nombreDireccion: 'BBBBBB'
                     },
                     elemDefault
                 );

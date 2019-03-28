@@ -1,0 +1,254 @@
+@import 'forms/common';
+@import 'forms/checkbox';
+@import 'forms/radios';
+@import 'forms/switch';
+
+.form {
+    width: 100%;
+}
+
+.form__group {
+    position: relative;
+    margin: 1.5em 0;
+    padding: 0.3em 0;
+}
+
+.form__label,
+.form__input,
+.form__help,
+.form__error-message {
+    @extend %sans;
+}
+
+.form__help {
+    font-size: 0.85em;
+}
+
+.form__label {
+    cursor: text;
+    user-select: none;
+    color: $gris8;
+    font-size: 0.8em;
+    transition: all 0.35s ease;
+    width: 100%;
+}
+
+.form__label--opcional {
+    &::after {
+        content: '(Opcional)';
+        margin-left: 4px;
+        font-size: 70%;
+        font-weight: 200px;
+        opacity: 70%;
+    }
+}
+
+.form__label--required {
+    @extend .text--bold;
+    &::after {
+        content: '*';
+    }
+}
+
+.form__icon {
+    position: absolute;
+    top: 8px;
+    left: 3px;
+
+    & + .form__input {
+        padding-left: 30px;
+    }
+
+    & + .form__input + .form__label {
+        left: 33px;
+    }
+
+    & + .form__input + .form__label--active {
+        left: 0;
+    }
+
+    & + .form__input:focus + .form__label,
+    & + .form__input:active + .form__label {
+        left: 0;
+    }
+}
+
+.form__icon--clickeable {
+    cursor: pointer;
+
+    &:hover {
+        color: $cyan-tema;
+    }
+}
+
+.form__icon--active {
+    color: $cyan-tema;
+}
+
+.form__input {
+    @extend %sans;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid $azul-tema;
+    color: $negro4;
+    font-size: 1em;
+    padding: 0.25em 0;
+    resize: none;
+    width: 100%;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: optimizeLegibility;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    transition: all 800ms ease;
+
+    &:autofill {
+        background-color: transparent !important;
+    }
+
+    &:focus,
+    &:active {
+        color: $azul;
+        border: 0;
+        outline-color: transparent;
+        outline: none;
+    }
+
+    & + .form__label {
+        font-size: 1em;
+        position: absolute;
+        pointer-events: none;
+        top: 8px;
+        left: 0;
+        bottom: 0;
+        transition: all 0.35s ease;
+        &::before {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 45%;
+            height: 2px;
+            width: 10px;
+            visibility: hidden;
+            background-color: $celeste-tema;
+            transition: 350ms ease all;
+        }
+    }
+
+    & + .form__label--active {
+        font-size: 0.8em;
+        top: -8px;
+    }
+
+    &:required + .form__label {
+        @extend .form__label--required;
+    }
+
+    &:not(:required) + .form__label {
+        @extend .form__label--opcional;
+    }
+
+    &:focus + .form__label,
+    &:active + .form__label {
+        color: $celeste-tema;
+        font-size: 0.8em;
+        top: -8px;
+        &::before {
+            visibility: visible;
+            width: 100%;
+            left: 0;
+        }
+    }
+
+    &:disabled {
+        border-bottom: 1px dotted $grisc;
+        color: $grisa;
+        box-shadow: 0 0 0 $negro;
+        cursor: not-allowed;
+        pointer-events: none;
+
+        &:focus,
+        &:active {
+            outline-color: transparent;
+            box-shadow: 0 0 0 $negro;
+        }
+    }
+}
+
+p.form__input {
+    @extend %serif;
+    background: transparent;
+    box-shadow: 0 0 0 0 $sombra1;
+    border: 0;
+    padding: 0.5em 0;
+
+    &:focus,
+    &:active {
+        border: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: 0 0 0 0 $sombra1;
+    }
+}
+
+.form__group--error {
+    .form__label {
+        @extend .animated;
+        @extend .rubberBand;
+        animation-duration: 1.3s !important;
+        color: $rosado;
+        display: block;
+    }
+
+    .form__input {
+        box-shadow: inset 0 -2px 0 $rosado;
+    }
+}
+
+.form__error-message {
+    color: $rosado;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.form__group--inline {
+    align-items: baseline;
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: space-around;
+}
+
+.form__input-group {
+    display: flex;
+
+    .boton {
+        border-radius: 0;
+        box-shadow: 0 0 0;
+
+        &:first-child {
+            border-top-left-radius: 4px;
+        }
+
+        &:last-child {
+            border-top-right-radius: 4px;
+        }
+    }
+
+    .form__input-group__addon {
+        background: transparent;
+        @extend .form__input-group__addon--default;
+    }
+
+    .form__input-group__addon--color {
+        background: $grise;
+        @extend .form__input-group__addon--default;
+    }
+}
+
+.form__input-group__addon--default {
+    border-bottom: 1px solid $grisa;
+    color: $gris8;
+    padding-top: 10px;
+    text-align: center;
+    width: 10%;
+}

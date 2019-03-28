@@ -3,7 +3,9 @@ package com.pillars.gpsapp.web.rest;
 import com.pillars.gpsapp.GpsApp;
 
 import com.pillars.gpsapp.domain.Cliente;
+import com.pillars.gpsapp.domain.Ubicacion;
 import com.pillars.gpsapp.repository.ClienteRepository;
+import com.pillars.gpsapp.repository.UbicacionRepository;
 import com.pillars.gpsapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -60,6 +62,9 @@ public class ClienteResourceIntTest {
     private ClienteRepository clienteRepository;
 
     @Autowired
+   private UbicacionRepository ubicacionRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -78,7 +83,8 @@ public class ClienteResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ClienteResource clienteResource = new ClienteResource(clienteRepository);
+
+        final ClienteResource clienteResource = new ClienteResource(clienteRepository,ubicacionRepository);
         this.restClienteMockMvc = MockMvcBuilders.standaloneSetup(clienteResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -94,13 +100,20 @@ public class ClienteResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static Cliente createEntity() {
+        Ubicacion ubicacion = new Ubicacion();
+        ubicacion.setId("5c9b38d886e6595ad8e14120");
+        ubicacion.nombreDireccion("Edificio Kabat, San José, Costa Rica");
+        ubicacion.latitud(9.94088218013666);
+        ubicacion.longitud(-84.1003968576749);
+
         Cliente cliente = new Cliente()
             .nombre(DEFAULT_NOMBRE)
             .cedula(DEFAULT_CEDULA)
             .direccion(DEFAULT_DIRECCION)
             .correo(DEFAULT_CORREO)
             .esEmpresa(DEFAULT_ES_EMPRESA)
-            .borrado(DEFAULT_BORRADO);
+            .borrado(DEFAULT_BORRADO)
+            .ubicacion(ubicacion);
         return cliente;
     }
 
@@ -229,6 +242,11 @@ public class ClienteResourceIntTest {
 
     @Test
     public void updateCliente() throws Exception {
+        Ubicacion ubicacionU = new Ubicacion();
+        ubicacionU.setId("5c9b38d886e6595ad8e14120");
+        ubicacionU.nombreDireccion("Edificio Kabat, San José, Costa Rica, la casa de la mina");
+        ubicacionU.latitud(9.94088218013666);
+        ubicacionU.longitud(-84.1003968576749);
         // Initialize the database
         clienteRepository.save(cliente);
 
@@ -242,7 +260,8 @@ public class ClienteResourceIntTest {
             .direccion(UPDATED_DIRECCION)
             .correo(UPDATED_CORREO)
             .esEmpresa(UPDATED_ES_EMPRESA)
-            .borrado(UPDATED_BORRADO);
+            .borrado(UPDATED_BORRADO)
+            .ubicacion(ubicacionU);
 
         restClienteMockMvc.perform(put("/api/clientes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)

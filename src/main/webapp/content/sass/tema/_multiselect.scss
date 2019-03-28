@@ -1,0 +1,202 @@
+.multiselect {
+    @extend .form__input;
+    display: block;
+    position: relative;
+
+    &:focus,
+    &:active {
+        color: $azul;
+        border: 0;
+        outline-color: transparent;
+        outline: none;
+    }
+    * {
+        @extend %sans;
+    }
+}
+
+.multiselect,
+.multiselect__input,
+.multiselect__single {
+    font-family: inherit;
+    touch-action: manipulation;
+}
+
+.multiselect__input,
+.multiselect__single {
+    position: relative;
+    display: inline-block;
+    min-height: 1em;
+    line-height: 1em;
+    border: none;
+    background: transparent;
+    width: calc(100%);
+    vertical-align: middle;
+}
+
+.multiselect--disabled {
+    border-bottom: 1px dotted $grisc;
+    color: $grisa;
+    box-shadow: 0 0 0 $negro;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    .multiselect__select {
+        opacity: 0;
+    }
+}
+
+.multiselect--active {
+    z-index: 50;
+
+    .multiselect__select {
+        transform: rotateZ(180deg);
+    }
+}
+
+.multiselect__select {
+    display: block;
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    right: 0;
+    top: 6px;
+    margin: 0;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.multiselect__select:before {
+    @extend %font-awesome;
+    font-weight: bold;
+    position: relative;
+    color: $gris8;
+    content: '\f13a';
+}
+
+.multiselect__content-wrapper {
+    @extend .sombra;
+    position: absolute;
+    display: block;
+    background: $blanco;
+    width: 100%;
+    max-height: 240px;
+    overflow: auto;
+    z-index: 50;
+    top: 27px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.multiselect__content {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    min-width: 100%;
+    vertical-align: top;
+}
+
+.multiselect--above .multiselect__content-wrapper {
+    bottom: 100%;
+}
+
+.multiselect__content::webkit-scrollbar {
+    display: none;
+}
+
+.multiselect__element {
+    display: block;
+}
+
+.multiselect__option {
+    display: block;
+    padding: 12px;
+    min-height: 40px;
+    line-height: 16px;
+    text-decoration: none;
+    text-transform: none;
+    vertical-align: middle;
+    position: relative;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.multiselect__option:after {
+    top: 0;
+    right: 0;
+    position: absolute;
+    line-height: 40px;
+    padding-right: 12px;
+    padding-left: 20px;
+    font-size: 13px;
+}
+
+.multiselect__option--highlight {
+    background: $celeste-tema;
+    outline: none;
+    color: white;
+}
+
+.multiselect__option--highlight:after {
+    content: attr(data-select);
+    background: $celeste-tema;
+    color: white;
+}
+
+.multiselect__option--selected {
+    color: $azul-tema;
+    font-weight: bold;
+}
+
+.multiselect__option--selected:after {
+    content: attr(data-selected);
+    color: $gris8;
+}
+
+.multiselect__option--selected.multiselect__option--highlight {
+    background: $rosado;
+    color: $blanco;
+}
+
+.multiselect__option--selected.multiselect__option--highlight:after {
+    background: $rosado;
+    content: attr(data-deselect);
+    color: $blanco;
+}
+
+.multiselect__tag {
+    @extend .badge;
+    color: $blanco;
+    background: $azul-tema;
+    font-size: 13px;
+    padding: 3px 20px;
+}
+
+.multiselect__tag-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 4px;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    text-align: center;
+    line-height: 16px;
+    transition: all 0.2s ease;
+
+    &::after {
+        @extend %font-awesome;
+        font-weight: bold;
+        font-size: 12px;
+        position: relative;
+        color: $rojo-pastel;
+        content: '\f00d';
+    }
+
+    &:hover {
+        &::after {
+            color: $rojo;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+<input ngx-google-places-autocomplete class="form-control" id="autoComplete" name="autoComplete" placeholder="Ingrese dirección" #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+<br>
+<agm-map [latitude]="this.mapaService.lat"
+         [longitude]="this.mapaService.lng"
+         [zoom]="zoom"
+         (mapClick)="onChoseLocation($event)">
+    <agm-marker
+        *ngFor="let empleado of this.mapaService.empleados"
+        [latitude]="empleado.ubicacion.latitud"
+        [longitude]="empleado.ubicacion.longitud"
+        [label]="setLabel(empleado.nombre, empleado.apellidos)">
+
+        <agm-info-window>
+            <strong>
+                <a (click)="this.mapaService.onEmployeeCliked(empleado)"
+                   [routerLink]="['/empleados', empleado.id]">
+                {{empleado.nombre +' '+ empleado.apellido}}
+                </a>
+            </strong>
+        </agm-info-window>
+    </agm-marker>
+</agm-map>

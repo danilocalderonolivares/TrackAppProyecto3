@@ -14,19 +14,17 @@
         },
         {
             "fieldName": "borrado",
-            "fieldType": "Boolean",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "Boolean"
         }
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-one",
-            "relationshipName": "ubicaciones",
+            "relationshipType": "many-to-many",
             "otherEntityName": "ubicacion",
+            "otherEntityRelationshipName": "rutas",
+            "relationshipName": "ubicaciones",
             "otherEntityField": "id",
-            "otherEntityRelationshipName": "ubicacion"
+            "ownerSide": true
         }
     ],
     "changelogDate": "20190226065458",

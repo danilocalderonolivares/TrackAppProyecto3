@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
         <span>Rutas</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ruta" [routerLink]="['/ruta/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ruta" [routerLink]="['/ruta/add-ubications']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
-            Create new Ruta
+            Crear nueva ruta
             </span>
         </button>
     </h2>
@@ -14,24 +14,22 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span>ID</span></th>
-            <th><span>Nombre</span></th>
-            <th><span>Descripcion</span></th>
-            <th><span>Borrado</span></th>
-            <th><span>Ubicaciones</span></th>
-            <th></th>
+                <!--<th><span>ID</span></th>-->
+                <th><span>Nombre</span></th>
+                <th><span>Descripción</span></th>
+                <th><span>Ubicaciones</span></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let ruta of rutas ;trackBy: trackId">
-                <td><a [routerLink]="['/ruta', ruta.id, 'view' ]">{{ruta.id}}</a></td>
+                <!--<td><a [routerLink]="['/ruta', ruta.id, 'view' ]">{{ruta.id}}</a></td>-->
                 <td>{{ruta.nombre}}</td>
                 <td>{{ruta.descripcion}}</td>
-                <td>{{ruta.borrado}}</td>
                 <td>
-                    <div *ngIf="ruta.ubicaciones">
-                        <a [routerLink]="['../ubicacion', ruta.ubicaciones?.id, 'view' ]" >{{ruta.ubicaciones?.id}}</a>
-                    </div>
+                    <span *ngFor="let ubicacion of ruta.ubicaciones; let last = last">
+                        {{ubicacion.nombreDireccion}}
+                    </span>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
@@ -39,13 +37,13 @@
                                 [routerLink]="['/ruta', ruta.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
+                            <span class="d-none d-md-inline">Ver</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/ruta', ruta.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
+                            <span class="d-none d-md-inline">Editar</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', 'ruta', { outlets: { popup: ruta.id + '/delete'} }]"
@@ -53,7 +51,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
+                            <span class="d-none d-md-inline">Eliminar</span>
                         </button>
                     </div>
                 </td>

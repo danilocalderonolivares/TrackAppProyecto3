@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -40,7 +41,7 @@ public class UbicacionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/ubicacions")
-    public ResponseEntity<Ubicacion> createUbicacion(@RequestBody Ubicacion ubicacion) throws URISyntaxException {
+    public ResponseEntity<Ubicacion> createUbicacion(@Valid @RequestBody Ubicacion ubicacion) throws URISyntaxException {
         log.debug("REST request to save Ubicacion : {}", ubicacion);
         if (ubicacion.getId() != null) {
             throw new BadRequestAlertException("A new ubicacion cannot already have an ID", ENTITY_NAME, "idexists");
@@ -61,7 +62,7 @@ public class UbicacionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/ubicacions")
-    public ResponseEntity<Ubicacion> updateUbicacion(@RequestBody Ubicacion ubicacion) throws URISyntaxException {
+    public ResponseEntity<Ubicacion> updateUbicacion(@Valid @RequestBody Ubicacion ubicacion) throws URISyntaxException {
         log.debug("REST request to update Ubicacion : {}", ubicacion);
         if (ubicacion.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -108,4 +109,17 @@ public class UbicacionResource {
         ubicacionRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
+
+//    /**
+//     * GET  /ubicacion : get the last inserted ubicacion.
+//     *
+//     * @return the ResponseEntity with status 200 (OK) and the list of ubicacions in body
+//     */
+//    @GetMapping("/ubicacions/last-record")
+//    public Ubicacion getLastInsertedUbicacion() {
+//        log.debug("REST request to get the last inserted ubicacion");
+//        List<Ubicacion> ubications = ubicacionRepository.findAll();
+//        return ubications.get(ubications.size() - 1);
+//    }
+
 }
