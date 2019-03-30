@@ -55,8 +55,8 @@ describe('Service Tests', () => {
             it('should update a Ubicacion', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        longitud: 1,
                         latitud: 1,
+                        longitud: 1,
                         nombreDireccion: 'BBBBBB'
                     },
                     elemDefault
@@ -74,8 +74,8 @@ describe('Service Tests', () => {
             it('should return a list of Ubicacion', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        longitud: 1,
                         latitud: 1,
+                        longitud: 1,
                         nombreDireccion: 'BBBBBB'
                     },
                     elemDefault

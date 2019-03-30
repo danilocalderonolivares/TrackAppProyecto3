@@ -33,7 +33,7 @@ export const ubicacionRoute: Routes = [
         path: '',
         component: UbicacionComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Ubicacions'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +45,7 @@ export const ubicacionRoute: Routes = [
             ubicacion: UbicacionResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Ubicacions'
         },
         canActivate: [UserRouteAccessService]
@@ -57,7 +57,7 @@ export const ubicacionRoute: Routes = [
             ubicacion: UbicacionResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Ubicacions'
         },
         canActivate: [UserRouteAccessService]
@@ -69,7 +69,7 @@ export const ubicacionRoute: Routes = [
             ubicacion: UbicacionResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Ubicacions'
         },
         canActivate: [UserRouteAccessService]
@@ -84,7 +84,7 @@ export const ubicacionPopupRoute: Routes = [
             ubicacion: UbicacionResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Ubicacions'
         },
         canActivate: [UserRouteAccessService],

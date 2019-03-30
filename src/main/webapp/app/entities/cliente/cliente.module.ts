@@ -11,11 +11,18 @@ import {
     clienteRoute,
     clientePopupRoute
 } from './';
+import { AgmCoreModule } from '@agm/core';
 
 const ENTITY_STATES = [...clienteRoute, ...clientePopupRoute];
 
 @NgModule({
-    imports: [GpsAppSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [
+        GpsAppSharedModule,
+        RouterModule.forChild(ENTITY_STATES),
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyCyVrHRb3_HIueNx4GBBJFAWAfSg1GqVj8'
+        })
+    ],
     declarations: [
         ClienteComponent,
         ClienteDetailComponent,

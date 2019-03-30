@@ -19,6 +19,7 @@ logging:
         io.github.jhipster: DEBUG
         com.pillars.gpsapp: DEBUG
 
+
 spring:
     profiles:
         active: dev

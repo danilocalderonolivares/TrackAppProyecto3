@@ -11,14 +11,22 @@ import { UbicacionService } from 'app/entities/ubicacion';
 
 @Component({
     selector: 'jhi-cliente-update',
-    templateUrl: './cliente-update.component.html'
+    templateUrl: './cliente-update.component.html',
+    styleUrls: ['./cliente.css']
 })
 export class ClienteUpdateComponent implements OnInit {
     cliente: ICliente;
     isSaving: boolean;
-
     ubicacions: IUbicacion[];
+    idUbucacion: any;
+    // google maps zoom level
+    zoom: number = 15;
+    nombDireccion: string;
 
+    lat: number = 9.9359219;
+    lng: number = -84.0919663761358;
+    locationChosen = false;
+    address: string;
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected clienteService: ClienteService,
@@ -30,6 +38,7 @@ export class ClienteUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ cliente }) => {
             this.cliente = cliente;
+            this.updateData(this.cliente);
         });
         this.ubicacionService
             .query({ filter: 'cliente-is-null' })
@@ -40,7 +49,6 @@ export class ClienteUpdateComponent implements OnInit {
             .subscribe(
                 (res: IUbicacion[]) => {
                     if (!this.cliente.ubicacion || !this.cliente.ubicacion.id) {
-                        this.ubicacions = res;
                     } else {
                         this.ubicacionService
                             .find(this.cliente.ubicacion.id)
@@ -65,6 +73,7 @@ export class ClienteUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         if (this.cliente.id !== undefined) {
+            this.cliente.ubicacion.id = this.idUbucacion;
             this.subscribeToSaveResponse(this.clienteService.update(this.cliente));
         } else {
             this.subscribeToSaveResponse(this.clienteService.create(this.cliente));
@@ -90,5 +99,35 @@ export class ClienteUpdateComponent implements OnInit {
 
     trackUbicacionById(index: number, item: IUbicacion) {
         return item.id;
+    }
+    mapClicked(event) {
+        this.lat = event.coords.lat;
+        this.lng = event.coords.lng;
+
+        this.locationChosen = true;
+        this.cliente.ubicacion = {
+            latitud: event.coords.lat,
+            longitud: event.coords.lng
+        };
+        this.locationSelect();
+    }
+
+    locationSelect() {
+        this.clienteService.getAddress(this.lat, this.lng).subscribe(
+            res => {
+                this.cliente.direccion = res.results[0].formatted_address;
+                this.cliente.ubicacion.nombreDireccion = res.results[0].formatted_address;
+            },
+            err => {
+                console.log(err);
+            }
+        );
+    }
+    updateData(clienteData: ICliente) {
+        if (clienteData.id !== undefined) {
+            (this.idUbucacion = clienteData.ubicacion.id), (this.lat = clienteData.ubicacion.latitud);
+            this.lng = clienteData.ubicacion.longitud;
+            this.locationChosen = true;
+        }
     }
 }

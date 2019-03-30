@@ -3,6 +3,8 @@ import { MapaService } from './mapa.service';
 import { MouseEvent } from '@agm/core';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
+import { Empleado, IEmpleado } from 'app/shared/model/empleado.model';
+import { numberOfBytes } from 'ng-jhipster/directive/number-of-bytes';
 
 @Component({
     selector: 'jhi-mapa',
@@ -12,6 +14,7 @@ import { Address } from 'ngx-google-places-autocomplete/objects/address';
 export class MapaComponent implements OnInit {
     zoom: number = 15;
     @ViewChild('placesRef') placesRef: GooglePlaceDirective;
+    myEmployees: any[] = new Array();
 
     constructor(protected mapaService: MapaService) {}
 

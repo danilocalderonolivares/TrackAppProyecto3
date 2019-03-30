@@ -27,6 +27,8 @@ export class UserMgmtUpdateComponent implements OnInit {
     tipoempleados: ITipoEmpleado[];
     selectedSchedule: IHorario;
     selectedType: ITipoEmpleado;
+    currentAuthority: string;
+    selectedAuthority: string;
 
     constructor(
         private userService: UserService,
@@ -45,6 +47,11 @@ export class UserMgmtUpdateComponent implements OnInit {
         this.route.data.subscribe(({ user }) => {
             this.user = user.body ? user.body : user;
         });
+
+        if (this.user.authorities !== null) {
+            this.currentAuthority = this.user.authorities[0];
+            this.selectedAuthority = this.currentAuthority;
+        }
 
         this.loadCustomUserData();
         this.authorities = [];
@@ -111,10 +118,20 @@ export class UserMgmtUpdateComponent implements OnInit {
     save() {
         this.isSaving = true;
         if (this.user.id !== null) {
+            this.checkAuthority();
             this.userService.update(this.user).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
         } else {
             this.user.langKey = 'en';
+            this.user.authorities = [];
+            this.user.authorities.push(this.selectedAuthority);
             this.userService.create(this.user).subscribe(response => this.onSaveSuccess(response), () => this.onSaveError());
+        }
+    }
+
+    checkAuthority() {
+        if (this.currentAuthority !== this.selectedAuthority) {
+            this.user.authorities = [];
+            this.user.authorities.push(this.selectedAuthority);
         }
     }
 
