@@ -1,10 +1,10 @@
-<div>
+<div style="padding: 10px;">
     <h2 id="page-heading">
-        <span jhiTranslate="gpsApp.tarea.home.title">Tareas</span>
+        <span>Tareas</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-tarea" [routerLink]="['/tarea/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="gpsApp.tarea.home.createLabel">
-            Create new Tarea
+            <span >
+            Crear nueva Tarea
             </span>
         </button>
     </h2>
@@ -14,71 +14,33 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.title">Title</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.descripcion">Descripcion</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.inicio">Inicio</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.fin">Fin</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.usarRuta">Usar Ruta</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.horaInicio">Hora Inicio</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.horaFin">Hora Fin</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.notaExtra">Nota Extra</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.firma">Firma</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.activa">Activa</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.completada">Completada</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.borrado">Borrado</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.subtarea">Subtarea</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.empleado">Empleado</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.ubicacion">Ubicacion</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.cliente">Cliente</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.ruta">Ruta</span></th>
-            <th><span jhiTranslate="gpsApp.tarea.logs">Logs</span></th>
+            <th><span>Titulo</span></th>
+            <th><span>Descripción</span></th>
+            <th><span>Inicio</span></th>
+            <th><span>Fin</span></th>
+            <th><span>Activa</span></th>
+            <th><span>Completada</span></th>
+            <th><span>Empleado</span></th>
+            <th><span>Cliente</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let tarea of tareas ;trackBy: trackId">
-                <td><a [routerLink]="['/tarea', tarea.id, 'view' ]">{{tarea.id}}</a></td>
                 <td>{{tarea.title}}</td>
                 <td>{{tarea.descripcion}}</td>
                 <td>{{tarea.inicio | date:'mediumDate'}}</td>
                 <td>{{tarea.fin | date:'mediumDate'}}</td>
-                <td>{{tarea.usarRuta}}</td>
-                <td>{{tarea.horaInicio | date:'mediumDate'}}</td>
-                <td>{{tarea.horaFin | date:'mediumDate'}}</td>
-                <td>{{tarea.notaExtra}}</td>
-                <td>{{tarea.firma}}</td>
                 <td>{{tarea.activa}}</td>
                 <td>{{tarea.completada}}</td>
-                <td>{{tarea.borrado}}</td>
-                <td>
-                    <div *ngIf="tarea.subtarea">
-                        <a [routerLink]="['../sub-tarea', tarea.subtarea?.id, 'view' ]" >{{tarea.subtarea?.id}}</a>
-                    </div>
-                </td>
                 <td>
                     <div *ngIf="tarea.empleado">
-                        <a [routerLink]="['../empleado', tarea.empleado?.id, 'view' ]" >{{tarea.empleado?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="tarea.ubicacion">
-                        <a [routerLink]="['../ubicacion', tarea.ubicacion?.id, 'view' ]" >{{tarea.ubicacion?.id}}</a>
+                        <a>{{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="tarea.cliente">
-                        <a [routerLink]="['../cliente', tarea.cliente?.id, 'view' ]" >{{tarea.cliente?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="tarea.ruta">
-                        <a [routerLink]="['../ruta', tarea.ruta?.id, 'view' ]" >{{tarea.ruta?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="tarea.logs">
-                        <a [routerLink]="['../log', tarea.logs?.id, 'view' ]" >{{tarea.logs?.id}}</a>
+                        <a [routerLink]="['../cliente', tarea.cliente?.id, 'view' ]" >{{tarea.cliente?.nombre}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -87,13 +49,13 @@
                                 [routerLink]="['/tarea', tarea.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            <span class="d-none d-md-inline">Ver</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/tarea', tarea.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            <span class="d-none d-md-inline">Editar</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', 'tarea', { outlets: { popup: tarea.id + '/delete'} }]"
@@ -101,7 +63,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            <span class="d-none d-md-inline">Eliminar</span>
                         </button>
                     </div>
                 </td>

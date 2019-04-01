@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="gpsApp.horario.home.title">Horarios</span>
+        <span>Horarios</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-horario" [routerLink]="['/horario/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="gpsApp.horario.home.createLabel">
-            Create new Horario
+            <span >
+            Crear nuevo horario
             </span>
         </button>
     </h2>
@@ -14,28 +14,28 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="gpsApp.horario.nombre">Nombre</span></th>
-            <th><span jhiTranslate="gpsApp.horario.lunesInico">Lunes Inico</span></th>
-            <th><span jhiTranslate="gpsApp.horario.lunesFin">Lunes Fin</span></th>
-            <th><span jhiTranslate="gpsApp.horario.martesInico">Martes Inico</span></th>
-            <th><span jhiTranslate="gpsApp.horario.martesFin">Martes Fin</span></th>
-            <th><span jhiTranslate="gpsApp.horario.miercolesInico">Miercoles Inico</span></th>
-            <th><span jhiTranslate="gpsApp.horario.miercolesFin">Miercoles Fin</span></th>
-            <th><span jhiTranslate="gpsApp.horario.juevesInico">Jueves Inico</span></th>
-            <th><span jhiTranslate="gpsApp.horario.juevesFin">Jueves Fin</span></th>
-            <th><span jhiTranslate="gpsApp.horario.viernesInico">Viernes Inico</span></th>
-            <th><span jhiTranslate="gpsApp.horario.viernesFin">Viernes Fin</span></th>
-            <th><span jhiTranslate="gpsApp.horario.sabadoInico">Sabado Inico</span></th>
-            <th><span jhiTranslate="gpsApp.horario.sabadoFin">Sabado Fin</span></th>
-            <th><span jhiTranslate="gpsApp.horario.domingoInico">Domingo Inico</span></th>
-            <th><span jhiTranslate="gpsApp.horario.domingoFin">Domingo Fin</span></th>
+            <!--<th><span>ID</span></th>-->
+            <th><span>Nombre</span></th>
+            <th><span>Lunes <br />Inicio</span></th>
+            <th><span>Lunes <br />Fin</span></th>
+            <th><span>Martes <br />Inicio</span></th>
+            <th><span>Martes <br />Fin</span></th>
+            <th><span>Miercoles <br />Inicio</span></th>
+            <th><span>Miercoles <br />Fin</span></th>
+            <th><span>Jueves <br />Inicio</span></th>
+            <th><span>Jueves <br />Fin</span></th>
+            <th><span>Viernes <br />Inicio</span></th>
+            <th><span>Viernes <br />Fin</span></th>
+            <th><span>Sabado <br />Inicio</span></th>
+            <th><span>Sabado <br />Fin</span></th>
+            <th><span>Domingo <br />Inicio</span></th>
+            <th><span>Domingo <br />Fin</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let horario of horarios ;trackBy: trackId">
-                <td><a [routerLink]="['/horario', horario.id, 'view' ]">{{horario.id}}</a></td>
+                <!--<td><a [routerLink]="['/horario', horario.id, 'view' ]">{{horario.id}}</a></td>-->
                 <td>{{horario.nombre}}</td>
                 <td>{{horario.lunesInico}}</td>
                 <td>{{horario.lunesFin}}</td>
@@ -57,13 +57,13 @@
                                 [routerLink]="['/horario', horario.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            <span class="d-none d-md-inline">Ver</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/horario', horario.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            <span class="d-none d-md-inline">Editar</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', 'horario', { outlets: { popup: horario.id + '/delete'} }]"
@@ -71,7 +71,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            <span class="d-none d-md-inline">Eliminar</span>
                         </button>
                     </div>
                 </td>

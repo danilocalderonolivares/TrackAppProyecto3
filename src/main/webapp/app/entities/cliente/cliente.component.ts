@@ -14,6 +14,7 @@ import { ClienteService } from './cliente.service';
 })
 export class ClienteComponent implements OnInit, OnDestroy {
     clientes: ICliente[];
+    clientesBorradoLogico: ICliente[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
@@ -48,6 +49,7 @@ export class ClienteComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.registerChangeInClientes();
         this.eventManager.destroy(this.eventSubscriber);
     }
 

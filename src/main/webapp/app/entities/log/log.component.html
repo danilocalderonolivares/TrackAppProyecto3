@@ -1,9 +1,9 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="gpsApp.log.home.title">Logs</span>
+        <span>Logs</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-log" [routerLink]="['/log/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="gpsApp.log.home.createLabel">
+            <span >
             Create new Log
             </span>
         </button>
@@ -14,9 +14,9 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="gpsApp.log.mensaje">Mensaje</span></th>
-            <th><span jhiTranslate="gpsApp.log.fecha">Fecha</span></th>
+            <th><span>ID</span></th>
+            <th><span>Mensaje</span></th>
+            <th><span>Fecha</span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,13 +31,13 @@
                                 [routerLink]="['/log', log.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            <span class="d-none d-md-inline">View</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/log', log.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            <span class="d-none d-md-inline">Edit</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', 'log', { outlets: { popup: log.id + '/delete'} }]"
@@ -45,7 +45,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            <span class="d-none d-md-inline">Delete</span>
                         </button>
                     </div>
                 </td>

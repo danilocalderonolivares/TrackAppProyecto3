@@ -33,7 +33,7 @@ public class Empleado implements Serializable {
     @Field("apellidos")
     private String apellidos;
 
-    @DBRef
+//    @DBRef
     @Field("ubicacion")
     private Ubicacion ubicacion;
 
@@ -42,15 +42,10 @@ public class Empleado implements Serializable {
     @JsonIgnoreProperties("empleados")
     private Horario horarios;
 
-    @DBRef
+//    @DBRef
     @Field("tipo")
     @JsonIgnoreProperties("empleados")
     private TipoEmpleado tipo;
-
-    @DBRef
-    @Field("empleados")
-    @JsonIgnoreProperties("empleados")
-    private Chat empleados;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -137,19 +132,6 @@ public class Empleado implements Serializable {
 
     public void setTipo(TipoEmpleado tipoEmpleado) {
         this.tipo = tipoEmpleado;
-    }
-
-    public Chat getEmpleados() {
-        return empleados;
-    }
-
-    public Empleado empleados(Chat chat) {
-        this.empleados = chat;
-        return this;
-    }
-
-    public void setEmpleados(Chat chat) {
-        this.empleados = chat;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

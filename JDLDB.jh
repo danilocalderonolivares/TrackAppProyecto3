@@ -46,12 +46,9 @@ entity Empleado {
 entity Mensaje {
 	id String required,
     texto String required,
-    fechaEnvio String required,
-}
-
-entity Chat {
-	id String required,
-    nombre String required
+    fechaEnvio LocalDate required,
+    visto Boolean required,
+    borrado Boolean required
 }
 
 entity Recuperacion {
@@ -115,6 +112,4 @@ relationship OneToMany {
     Horario to Empleado{horarios},
     TipoEmpleado to Empleado{tipo}
     Log to Tarea{logs}
-    Chat to Empleado{empleados}
-    Chat to Mensaje{mensajes}
 }

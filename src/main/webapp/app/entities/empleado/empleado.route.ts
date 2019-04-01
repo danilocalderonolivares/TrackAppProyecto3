@@ -34,7 +34,7 @@ export const empleadoRoute: Routes = [
         component: EmpleadoComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.empleado.home.title'
+            pageTitle: 'Empleados'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -46,7 +46,7 @@ export const empleadoRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.empleado.home.title'
+            pageTitle: 'Empleados'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -58,7 +58,7 @@ export const empleadoRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.empleado.home.title'
+            pageTitle: 'Empleados'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -70,7 +70,7 @@ export const empleadoRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.empleado.home.title'
+            pageTitle: 'Empleados'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -85,7 +85,7 @@ export const empleadoPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.empleado.home.title'
+            pageTitle: 'Empleados'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

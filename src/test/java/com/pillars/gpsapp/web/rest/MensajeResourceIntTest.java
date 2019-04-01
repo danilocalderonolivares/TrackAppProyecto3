@@ -20,6 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.Validator;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 
@@ -41,8 +43,14 @@ public class MensajeResourceIntTest {
     private static final String DEFAULT_TEXTO = "AAAAAAAAAA";
     private static final String UPDATED_TEXTO = "BBBBBBBBBB";
 
-    private static final String DEFAULT_FECHA_ENVIO = "AAAAAAAAAA";
-    private static final String UPDATED_FECHA_ENVIO = "BBBBBBBBBB";
+    private static final LocalDate DEFAULT_FECHA_ENVIO = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_FECHA_ENVIO = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Boolean DEFAULT_VISTO = false;
+    private static final Boolean UPDATED_VISTO = true;
+
+    private static final Boolean DEFAULT_BORRADO = false;
+    private static final Boolean UPDATED_BORRADO = true;
 
     @Autowired
     private MensajeRepository mensajeRepository;
@@ -84,7 +92,9 @@ public class MensajeResourceIntTest {
     public static Mensaje createEntity() {
         Mensaje mensaje = new Mensaje()
             .texto(DEFAULT_TEXTO)
-            .fechaEnvio(DEFAULT_FECHA_ENVIO);
+            .fechaEnvio(DEFAULT_FECHA_ENVIO)
+            .visto(DEFAULT_VISTO)
+            .borrado(DEFAULT_BORRADO);
         return mensaje;
     }
 
@@ -110,6 +120,8 @@ public class MensajeResourceIntTest {
         Mensaje testMensaje = mensajeList.get(mensajeList.size() - 1);
         assertThat(testMensaje.getTexto()).isEqualTo(DEFAULT_TEXTO);
         assertThat(testMensaje.getFechaEnvio()).isEqualTo(DEFAULT_FECHA_ENVIO);
+        assertThat(testMensaje.isVisto()).isEqualTo(DEFAULT_VISTO);
+        assertThat(testMensaje.isBorrado()).isEqualTo(DEFAULT_BORRADO);
     }
 
     @Test
@@ -165,6 +177,40 @@ public class MensajeResourceIntTest {
     }
 
     @Test
+    public void checkVistoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = mensajeRepository.findAll().size();
+        // set the field null
+        mensaje.setVisto(null);
+
+        // Create the Mensaje, which fails.
+
+        restMensajeMockMvc.perform(post("/api/mensajes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(mensaje)))
+            .andExpect(status().isBadRequest());
+
+        List<Mensaje> mensajeList = mensajeRepository.findAll();
+        assertThat(mensajeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    public void checkBorradoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = mensajeRepository.findAll().size();
+        // set the field null
+        mensaje.setBorrado(null);
+
+        // Create the Mensaje, which fails.
+
+        restMensajeMockMvc.perform(post("/api/mensajes")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(mensaje)))
+            .andExpect(status().isBadRequest());
+
+        List<Mensaje> mensajeList = mensajeRepository.findAll();
+        assertThat(mensajeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     public void getAllMensajes() throws Exception {
         // Initialize the database
         mensajeRepository.save(mensaje);
@@ -175,7 +221,9 @@ public class MensajeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(mensaje.getId())))
             .andExpect(jsonPath("$.[*].texto").value(hasItem(DEFAULT_TEXTO.toString())))
-            .andExpect(jsonPath("$.[*].fechaEnvio").value(hasItem(DEFAULT_FECHA_ENVIO.toString())));
+            .andExpect(jsonPath("$.[*].fechaEnvio").value(hasItem(DEFAULT_FECHA_ENVIO.toString())))
+            .andExpect(jsonPath("$.[*].visto").value(hasItem(DEFAULT_VISTO.booleanValue())))
+            .andExpect(jsonPath("$.[*].borrado").value(hasItem(DEFAULT_BORRADO.booleanValue())));
     }
     
     @Test
@@ -189,7 +237,9 @@ public class MensajeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(mensaje.getId()))
             .andExpect(jsonPath("$.texto").value(DEFAULT_TEXTO.toString()))
-            .andExpect(jsonPath("$.fechaEnvio").value(DEFAULT_FECHA_ENVIO.toString()));
+            .andExpect(jsonPath("$.fechaEnvio").value(DEFAULT_FECHA_ENVIO.toString()))
+            .andExpect(jsonPath("$.visto").value(DEFAULT_VISTO.booleanValue()))
+            .andExpect(jsonPath("$.borrado").value(DEFAULT_BORRADO.booleanValue()));
     }
 
     @Test
@@ -210,7 +260,9 @@ public class MensajeResourceIntTest {
         Mensaje updatedMensaje = mensajeRepository.findById(mensaje.getId()).get();
         updatedMensaje
             .texto(UPDATED_TEXTO)
-            .fechaEnvio(UPDATED_FECHA_ENVIO);
+            .fechaEnvio(UPDATED_FECHA_ENVIO)
+            .visto(UPDATED_VISTO)
+            .borrado(UPDATED_BORRADO);
 
         restMensajeMockMvc.perform(put("/api/mensajes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -223,6 +275,8 @@ public class MensajeResourceIntTest {
         Mensaje testMensaje = mensajeList.get(mensajeList.size() - 1);
         assertThat(testMensaje.getTexto()).isEqualTo(UPDATED_TEXTO);
         assertThat(testMensaje.getFechaEnvio()).isEqualTo(UPDATED_FECHA_ENVIO);
+        assertThat(testMensaje.isVisto()).isEqualTo(UPDATED_VISTO);
+        assertThat(testMensaje.isBorrado()).isEqualTo(UPDATED_BORRADO);
     }
 
     @Test

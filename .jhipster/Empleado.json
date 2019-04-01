@@ -42,13 +42,6 @@
             "otherEntityRelationshipName": "empleado",
             "relationshipName": "tipo",
             "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "chat",
-            "otherEntityRelationshipName": "empleado",
-            "relationshipName": "empleados",
-            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190226065454",

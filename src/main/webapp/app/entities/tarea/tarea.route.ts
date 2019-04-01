@@ -33,8 +33,8 @@ export const tareaRoute: Routes = [
         path: '',
         component: TareaComponent,
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.tarea.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Tareas'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -45,8 +45,8 @@ export const tareaRoute: Routes = [
             tarea: TareaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.tarea.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Tareas'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -57,8 +57,8 @@ export const tareaRoute: Routes = [
             tarea: TareaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.tarea.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Tareas'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -69,8 +69,8 @@ export const tareaRoute: Routes = [
             tarea: TareaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.tarea.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Tareas'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -84,8 +84,8 @@ export const tareaPopupRoute: Routes = [
             tarea: TareaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.tarea.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Tareas'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

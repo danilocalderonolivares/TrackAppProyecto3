@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="gpsApp.ruta.home.title">Rutas</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ruta" [routerLink]="['/ruta/new']">
+        <span>Rutas</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ruta" [routerLink]="['/ruta/add-ubications']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="gpsApp.ruta.home.createLabel">
-            Create new Ruta
+            <span >
+            Crear nueva ruta
             </span>
         </button>
     </h2>
@@ -14,36 +14,36 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="gpsApp.ruta.nombre">Nombre</span></th>
-            <th><span jhiTranslate="gpsApp.ruta.descripcion">Descripcion</span></th>
-            <th><span jhiTranslate="gpsApp.ruta.borrado">Borrado</span></th>
-            <th><span jhiTranslate="gpsApp.ruta.puntoInicio">Punto Inicio</span></th>
-            <th><span jhiTranslate="gpsApp.ruta.puntoLLegada">Punto L Legada</span></th>
-            <th></th>
+                <!--<th><span>ID</span></th>-->
+                <th><span>Nombre</span></th>
+                <th><span>Descripción</span></th>
+                <th><span>Ubicaciones</span></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let ruta of rutas ;trackBy: trackId">
-                <td><a [routerLink]="['/ruta', ruta.id, 'view' ]">{{ruta.id}}</a></td>
+                <!--<td><a [routerLink]="['/ruta', ruta.id, 'view' ]">{{ruta.id}}</a></td>-->
                 <td>{{ruta.nombre}}</td>
                 <td>{{ruta.descripcion}}</td>
-                <td>{{ruta.borrado}}</td>
-                <td>{{ruta.puntoInicio}}</td>
-                <td>{{ruta.puntoLLegada}}</td>
+                <td>
+                    <span *ngFor="let ubicacion of ruta.ubicaciones; let last = last">
+                        {{ubicacion.nombreDireccion}}
+                    </span>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['/ruta', ruta.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            <span class="d-none d-md-inline">Ver</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/ruta', ruta.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            <span class="d-none d-md-inline">Editar</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', 'ruta', { outlets: { popup: ruta.id + '/delete'} }]"
@@ -51,7 +51,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            <span class="d-none d-md-inline">Eliminar</span>
                         </button>
                     </div>
                 </td>

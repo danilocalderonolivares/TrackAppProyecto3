@@ -1,89 +1,89 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="tarea">
-            <h2><span jhiTranslate="gpsApp.tarea.detail.title">Tarea</span> {{tarea.id}}</h2>
+            <h2><span>Tarea</span> {{tarea.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="gpsApp.tarea.title">Title</span></dt>
+                <dt><span>Titulo</span></dt>
                 <dd>
                     <span>{{tarea.title}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.descripcion">Descripcion</span></dt>
+                <dt><span>Descripción</span></dt>
                 <dd>
                     <span>{{tarea.descripcion}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.inicio">Inicio</span></dt>
+                <dt><span>Inicio</span></dt>
                 <dd>
                     <span>{{tarea.inicio}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.fin">Fin</span></dt>
+                <dt><span>Fin</span></dt>
                 <dd>
                     <span>{{tarea.fin}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.usarRuta">Usar Ruta</span></dt>
+                <dt><span>Usar Ruta</span></dt>
                 <dd>
                     <span>{{tarea.usarRuta}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.horaInicio">Hora Inicio</span></dt>
+                <dt><span>Hora Inicio</span></dt>
                 <dd>
                     <span>{{tarea.horaInicio}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.horaFin">Hora Fin</span></dt>
+                <dt><span>Hora Fin</span></dt>
                 <dd>
                     <span>{{tarea.horaFin}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.notaExtra">Nota Extra</span></dt>
+                <dt><span>Nota Extra</span></dt>
                 <dd>
                     <span>{{tarea.notaExtra}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.firma">Firma</span></dt>
+                <dt><span>Firma</span></dt>
                 <dd>
                     <span>{{tarea.firma}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.activa">Activa</span></dt>
+                <dt><span>Activa</span></dt>
                 <dd>
                     <span>{{tarea.activa}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.completada">Completada</span></dt>
+                <dt><span>Completada</span></dt>
                 <dd>
                     <span>{{tarea.completada}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.borrado">Borrado</span></dt>
+                <dt><span>Borrado</span></dt>
                 <dd>
                     <span>{{tarea.borrado}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.subtarea">Subtarea</span></dt>
+                <dt><span>Subtarea</span></dt>
                 <dd>
                     <div *ngIf="tarea.subtarea">
                         <a [routerLink]="['/sub-tarea', tarea.subtarea?.id, 'view']">{{tarea.subtarea?.id}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.empleado">Empleado</span></dt>
+                <dt><span>Empleado</span></dt>
                 <dd>
                     <div *ngIf="tarea.empleado">
                         <a [routerLink]="['/empleado', tarea.empleado?.id, 'view']">{{tarea.empleado?.id}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.ubicacion">Ubicacion</span></dt>
+                <dt><span>Ubicación</span></dt>
                 <dd>
                     <div *ngIf="tarea.ubicacion">
                         <a [routerLink]="['/ubicacion', tarea.ubicacion?.id, 'view']">{{tarea.ubicacion?.id}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.cliente">Cliente</span></dt>
+                <dt><span>Cliente</span></dt>
                 <dd>
                     <div *ngIf="tarea.cliente">
                         <a [routerLink]="['/cliente', tarea.cliente?.id, 'view']">{{tarea.cliente?.id}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.ruta">Ruta</span></dt>
-                <dd>
+                <dt *ngIf="tarea.usarRuta"><span>Ruta</span></dt>
+                <dd *ngIf="tarea.usarRuta">
                     <div *ngIf="tarea.ruta">
                         <a [routerLink]="['/ruta', tarea.ruta?.id, 'view']">{{tarea.ruta?.id}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.tarea.logs">Logs</span></dt>
+                <dt><span>Logs</span></dt>
                 <dd>
                     <div *ngIf="tarea.logs">
                         <a [routerLink]="['/log', tarea.logs?.id, 'view']">{{tarea.logs?.id}}</a>
@@ -94,13 +94,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Regresar</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/tarea', tarea.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Editar</span>
             </button>
         </div>
     </div>

@@ -1,27 +1,27 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-log-heading" jhiTranslate="gpsApp.log.home.createOrEditLabel">Create or edit a Log</h2>
+            <h2 id="jhi-log-heading">Create or edit a Log</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!log.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <label for="id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="log.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.log.mensaje" for="field_mensaje">Mensaje</label>
+                    <label class="form-control-label" for="field_mensaje">Mensaje</label>
                     <input type="text" class="form-control" name="mensaje" id="field_mensaje"
                         [(ngModel)]="log.mensaje" required/>
                     <div [hidden]="!(editForm.controls.mensaje?.dirty && editForm.controls.mensaje?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.mensaje?.errors?.required" jhiTranslate="entity.validation.required">
+                        [hidden]="!editForm.controls.mensaje?.errors?.required">
                         This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.log.fecha" for="field_fecha">Fecha</label>
+                    <label class="form-control-label" for="field_fecha">Fecha</label>
                     <div class="input-group">
                         <input id="field_fecha" type="text" class="form-control" name="fecha" ngbDatepicker  #fechaDp="ngbDatepicker" [(ngModel)]="log.fecha"
                         required/>
@@ -31,7 +31,7 @@
                     </div>
                     <div [hidden]="!(editForm.controls.fecha?.dirty && editForm.controls.fecha?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.fecha?.errors?.required" jhiTranslate="entity.validation.required">
+                        [hidden]="!editForm.controls.fecha?.errors?.required">
                         This field is required.
                         </small>
                     </div>
@@ -40,10 +40,10 @@
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>
         </form>

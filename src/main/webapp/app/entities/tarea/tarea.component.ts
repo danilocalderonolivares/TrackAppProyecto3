@@ -48,6 +48,7 @@ export class TareaComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.registerChangeInTareas();
         this.eventManager.destroy(this.eventSubscriber);
     }
 

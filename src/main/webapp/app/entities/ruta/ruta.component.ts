@@ -40,6 +40,7 @@ export class RutaComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.rutaService.onEdition = false;
         this.loadAll();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
@@ -48,6 +49,7 @@ export class RutaComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.registerChangeInRutas();
         this.eventManager.destroy(this.eventSubscriber);
     }
 

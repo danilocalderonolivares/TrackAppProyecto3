@@ -1,77 +1,70 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-empleado-heading" jhiTranslate="gpsApp.empleado.home.createOrEditLabel">Create or edit a Empleado</h2>
+            <h2 id="jhi-empleado-heading">Create or edit a Empleado</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!empleado.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <label for="id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="empleado.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.empleado.idUsuarioRelacion" for="field_idUsuarioRelacion">Id Usuario Relacion</label>
+                    <label class="form-control-label" for="field_idUsuarioRelacion">Id Usuario Relacion</label>
                     <input type="text" class="form-control" name="idUsuarioRelacion" id="field_idUsuarioRelacion"
                         [(ngModel)]="empleado.idUsuarioRelacion" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.empleado.nombre" for="field_nombre">Nombre</label>
+                    <label class="form-control-label" for="field_nombre">Nombre</label>
                     <input type="text" class="form-control" name="nombre" id="field_nombre"
                         [(ngModel)]="empleado.nombre" required/>
                     <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.nombre?.errors?.required" jhiTranslate="entity.validation.required">
+                        [hidden]="!editForm.controls.nombre?.errors?.required">
                         This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.empleado.apellidos" for="field_apellidos">Apellidos</label>
+                    <label class="form-control-label" for="field_apellidos">Apellidos</label>
                     <input type="text" class="form-control" name="apellidos" id="field_apellidos"
                         [(ngModel)]="empleado.apellidos" required/>
                     <div [hidden]="!(editForm.controls.apellidos?.dirty && editForm.controls.apellidos?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.apellidos?.errors?.required" jhiTranslate="entity.validation.required">
+                        [hidden]="!editForm.controls.apellidos?.errors?.required">
                         This field is required.
                         </small>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.empleado.ubicacion" for="field_ubicacion">Ubicacion</label>
+                    <label class="form-control-label" for="field_ubicacion">Ubicacion</label>
                     <select class="form-control" id="field_ubicacion" name="ubicacion" [(ngModel)]="empleado.ubicacion">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="ubicacionOption.id === empleado.ubicacion?.id ? empleado.ubicacion : ubicacionOption" *ngFor="let ubicacionOption of ubicacions; trackBy: trackUbicacionById">{{ubicacionOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.empleado.horarios" for="field_horarios">Horarios</label>
+                    <label class="form-control-label" for="field_horarios">Horarios</label>
                     <select class="form-control" id="field_horarios" name="horarios" [(ngModel)]="empleado.horarios" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="horarioOption.id === empleado.horarios?.id ? empleado.horarios : horarioOption" *ngFor="let horarioOption of horarios; trackBy: trackHorarioById">{{horarioOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.empleado.tipo" for="field_tipo">Tipo</label>
+                    <label class="form-control-label" for="field_tipo">Tipo</label>
                     <select class="form-control" id="field_tipo" name="tipo" [(ngModel)]="empleado.tipo" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="tipoEmpleadoOption.id === empleado.tipo?.id ? empleado.tipo : tipoEmpleadoOption" *ngFor="let tipoEmpleadoOption of tipoempleados; trackBy: trackTipoEmpleadoById">{{tipoEmpleadoOption.id}}</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.empleado.empleados" for="field_empleados">Empleados</label>
-                    <select class="form-control" id="field_empleados" name="empleados" [(ngModel)]="empleado.empleados" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="chatOption.id === empleado.empleados?.id ? empleado.empleados : chatOption" *ngFor="let chatOption of chats; trackBy: trackChatById">{{chatOption.id}}</option>
-                    </select>
-                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>
         </form>

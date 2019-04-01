@@ -3,13 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { IMensaje } from 'app/shared/model/mensaje.model';
 import { MensajeService } from './mensaje.service';
 import { IEmpleado } from 'app/shared/model/empleado.model';
 import { EmpleadoService } from 'app/entities/empleado';
-import { IChat } from 'app/shared/model/chat.model';
-import { ChatService } from 'app/entities/chat';
 
 @Component({
     selector: 'jhi-mensaje-update',
@@ -20,14 +19,12 @@ export class MensajeUpdateComponent implements OnInit {
     isSaving: boolean;
 
     empleados: IEmpleado[];
-
-    chats: IChat[];
+    fechaEnvioDp: any;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected mensajeService: MensajeService,
         protected empleadoService: EmpleadoService,
-        protected chatService: ChatService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -61,13 +58,6 @@ export class MensajeUpdateComponent implements OnInit {
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
-        this.chatService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IChat[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IChat[]>) => response.body)
-            )
-            .subscribe((res: IChat[]) => (this.chats = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -101,10 +91,6 @@ export class MensajeUpdateComponent implements OnInit {
     }
 
     trackEmpleadoById(index: number, item: IEmpleado) {
-        return item.id;
-    }
-
-    trackChatById(index: number, item: IChat) {
         return item.id;
     }
 }

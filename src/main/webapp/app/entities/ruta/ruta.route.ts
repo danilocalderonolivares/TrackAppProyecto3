@@ -11,6 +11,7 @@ import { RutaDetailComponent } from './ruta-detail.component';
 import { RutaUpdateComponent } from './ruta-update.component';
 import { RutaDeletePopupComponent } from './ruta-delete-dialog.component';
 import { IRuta } from 'app/shared/model/ruta.model';
+import { UbicacionFormComponent } from './ubicacion/ubicacion-form.component';
 
 @Injectable({ providedIn: 'root' })
 export class RutaResolve implements Resolve<IRuta> {
@@ -33,8 +34,8 @@ export const rutaRoute: Routes = [
         path: '',
         component: RutaComponent,
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.ruta.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Rutas'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -45,8 +46,20 @@ export const rutaRoute: Routes = [
             ruta: RutaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.ruta.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Rutas'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'add-ubications',
+        component: UbicacionFormComponent,
+        resolve: {
+            ruta: RutaResolve
+        },
+        data: {
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Rutas'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -57,8 +70,8 @@ export const rutaRoute: Routes = [
             ruta: RutaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.ruta.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Rutas'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -69,8 +82,8 @@ export const rutaRoute: Routes = [
             ruta: RutaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.ruta.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Rutas'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -84,8 +97,8 @@ export const rutaPopupRoute: Routes = [
             ruta: RutaResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.ruta.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Rutas'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

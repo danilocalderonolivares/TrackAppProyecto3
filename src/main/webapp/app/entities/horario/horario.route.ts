@@ -33,8 +33,8 @@ export const horarioRoute: Routes = [
         path: '',
         component: HorarioComponent,
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.horario.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Horarios'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -45,8 +45,8 @@ export const horarioRoute: Routes = [
             horario: HorarioResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.horario.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Horarios'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -57,8 +57,8 @@ export const horarioRoute: Routes = [
             horario: HorarioResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.horario.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Horarios'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -69,8 +69,8 @@ export const horarioRoute: Routes = [
             horario: HorarioResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.horario.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Horarios'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -84,8 +84,8 @@ export const horarioPopupRoute: Routes = [
             horario: HorarioResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.horario.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Horarios'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

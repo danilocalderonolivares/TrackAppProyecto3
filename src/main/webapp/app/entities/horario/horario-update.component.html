@@ -1,103 +1,103 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-horario-heading" jhiTranslate="gpsApp.horario.home.createOrEditLabel">Create or edit a Horario</h2>
+            <h2 id="jhi-horario-heading">Crear - editar horario</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!horario.id">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                <!--<div class="form-group" [hidden]="!horario.id">
+                    <label for="id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="horario.id" readonly />
-                </div>
+                </div>-->
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.nombre" for="field_nombre">Nombre</label>
+                    <label class="form-control-label" for="field_nombre">Nombre</label>
                     <input type="text" class="form-control" name="nombre" id="field_nombre"
                         [(ngModel)]="horario.nombre" required/>
                     <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.nombre?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
+                        [hidden]="!editForm.controls.nombre?.errors?.required">
+                        Este campo es requerido
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.lunesInico" for="field_lunesInico">Lunes Inico</label>
-                    <input type="text" class="form-control" name="lunesInico" id="field_lunesInico"
+                    <label class="form-control-label" for="field_lunesInico">Lunes Inicio</label>
+                    <input type="time" class="form-control" name="lunesInico" id="field_lunesInico"
                         [(ngModel)]="horario.lunesInico" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.lunesFin" for="field_lunesFin">Lunes Fin</label>
-                    <input type="text" class="form-control" name="lunesFin" id="field_lunesFin"
+                    <label class="form-control-label" for="field_lunesFin">Lunes Fin</label>
+                    <input type="time" class="form-control" name="lunesFin" id="field_lunesFin"
                         [(ngModel)]="horario.lunesFin" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.martesInico" for="field_martesInico">Martes Inico</label>
-                    <input type="text" class="form-control" name="martesInico" id="field_martesInico"
+                    <label class="form-control-label" for="field_martesInico">Martes Inicio</label>
+                    <input type="time" class="form-control" name="martesInico" id="field_martesInico"
                         [(ngModel)]="horario.martesInico" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.martesFin" for="field_martesFin">Martes Fin</label>
-                    <input type="text" class="form-control" name="martesFin" id="field_martesFin"
+                    <label class="form-control-label" for="field_martesFin">Martes Fin</label>
+                    <input type="time" class="form-control" name="martesFin" id="field_martesFin"
                         [(ngModel)]="horario.martesFin" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.miercolesInico" for="field_miercolesInico">Miercoles Inico</label>
-                    <input type="text" class="form-control" name="miercolesInico" id="field_miercolesInico"
+                    <label class="form-control-label" for="field_miercolesInico">Miercoles Inicio</label>
+                    <input type="time" class="form-control" name="miercolesInico" id="field_miercolesInico"
                         [(ngModel)]="horario.miercolesInico" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.miercolesFin" for="field_miercolesFin">Miercoles Fin</label>
-                    <input type="text" class="form-control" name="miercolesFin" id="field_miercolesFin"
+                    <label class="form-control-label" for="field_miercolesFin">Miercoles Fin</label>
+                    <input type="time" class="form-control" name="miercolesFin" id="field_miercolesFin"
                         [(ngModel)]="horario.miercolesFin" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.juevesInico" for="field_juevesInico">Jueves Inico</label>
-                    <input type="text" class="form-control" name="juevesInico" id="field_juevesInico"
+                    <label class="form-control-label" for="field_juevesInico">Jueves Inicio</label>
+                    <input type="time" class="form-control" name="juevesInico" id="field_juevesInico"
                         [(ngModel)]="horario.juevesInico" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.juevesFin" for="field_juevesFin">Jueves Fin</label>
-                    <input type="text" class="form-control" name="juevesFin" id="field_juevesFin"
+                    <label class="form-control-label" for="field_juevesFin">Jueves Fin</label>
+                    <input type="time" class="form-control" name="juevesFin" id="field_juevesFin"
                         [(ngModel)]="horario.juevesFin" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.viernesInico" for="field_viernesInico">Viernes Inico</label>
-                    <input type="text" class="form-control" name="viernesInico" id="field_viernesInico"
+                    <label class="form-control-label" for="field_viernesInico">Viernes Inicio</label>
+                    <input type="time" class="form-control" name="viernesInico" id="field_viernesInico"
                         [(ngModel)]="horario.viernesInico" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.viernesFin" for="field_viernesFin">Viernes Fin</label>
-                    <input type="text" class="form-control" name="viernesFin" id="field_viernesFin"
+                    <label class="form-control-label" for="field_viernesFin">Viernes Fin</label>
+                    <input type="time" class="form-control" name="viernesFin" id="field_viernesFin"
                         [(ngModel)]="horario.viernesFin" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.sabadoInico" for="field_sabadoInico">Sabado Inico</label>
-                    <input type="text" class="form-control" name="sabadoInico" id="field_sabadoInico"
+                    <label class="form-control-label" for="field_sabadoInico">Sabado Inicio</label>
+                    <input type="time" class="form-control" name="sabadoInico" id="field_sabadoInico"
                         [(ngModel)]="horario.sabadoInico" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.sabadoFin" for="field_sabadoFin">Sabado Fin</label>
-                    <input type="text" class="form-control" name="sabadoFin" id="field_sabadoFin"
+                    <label class="form-control-label" for="field_sabadoFin">Sabado Fin</label>
+                    <input type="time" class="form-control" name="sabadoFin" id="field_sabadoFin"
                         [(ngModel)]="horario.sabadoFin" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.domingoInico" for="field_domingoInico">Domingo Inico</label>
-                    <input type="text" class="form-control" name="domingoInico" id="field_domingoInico"
+                    <label class="form-control-label" for="field_domingoInico">Domingo Inicio</label>
+                    <input type="time" class="form-control" name="domingoInico" id="field_domingoInico"
                         [(ngModel)]="horario.domingoInico" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gpsApp.horario.domingoFin" for="field_domingoFin">Domingo Fin</label>
-                    <input type="text" class="form-control" name="domingoFin" id="field_domingoFin"
+                    <label class="form-control-label" for="field_domingoFin">Domingo Fin</label>
+                    <input type="time" class="form-control" name="domingoFin" id="field_domingoFin"
                         [(ngModel)]="horario.domingoFin" />
                 </div>
 
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>
                 </button>
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Guardar</span>
                 </button>
             </div>
         </form>

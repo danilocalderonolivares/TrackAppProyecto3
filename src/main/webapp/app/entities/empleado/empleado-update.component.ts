@@ -12,8 +12,6 @@ import { IHorario } from 'app/shared/model/horario.model';
 import { HorarioService } from 'app/entities/horario';
 import { ITipoEmpleado } from 'app/shared/model/tipo-empleado.model';
 import { TipoEmpleadoService } from 'app/entities/tipo-empleado';
-import { IChat } from 'app/shared/model/chat.model';
-import { ChatService } from 'app/entities/chat';
 
 @Component({
     selector: 'jhi-empleado-update',
@@ -29,15 +27,12 @@ export class EmpleadoUpdateComponent implements OnInit {
 
     tipoempleados: ITipoEmpleado[];
 
-    chats: IChat[];
-
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected empleadoService: EmpleadoService,
         protected ubicacionService: UbicacionService,
         protected horarioService: HorarioService,
         protected tipoEmpleadoService: TipoEmpleadoService,
-        protected chatService: ChatService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -85,13 +80,6 @@ export class EmpleadoUpdateComponent implements OnInit {
                 map((response: HttpResponse<ITipoEmpleado[]>) => response.body)
             )
             .subscribe((res: ITipoEmpleado[]) => (this.tipoempleados = res), (res: HttpErrorResponse) => this.onError(res.message));
-        this.chatService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IChat[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IChat[]>) => response.body)
-            )
-            .subscribe((res: IChat[]) => (this.chats = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -133,10 +121,6 @@ export class EmpleadoUpdateComponent implements OnInit {
     }
 
     trackTipoEmpleadoById(index: number, item: ITipoEmpleado) {
-        return item.id;
-    }
-
-    trackChatById(index: number, item: IChat) {
         return item.id;
     }
 }

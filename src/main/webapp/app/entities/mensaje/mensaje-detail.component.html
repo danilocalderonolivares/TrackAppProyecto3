@@ -1,28 +1,30 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="mensaje">
-            <h2><span jhiTranslate="gpsApp.mensaje.detail.title">Mensaje</span> {{mensaje.id}}</h2>
+            <h2><span>Mensaje</span> {{mensaje.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="gpsApp.mensaje.texto">Texto</span></dt>
+                <dt><span>Texto</span></dt>
                 <dd>
                     <span>{{mensaje.texto}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.mensaje.fechaEnvio">Fecha Envio</span></dt>
+                <dt><span>Fecha Envio</span></dt>
                 <dd>
                     <span>{{mensaje.fechaEnvio}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.mensaje.empleado">Empleado</span></dt>
+                <dt><span>Visto</span></dt>
+                <dd>
+                    <span>{{mensaje.visto}}</span>
+                </dd>
+                <dt><span>Borrado</span></dt>
+                <dd>
+                    <span>{{mensaje.borrado}}</span>
+                </dd>
+                <dt><span>Empleado</span></dt>
                 <dd>
                     <div *ngIf="mensaje.empleado">
                         <a [routerLink]="['/empleado', mensaje.empleado?.id, 'view']">{{mensaje.empleado?.id}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="gpsApp.mensaje.mensajes">Mensajes</span></dt>
-                <dd>
-                    <div *ngIf="mensaje.mensajes">
-                        <a [routerLink]="['/chat', mensaje.mensajes?.id, 'view']">{{mensaje.mensajes?.id}}</a>
                     </div>
                 </dd>
             </dl>
@@ -30,13 +32,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/mensaje', mensaje.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
             </button>
         </div>
     </div>

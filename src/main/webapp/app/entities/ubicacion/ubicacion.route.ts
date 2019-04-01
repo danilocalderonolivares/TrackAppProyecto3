@@ -33,8 +33,8 @@ export const ubicacionRoute: Routes = [
         path: '',
         component: UbicacionComponent,
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.ubicacion.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Ubicacions'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -45,8 +45,8 @@ export const ubicacionRoute: Routes = [
             ubicacion: UbicacionResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.ubicacion.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Ubicacions'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -57,8 +57,8 @@ export const ubicacionRoute: Routes = [
             ubicacion: UbicacionResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.ubicacion.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Ubicacions'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -69,8 +69,8 @@ export const ubicacionRoute: Routes = [
             ubicacion: UbicacionResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.ubicacion.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Ubicacions'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -84,8 +84,8 @@ export const ubicacionPopupRoute: Routes = [
             ubicacion: UbicacionResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.ubicacion.home.title'
+            authorities: ['ROLE_ADMIN'],
+            pageTitle: 'Ubicacions'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

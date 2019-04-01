@@ -1,67 +1,67 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="horario">
-            <h2><span jhiTranslate="gpsApp.horario.detail.title">Horario</span> {{horario.id}}</h2>
+            <h2><span>Horario</span> {{horario.nombre}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="gpsApp.horario.nombre">Nombre</span></dt>
+                <dt><span>Nombre</span></dt>
                 <dd>
                     <span>{{horario.nombre}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.lunesInico">Lunes Inico</span></dt>
+                <dt><span>Lunes Inicio</span></dt>
                 <dd>
                     <span>{{horario.lunesInico}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.lunesFin">Lunes Fin</span></dt>
+                <dt><span>Lunes Fin</span></dt>
                 <dd>
                     <span>{{horario.lunesFin}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.martesInico">Martes Inico</span></dt>
+                <dt><span>Martes Inicio</span></dt>
                 <dd>
                     <span>{{horario.martesInico}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.martesFin">Martes Fin</span></dt>
+                <dt><span>Martes Fin</span></dt>
                 <dd>
                     <span>{{horario.martesFin}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.miercolesInico">Miercoles Inico</span></dt>
+                <dt><span>Miercoles Inicio</span></dt>
                 <dd>
                     <span>{{horario.miercolesInico}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.miercolesFin">Miercoles Fin</span></dt>
+                <dt><span>Miercoles Fin</span></dt>
                 <dd>
                     <span>{{horario.miercolesFin}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.juevesInico">Jueves Inico</span></dt>
+                <dt><span>Jueves Inicio</span></dt>
                 <dd>
                     <span>{{horario.juevesInico}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.juevesFin">Jueves Fin</span></dt>
+                <dt><span>Jueves Fin</span></dt>
                 <dd>
                     <span>{{horario.juevesFin}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.viernesInico">Viernes Inico</span></dt>
+                <dt><span>Viernes Inicio</span></dt>
                 <dd>
                     <span>{{horario.viernesInico}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.viernesFin">Viernes Fin</span></dt>
+                <dt><span>Viernes Fin</span></dt>
                 <dd>
                     <span>{{horario.viernesFin}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.sabadoInico">Sabado Inico</span></dt>
+                <dt><span>Sabado Inicio</span></dt>
                 <dd>
                     <span>{{horario.sabadoInico}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.sabadoFin">Sabado Fin</span></dt>
+                <dt><span>Sabado Fin</span></dt>
                 <dd>
                     <span>{{horario.sabadoFin}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.domingoInico">Domingo Inico</span></dt>
+                <dt><span>Domingo Inicio</span></dt>
                 <dd>
                     <span>{{horario.domingoInico}}</span>
                 </dd>
-                <dt><span jhiTranslate="gpsApp.horario.domingoFin">Domingo Fin</span></dt>
+                <dt><span>Domingo Fin</span></dt>
                 <dd>
                     <span>{{horario.domingoFin}}</span>
                 </dd>
@@ -70,13 +70,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Regresar</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/horario', horario.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Editar</span>
             </button>
         </div>
     </div>

@@ -1,20 +1,25 @@
+import { Moment } from 'moment';
 import { IEmpleado } from 'app/shared/model/empleado.model';
-import { IChat } from 'app/shared/model/chat.model';
 
 export interface IMensaje {
     id?: string;
     texto?: string;
-    fechaEnvio?: string;
+    fechaEnvio?: Moment;
+    visto?: boolean;
+    borrado?: boolean;
     empleado?: IEmpleado;
-    mensajes?: IChat;
 }
 
 export class Mensaje implements IMensaje {
     constructor(
         public id?: string,
         public texto?: string,
-        public fechaEnvio?: string,
-        public empleado?: IEmpleado,
-        public mensajes?: IChat
-    ) {}
+        public fechaEnvio?: Moment,
+        public visto?: boolean,
+        public borrado?: boolean,
+        public empleado?: IEmpleado
+    ) {
+        this.visto = this.visto || false;
+        this.borrado = this.borrado || false;
+    }
 }

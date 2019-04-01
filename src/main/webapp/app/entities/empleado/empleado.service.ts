@@ -35,4 +35,26 @@ export class EmpleadoService {
     delete(id: string): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
+
+    findUserByIdRelationship(id: string): Observable<EntityResponseType> {
+        return this.http.get<IEmpleado>(`${this.resourceUrl + '/findByRelationshipId'}/${id}`, { observe: 'response' });
+    }
+
+    findUserByIdType(id: string): Observable<EntityArrayResponseType> {
+        return this.http.get<IEmpleado[]>(`${this.resourceUrl + '/findByTypeId'}/${id}`, { observe: 'response' });
+    }
+
+    findUserByIdSchedule(id: string): Observable<EntityArrayResponseType> {
+        return this.http.get<IEmpleado[]>(`${this.resourceUrl + '/findByScheduleId'}/${id}`, { observe: 'response' });
+    }
+
+    deleteByIdRelacion(id: string): Observable<HttpResponse<any>> {
+        return this.http.delete(`${this.resourceUrl + '/deleteByRelationId'}/${id}`, { observe: 'response' });
+    }
+
+    //get all employees custom
+    queryCustom(req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IEmpleado[]>(this.resourceUrl + '-custom', { params: options, observe: 'response' });
+    }
 }

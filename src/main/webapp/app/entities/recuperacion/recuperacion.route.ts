@@ -34,7 +34,7 @@ export const recuperacionRoute: Routes = [
         component: RecuperacionComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.recuperacion.home.title'
+            pageTitle: 'Recuperacions'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -46,7 +46,7 @@ export const recuperacionRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.recuperacion.home.title'
+            pageTitle: 'Recuperacions'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -58,7 +58,7 @@ export const recuperacionRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.recuperacion.home.title'
+            pageTitle: 'Recuperacions'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -70,7 +70,7 @@ export const recuperacionRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.recuperacion.home.title'
+            pageTitle: 'Recuperacions'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -85,7 +85,7 @@ export const recuperacionPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'gpsApp.recuperacion.home.title'
+            pageTitle: 'Recuperacions'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

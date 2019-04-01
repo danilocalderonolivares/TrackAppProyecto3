@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span jhiTranslate="gpsApp.ubicacion.home.title">Ubicacions</span>
+        <span>Ubicaciones</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ubicacion" [routerLink]="['/ubicacion/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="gpsApp.ubicacion.home.createLabel">
-            Create new Ubicacion
+            <span >
+            Crear nueva ubicación
             </span>
         </button>
     </h2>
@@ -14,11 +14,11 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="gpsApp.ubicacion.longitud">Longitud</span></th>
-            <th><span jhiTranslate="gpsApp.ubicacion.latitud">Latitud</span></th>
-            <th><span jhiTranslate="gpsApp.ubicacion.nombreDireccion">Nombre Direccion</span></th>
-            <th></th>
+                <th><span>ID</span></th>
+                <th><span>Longitud</span></th>
+                <th><span>Latitud</span></th>
+                <th><span>Nombre Dirección</span></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -33,13 +33,13 @@
                                 [routerLink]="['/ubicacion', ubicacion.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            <span class="d-none d-md-inline">Ver</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/ubicacion', ubicacion.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            <span class="d-none d-md-inline">Editar</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', 'ubicacion', { outlets: { popup: ubicacion.id + '/delete'} }]"
@@ -47,7 +47,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            <span class="d-none d-md-inline">Eliminar</span>
                         </button>
                     </div>
                 </td>
