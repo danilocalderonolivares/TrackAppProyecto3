@@ -125,7 +125,4 @@ public class Log implements Serializable {
             ", fecha='" + getFecha() + "'" +
             "}";
     }
-
-    public void debug(String s, Log log) {
-    }
 }
