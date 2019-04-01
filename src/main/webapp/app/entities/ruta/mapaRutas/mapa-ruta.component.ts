@@ -21,25 +21,25 @@ export class MapaRutaComponent implements OnInit {
 
     ngOnInit() {}
 
-    onChoseLocation(event: MouseEvent) {
-        this.latMarker = event.coords.lat;
-        this.lngMarker = event.coords.lng;
-        this.rutaService.setUbication(event.coords.lat, event.coords.lng);
-    }
-
-    setLabel(direccion: string) {
-        return direccion.charAt(0) + direccion.charAt(1);
-    }
-
-    public handleAddressChange(address: Address) {
-        this.lat = address.geometry.location.lat();
-        this.lng = address.geometry.location.lng();
-        this.latMarker = address.geometry.location.lat();
-        this.lngMarker = address.geometry.location.lng();
-        this.rutaService.setUbication(
-            address.geometry.location.lat(),
-            address.geometry.location.lng(),
-            address.name + ', ' + address.formatted_address
-        );
-    }
+    // onChoseLocation(event: MouseEvent) {
+    //     this.latMarker = event.coords.lat;
+    //     this.lngMarker = event.coords.lng;
+    //     this.rutaService.setUbication(event.coords.lat, event.coords.lng);
+    // }
+    //
+    // setLabel(direccion: string) {
+    //     return direccion.charAt(0) + direccion.charAt(1);
+    // }
+    //
+    // public handleAddressChange(address: Address) {
+    //     this.lat = address.geometry.location.lat();
+    //     this.lng = address.geometry.location.lng();
+    //     this.latMarker = address.geometry.location.lat();
+    //     this.lngMarker = address.geometry.location.lng();
+    //     this.rutaService.setUbication(
+    //         address.geometry.location.lat(),
+    //         address.geometry.location.lng(),
+    //         address.name + ', ' + address.formatted_address
+    //     );
+    // }
 }

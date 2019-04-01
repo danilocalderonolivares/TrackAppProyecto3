@@ -14,14 +14,10 @@ type EntityArrayResponseType = HttpResponse<IRuta[]>;
 @Injectable({ providedIn: 'root' })
 export class RutaService {
     public resourceUrl = SERVER_API_URL + 'api/rutas';
-    public ubication: IUbicacion;
-    public ubicaciones: Ubicacion[];
     public onEdition: boolean = false;
     public ruta: IRuta;
 
     constructor(protected http: HttpClient) {
-        this.ubication = new Ubicacion();
-        this.ubicaciones = new Array();
         this.ruta = new Ruta();
     }
 
@@ -44,13 +40,5 @@ export class RutaService {
 
     delete(id: string): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
-    }
-
-    //other
-
-    setUbication(lat: number, lng: number, address?: string) {
-        this.ubication.latitud = lat;
-        this.ubication.longitud = lng;
-        this.ubication.nombreDireccion = address;
     }
 }
