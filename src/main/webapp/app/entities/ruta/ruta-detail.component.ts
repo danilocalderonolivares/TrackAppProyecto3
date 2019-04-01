@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IRuta } from 'app/shared/model/ruta.model';
@@ -7,7 +7,7 @@ import { IRuta } from 'app/shared/model/ruta.model';
     selector: 'jhi-ruta-detail',
     templateUrl: './ruta-detail.component.html'
 })
-export class RutaDetailComponent implements OnInit, OnDestroy {
+export class RutaDetailComponent implements OnInit {
     ruta: IRuta;
 
     constructor(protected activatedRoute: ActivatedRoute) {}
@@ -16,10 +16,6 @@ export class RutaDetailComponent implements OnInit, OnDestroy {
         this.activatedRoute.data.subscribe(({ ruta }) => {
             this.ruta = ruta;
         });
-    }
-
-    ngOnDestroy() {
-        localStorage.removeItem('currentUbications');
     }
 
     previousState() {

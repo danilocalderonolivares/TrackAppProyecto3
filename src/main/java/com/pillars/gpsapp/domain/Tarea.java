@@ -10,9 +10,7 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * A Tarea.
@@ -34,19 +32,21 @@ public class Tarea implements Serializable {
 
     @NotNull
     @Field("inicio")
-    private String inicio;
+    private LocalDate inicio;
 
     @NotNull
     @Field("fin")
-    private String fin;
+    private LocalDate fin;
 
     @NotNull
     @Field("usar_ruta")
     private Boolean usarRuta;
 
+    @NotNull
     @Field("hora_inicio")
     private LocalDate horaInicio;
 
+    @NotNull
     @Field("hora_fin")
     private LocalDate horaFin;
 
@@ -67,13 +67,15 @@ public class Tarea implements Serializable {
     @Field("borrado")
     private Boolean borrado;
 
+    @DBRef
     @Field("subtarea")
-    private Set<SubTarea> subtarea = new HashSet<>();
+    private SubTarea subtarea;
 
     @DBRef
     @Field("empleado")
     private Empleado empleado;
 
+    @DBRef
     @Field("ubicacion")
     private Ubicacion ubicacion;
 
@@ -125,29 +127,29 @@ public class Tarea implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getInicio() {
+    public LocalDate getInicio() {
         return inicio;
     }
 
-    public Tarea inicio(String inicio) {
+    public Tarea inicio(LocalDate inicio) {
         this.inicio = inicio;
         return this;
     }
 
-    public void setInicio(String inicio) {
+    public void setInicio(LocalDate inicio) {
         this.inicio = inicio;
     }
 
-    public String getFin() {
+    public LocalDate getFin() {
         return fin;
     }
 
-    public Tarea fin(String fin) {
+    public Tarea fin(LocalDate fin) {
         this.fin = fin;
         return this;
     }
 
-    public void setFin(String fin) {
+    public void setFin(LocalDate fin) {
         this.fin = fin;
     }
 
@@ -255,27 +257,17 @@ public class Tarea implements Serializable {
         this.borrado = borrado;
     }
 
-    public Set<SubTarea> getTareas() {
+    public SubTarea getSubtarea() {
         return subtarea;
     }
 
-    public Tarea subtarea(Set<SubTarea> subtareas) {
-        this.subtarea = subtareas;
+    public Tarea subtarea(SubTarea subTarea) {
+        this.subtarea = subTarea;
         return this;
     }
 
-    public Tarea addSubtarea(SubTarea subtarea) {
-        this.subtarea.add(subtarea);
-        return this;
-    }
-
-    public Tarea removeTarea(SubTarea subtarea) {
-        this.subtarea.remove(subtarea);
-        return this;
-    }
-
-    public void setSubtareas(Set<SubTarea> subtarea) {
-        this.subtarea = subtarea;
+    public void setSubtarea(SubTarea subTarea) {
+        this.subtarea = subTarea;
     }
 
     public Empleado getEmpleado() {

@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-import { OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
+import { JhiLanguageService } from 'ng-jhipster';
+import { JhiLanguageHelper } from 'app/core';
 
 import { GpsAppSharedModule } from 'app/shared';
 import {
@@ -13,26 +13,22 @@ import {
     tareaRoute,
     tareaPopupRoute
 } from './';
-import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
-import { AgmCoreModule } from '@agm/core';
 
 const ENTITY_STATES = [...tareaRoute, ...tareaPopupRoute];
 
 @NgModule({
-    imports: [
-        GpsAppSharedModule,
-        RouterModule.forChild(ENTITY_STATES),
-        OwlDateTimeModule,
-        OwlNativeDateTimeModule,
-        GooglePlaceModule,
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyA6qPYcS3xkzoGTXEeljg5g_CE3m0wBTlI',
-            libraries: ['places']
-        })
-    ],
+    imports: [GpsAppSharedModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [TareaComponent, TareaDetailComponent, TareaUpdateComponent, TareaDeleteDialogComponent, TareaDeletePopupComponent],
     entryComponents: [TareaComponent, TareaUpdateComponent, TareaDeleteDialogComponent, TareaDeletePopupComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [{ provide: OWL_DATE_TIME_LOCALE, useValue: 'es' }]
+    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GpsAppTareaModule {}
+export class GpsAppTareaModule {
+    constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
+        this.languageHelper.language.subscribe((languageKey: string) => {
+            if (languageKey !== undefined) {
+                this.languageService.changeLanguage(languageKey);
+            }
+        });
+    }
+}

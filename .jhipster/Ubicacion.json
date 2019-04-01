@@ -2,18 +2,12 @@
     "name": "Ubicacion",
     "fields": [
         {
-            "fieldName": "latitud",
-            "fieldType": "Double",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldName": "longitud",
+            "fieldType": "Double"
         },
         {
-            "fieldName": "longitud",
-            "fieldType": "Double",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldName": "latitud",
+            "fieldType": "Double"
         },
         {
             "fieldName": "nombreDireccion",
@@ -23,16 +17,7 @@
             ]
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "ruta",
-            "otherEntityRelationshipName": "ubicaciones",
-            "relationshipName": "rutas",
-            "otherEntityField": "id",
-            "ownerSide": false
-        }
-    ],
+    "relationships": [],
     "changelogDate": "20190226065451",
     "entityTableName": "ubicacion",
     "dto": "no",

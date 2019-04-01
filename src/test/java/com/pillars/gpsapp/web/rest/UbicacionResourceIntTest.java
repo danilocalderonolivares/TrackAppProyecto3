@@ -38,11 +38,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = GpsApp.class)
 public class UbicacionResourceIntTest {
 
-    private static final Double DEFAULT_LATITUD = 1D;
-    private static final Double UPDATED_LATITUD = 2D;
-
     private static final Double DEFAULT_LONGITUD = 1D;
     private static final Double UPDATED_LONGITUD = 2D;
+
+    private static final Double DEFAULT_LATITUD = 1D;
+    private static final Double UPDATED_LATITUD = 2D;
 
     private static final String DEFAULT_NOMBRE_DIRECCION = "AAAAAAAAAA";
     private static final String UPDATED_NOMBRE_DIRECCION = "BBBBBBBBBB";
@@ -86,8 +86,8 @@ public class UbicacionResourceIntTest {
      */
     public static Ubicacion createEntity() {
         Ubicacion ubicacion = new Ubicacion()
-            .latitud(DEFAULT_LATITUD)
             .longitud(DEFAULT_LONGITUD)
+            .latitud(DEFAULT_LATITUD)
             .nombreDireccion(DEFAULT_NOMBRE_DIRECCION);
         return ubicacion;
     }
@@ -112,8 +112,8 @@ public class UbicacionResourceIntTest {
         List<Ubicacion> ubicacionList = ubicacionRepository.findAll();
         assertThat(ubicacionList).hasSize(databaseSizeBeforeCreate + 1);
         Ubicacion testUbicacion = ubicacionList.get(ubicacionList.size() - 1);
-        assertThat(testUbicacion.getLatitud()).isEqualTo(DEFAULT_LATITUD);
         assertThat(testUbicacion.getLongitud()).isEqualTo(DEFAULT_LONGITUD);
+        assertThat(testUbicacion.getLatitud()).isEqualTo(DEFAULT_LATITUD);
         assertThat(testUbicacion.getNombreDireccion()).isEqualTo(DEFAULT_NOMBRE_DIRECCION);
     }
 
@@ -133,40 +133,6 @@ public class UbicacionResourceIntTest {
         // Validate the Ubicacion in the database
         List<Ubicacion> ubicacionList = ubicacionRepository.findAll();
         assertThat(ubicacionList).hasSize(databaseSizeBeforeCreate);
-    }
-
-    @Test
-    public void checkLatitudIsRequired() throws Exception {
-        int databaseSizeBeforeTest = ubicacionRepository.findAll().size();
-        // set the field null
-        ubicacion.setLatitud(null);
-
-        // Create the Ubicacion, which fails.
-
-        restUbicacionMockMvc.perform(post("/api/ubicacions")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(ubicacion)))
-            .andExpect(status().isBadRequest());
-
-        List<Ubicacion> ubicacionList = ubicacionRepository.findAll();
-        assertThat(ubicacionList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    public void checkLongitudIsRequired() throws Exception {
-        int databaseSizeBeforeTest = ubicacionRepository.findAll().size();
-        // set the field null
-        ubicacion.setLongitud(null);
-
-        // Create the Ubicacion, which fails.
-
-        restUbicacionMockMvc.perform(post("/api/ubicacions")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(ubicacion)))
-            .andExpect(status().isBadRequest());
-
-        List<Ubicacion> ubicacionList = ubicacionRepository.findAll();
-        assertThat(ubicacionList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -196,8 +162,8 @@ public class UbicacionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(ubicacion.getId())))
-            .andExpect(jsonPath("$.[*].latitud").value(hasItem(DEFAULT_LATITUD.doubleValue())))
             .andExpect(jsonPath("$.[*].longitud").value(hasItem(DEFAULT_LONGITUD.doubleValue())))
+            .andExpect(jsonPath("$.[*].latitud").value(hasItem(DEFAULT_LATITUD.doubleValue())))
             .andExpect(jsonPath("$.[*].nombreDireccion").value(hasItem(DEFAULT_NOMBRE_DIRECCION.toString())));
     }
     
@@ -211,8 +177,8 @@ public class UbicacionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(ubicacion.getId()))
-            .andExpect(jsonPath("$.latitud").value(DEFAULT_LATITUD.doubleValue()))
             .andExpect(jsonPath("$.longitud").value(DEFAULT_LONGITUD.doubleValue()))
+            .andExpect(jsonPath("$.latitud").value(DEFAULT_LATITUD.doubleValue()))
             .andExpect(jsonPath("$.nombreDireccion").value(DEFAULT_NOMBRE_DIRECCION.toString()));
     }
 
@@ -233,8 +199,8 @@ public class UbicacionResourceIntTest {
         // Update the ubicacion
         Ubicacion updatedUbicacion = ubicacionRepository.findById(ubicacion.getId()).get();
         updatedUbicacion
-            .latitud(UPDATED_LATITUD)
             .longitud(UPDATED_LONGITUD)
+            .latitud(UPDATED_LATITUD)
             .nombreDireccion(UPDATED_NOMBRE_DIRECCION);
 
         restUbicacionMockMvc.perform(put("/api/ubicacions")
@@ -246,8 +212,8 @@ public class UbicacionResourceIntTest {
         List<Ubicacion> ubicacionList = ubicacionRepository.findAll();
         assertThat(ubicacionList).hasSize(databaseSizeBeforeUpdate);
         Ubicacion testUbicacion = ubicacionList.get(ubicacionList.size() - 1);
-        assertThat(testUbicacion.getLatitud()).isEqualTo(UPDATED_LATITUD);
         assertThat(testUbicacion.getLongitud()).isEqualTo(UPDATED_LONGITUD);
+        assertThat(testUbicacion.getLatitud()).isEqualTo(UPDATED_LATITUD);
         assertThat(testUbicacion.getNombreDireccion()).isEqualTo(UPDATED_NOMBRE_DIRECCION);
     }
 

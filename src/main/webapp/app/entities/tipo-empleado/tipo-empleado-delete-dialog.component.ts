@@ -6,47 +6,19 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { ITipoEmpleado } from 'app/shared/model/tipo-empleado.model';
 import { TipoEmpleadoService } from './tipo-empleado.service';
-import { IEmpleado } from 'app/shared/model/empleado.model';
-import { EmpleadoService } from 'app/entities/empleado';
 
 @Component({
     selector: 'jhi-tipo-empleado-delete-dialog',
     templateUrl: './tipo-empleado-delete-dialog.component.html'
 })
-export class TipoEmpleadoDeleteDialogComponent implements OnInit {
+export class TipoEmpleadoDeleteDialogComponent {
     tipoEmpleado: ITipoEmpleado;
-    empleadosDependencia: IEmpleado[];
-    mensajeMostrar: string;
-    botonEliminar: boolean;
 
     constructor(
         protected tipoEmpleadoService: TipoEmpleadoService,
         public activeModal: NgbActiveModal,
-        protected eventManager: JhiEventManager,
-        protected empleadoService: EmpleadoService
+        protected eventManager: JhiEventManager
     ) {}
-
-    ngOnInit() {
-        this.verifyEmployeesDependencies();
-    }
-
-    verifyEmployeesDependencies() {
-        this.empleadoService.findUserByIdType(this.tipoEmpleado.id).subscribe(res => {
-            this.empleadosDependencia = [];
-            this.empleadosDependencia = res.body;
-            this.setValuesToShow();
-        });
-    }
-
-    setValuesToShow() {
-        if (this.empleadosDependencia[0] != null) {
-            this.mensajeMostrar = 'Existen usuarios dentro de este tipo, operación no permitida';
-            this.botonEliminar = true;
-        } else {
-            this.mensajeMostrar = 'Esta seguro que desea eliminar este tipo de usuario?';
-            this.botonEliminar = false;
-        }
-    }
 
     clear() {
         this.activeModal.dismiss('cancel');

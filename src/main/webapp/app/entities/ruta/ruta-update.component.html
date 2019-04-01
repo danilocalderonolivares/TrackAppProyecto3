@@ -1,46 +1,73 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-ruta-heading">Crear o editar rutas</h2>
+            <h2 id="jhi-ruta-heading" jhiTranslate="gpsApp.ruta.home.createOrEditLabel">Create or edit a Ruta</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <!--<div class="form-group" [hidden]="!ruta.id">-->
-                    <!--<label for="id">ID</label>-->
-                    <!--<input type="text" class="form-control" id="id" name="id"-->
-                           <!--[(ngModel)]="ruta.id" readonly />-->
-                <!--</div>-->
+                <div class="form-group" [hidden]="!ruta.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="ruta.id" readonly />
+                </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_nombre">Nombre</label>
+                    <label class="form-control-label" jhiTranslate="gpsApp.ruta.nombre" for="field_nombre">Nombre</label>
                     <input type="text" class="form-control" name="nombre" id="field_nombre"
-                           [(ngModel)]="ruta.nombre" required/>
+                        [(ngModel)]="ruta.nombre" required/>
                     <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.nombre?.errors?.required">
-                            Este campo es requerido.
+                        [hidden]="!editForm.controls.nombre?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_descripcion">Descripción</label>
+                    <label class="form-control-label" jhiTranslate="gpsApp.ruta.descripcion" for="field_descripcion">Descripcion</label>
                     <input type="text" class="form-control" name="descripcion" id="field_descripcion"
-                           [(ngModel)]="ruta.descripcion" />
+                        [(ngModel)]="ruta.descripcion" />
                 </div>
                 <div class="form-group">
-                    <label for="field_ubicaciones">Ubicaciones</label>
-                    <select class="form-control" id="field_ubicaciones" multiple name="ubicaciones">
-                        <option *ngFor="let ubicacionOption of ubicaciones" (click)="onUbicationClicked()">{{ubicacionOption.nombreDireccion}}</option>
-                    </select>
+                    <label class="form-control-label" jhiTranslate="gpsApp.ruta.borrado" for="field_borrado">Borrado</label>
+                    <input type="checkbox" class="form-control" name="borrado" id="field_borrado"
+                        [(ngModel)]="ruta.borrado" />
+                    <div [hidden]="!(editForm.controls.borrado?.dirty && editForm.controls.borrado?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.borrado?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gpsApp.ruta.puntoInicio" for="field_puntoInicio">Punto Inicio</label>
+                    <input type="text" class="form-control" name="puntoInicio" id="field_puntoInicio"
+                        [(ngModel)]="ruta.puntoInicio" required/>
+                    <div [hidden]="!(editForm.controls.puntoInicio?.dirty && editForm.controls.puntoInicio?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.puntoInicio?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gpsApp.ruta.puntoLLegada" for="field_puntoLLegada">Punto L Legada</label>
+                    <input type="text" class="form-control" name="puntoLLegada" id="field_puntoLLegada"
+                        [(ngModel)]="ruta.puntoLLegada" required/>
+                    <div [hidden]="!(editForm.controls.puntoLLegada?.dirty && editForm.controls.puntoLLegada?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.puntoLLegada?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Guardar</span>
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
         </form>
     </div>
 </div>
-

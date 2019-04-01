@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { IRuta, Ruta } from 'app/shared/model/ruta.model';
-import { IUbicacion, Ubicacion } from 'app/shared/model/ubicacion.model';
-import { map } from 'rxjs/operators';
+import { IRuta } from 'app/shared/model/ruta.model';
 
 type EntityResponseType = HttpResponse<IRuta>;
 type EntityArrayResponseType = HttpResponse<IRuta[]>;
@@ -14,16 +12,8 @@ type EntityArrayResponseType = HttpResponse<IRuta[]>;
 @Injectable({ providedIn: 'root' })
 export class RutaService {
     public resourceUrl = SERVER_API_URL + 'api/rutas';
-    public ubication: IUbicacion;
-    public ubicaciones: Ubicacion[];
-    public onEdition: boolean = false;
-    public ruta: IRuta;
 
-    constructor(protected http: HttpClient) {
-        this.ubication = new Ubicacion();
-        this.ubicaciones = new Array();
-        this.ruta = new Ruta();
-    }
+    constructor(protected http: HttpClient) {}
 
     create(ruta: IRuta): Observable<EntityResponseType> {
         return this.http.post<IRuta>(this.resourceUrl, ruta, { observe: 'response' });
@@ -44,13 +34,5 @@ export class RutaService {
 
     delete(id: string): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
-    }
-
-    //other
-
-    setUbication(lat: number, lng: number, address?: string) {
-        this.ubication.latitud = lat;
-        this.ubication.longitud = lng;
-        this.ubication.nombreDireccion = address;
     }
 }

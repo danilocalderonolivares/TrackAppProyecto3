@@ -10,21 +10,7 @@
         },
         {
             "fieldName": "fechaEnvio",
-            "fieldType": "LocalDate",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "visto",
-            "fieldType": "Boolean",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "borrado",
-            "fieldType": "Boolean",
+            "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
@@ -38,6 +24,13 @@
             "relationshipName": "empleado",
             "otherEntityField": "id",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "chat",
+            "otherEntityRelationshipName": "mensaje",
+            "relationshipName": "mensajes",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190226065456",

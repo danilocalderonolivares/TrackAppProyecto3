@@ -48,7 +48,6 @@ export class LogComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.registerChangeInLogs();
         this.eventManager.destroy(this.eventSubscriber);
     }
 

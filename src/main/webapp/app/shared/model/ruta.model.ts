@@ -1,11 +1,10 @@
-import { IUbicacion } from 'app/shared/model/ubicacion.model';
-
 export interface IRuta {
     id?: string;
     nombre?: string;
     descripcion?: string;
     borrado?: boolean;
-    ubicaciones?: IUbicacion[];
+    puntoInicio?: string;
+    puntoLLegada?: string;
 }
 
 export class Ruta implements IRuta {
@@ -14,7 +13,8 @@ export class Ruta implements IRuta {
         public nombre?: string,
         public descripcion?: string,
         public borrado?: boolean,
-        public ubicaciones?: IUbicacion[]
+        public puntoInicio?: string,
+        public puntoLLegada?: string
     ) {
         this.borrado = this.borrado || false;
     }

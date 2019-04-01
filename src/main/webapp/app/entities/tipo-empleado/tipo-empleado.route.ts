@@ -33,8 +33,8 @@ export const tipoEmpleadoRoute: Routes = [
         path: '',
         component: TipoEmpleadoComponent,
         data: {
-            authorities: ['ROLE_ADMIN'],
-            pageTitle: 'TipoEmpleados'
+            authorities: ['ROLE_USER'],
+            pageTitle: 'gpsApp.tipoEmpleado.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -45,8 +45,8 @@ export const tipoEmpleadoRoute: Routes = [
             tipoEmpleado: TipoEmpleadoResolve
         },
         data: {
-            authorities: ['ROLE_ADMIN'],
-            pageTitle: 'TipoEmpleados'
+            authorities: ['ROLE_USER'],
+            pageTitle: 'gpsApp.tipoEmpleado.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -57,8 +57,8 @@ export const tipoEmpleadoRoute: Routes = [
             tipoEmpleado: TipoEmpleadoResolve
         },
         data: {
-            authorities: ['ROLE_ADMIN'],
-            pageTitle: 'TipoEmpleados'
+            authorities: ['ROLE_USER'],
+            pageTitle: 'gpsApp.tipoEmpleado.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -69,8 +69,8 @@ export const tipoEmpleadoRoute: Routes = [
             tipoEmpleado: TipoEmpleadoResolve
         },
         data: {
-            authorities: ['ROLE_ADMIN'],
-            pageTitle: 'TipoEmpleados'
+            authorities: ['ROLE_USER'],
+            pageTitle: 'gpsApp.tipoEmpleado.home.title'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -84,8 +84,8 @@ export const tipoEmpleadoPopupRoute: Routes = [
             tipoEmpleado: TipoEmpleadoResolve
         },
         data: {
-            authorities: ['ROLE_ADMIN'],
-            pageTitle: 'TipoEmpleados'
+            authorities: ['ROLE_USER'],
+            pageTitle: 'gpsApp.tipoEmpleado.home.title'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

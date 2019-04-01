@@ -9,14 +9,12 @@ import { ICliente } from 'app/shared/model/cliente.model';
 })
 export class ClienteDetailComponent implements OnInit {
     cliente: ICliente;
-    empresa: boolean;
 
     constructor(protected activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ cliente }) => {
             this.cliente = cliente;
-            this.empresa = cliente.esEmpresa;
         });
     }
 

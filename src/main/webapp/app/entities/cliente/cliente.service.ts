@@ -5,8 +5,6 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { ICliente } from 'app/shared/model/cliente.model';
-import { UbicacionService } from 'app/entities/ubicacion';
-import { IUbicacion } from 'app/shared/model/ubicacion.model';
 
 type EntityResponseType = HttpResponse<ICliente>;
 type EntityArrayResponseType = HttpResponse<ICliente[]>;
@@ -14,7 +12,6 @@ type EntityArrayResponseType = HttpResponse<ICliente[]>;
 @Injectable({ providedIn: 'root' })
 export class ClienteService {
     public resourceUrl = SERVER_API_URL + 'api/clientes';
-    private googleMapsKey: 'AIzaSyCyVrHRb3_HIueNx4GBBJFAWAfSg1GqVj8';
 
     constructor(protected http: HttpClient) {}
 
@@ -37,10 +34,5 @@ export class ClienteService {
 
     delete(id: string): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
-    }
-    getAddress(lat: number, lng: number) {
-        return this.http.get<any>(
-            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${'AIzaSyCyVrHRb3_HIueNx4GBBJFAWAfSg1GqVj8'}`
-        );
     }
 }

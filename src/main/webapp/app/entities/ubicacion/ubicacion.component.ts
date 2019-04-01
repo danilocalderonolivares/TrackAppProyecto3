@@ -48,7 +48,6 @@ export class UbicacionComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.registerChangeInUbicacions();
         this.eventManager.destroy(this.eventSubscriber);
     }
 

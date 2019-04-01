@@ -1,245 +1,194 @@
-<div class="row justify-content-center" style="padding: 10px; width: 100%;">
-    <div class="col-6">
+<div class="row justify-content-center">
+    <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-tarea-heading">Crear o editar Tarea</h2>
+            <h2 id="jhi-tarea-heading" jhiTranslate="gpsApp.tarea.home.createOrEditLabel">Create or edit a Tarea</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!tarea.id">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="tarea.id" readonly />
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="tarea.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_title">Titulo</label>
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.title" for="field_title">Title</label>
                     <input type="text" class="form-control" name="title" id="field_title"
                         [(ngModel)]="tarea.title" required/>
                     <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
-                        <small class="form-text text-danger" [hidden]="!editForm.controls.title?.errors?.required">
-                            Este campo es requerido
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.title?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_descripcion">Descripción</label>
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.descripcion" for="field_descripcion">Descripcion</label>
                     <input type="text" class="form-control" name="descripcion" id="field_descripcion"
                         [(ngModel)]="tarea.descripcion" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label">
-                        Inicio
-                        <input [(ngModel)]="tarea.inicio"
-                               [max]="tarea.fin"
-                               [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
-                               #dateTime="ngModel"
-                               name="inicio"
-                               required
-                               class="form-control">
-                        <owl-date-time #dt1></owl-date-time>
-                    </label>
-                    <div *ngIf="dateTime.invalid && dateTime.errors.owlDateTimeMax">
-                        Tiene que escoger una fecha anterior a {{tarea.fin | date: 'medium'}}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label">
-                        Fin
-                        <input [(ngModel)]="tarea.fin"
-                               [min]="tarea.inicio"
-                               [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
-                               #dateTime="ngModel"
-                               name="fin"
-                               required
-                               class="form-control">
-                        <owl-date-time #dt2></owl-date-time>
-                    </label>
-                    <div *ngIf="dateTime.invalid && dateTime.errors.owlDateTimeMin">
-                        Tiene que escoger una fecha posterior a {{tarea.inicio | date: 'medium'}}
-                    </div>
-                </div>
-                <!--div class="form-group">
-                    <label class="form-control-label" for="field_inicio">Inicio</label>
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.inicio" for="field_inicio">Inicio</label>
                     <div class="input-group">
                         <input id="field_inicio" type="text" class="form-control" name="inicio" ngbDatepicker  #inicioDp="ngbDatepicker" [(ngModel)]="tarea.inicio"
                         required/>
                         <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="inicioDp.toggle()">
-                                <fa-icon [icon]="'calendar-alt'"></fa-icon>
-                            </button>
+                            <button type="button" class="btn btn-secondary" (click)="inicioDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                         </span>
                     </div>
                     <div [hidden]="!(editForm.controls.inicio?.dirty && editForm.controls.inicio?.invalid)">
-                        <small class="form-text text-danger" [hidden]="!editForm.controls.inicio?.errors?.required">
-                            Este campo es requerido
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_fin">Fin</label>
-                    <div class="input-group">
-                        <input id="field_fin" type="text" class="form-control" name="fin" ngbDatepicker #finDp="ngbDatepicker" [(ngModel)]="tarea.fin" required />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="finDp.toggle()">
-                                <fa-icon [icon]="'calendar-alt'"></fa-icon>
-                            </button>
-                        </span>
-                    </div>
-                    <div [hidden]="!(editForm.controls.fin?.dirty && editForm.controls.fin?.invalid)">
-                        <small class="form-text text-danger" [hidden]="!editForm.controls.fin?.errors?.required">
-                            Este campo es requerido
-                        </small>
-                    </div>
-                </div-->
-                <!--div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" name="usarRuta" id="field_usarRuta"
-                           [(ngModel)]="tarea.usarRuta" />
-                    <label class="form-check-label" for="field_usarRuta">Usar Ruta</label>
-                    <div [hidden]="!(editForm.controls.usarRuta?.dirty && editForm.controls.usarRuta?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.usarRuta?.errors?.required">
+                        [hidden]="!editForm.controls.inicio?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
-                </div-->
-                <!--div class="form-group">
-                    <label class="form-control-label" for="field_horaInicio">Hora Inicio</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.fin" for="field_fin">Fin</label>
                     <div class="input-group">
-                        <input id="field_horaInicio" type="text" class="form-control" name="horaInicio" ngbDatepicker #horaInicioDp="ngbDatepicker" [(ngModel)]="tarea.horaInicio" required />
+                        <input id="field_fin" type="text" class="form-control" name="fin" ngbDatepicker  #finDp="ngbDatepicker" [(ngModel)]="tarea.fin"
+                        required/>
                         <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="horaInicioDp.toggle()">
-                                <fa-icon [icon]="'calendar-alt'"></fa-icon>
-                            </button>
+                            <button type="button" class="btn btn-secondary" (click)="finDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div [hidden]="!(editForm.controls.fin?.dirty && editForm.controls.fin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fin?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.usarRuta" for="field_usarRuta">Usar Ruta</label>
+                    <input type="checkbox" class="form-control" name="usarRuta" id="field_usarRuta"
+                        [(ngModel)]="tarea.usarRuta" />
+                    <div [hidden]="!(editForm.controls.usarRuta?.dirty && editForm.controls.usarRuta?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.usarRuta?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.horaInicio" for="field_horaInicio">Hora Inicio</label>
+                    <div class="input-group">
+                        <input id="field_horaInicio" type="text" class="form-control" name="horaInicio" ngbDatepicker  #horaInicioDp="ngbDatepicker" [(ngModel)]="tarea.horaInicio"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="horaInicioDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                         </span>
                     </div>
                     <div [hidden]="!(editForm.controls.horaInicio?.dirty && editForm.controls.horaInicio?.invalid)">
-                        <small class="form-text text-danger" [hidden]="!editForm.controls.horaInicio?.errors?.required">
-                            Este campo es requerido
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.horaInicio?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_horaFin">Hora Fin</label>
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.horaFin" for="field_horaFin">Hora Fin</label>
                     <div class="input-group">
-                        <input id="field_horaFin" type="text" class="form-control" name="horaFin" ngbDatepicker #horaFinDp="ngbDatepicker" [(ngModel)]="tarea.horaFin" required />
+                        <input id="field_horaFin" type="text" class="form-control" name="horaFin" ngbDatepicker  #horaFinDp="ngbDatepicker" [(ngModel)]="tarea.horaFin"
+                        required/>
                         <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="horaFinDp.toggle()">
-                                <fa-icon [icon]="'calendar-alt'"></fa-icon>
-                            </button>
+                            <button type="button" class="btn btn-secondary" (click)="horaFinDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                         </span>
                     </div>
                     <div [hidden]="!(editForm.controls.horaFin?.dirty && editForm.controls.horaFin?.invalid)">
-                        <small class="form-text text-danger" [hidden]="!editForm.controls.horaFin?.errors?.required">
-                            Este campo es requerido
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.horaFin?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_notaExtra">Nota Extra</label>
-                    <input type="text" class="form-control" name="notaExtra" id="field_notaExtra" [(ngModel)]="tarea.notaExtra" />
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.notaExtra" for="field_notaExtra">Nota Extra</label>
+                    <input type="text" class="form-control" name="notaExtra" id="field_notaExtra"
+                        [(ngModel)]="tarea.notaExtra" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_firma">Firma</label>
-                    <input type="text" class="form-control" name="firma" id="field_firma" [(ngModel)]="tarea.firma" />
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.firma" for="field_firma">Firma</label>
+                    <input type="text" class="form-control" name="firma" id="field_firma"
+                        [(ngModel)]="tarea.firma" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_activa">Activa</label>
-                    <input type="checkbox" class="form-control" name="activa" id="field_activa" [(ngModel)]="tarea.activa" />
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.activa" for="field_activa">Activa</label>
+                    <input type="checkbox" class="form-control" name="activa" id="field_activa"
+                        [(ngModel)]="tarea.activa" />
                     <div [hidden]="!(editForm.controls.activa?.dirty && editForm.controls.activa?.invalid)">
-                        <small class="form-text text-danger" [hidden]="!editForm.controls.activa?.errors?.required">
-                            Este campo es requerido
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.activa?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_completada">Completada</label>
-                    <input type="checkbox" class="form-control" name="completada" id="field_completada" [(ngModel)]="tarea.completada" />
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.completada" for="field_completada">Completada</label>
+                    <input type="checkbox" class="form-control" name="completada" id="field_completada"
+                        [(ngModel)]="tarea.completada" />
                     <div [hidden]="!(editForm.controls.completada?.dirty && editForm.controls.completada?.invalid)">
-                        <small class="form-text text-danger" [hidden]="!editForm.controls.completada?.errors?.required">
-                            Este campo es requerido
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.completada?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_borrado">Borrado</label>
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.borrado" for="field_borrado">Borrado</label>
                     <input type="checkbox" class="form-control" name="borrado" id="field_borrado"
                         [(ngModel)]="tarea.borrado" />
-                </div-->
+                </div>
 
-                <!--div class="form-group">
-                    <label class="form-control-label" for="field_subtarea">Subtarea</label>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.subtarea" for="field_subtarea">Subtarea</label>
                     <select class="form-control" id="field_subtarea" name="subtarea" [(ngModel)]="tarea.subtarea">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="subTareaOption.id === tarea.subtarea?.id ? tarea.subtarea : subTareaOption" *ngFor="let subTareaOption of subtareas; trackBy: trackSubTareaById">{{subTareaOption.id}}</option>
                     </select>
-                </div-->
+                </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_empleado">Empleado</label>
-                    <!--<select class="form-control" id="field_empleado" name="empleado" (change)="onEmpleadoChangeCustom(empleadoOption)">-->
-                        <!--<option> </option>-->
-                        <!--<option [ngValue]="empleadoOption" *ngFor="let empleadoOption of empleados">{{empleadoOption.nombre}} {{empleadoOption.apellidos}}</option>-->
-                    <!--</select>-->
-                    <select  class="form-control" id="field_empleado" name="empleado" [(ngModel)]="tarea.empleado">
-                        <option [ngValue]="empleadoOption.id === tarea.empleado?.id ? tarea.empleado : empleadoOption" *ngFor="let empleadoOption of empleados; trackBy: trackEmpleadoById">{{empleadoOption.nombre}} {{empleadoOption.apellidos}}</option>
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.empleado" for="field_empleado">Empleado</label>
+                    <select class="form-control" id="field_empleado" name="empleado" [(ngModel)]="tarea.empleado">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="empleadoOption.id === tarea.empleado?.id ? tarea.empleado : empleadoOption" *ngFor="let empleadoOption of empleados; trackBy: trackEmpleadoById">{{empleadoOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_cliente">Cliente</label>
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.ubicacion" for="field_ubicacion">Ubicacion</label>
+                    <select class="form-control" id="field_ubicacion" name="ubicacion" [(ngModel)]="tarea.ubicacion">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="ubicacionOption.id === tarea.ubicacion?.id ? tarea.ubicacion : ubicacionOption" *ngFor="let ubicacionOption of ubicacions; trackBy: trackUbicacionById">{{ubicacionOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.cliente" for="field_cliente">Cliente</label>
                     <select class="form-control" id="field_cliente" name="cliente" [(ngModel)]="tarea.cliente">
-                        <option [ngValue]="clienteOption.id === tarea.cliente?.id ? tarea.cliente : clienteOption" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.nombre}}</option>
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="clienteOption.id === tarea.cliente?.id ? tarea.cliente : clienteOption" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.id}}</option>
                     </select>
                 </div>
-                <div *ngIf="tarea.usarRuta" class="form-group">
-                    <label class="form-control-label" for="field_ruta">Ruta</label>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.ruta" for="field_ruta">Ruta</label>
                     <select class="form-control" id="field_ruta" name="ruta" [(ngModel)]="tarea.ruta">
-                        <option [ngValue]="rutaOption.id === tarea.ruta?.id ? tarea.ruta : rutaOption" *ngFor="let rutaOption of rutas; trackBy: trackRutaById">{{rutaOption.nombre}}</option>
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="rutaOption.id === tarea.ruta?.id ? tarea.ruta : rutaOption" *ngFor="let rutaOption of rutas; trackBy: trackRutaById">{{rutaOption.id}}</option>
                     </select>
                 </div>
-                <!--div class="form-group">
-                    <label class="form-control-label" for="field_logs">Logs</label>
-                    <select class="form-control" id="field_logs" name="logs" [(ngModel)]="tarea.logs">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gpsApp.tarea.logs" for="field_logs">Logs</label>
+                    <select class="form-control" id="field_logs" name="logs" [(ngModel)]="tarea.logs" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="logOption.id === tarea.logs?.id ? tarea.logs : logOption" *ngFor="let logOption of logs; trackBy: trackLogById">{{logOption.id}}</option>
                     </select>
-                </div-->
+                </div>
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Guardar</span>
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
         </form>
-    </div>
-    <div class="col-6">
-        <div>
-            <h3>Ubicación</h3>
-            <input ngx-google-places-autocomplete class="form-control" id="autoComplete"
-                   name="autoComplete" placeholder="Ingrese una ubicación"
-                   #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
-            <br>
-            <agm-map [latitude]="9.935697"
-                     [longitude]="-84.1484506"
-                     [zoom]="zoom"
-                     (mapClick)="onChoseLocation($event)"
-                     style="height: 300px">
-                <agm-marker
-                    [latitude]="tarea.ubicacion.latitud"
-                    [longitude]="tarea.ubicacion.longitud">
-                </agm-marker>
-            </agm-map>
-        </div>
-        <!--<div style="margin-top: 10px">-->
-            <!--<h3>Subtareas</h3>-->
-            <!--<input type="text" class="form-control" #box (keyup.enter)="addSubtarea(box.value)"-->
-                   <!--placeholder="Agregar nueva subtarea" [(ngModel)]="nvaSubtarea"/>-->
-            <!--<div style="margin-top: 10px;">-->
-                <!--<ul class="list-group">-->
-                    <!--<li *ngFor="let subtarea of subtareas; index as i; trackBy: trackByFn" class="list-group-item d-flex justify-content-between align-items-center">-->
-                        <!--{{i+1}}. {{subtarea.descripcion}}-->
-                        <!--<fa-icon icon="times" (click)="eliminarSubtarea(i)"></fa-icon>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</div>-->
-        <!--</div>-->
     </div>
 </div>

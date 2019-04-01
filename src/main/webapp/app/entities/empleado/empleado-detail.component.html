@@ -1,38 +1,44 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="empleado">
-            <h2><span>Empleado</span> {{empleado.id}}</h2>
+            <h2><span jhiTranslate="gpsApp.empleado.detail.title">Empleado</span> {{empleado.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Id Usuario Relacion</span></dt>
+                <dt><span jhiTranslate="gpsApp.empleado.idUsuarioRelacion">Id Usuario Relacion</span></dt>
                 <dd>
                     <span>{{empleado.idUsuarioRelacion}}</span>
                 </dd>
-                <dt><span>Nombre</span></dt>
+                <dt><span jhiTranslate="gpsApp.empleado.nombre">Nombre</span></dt>
                 <dd>
                     <span>{{empleado.nombre}}</span>
                 </dd>
-                <dt><span>Apellidos</span></dt>
+                <dt><span jhiTranslate="gpsApp.empleado.apellidos">Apellidos</span></dt>
                 <dd>
                     <span>{{empleado.apellidos}}</span>
                 </dd>
-                <dt><span>Ubicacion</span></dt>
+                <dt><span jhiTranslate="gpsApp.empleado.ubicacion">Ubicacion</span></dt>
                 <dd>
                     <div *ngIf="empleado.ubicacion">
                         <a [routerLink]="['/ubicacion', empleado.ubicacion?.id, 'view']">{{empleado.ubicacion?.id}}</a>
                     </div>
                 </dd>
-                <dt><span>Horarios</span></dt>
+                <dt><span jhiTranslate="gpsApp.empleado.horarios">Horarios</span></dt>
                 <dd>
                     <div *ngIf="empleado.horarios">
                         <a [routerLink]="['/horario', empleado.horarios?.id, 'view']">{{empleado.horarios?.id}}</a>
                     </div>
                 </dd>
-                <dt><span>Tipo</span></dt>
+                <dt><span jhiTranslate="gpsApp.empleado.tipo">Tipo</span></dt>
                 <dd>
                     <div *ngIf="empleado.tipo">
                         <a [routerLink]="['/tipo-empleado', empleado.tipo?.id, 'view']">{{empleado.tipo?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="gpsApp.empleado.empleados">Empleados</span></dt>
+                <dd>
+                    <div *ngIf="empleado.empleados">
+                        <a [routerLink]="['/chat', empleado.empleados?.id, 'view']">{{empleado.empleados?.id}}</a>
                     </div>
                 </dd>
             </dl>
@@ -40,13 +46,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/empleado', empleado.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>
     </div>

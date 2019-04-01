@@ -1,15 +1,15 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="subTarea">
-            <h2><span>Sub Tarea</span> {{subTarea.id}}</h2>
+            <h2><span jhiTranslate="gpsApp.subTarea.detail.title">Sub Tarea</span> {{subTarea.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Descripcion</span></dt>
+                <dt><span jhiTranslate="gpsApp.subTarea.descripcion">Descripcion</span></dt>
                 <dd>
                     <span>{{subTarea.descripcion}}</span>
                 </dd>
-                <dt><span>Completado</span></dt>
+                <dt><span jhiTranslate="gpsApp.subTarea.completado">Completado</span></dt>
                 <dd>
                     <span>{{subTarea.completado}}</span>
                 </dd>
@@ -18,13 +18,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/sub-tarea', subTarea.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>
     </div>

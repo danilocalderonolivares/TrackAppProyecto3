@@ -34,7 +34,7 @@ export const logRoute: Routes = [
         component: LogComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Logs'
+            pageTitle: 'gpsApp.log.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -46,7 +46,7 @@ export const logRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Logs'
+            pageTitle: 'gpsApp.log.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -58,7 +58,7 @@ export const logRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Logs'
+            pageTitle: 'gpsApp.log.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -70,7 +70,7 @@ export const logRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Logs'
+            pageTitle: 'gpsApp.log.home.title'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -85,7 +85,7 @@ export const logPopupRoute: Routes = [
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Logs'
+            pageTitle: 'gpsApp.log.home.title'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

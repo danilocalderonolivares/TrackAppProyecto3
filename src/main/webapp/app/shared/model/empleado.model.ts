@@ -1,6 +1,7 @@
 import { IUbicacion } from 'app/shared/model/ubicacion.model';
 import { IHorario } from 'app/shared/model/horario.model';
 import { ITipoEmpleado } from 'app/shared/model/tipo-empleado.model';
+import { IChat } from 'app/shared/model/chat.model';
 
 export interface IEmpleado {
     id?: string;
@@ -10,6 +11,7 @@ export interface IEmpleado {
     ubicacion?: IUbicacion;
     horarios?: IHorario;
     tipo?: ITipoEmpleado;
+    empleados?: IChat;
 }
 
 export class Empleado implements IEmpleado {
@@ -20,6 +22,7 @@ export class Empleado implements IEmpleado {
         public apellidos?: string,
         public ubicacion?: IUbicacion,
         public horarios?: IHorario,
-        public tipo?: ITipoEmpleado
+        public tipo?: ITipoEmpleado,
+        public empleados?: IChat
     ) {}
 }

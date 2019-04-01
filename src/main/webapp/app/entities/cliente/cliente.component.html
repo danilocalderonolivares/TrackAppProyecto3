@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span>Clientes</span>
+        <span jhiTranslate="gpsApp.cliente.home.title">Clientes</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cliente" [routerLink]="['/cliente/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
-           Crear nuevo cliente
+            <span  jhiTranslate="gpsApp.cliente.home.createLabel">
+            Create new Cliente
             </span>
         </button>
     </h2>
@@ -14,32 +14,44 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span>Nombre</span></th>
-            <th><span>Cédula</span></th>
-            <th><span>Dirección</span></th>
-            <th><span>Correo</span></th>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="gpsApp.cliente.nombre">Nombre</span></th>
+            <th><span jhiTranslate="gpsApp.cliente.cedula">Cedula</span></th>
+            <th><span jhiTranslate="gpsApp.cliente.direccion">Direccion</span></th>
+            <th><span jhiTranslate="gpsApp.cliente.correo">Correo</span></th>
+            <th><span jhiTranslate="gpsApp.cliente.esEmpresa">Es Empresa</span></th>
+            <th><span jhiTranslate="gpsApp.cliente.borrado">Borrado</span></th>
+            <th><span jhiTranslate="gpsApp.cliente.ubicacion">Ubicacion</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let cliente of clientes ;trackBy: trackId">
+                <td><a [routerLink]="['/cliente', cliente.id, 'view' ]">{{cliente.id}}</a></td>
                 <td>{{cliente.nombre}}</td>
                 <td>{{cliente.cedula}}</td>
                 <td>{{cliente.direccion}}</td>
                 <td>{{cliente.correo}}</td>
+                <td>{{cliente.esEmpresa}}</td>
+                <td>{{cliente.borrado}}</td>
+                <td>
+                    <div *ngIf="cliente.ubicacion">
+                        <a [routerLink]="['../ubicacion', cliente.ubicacion?.id, 'view' ]" >{{cliente.ubicacion?.id}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
                                 [routerLink]="['/cliente', cliente.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">Ver</span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/cliente', cliente.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Editar</span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', 'cliente', { outlets: { popup: cliente.id + '/delete'} }]"
@@ -47,7 +59,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Eliminar</span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                     </div>
                 </td>

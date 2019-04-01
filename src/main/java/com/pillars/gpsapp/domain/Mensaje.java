@@ -1,6 +1,7 @@
 package com.pillars.gpsapp.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -28,19 +28,16 @@ public class Mensaje implements Serializable {
 
     @NotNull
     @Field("fecha_envio")
-    private LocalDate fechaEnvio;
-
-    @NotNull
-    @Field("visto")
-    private Boolean visto;
-
-    @NotNull
-    @Field("borrado")
-    private Boolean borrado;
+    private String fechaEnvio;
 
     @DBRef
     @Field("empleado")
     private Empleado empleado;
+
+    @DBRef
+    @Field("mensajes")
+    @JsonIgnoreProperties("mensajes")
+    private Chat mensajes;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -64,43 +61,17 @@ public class Mensaje implements Serializable {
         this.texto = texto;
     }
 
-    public LocalDate getFechaEnvio() {
+    public String getFechaEnvio() {
         return fechaEnvio;
     }
 
-    public Mensaje fechaEnvio(LocalDate fechaEnvio) {
+    public Mensaje fechaEnvio(String fechaEnvio) {
         this.fechaEnvio = fechaEnvio;
         return this;
     }
 
-    public void setFechaEnvio(LocalDate fechaEnvio) {
+    public void setFechaEnvio(String fechaEnvio) {
         this.fechaEnvio = fechaEnvio;
-    }
-
-    public Boolean isVisto() {
-        return visto;
-    }
-
-    public Mensaje visto(Boolean visto) {
-        this.visto = visto;
-        return this;
-    }
-
-    public void setVisto(Boolean visto) {
-        this.visto = visto;
-    }
-
-    public Boolean isBorrado() {
-        return borrado;
-    }
-
-    public Mensaje borrado(Boolean borrado) {
-        this.borrado = borrado;
-        return this;
-    }
-
-    public void setBorrado(Boolean borrado) {
-        this.borrado = borrado;
     }
 
     public Empleado getEmpleado() {
@@ -114,6 +85,19 @@ public class Mensaje implements Serializable {
 
     public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
+    }
+
+    public Chat getMensajes() {
+        return mensajes;
+    }
+
+    public Mensaje mensajes(Chat chat) {
+        this.mensajes = chat;
+        return this;
+    }
+
+    public void setMensajes(Chat chat) {
+        this.mensajes = chat;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -143,8 +127,6 @@ public class Mensaje implements Serializable {
             "id=" + getId() +
             ", texto='" + getTexto() + "'" +
             ", fechaEnvio='" + getFechaEnvio() + "'" +
-            ", visto='" + isVisto() + "'" +
-            ", borrado='" + isBorrado() + "'" +
             "}";
     }
 }

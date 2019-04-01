@@ -1,36 +1,42 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="ruta">
-            <h2><span>Ruta</span> {{ruta.nombre}}</h2>
+            <h2><span jhiTranslate="gpsApp.ruta.detail.title">Ruta</span> {{ruta.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Nombre</span></dt>
+                <dt><span jhiTranslate="gpsApp.ruta.nombre">Nombre</span></dt>
                 <dd>
                     <span>{{ruta.nombre}}</span>
                 </dd>
-                <dt><span>Descripción</span></dt>
+                <dt><span jhiTranslate="gpsApp.ruta.descripcion">Descripcion</span></dt>
                 <dd>
                     <span>{{ruta.descripcion}}</span>
                 </dd>
-                <dt><span>Ubicaciones</span></dt>
+                <dt><span jhiTranslate="gpsApp.ruta.borrado">Borrado</span></dt>
                 <dd>
-                    <ul *ngFor="let ubication of ruta.ubicaciones">
-                        <li>{{ubication.nombreDireccion}}</li>
-                    </ul>
+                    <span>{{ruta.borrado}}</span>
+                </dd>
+                <dt><span jhiTranslate="gpsApp.ruta.puntoInicio">Punto Inicio</span></dt>
+                <dd>
+                    <span>{{ruta.puntoInicio}}</span>
+                </dd>
+                <dt><span jhiTranslate="gpsApp.ruta.puntoLLegada">Punto L Legada</span></dt>
+                <dd>
+                    <span>{{ruta.puntoLLegada}}</span>
                 </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Volver</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/ruta', ruta.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Editar</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>
     </div>

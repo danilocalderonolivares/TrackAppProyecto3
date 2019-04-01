@@ -1,7 +1,6 @@
 package com.pillars.gpsapp.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,8 +8,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -24,22 +21,15 @@ public class Ubicacion implements Serializable {
     @Id
     private String id;
 
-    @NotNull
+    @Field("longitud")
+    private Double longitud;
+
     @Field("latitud")
     private Double latitud;
 
     @NotNull
-    @Field("longitud")
-    private Double longitud;
-
-    @NotNull
     @Field("nombre_direccion")
     private String nombreDireccion;
-
-    @DBRef
-    @Field("rutas")
-    @JsonIgnore
-    private Set<Ruta> rutas = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -48,19 +38,6 @@ public class Ubicacion implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Double getLatitud() {
-        return latitud;
-    }
-
-    public Ubicacion latitud(Double latitud) {
-        this.latitud = latitud;
-        return this;
-    }
-
-    public void setLatitud(Double latitud) {
-        this.latitud = latitud;
     }
 
     public Double getLongitud() {
@@ -76,6 +53,19 @@ public class Ubicacion implements Serializable {
         this.longitud = longitud;
     }
 
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public Ubicacion latitud(Double latitud) {
+        this.latitud = latitud;
+        return this;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
     public String getNombreDireccion() {
         return nombreDireccion;
     }
@@ -87,31 +77,6 @@ public class Ubicacion implements Serializable {
 
     public void setNombreDireccion(String nombreDireccion) {
         this.nombreDireccion = nombreDireccion;
-    }
-
-    public Set<Ruta> getRutas() {
-        return rutas;
-    }
-
-    public Ubicacion rutas(Set<Ruta> rutas) {
-        this.rutas = rutas;
-        return this;
-    }
-
-    public Ubicacion addRutas(Ruta ruta) {
-        this.rutas.add(ruta);
-        ruta.getUbicaciones().add(this);
-        return this;
-    }
-
-    public Ubicacion removeRutas(Ruta ruta) {
-        this.rutas.remove(ruta);
-        ruta.getUbicaciones().remove(this);
-        return this;
-    }
-
-    public void setRutas(Set<Ruta> rutas) {
-        this.rutas = rutas;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -139,8 +104,8 @@ public class Ubicacion implements Serializable {
     public String toString() {
         return "Ubicacion{" +
             "id=" + getId() +
-            ", latitud=" + getLatitud() +
             ", longitud=" + getLongitud() +
+            ", latitud=" + getLatitud() +
             ", nombreDireccion='" + getNombreDireccion() + "'" +
             "}";
     }

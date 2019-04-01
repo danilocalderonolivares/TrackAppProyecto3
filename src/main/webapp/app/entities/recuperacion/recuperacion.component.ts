@@ -48,7 +48,6 @@ export class RecuperacionComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.registerChangeInRecuperacions();
         this.eventManager.destroy(this.eventSubscriber);
     }
 

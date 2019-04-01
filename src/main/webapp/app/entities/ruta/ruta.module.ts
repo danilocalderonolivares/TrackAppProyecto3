@@ -1,5 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { JhiLanguageService } from 'ng-jhipster';
+import { JhiLanguageHelper } from 'app/core';
 
 import { GpsAppSharedModule } from 'app/shared';
 import {
@@ -11,33 +13,22 @@ import {
     rutaRoute,
     rutaPopupRoute
 } from './';
-import { UbicacionFormComponent } from './ubicacion/ubicacion-form.component';
-import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
-import { AgmCoreModule } from '@agm/core';
-import { MapaRutaComponent } from './mapaRutas/mapa-ruta.component';
 
 const ENTITY_STATES = [...rutaRoute, ...rutaPopupRoute];
 
 @NgModule({
-    imports: [
-        GpsAppSharedModule,
-        RouterModule.forChild(ENTITY_STATES),
-        GooglePlaceModule,
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyA6qPYcS3xkzoGTXEeljg5g_CE3m0wBTlI',
-            libraries: ['places']
-        })
-    ],
-    declarations: [
-        RutaComponent,
-        RutaDetailComponent,
-        RutaUpdateComponent,
-        RutaDeleteDialogComponent,
-        RutaDeletePopupComponent,
-        UbicacionFormComponent,
-        MapaRutaComponent
-    ],
+    imports: [GpsAppSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    declarations: [RutaComponent, RutaDetailComponent, RutaUpdateComponent, RutaDeleteDialogComponent, RutaDeletePopupComponent],
     entryComponents: [RutaComponent, RutaUpdateComponent, RutaDeleteDialogComponent, RutaDeletePopupComponent],
+    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class GpsAppRutaModule {}
+export class GpsAppRutaModule {
+    constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
+        this.languageHelper.language.subscribe((languageKey: string) => {
+            if (languageKey !== undefined) {
+                this.languageService.changeLanguage(languageKey);
+            }
+        });
+    }
+}

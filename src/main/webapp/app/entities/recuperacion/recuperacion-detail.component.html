@@ -1,19 +1,19 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="recuperacion">
-            <h2><span>Recuperacion</span> {{recuperacion.id}}</h2>
+            <h2><span jhiTranslate="gpsApp.recuperacion.detail.title">Recuperacion</span> {{recuperacion.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Activo</span></dt>
+                <dt><span jhiTranslate="gpsApp.recuperacion.activo">Activo</span></dt>
                 <dd>
                     <span>{{recuperacion.activo}}</span>
                 </dd>
-                <dt><span>Borrado</span></dt>
+                <dt><span jhiTranslate="gpsApp.recuperacion.borrado">Borrado</span></dt>
                 <dd>
                     <span>{{recuperacion.borrado}}</span>
                 </dd>
-                <dt><span>Empleado</span></dt>
+                <dt><span jhiTranslate="gpsApp.recuperacion.empleado">Empleado</span></dt>
                 <dd>
                     <div *ngIf="recuperacion.empleado">
                         <a [routerLink]="['/empleado', recuperacion.empleado?.id, 'view']">{{recuperacion.empleado?.id}}</a>
@@ -24,13 +24,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/recuperacion', recuperacion.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>
     </div>

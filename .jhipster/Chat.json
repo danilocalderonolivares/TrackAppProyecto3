@@ -1,0 +1,35 @@
+{
+    "name": "Chat",
+    "fields": [
+        {
+            "fieldName": "nombre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "empleado",
+            "otherEntityRelationshipName": "empleados",
+            "relationshipName": "empleado"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "mensaje",
+            "otherEntityRelationshipName": "mensajes",
+            "relationshipName": "mensaje"
+        }
+    ],
+    "changelogDate": "20190401085219",
+    "entityTableName": "chat",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
