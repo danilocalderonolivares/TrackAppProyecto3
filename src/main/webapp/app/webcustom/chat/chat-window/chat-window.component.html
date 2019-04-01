@@ -1,4 +1,4 @@
-<div class="container" style="height: 800px;  overflow-y: scroll;">
+<div class="container" style="height: 560px;  overflow-y: scroll;">
     <div style="margin-bottom: 26px; margin-top: 26px; overflow: hidden">
         <div class="alert alert-success w-50" style="background-color: #EBEBEB; margin-bottom: 15px; border-radius: 0 15px 15px 15px;">
             <strong>Success! You should read this message</strong>
@@ -22,9 +22,9 @@
 </div>
 <div class="input-group">
     <div class="custom-file">
-        <input type="text" class="form-control" placeholder="Escriba su mensaje aquí..">
+        <input [(ngModel)]="message" type="text" class="form-control" placeholder="Escriba su mensaje aquí..">
     </div>
     <div class="input-group-append">
-        <a class="btn btn-primary" style="background-color: #007bff; color: #ffffff;">Enviar</a>
+        <a (click)="sendMessage()" class="btn btn-primary" style="background-color: #007bff; color: #ffffff;">Enviar</a>
     </div>
 </div>

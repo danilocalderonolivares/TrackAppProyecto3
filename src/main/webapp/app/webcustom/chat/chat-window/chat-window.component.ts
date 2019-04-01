@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatService } from 'app/webcustom/chat/chat.service';
 
 @Component({
     selector: 'jhi-chat-window',
@@ -8,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class ChatWindowComponent implements OnInit {
     message: string;
 
-    constructor() {}
+    constructor(private chatService: ChatService) {}
 
     ngOnInit() {}
+
+    sendMessage() {
+        this.chatService.sendMessage(this.message);
+        this.message = '';
+    }
 }

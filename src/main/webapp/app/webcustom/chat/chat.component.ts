@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatService } from 'app/webcustom/chat/chat.service';
 
 @Component({
     selector: 'jhi-chat',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
     styles: []
 })
 export class ChatComponent implements OnInit {
-    constructor() {}
+    constructor(private chatService: ChatService) {}
 
     ngOnInit() {}
 }
