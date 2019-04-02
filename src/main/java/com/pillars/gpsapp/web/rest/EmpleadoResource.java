@@ -2,6 +2,7 @@ package com.pillars.gpsapp.web.rest;
 import com.pillars.gpsapp.domain.Authority;
 import com.pillars.gpsapp.domain.Empleado;
 import com.pillars.gpsapp.domain.User;
+import com.pillars.gpsapp.domain.UserCustom;
 import com.pillars.gpsapp.repository.EmpleadoRepository;
 import com.pillars.gpsapp.repository.UserRepository;
 import com.pillars.gpsapp.web.rest.errors.BadRequestAlertException;
@@ -184,4 +185,23 @@ public class EmpleadoResource {
         return listEmpFinal;
     }
 
+    @GetMapping("/empleados-customizable")
+    private List<UserCustom> getEmployeesCustom() {
+        List<Empleado> listEmp = empleadoRepository.findAll();
+        List<User> listUsers = userRepository.findAll();
+        List<UserCustom> customList = new ArrayList<UserCustom>();
+
+        for(int i = 0; i <= listUsers.size() - 1; i++){
+            Optional user = userRepository.findById(listUsers.get(i).getId());
+            User newUser = (User)user.get();
+            Empleado newEmpleado = listEmp.get(i);
+            Set<Authority> Authorities = newUser.getAuthorities();
+            for(Authority authority: Authorities){
+                if(authority.getName().equals("ROLE_USER")){
+                    customList.add(new UserCustom(listUsers.get(i), newEmpleado));
+                }
+            }
+        }
+        return customList;
+    }
 }
