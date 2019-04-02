@@ -74,7 +74,7 @@
         "moment-locales-webpack-plugin": "1.0.7",
         "optimize-css-assets-webpack-plugin": "5.0.1",
         "postcss-loader": "3.0.0",
-        "prettier": "1.16.1",
+        "prettier": "^1.16.1",
         "reflect-metadata": "0.1.13",
         "rimraf": "2.6.3",
         "sass": "1.16.1",
