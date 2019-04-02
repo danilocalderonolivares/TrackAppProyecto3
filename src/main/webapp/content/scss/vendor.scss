@@ -5,12 +5,13 @@ put Sass variables here:
 eg $input-color: red;
 ****************************/
 // Override Boostrap variables
-@import 'bootstrap-variables';
+//@import 'bootstrap-variables';
 // Import Bootstrap source files from node_modules
-@import '~bootstrap/scss/bootstrap';
+//@import '~bootstrap/scss/bootstrap';
 //@import '../css/bootstrap.min.css';
 
 @import '~angular-calendar/css/angular-calendar.css';
 @import '~ng-pick-datetime/assets/style/picker.min.css';
 
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 /* jhipster-needle-scss-add-vendor JHipster will add new css style */

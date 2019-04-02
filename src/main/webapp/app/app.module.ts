@@ -25,6 +25,8 @@ import { GpsAppEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 import { GpsAppWebCustomModule } from './webcustom/web-custom.module';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+import 'hammerjs';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
@@ -35,6 +37,8 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
         BrowserAnimationsModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         NgJhipsterModule.forRoot({
