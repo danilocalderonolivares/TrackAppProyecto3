@@ -58,4 +58,9 @@ export class EmpleadoService {
         const options = createRequestOption(req);
         return this.http.get<IEmpleado[]>(this.resourceUrl + '-custom', { params: options, observe: 'response' });
     }
+
+    getEmployeesCustom(): Observable<EntityArrayResponseType> {
+        const test = this.http.get<any[]>(this.resourceUrl + '/empleados-customized', { observe: 'response' });
+        return test;
+    }
 }

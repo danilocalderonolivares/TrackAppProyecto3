@@ -1,8 +1,8 @@
 package com.pillars.gpsapp.web.rest;
+
 import com.pillars.gpsapp.domain.Authority;
 import com.pillars.gpsapp.domain.Empleado;
 import com.pillars.gpsapp.domain.User;
-import com.pillars.gpsapp.domain.UserCustom;
 import com.pillars.gpsapp.repository.EmpleadoRepository;
 import com.pillars.gpsapp.repository.UserRepository;
 import com.pillars.gpsapp.web.rest.errors.BadRequestAlertException;
@@ -44,7 +44,6 @@ public class EmpleadoResource {
     public EmpleadoResource(EmpleadoRepository empleadoRepository) {
         this.empleadoRepository = empleadoRepository;
     }
-
 
 
     /**
@@ -128,7 +127,7 @@ public class EmpleadoResource {
     public ResponseEntity<Void> deleteByRelationId(@PathVariable String id) {
         log.debug("REST request to delete Empleado : {}", id);
         empleadoRepository.deleteByRelationshipId(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME,id)).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
 
     @GetMapping("/empleados/findByRelationshipId/{id}")
@@ -166,18 +165,19 @@ public class EmpleadoResource {
     }
 
     /**
-     *  This method extract all the employees in the system
+     * This method extract all the employees in the system
+     *
      * @param listEmp
      * @param listUsers
      * @return listEmp
      */
     private List<Empleado> ExtractEmployees(List<Empleado> listEmp, List<User> listUsers) {
         List<Empleado> listEmpFinal = new ArrayList<>();
-        for(int i = 0; i <= listUsers.size() - 1; i++){
+        for (int i = 0; i <= listUsers.size() - 1; i++) {
             User user = listUsers.get(i);
             Set<Authority> Authorities = user.getAuthorities();
-            for(Authority authority: Authorities){
-                if(authority.getName().equals("ROLE_USER")){
+            for (Authority authority : Authorities) {
+                if (authority.getName().equals("ROLE_USER")) {
                     listEmpFinal.add(listEmp.get(i));
                 }
             }
@@ -185,8 +185,8 @@ public class EmpleadoResource {
         return listEmpFinal;
     }
 
-    @GetMapping("/empleados-customizable")
-    private List<UserCustom> getEmployeesCustom() {
+    /*@GetMapping("/empleados/empleados-customized")
+    public List<UserCustom> getEmployeesCustom() {
         List<Empleado> listEmp = empleadoRepository.findAll();
         List<User> listUsers = userRepository.findAll();
         List<UserCustom> customList = new ArrayList<UserCustom>();
@@ -203,5 +203,5 @@ public class EmpleadoResource {
             }
         }
         return customList;
-    }
+    }*/
 }
