@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * REST controller for managing Empleado.
@@ -185,23 +182,16 @@ public class EmpleadoResource {
         return listEmpFinal;
     }
 
-    /*@GetMapping("/empleados/empleados-customized")
-    public List<UserCustom> getEmployeesCustom() {
-        List<Empleado> listEmp = empleadoRepository.findAll();
-        List<User> listUsers = userRepository.findAll();
-        List<UserCustom> customList = new ArrayList<UserCustom>();
+    @GetMapping("/empleados/empleado-customized/{username}")
+    public Optional getEmployeesCustom(@PathVariable String username) {
 
-        for(int i = 0; i <= listUsers.size() - 1; i++){
-            Optional user = userRepository.findById(listUsers.get(i).getId());
-            User newUser = (User)user.get();
-            Empleado newEmpleado = listEmp.get(i);
-            Set<Authority> Authorities = newUser.getAuthorities();
-            for(Authority authority: Authorities){
-                if(authority.getName().equals("ROLE_USER")){
-                    customList.add(new UserCustom(listUsers.get(i), newEmpleado));
-                }
-            }
-        }
+        Optional user = userRepository.findOneByLogin(username);
+        User userFound = (User)user.get();
+        Optional empleado = empleadoRepository.findByRelationshipId(userFound.getId());
+        Empleado empleadoFound = (Empleado)empleado.get();
+
+        Optional fullUserInfo = new Optional<>();
+        
         return customList;
-    }*/
+    }
 }

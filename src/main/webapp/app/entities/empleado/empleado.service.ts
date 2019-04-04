@@ -5,7 +5,6 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IEmpleado } from 'app/shared/model/empleado.model';
 import { UserService } from 'app/core';
-import { UserCustomUser } from 'app/shared/model/user_CustomUser.model';
 
 type EntityResponseType = HttpResponse<IEmpleado>;
 type EntityArrayResponseType = HttpResponse<IEmpleado[]>;
