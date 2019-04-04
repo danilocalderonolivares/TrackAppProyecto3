@@ -29,7 +29,7 @@ import { GpsAppWebCustomModule } from './webcustom/web-custom.module';
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { LandingComponent } from './layouts/landing/landing.component';
-import { MapaService } from './webcustom/empleados/mapa/mapa.service';
+import { MapService } from './shared/map/map.service';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -82,7 +82,7 @@ import { FormsModule } from '@angular/forms';
             useClass: NotificationInterceptor,
             multi: true
         },
-        MapaService
+        MapService
     ],
     bootstrap: [JhiMainComponent]
 })

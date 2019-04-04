@@ -14,7 +14,7 @@
             <strong>
                 <a (click)="this.mapaService.onEmployeeCliked(empleado)"
                    [routerLink]="['/empleados', empleado.id]">
-                {{empleado.nombre +' '+ empleado.apellido}}
+                {{empleado.nombre +' '+ empleado.apellidos}}
                 </a>
             </strong>
         </agm-info-window>
