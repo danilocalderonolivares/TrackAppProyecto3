@@ -7,7 +7,8 @@ import { IEmpleado } from 'app/shared/model/empleado.model';
 import { UserService } from 'app/core';
 
 type EntityResponseType = HttpResponse<IEmpleado>;
-type EntityArrayResponseType = HttpResponse<IEmpleado[]>;
+type EntityArrayResponseType = HttpResponse<any>;
+// Se cambio IEmpleado[] por any, para que el método getEmployeesCustom funcionara apropiadamente
 
 @Injectable({ providedIn: 'root' })
 export class EmpleadoService {
@@ -58,8 +59,7 @@ export class EmpleadoService {
         return this.http.get<IEmpleado[]>(this.resourceUrl + '-custom', { params: options, observe: 'response' });
     }
 
-    getEmployeesCustom(): Observable<EntityArrayResponseType> {
-        const test = this.http.get<any[]>(this.resourceUrl + '/empleados-customized', { observe: 'response' });
-        return test;
+    getEmployeesCustom(username: string): Observable<EntityArrayResponseType> {
+        return this.http.get<any[]>(`${this.resourceUrl + '/empleado-customized'}/${username}`, { observe: 'response' });
     }
 }

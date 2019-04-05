@@ -7,6 +7,7 @@ import com.pillars.gpsapp.repository.EmpleadoRepository;
 import com.pillars.gpsapp.repository.UserRepository;
 import com.pillars.gpsapp.web.rest.errors.BadRequestAlertException;
 import com.pillars.gpsapp.web.rest.util.HeaderUtil;
+import com.pillars.gpsapp.web.rest.vm.LoginVM;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * REST controller for managing Empleado.
@@ -183,15 +185,15 @@ public class EmpleadoResource {
     }
 
     @GetMapping("/empleados/empleado-customized/{username}")
-    public Optional getEmployeesCustom(@PathVariable String username) {
-
+    public Map<String, Object> getEmployeesCustom(@PathVariable String username) {
         Optional user = userRepository.findOneByLogin(username);
         User userFound = (User)user.get();
         Optional empleado = empleadoRepository.findByRelationshipId(userFound.getId());
-        Empleado empleadoFound = (Empleado)empleado.get();
 
-        Optional fullUserInfo = new Optional<>();
-        
-        return customList;
+        Map<String, Object> fullUserInfo = new HashMap<>();
+        fullUserInfo.put("user", userFound);
+        fullUserInfo.put("empleado", empleado.get());
+
+        return fullUserInfo;
     }
 }
