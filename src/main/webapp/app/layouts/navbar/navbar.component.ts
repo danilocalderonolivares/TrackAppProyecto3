@@ -10,7 +10,7 @@ import { faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 @Component({
     selector: 'jhi-navbar',
     templateUrl: './navbar.component.html',
-    styleUrls: ['navbar.scss']
+    styleUrls: ['./navbar.scss']
 })
 export class NavbarComponent implements OnInit {
     inProduction: boolean;
@@ -21,6 +21,8 @@ export class NavbarComponent implements OnInit {
     version: string;
     salir = faSignOutAlt;
     entrat = faSignInAlt;
+    isMenuOpen = true;
+    contentMargin = 240;
     constructor(
         private loginService: LoginService,
         private accountService: AccountService,
@@ -64,5 +66,13 @@ export class NavbarComponent implements OnInit {
 
     getImageUrl() {
         return this.isAuthenticated() ? this.accountService.getImageUrl() : null;
+    }
+    onToolbarMenuToggle() {
+        this.isMenuOpen = !this.isMenuOpen;
+        if (!this.isMenuOpen) {
+            this.contentMargin = 70;
+        } else {
+            this.contentMargin = 240;
+        }
     }
 }

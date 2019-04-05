@@ -1,0 +1,18 @@
+mat-form-field {
+    width: 100%;
+}
+//#mainToolbar{
+//    background-color: white;
+//}
+#toolbarMenu {
+    cursor: pointer;
+    margin-right: 20px;
+}
+#mainToolbar .toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+#mainToolbar .toolbar-icon {
+    cursor: pointer;
+    margin: 0 8px;
+}

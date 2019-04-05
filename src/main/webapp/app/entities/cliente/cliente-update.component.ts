@@ -8,6 +8,7 @@ import { ICliente } from 'app/shared/model/cliente.model';
 import { ClienteService } from './cliente.service';
 import { IUbicacion } from 'app/shared/model/ubicacion.model';
 import { UbicacionService } from 'app/entities/ubicacion';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'jhi-cliente-update',
@@ -15,6 +16,7 @@ import { UbicacionService } from 'app/entities/ubicacion';
     styleUrls: ['./cliente.css']
 })
 export class ClienteUpdateComponent implements OnInit {
+    clienteForm: FormGroup;
     cliente: ICliente;
     isSaving: boolean;
     ubicacions: IUbicacion[];
@@ -31,10 +33,17 @@ export class ClienteUpdateComponent implements OnInit {
         protected jhiAlertService: JhiAlertService,
         protected clienteService: ClienteService,
         protected ubicacionService: UbicacionService,
-        protected activatedRoute: ActivatedRoute
+        protected activatedRoute: ActivatedRoute,
+        private _formBuilder: FormBuilder
     ) {}
 
     ngOnInit() {
+        this.clienteForm = this._formBuilder.group({
+            nombre: ['', Validators.required],
+            cedula: ['', Validators.required],
+            correo: ['', [Validators.required, Validators.email]],
+            direccion: ['', Validators.required]
+        });
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ cliente }) => {
             this.cliente = cliente;

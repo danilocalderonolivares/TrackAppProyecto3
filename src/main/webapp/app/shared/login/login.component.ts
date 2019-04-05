@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
     selector: 'jhi-login-modal',
     templateUrl: './login.component.html',
+    styleUrls: ['./login.scss'],
     animations: fuseAnimations
 })
 export class JhiLoginModalComponent implements AfterViewInit, OnInit {
@@ -39,9 +40,7 @@ export class JhiLoginModalComponent implements AfterViewInit, OnInit {
             password: ['', Validators.required]
         });
     }
-    ngAfterViewInit() {
-        setTimeout(() => this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#username'), 'focus', []), 0);
-    }
+    ngAfterViewInit() {}
 
     cancel() {
         this.credentials = {
