@@ -164,4 +164,8 @@ public class Empleado implements Serializable {
             ", apellidos='" + getApellidos() + "'" +
             "}";
     }
+
+    public Empleado() {
+
+    }
 }

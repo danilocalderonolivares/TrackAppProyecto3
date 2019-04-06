@@ -29,6 +29,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     fullUserInfo: UserCustomUser[];
+    list: any[] = [];
 
     constructor(
         private userService: UserService,
@@ -172,6 +173,10 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
             } else {
             }
         }
+
+        this.empleadoService.getEmployeesCustom('jose').subscribe(response => {
+            console.log(response.body);
+        });
     }
 
     private onError(error) {
