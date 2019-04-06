@@ -1,4 +1,5 @@
 package com.pillars.gpsapp.web.rest;
+
 import com.pillars.gpsapp.domain.Authority;
 import com.pillars.gpsapp.domain.Empleado;
 import com.pillars.gpsapp.domain.User;
@@ -12,14 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * REST controller for managing Empleado.
@@ -43,7 +40,6 @@ public class EmpleadoResource {
     public EmpleadoResource(EmpleadoRepository empleadoRepository) {
         this.empleadoRepository = empleadoRepository;
     }
-
 
 
     /**
@@ -127,7 +123,7 @@ public class EmpleadoResource {
     public ResponseEntity<Void> deleteByRelationId(@PathVariable String id) {
         log.debug("REST request to delete Empleado : {}", id);
         empleadoRepository.deleteByRelationshipId(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME,id)).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
 
     @GetMapping("/empleados/findByRelationshipId/{id}")
@@ -165,18 +161,19 @@ public class EmpleadoResource {
     }
 
     /**
-     *  This method extract all the employees in the system
+     * This method extract all the employees in the system
+     *
      * @param listEmp
      * @param listUsers
      * @return listEmp
      */
     private List<Empleado> ExtractEmployees(List<Empleado> listEmp, List<User> listUsers) {
         List<Empleado> listEmpFinal = new ArrayList<>();
-        for(int i = 0; i <= listUsers.size() - 1; i++){
+        for (int i = 0; i <= listUsers.size() - 1; i++) {
             User user = listUsers.get(i);
             Set<Authority> Authorities = user.getAuthorities();
-            for(Authority authority: Authorities){
-                if(authority.getName().equals("ROLE_USER")){
+            for (Authority authority : Authorities) {
+                if (authority.getName().equals("ROLE_USER")) {
                     listEmpFinal.add(listEmp.get(i));
                 }
             }
@@ -184,4 +181,16 @@ public class EmpleadoResource {
         return listEmpFinal;
     }
 
+    @GetMapping("/empleados/empleado-customized/{username}")
+    public Map<String, Object> getEmployeesCustom(@PathVariable String username) {
+        Optional user = userRepository.findOneByLogin(username);
+        User userFound = (User)user.get();
+        Optional empleado = empleadoRepository.findByRelationshipId(userFound.getId());
+
+        Map<String, Object> fullUserInfo = new HashMap<>();
+        fullUserInfo.put("user", userFound);
+        fullUserInfo.put("empleado", empleado.get());
+
+        return fullUserInfo;
+    }
 }
