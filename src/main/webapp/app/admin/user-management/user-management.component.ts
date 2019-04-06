@@ -29,6 +29,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     previousPage: any;
     reverse: any;
     fullUserInfo: UserCustomUser[];
+    list: any[] = [];
 
     constructor(
         private userService: UserService,
