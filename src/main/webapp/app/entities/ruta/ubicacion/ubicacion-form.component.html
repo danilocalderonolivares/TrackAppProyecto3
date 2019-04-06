@@ -7,7 +7,7 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_nombreDireccion">Dirección</label>
                     <input type="text" class="form-control" name="nombreDireccion" id="field_nombreDireccion"
-                           [(ngModel)]="this.rutaService.ubication.nombreDireccion" required/>
+                           [(ngModel)]="this.mapService.ubication.nombreDireccion" required/>
                     <div [hidden]="!(editForm.controls.nombreDireccion?.dirty && editForm.controls.nombreDireccion?.invalid)">
                         <small class="form-text text-danger"
                                [hidden]="!editForm.controls.nombreDireccion?.errors?.required">
@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_latitud">Latitud</label>
                     <input type="number" class="form-control" name="latitud" id="field_latitud"
-                        [(ngModel)]="this.rutaService.ubication.latitud" required/>
+                        [(ngModel)]="this.mapService.ubication.latitud" required readonly/>
                     <div [hidden]="!(editForm.controls.latitud?.dirty && editForm.controls.latitud?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.latitud?.errors?.required">
@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_longitud">Longitud</label>
                     <input type="number" class="form-control" name="longitud" id="field_longitud"
-                        [(ngModel)]="this.rutaService.ubication.longitud" required/>
+                        [(ngModel)]="this.mapService.ubication.longitud" required readonly/>
                     <div [hidden]="!(editForm.controls.longitud?.dirty && editForm.controls.longitud?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.longitud?.errors?.required">
@@ -60,10 +60,10 @@
                 </div>
             </ng-template>
         </form>
-        <div style="margin-top: 25px;">
+        <div style="margin-top: 20px;">
             <label for="sel2">Listas de ubicaciones</label>
             <select multiple class="form-control" id="sel2" name="sellist2">
-                <option *ngFor="let ubicacion of this.rutaService.ubicaciones; let i = index" (click)="onSelectedUbication(ubicacion, i)">{{ubicacion.nombreDireccion}}</option>
+                <option *ngFor="let ubicacion of this.mapService.ubications; let i = index" (click)="onSelectedUbication(ubicacion, i)">{{ubicacion.nombreDireccion}}</option>
             </select>
             <div style="margin-top: 16px;">
                 <button type="button" [disabled]="!addedUbication" class="btn btn-primary" (click)="onFillList()">
@@ -72,7 +72,15 @@
             </div>
         </div>
     </div>
-    <jhi-mapa-ruta></jhi-mapa-ruta>
+
+    <div>
+        <ngx-select-dropdown (change)="onChangeClient($event.value)" [config]="config" [options]="clientes"
+                             [(ngModel)]="cliente" [multiple]="false"></ngx-select-dropdown>
+        <br>
+        <!--<jhi-mapa-ruta></jhi-mapa-ruta>-->
+        <jhi-map></jhi-map>
+    </div>
+
 </div>
 
 <!--modal-->
