@@ -24,6 +24,8 @@ export class ClienteUpdateComponent implements OnInit {
     // google maps zoom level
     zoom: number = 15;
     nombDireccion: string;
+    nombreClienteInput: string = 'Nombre*';
+    cedulaClienteInput: string = 'Cédula*';
 
     lat: number = 9.9359219;
     lng: number = -84.0919663761358;
@@ -137,6 +139,15 @@ export class ClienteUpdateComponent implements OnInit {
             (this.idUbucacion = clienteData.ubicacion.id), (this.lat = clienteData.ubicacion.latitud);
             this.lng = clienteData.ubicacion.longitud;
             this.locationChosen = true;
+        }
+    }
+    esEmpresa(result: HTMLInputElement) {
+        if (result.checked !== true) {
+            this.nombreClienteInput = 'Nombre de la empresa*';
+            this.cedulaClienteInput = 'Cédula Jurídica';
+        } else {
+            this.nombreClienteInput = 'Nombre*';
+            this.cedulaClienteInput = 'Cédula';
         }
     }
 }

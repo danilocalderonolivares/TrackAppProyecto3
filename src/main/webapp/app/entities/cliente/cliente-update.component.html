@@ -2,22 +2,22 @@
     <div class="container">
         <form name="editForm"  [formGroup]="clienteForm" novalidate (ngSubmit)="save()">
         <div class="row">
-
             <div class="col-md-6">
+                <jhi-alert-error></jhi-alert-error>
                 <h1 id="jhi-cliente-heading">Información básica</h1>
+                <mat-checkbox #esEmpesaCheckBox (click)="esEmpresa(esEmpesaCheckBox)" [(ngModel)]="cliente.esEmpresa" [ngModelOptions]="{standalone: true}">
+                    ¿Es empresa?
+                </mat-checkbox>
                 <mat-form-field appearance="outline">
-                    <mat-label>Nombre*</mat-label>
-                    <input matInput formControlName="nombre" [(ngModel)]="cliente.nombre">
-                    <!-- <button mat-button *ngIf="cliente.nombre" matSuffix mat-icon-button aria-label="Clear" (click)="cliente.nombre=''">
-                         <mat-icon>close</mat-icon>
-                     </button>-->
+                    <mat-label>{{nombreClienteInput}}</mat-label>
+                    <input id="nombre_field" matInput formControlName="nombre" [(ngModel)]="cliente.nombre">
                      <mat-icon matSuffix class="secondary-text">person_outline</mat-icon>
                      <mat-error>
                          Nombre del cliente es requerido
                      </mat-error>
                  </mat-form-field>
                  <mat-form-field appearance="outline">
-                     <mat-label>Cédula*</mat-label>
+                     <mat-label>{{cedulaClienteInput}}</mat-label>
                      <input matInput formControlName="cedula" [(ngModel)]="cliente.cedula">
                      <mat-icon matSuffix class="secondary-text">person_outline</mat-icon>
                      <mat-error>
