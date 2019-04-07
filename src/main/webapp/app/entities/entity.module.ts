@@ -51,8 +51,12 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'tipo-empleado',
                 loadChildren: './tipo-empleado/tipo-empleado.module#GpsAppTipoEmpleadoModule'
-            }
+            },
 
+            {
+                path: 'chat-room',
+                loadChildren: './chat-room/chat-room.module#GpsAppChatRoomModule'
+            }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])
     ],

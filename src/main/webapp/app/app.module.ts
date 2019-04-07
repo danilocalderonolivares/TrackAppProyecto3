@@ -82,7 +82,8 @@ import { FormsModule } from '@angular/forms';
             useClass: NotificationInterceptor,
             multi: true
         },
-        MapService
+        MapService,
+        ChatService
     ],
     bootstrap: [JhiMainComponent]
 })

@@ -1,24 +1,26 @@
 <div class="container" style="height: 560px;  overflow-y: scroll;">
-    <div style="margin-bottom: 26px; margin-top: 26px; overflow: hidden">
+    <div *ngFor="let mensaje of chatRoom.mensajes" style="margin-bottom: 26px; margin-top: 26px; overflow: hidden">
         <div class="alert alert-success w-50" style="background-color: #EBEBEB; margin-bottom: 15px; border-radius: 0 15px 15px 15px;">
-            <strong>Success! You should read this message</strong>
+            <strong>{{ mensaje.texto }}</strong>
         </div>
     </div>
+    <!--<ng-template #otherUser>
+        <div style="margin-bottom: 26px; margin-top: 26px; overflow: hidden">
+            <div class="alert alert-success w-50 float-right" style="color: #ffffff; background-color: #17a2b8; margin-bottom: 15px; border-radius: 12px 15px 15px 0;">
+                <strong>Success! You should read this message</strong>
+            </div>
+        </div>
+    </ng-template>
     <div style="margin-bottom: 26px; margin-top: 26px; overflow: hidden">
-        <div class="alert alert-success w-50 float-right" style="color: #ffffff; background-color: #17a2b8; margin-bottom: 15px; border-radius: 12px 15px 15px 0;">
-            <strong>Success! You should read this message</strong>
-        </div>
-    </div>
-    <div style="margin-bottom: 26px; margin-top: 26px; overflow: hidden">
-        <div class="alert alert-success w-50" style="background-color: #EBEBEB; margin-bottom: 15px; border-radius: 0 15px 15px 15px;">
-            <strong>Success! You should read this message</strong>
-        </div>
-    </div>
-    <div style="margin-bottom: 26px; margin-top: 26px; overflow: hidden">
-        <div class="alert alert-success w-50 float-right" style="color: #ffffff; background-color: #17a2b8; margin-bottom: 15px; border-radius: 12px 15px 15px 0;">
-            <strong>Success! You should read this message</strong>
-        </div>
-    </div>
+       <div class="alert alert-success w-50" style="background-color: #EBEBEB; margin-bottom: 15px; border-radius: 0 15px 15px 15px;">
+           <strong>Success! You should read this message</strong>
+       </div>
+   </div>
+   <div style="margin-bottom: 26px; margin-top: 26px; overflow: hidden">
+       <div class="alert alert-success w-50 float-right" style="color: #ffffff; background-color: #17a2b8; margin-bottom: 15px; border-radius: 12px 15px 15px 0;">
+           <strong>Success! You should read this message</strong>
+       </div>
+   </div>-->
 </div>
 <div class="input-group">
     <div class="custom-file">
