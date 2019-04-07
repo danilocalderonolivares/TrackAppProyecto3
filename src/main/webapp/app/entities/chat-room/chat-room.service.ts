@@ -35,4 +35,8 @@ export class ChatRoomService {
     delete(id: string): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
+
+    getChatRoomsByApproximation(name: string): Observable<EntityArrayResponseType> {
+        return this.http.get<IChatRoom[]>(`${this.resourceUrl + '/get-by-approximation'}/${name}`, { observe: 'response' });
+    }
 }

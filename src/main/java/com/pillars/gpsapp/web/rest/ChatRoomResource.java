@@ -6,6 +6,7 @@ import com.pillars.gpsapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.mongodb.core.aggregation.StringOperators;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -107,5 +108,11 @@ public class ChatRoomResource {
         log.debug("REST request to delete ChatRoom : {}", id);
         chatRoomRepository.deleteById(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
+    }
+
+    @GetMapping("/chat-rooms/get-by-approximation/{name}")
+    public List<ChatRoom> getByApproximation(@PathVariable String name) {
+        List<ChatRoom> chatRooms = chatRoomRepository.findBynombreLike(name.toUpperCase());
+        return chatRooms;
     }
 }

@@ -9,7 +9,7 @@ export class ChatService {
     chatSelected = new EventEmitter<ChatRoom>();
 
     constructor() {
-        this.socket = io(this.url);
+        // this.socket = io(this.url);
     }
 
     public sendMessage(message) {

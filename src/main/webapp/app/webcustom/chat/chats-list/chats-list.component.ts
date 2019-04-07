@@ -27,4 +27,14 @@ export class ChatsListComponent implements OnInit {
     loadChatRoomsMessages(chatRoom: ChatRoom) {
         this.chatService.chatRoomSelected(chatRoom);
     }
+
+    onKeyPressed(event: any) {
+        if (event.target.value !== '') {
+            this.chatRoomService.getChatRoomsByApproximation(event.target.value).subscribe(res => {
+                this.chatRooms = res.body;
+            });
+        } else {
+            this.loadChatRoomsList();
+        }
+    }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'app/webcustom/chat/chat.service';
 import { ChatRoom } from 'app/shared/model/chat-room.model';
 import { Mensaje } from 'app/shared/model/mensaje.model';
+import { User } from 'app/core';
 
 @Component({
     selector: 'jhi-chat-window',
@@ -17,6 +18,7 @@ export class ChatWindowComponent implements OnInit {
 
     ngOnInit() {
         this.isSender = true;
+        this.chatRoom = new ChatRoom();
 
         this.chatService.chatSelected.subscribe((chatRoom: ChatRoom) => {
             this.chatRoom = chatRoom;
@@ -28,5 +30,14 @@ export class ChatWindowComponent implements OnInit {
         this.message = '';
     }
 
-    validateIsSender(mensaje: Mensaje) {}
+    validateIsSender(mensaje: Mensaje) {
+        const user = JSON.parse(sessionStorage.getItem('user')) as User;
+        if (mensaje.empleado.idUsuarioRelacion !== user.id) {
+            this.isSender = false;
+        } else {
+            this.isSender = true;
+        }
+
+        return this.isSender;
+    }
 }
