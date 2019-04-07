@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -184,7 +185,7 @@ public class EmpleadoResource {
     @GetMapping("/empleados/empleado-customized/{username}")
     public Map<String, Object> getEmployeesCustom(@PathVariable String username) {
         Optional user = userRepository.findOneByLogin(username);
-        User userFound = (User)user.get();
+        User userFound = (User) user.get();
         Optional empleado = empleadoRepository.findByRelationshipId(userFound.getId());
 
         Map<String, Object> fullUserInfo = new HashMap<>();
@@ -192,5 +193,15 @@ public class EmpleadoResource {
         fullUserInfo.put("empleado", empleado.get());
 
         return fullUserInfo;
+    }
+
+    @GetMapping("/empleados/get-by-approximation/{name}")
+    public List<Empleado> getByApproximation(@PathVariable String name) {
+        List<Empleado> empleados = empleadoRepository.findBynombre(".*" + name.toUpperCase() + ".*");
+
+        if (empleados.size() < 1) {
+            empleadoRepository.findBynombre(".*" + name.toLowerCase() + ".*");
+        }
+        return empleados;
     }
 }

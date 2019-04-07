@@ -112,7 +112,17 @@ public class ChatRoomResource {
 
     @GetMapping("/chat-rooms/get-by-approximation/{name}")
     public List<ChatRoom> getByApproximation(@PathVariable String name) {
-        List<ChatRoom> chatRooms = chatRoomRepository.findBynombreLike(name.toUpperCase());
+        List<ChatRoom> chatRooms = chatRoomRepository.findBynombre(".*" + name.toUpperCase() + ".*");
+
+        if(chatRooms.size() < 1) {
+            chatRoomRepository.findBynombre(".*" + name.toUpperCase() + ".*");
+        }
+        return chatRooms;
+    }
+
+    @GetMapping("/chat-rooms/get-by-user/{id}")
+    public List<ChatRoom> getByUser(@PathVariable String id) {
+        List<ChatRoom> chatRooms = chatRoomRepository.findByUser(id);
         return chatRooms;
     }
 }

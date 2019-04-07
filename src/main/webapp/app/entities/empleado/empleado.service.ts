@@ -38,7 +38,8 @@ export class EmpleadoService {
     }
 
     findUserByIdRelationship(id: string): Observable<EntityResponseType> {
-        return this.http.get<IEmpleado>(`${this.resourceUrl + '/findByRelationshipId'}/${id}`, { observe: 'response' });
+        const test = this.http.get<IEmpleado>(`${this.resourceUrl + '/findByRelationshipId'}/${id}`, { observe: 'response' });
+        return test;
     }
 
     findUserByIdType(id: string): Observable<EntityArrayResponseType> {
@@ -57,5 +58,9 @@ export class EmpleadoService {
     queryCustom(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<IEmpleado[]>(this.resourceUrl + '-custom', { params: options, observe: 'response' });
+    }
+
+    getEmployeesByApproximation(name: string): Observable<EntityArrayResponseType> {
+        return this.http.get<IEmpleado[]>(`${this.resourceUrl + '/get-by-approximation'}/${name}`, { observe: 'response' });
     }
 }

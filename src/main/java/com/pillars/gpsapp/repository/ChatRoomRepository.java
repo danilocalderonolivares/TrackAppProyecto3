@@ -1,13 +1,11 @@
 package com.pillars.gpsapp.repository;
 
 import com.pillars.gpsapp.domain.ChatRoom;
-import com.pillars.gpsapp.domain.Empleado;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 
 /**
@@ -16,5 +14,9 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 @Repository
 public interface ChatRoomRepository extends MongoRepository<ChatRoom, String> {
-    List<ChatRoom> findBynombreLike(String idTipo);
+    @Query("{'nombre': {$regex: ?0, $options: 'i'}})")
+    List<ChatRoom> findBynombre(String nombre);
+
+    @Query("{'miembros.id': ?0})")
+    List<ChatRoom> findByUser(String id);
 }

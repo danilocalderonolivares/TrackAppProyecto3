@@ -39,4 +39,8 @@ export class ChatRoomService {
     getChatRoomsByApproximation(name: string): Observable<EntityArrayResponseType> {
         return this.http.get<IChatRoom[]>(`${this.resourceUrl + '/get-by-approximation'}/${name}`, { observe: 'response' });
     }
+
+    getChatRoomsByUser(idUser: string): Observable<EntityArrayResponseType> {
+        return this.http.get<IChatRoom[]>(`${this.resourceUrl + '/get-by-user'}/${idUser}`, { observe: 'response' });
+    }
 }
