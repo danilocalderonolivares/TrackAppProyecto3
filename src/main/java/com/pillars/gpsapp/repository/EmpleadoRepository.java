@@ -27,6 +27,6 @@ public interface EmpleadoRepository extends MongoRepository<Empleado, String> {
     @DeleteQuery("{'idUsuarioRelacion' : ?0}")
     void deleteByRelationshipId(String idRelacion);
 
-    @Query("{'nombre': {$regex: ?0, $options: 'i'}})")
+    @Query("{'$or':[ {'nombre': {$regex: ?0, $options: 'i'}}, {'apellidos': {$regex: ?0, $options: 'i'}}]}")
     List<Empleado> findBynombre(String nombre);
 }

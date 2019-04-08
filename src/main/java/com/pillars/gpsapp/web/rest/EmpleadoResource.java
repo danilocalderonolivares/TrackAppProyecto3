@@ -202,6 +202,15 @@ public class EmpleadoResource {
         if (empleados.size() < 1) {
             empleadoRepository.findBynombre(".*" + name.toLowerCase() + ".*");
         }
+
+        filterList(empleados);
         return empleados;
+    }
+
+    public void filterList(List<Empleado> empleados) {
+        for(int i = 0; i < empleados.size(); i++) {
+            Empleado empleado = empleados.get(i);
+            empleado.setNombre(empleado.getNombre() + ' ' + empleado.getApellidos());
+        }
     }
 }
