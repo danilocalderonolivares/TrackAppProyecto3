@@ -10,49 +10,65 @@
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="table-responsive" *ngIf="clientes">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-            <th><span>Nombre</span></th>
-            <th><span>Cédula</span></th>
-            <th><span>Dirección</span></th>
-            <th><span>Correo</span></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let cliente of clientes ;trackBy: trackId">
-                <td>{{cliente.nombre}}</td>
-                <td>{{cliente.cedula}}</td>
-                <td>{{cliente.direccion}}</td>
-                <td>{{cliente.correo}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/cliente', cliente.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">Ver</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/cliente', cliente.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Editar</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'cliente', { outlets: { popup: cliente.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Eliminar</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <!--<div class="table-responsive" *ngIf="clientes">-->
+
+    <!--</div>-->
+    <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="nombre">
+                <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+                <mat-cell *matCellDef="let cliente">
+                    <p class="text-truncate font-weight-600">{{cliente.nombre}}</p>
+                </mat-cell>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </mat-table>
     </div>
 </div>
+
+<!--<table class="table table-striped">-->
+    <!--<thead>-->
+    <!--<tr>-->
+        <!--<th><span>Nombre</span></th>-->
+        <!--<th><span>Cédula</span></th>-->
+        <!--<th><span>Dirección</span></th>-->
+        <!--<th><span>Correo</span></th>-->
+        <!--<th></th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr *ngFor="let cliente of clientes ;trackBy: trackId">-->
+        <!--<td>{{cliente.nombre}}</td>-->
+        <!--<td>{{cliente.cedula}}</td>-->
+        <!--<td>{{cliente.direccion}}</td>-->
+        <!--<td>{{cliente.correo}}</td>-->
+        <!--<td class="text-right">-->
+            <!--<div class="btn-group flex-btn-group-container">-->
+                <!--<button type="submit"-->
+                        <!--[routerLink]="['/cliente', cliente.id, 'view' ]"-->
+                        <!--class="btn btn-info btn-sm">-->
+                    <!--<fa-icon [icon]="'eye'"></fa-icon>-->
+                    <!--<span class="d-none d-md-inline">Ver</span>-->
+                <!--</button>-->
+                <!--<button type="submit"-->
+                        <!--[routerLink]="['/cliente', cliente.id, 'edit']"-->
+                        <!--class="btn btn-primary btn-sm">-->
+                    <!--<fa-icon [icon]="'pencil-alt'"></fa-icon>-->
+                    <!--<span class="d-none d-md-inline">Editar</span>-->
+                <!--</button>-->
+                <!--<button type="submit"-->
+                        <!--[routerLink]="['/', 'cliente', { outlets: { popup: cliente.id + '/delete'} }]"-->
+                        <!--replaceUrl="true"-->
+                        <!--queryParamsHandling="merge"-->
+                        <!--class="btn btn-danger btn-sm">-->
+                    <!--<fa-icon [icon]="'times'"></fa-icon>-->
+                    <!--<span class="d-none d-md-inline">Eliminar</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+<!--</table>-->

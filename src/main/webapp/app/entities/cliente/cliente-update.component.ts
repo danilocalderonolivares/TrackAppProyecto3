@@ -141,7 +141,7 @@ export class ClienteUpdateComponent implements OnInit {
             this.locationChosen = true;
         }
     }
-    esEmpresa(result: HTMLInputElement) {
+    esEmpresa(result?: HTMLInputElement) {
         if (result.checked !== true) {
             this.nombreClienteInput = 'Nombre de la empresa*';
             this.cedulaClienteInput = 'Cédula Jurídica';
