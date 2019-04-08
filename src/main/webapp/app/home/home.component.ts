@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
-import { faTv, faSitemap, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { LoginModalService, AccountService, Account } from 'app/core';
 
@@ -13,9 +12,7 @@ import { LoginModalService, AccountService, Account } from 'app/core';
 export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
-    tv = faTv;
-    organization = faSitemap;
-    check = faCheckCircle;
+
     constructor(
         private accountService: AccountService,
         private loginModalService: LoginModalService,

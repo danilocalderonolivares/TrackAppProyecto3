@@ -1,12 +1,7 @@
 import './vendor.ts';
-import 'core-js/es6/reflect';
-import 'core-js/es7/reflect';
-import 'zone.js/dist/zone';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2Webstorage } from 'ngx-webstorage';
@@ -23,24 +18,19 @@ import { GpsAppHomeModule } from './home/home.module';
 import { GpsAppAccountModule } from './account/account.module';
 import { GpsAppEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
-import { GpsAppWebCustomModule } from './webcustom/web-custom.module';
-
 // jhipster-needle-angular-add-module-import JHipster will add new module here
-import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
-import { SidebarComponent } from './layouts/sidebar/sidebar.component';
-import { LandingComponent } from './layouts/landing/landing.component';
-import { MapService } from './shared/map/map.service';
-import { FormsModule } from '@angular/forms';
+import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
 @NgModule({
     imports: [
         BrowserModule,
-        BrowserAnimationsModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         NgJhipsterModule.forRoot({
             // set below to true to make alerts look like toast
             alertAsToast: false,
-            alertTimeout: 5000
+            alertTimeout: 5000,
+            i18nEnabled: true,
+            defaultI18nLang: 'en'
         }),
         GpsAppSharedModule.forRoot(),
         GpsAppCoreModule,
@@ -48,19 +38,9 @@ import { FormsModule } from '@angular/forms';
         GpsAppAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         GpsAppEntityModule,
-        GpsAppWebCustomModule,
-        GpsAppAppRoutingModule,
-        FormsModule
+        GpsAppAppRoutingModule
     ],
-    declarations: [
-        JhiMainComponent,
-        NavbarComponent,
-        ErrorComponent,
-        PageRibbonComponent,
-        FooterComponent,
-        SidebarComponent,
-        LandingComponent
-    ],
+    declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
@@ -81,8 +61,7 @@ import { FormsModule } from '@angular/forms';
             provide: HTTP_INTERCEPTORS,
             useClass: NotificationInterceptor,
             multi: true
-        },
-        MapService
+        }
     ],
     bootstrap: [JhiMainComponent]
 })
@@ -91,16 +70,3 @@ export class GpsAppAppModule {
         this.dpConfig.minDate = { year: moment().year() - 100, month: 1, day: 1 };
     }
 }
-
-platformBrowserDynamic()
-    .bootstrapModule(GpsAppAppModule)
-    .then(ref => {
-        // Ensure Angular destroys itself on hot reloads.
-        if (window['ngRef']) {
-            window['ngRef'].destroy();
-        }
-        window['ngRef'] = ref;
-
-        // Otherwise, log the boot error
-    })
-    .catch(err => console.error(err));

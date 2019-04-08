@@ -1,14 +1,6 @@
 package com.pillars.gpsapp.web.rest.vm;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.pillars.gpsapp.domain.Horario;
-import com.pillars.gpsapp.domain.Ubicacion;
-import com.pillars.gpsapp.domain.User;
 import com.pillars.gpsapp.service.dto.UserDTO;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Field;
-
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**

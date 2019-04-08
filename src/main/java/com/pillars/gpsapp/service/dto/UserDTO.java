@@ -3,8 +3,6 @@ package com.pillars.gpsapp.service.dto;
 import com.pillars.gpsapp.config.Constants;
 
 import com.pillars.gpsapp.domain.Authority;
-import com.pillars.gpsapp.domain.Horario;
-import com.pillars.gpsapp.domain.Ubicacion;
 import com.pillars.gpsapp.domain.User;
 
 import javax.validation.constraints.Email;
@@ -54,16 +52,6 @@ public class UserDTO {
     private Instant lastModifiedDate;
 
     private Set<String> authorities;
-
-    /**
-     * userExtra properties
-     */
-    private String admin;
-    private String ubicacion;
-    private String horario;
-    private String tipo;
-    private Boolean borrado;
-
 
     public UserDTO() {
         // Empty constructor needed for Jackson.
@@ -190,49 +178,6 @@ public class UserDTO {
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
     }
-
-    //get and setters of userExtra
-
-    public String getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(String admin) {
-        this.admin = admin;
-    }
-
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public Boolean getBorrado() {
-        return borrado;
-    }
-
-    public void setBorrado(Boolean borrado) {
-        this.borrado = borrado;
-    }
-
 
     @Override
     public String toString() {

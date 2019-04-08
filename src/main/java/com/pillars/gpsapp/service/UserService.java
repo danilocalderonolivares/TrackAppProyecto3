@@ -1,7 +1,8 @@
 package com.pillars.gpsapp.service;
 
 import com.pillars.gpsapp.config.Constants;
-import com.pillars.gpsapp.domain.*;
+import com.pillars.gpsapp.domain.Authority;
+import com.pillars.gpsapp.domain.User;
 import com.pillars.gpsapp.repository.AuthorityRepository;
 import com.pillars.gpsapp.repository.UserRepository;
 import com.pillars.gpsapp.security.AuthoritiesConstants;
@@ -9,6 +10,7 @@ import com.pillars.gpsapp.security.SecurityUtils;
 import com.pillars.gpsapp.service.dto.UserDTO;
 import com.pillars.gpsapp.service.util.RandomUtil;
 import com.pillars.gpsapp.web.rest.errors.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -17,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -118,13 +121,12 @@ public class UserService {
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
-        //Create and save the userExtra entity
         return newUser;
     }
 
-    private boolean removeNonActivatedUser(User existingUser) {
+    private boolean removeNonActivatedUser(User existingUser){
         if (existingUser.getActivated()) {
-            return false;
+             return false;
         }
         userRepository.delete(existingUser);
         this.clearUserCaches(existingUser);
@@ -159,7 +161,6 @@ public class UserService {
         userRepository.save(user);
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
-
         return user;
     }
 
@@ -167,10 +168,10 @@ public class UserService {
      * Update basic information (first name, last name, email, language) for the current user.
      *
      * @param firstName first name of user
-     * @param lastName  last name of user
-     * @param email     email id of user
-     * @param langKey   language key
-     * @param imageUrl  image URL of user
+     * @param lastName last name of user
+     * @param email email id of user
+     * @param langKey language key
+     * @param imageUrl image URL of user
      */
     public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
         SecurityUtils.getCurrentUserLogin()
@@ -217,7 +218,6 @@ public class UserService {
                 userRepository.save(user);
                 this.clearUserCaches(user);
                 log.debug("Changed Information for User: {}", user);
-
                 return user;
             })
             .map(UserDTO::new);
