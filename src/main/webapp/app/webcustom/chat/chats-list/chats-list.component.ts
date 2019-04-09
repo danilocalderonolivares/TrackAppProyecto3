@@ -5,6 +5,7 @@ import { ChatRoomService } from 'app/entities/chat-room';
 import { EmpleadoService } from 'app/entities/empleado';
 import { User } from 'app/core';
 import { Empleado } from 'app/shared/model/empleado.model';
+import { Mensaje } from 'app/shared/model/mensaje.model';
 
 @Component({
     selector: 'jhi-chats-list',
@@ -13,7 +14,7 @@ import { Empleado } from 'app/shared/model/empleado.model';
 })
 export class ChatsListComponent implements OnInit {
     chatRooms: any[];
-    employeeRelationId: string;
+    currentUserLogged: any;
     isSearch: boolean;
     currentChatRoomsList: ChatRoom[];
 
@@ -26,34 +27,53 @@ export class ChatsListComponent implements OnInit {
 
     findEmployee() {
         this.empleadosService.findUserByIdRelationship(this.getCurrentLoggedUser().id).subscribe(res => {
-            this.employeeRelationId = res.body.id;
+            this.currentUserLogged = res.body as Empleado;
             this.loadChatRoomsList();
         });
     }
 
     loadChatRoomsList() {
-        this.chatRoomService.getChatRoomsByUser(this.employeeRelationId).subscribe(res => {
+        this.chatRoomService.getChatRoomsByUser(this.currentUserLogged.id).subscribe(res => {
             this.chatRooms = res.body;
             this.cloneChatRoomsList();
-            this.loadChatRoomsMessages(this.chatRooms[0]);
         });
     }
 
     loadChatRoomsMessages(chatRoom: any) {
         if (!this.isSearch) {
             this.chatService.chatRoomSelected(chatRoom);
+            this.loadChatRoomsList();
         } else {
             const chatInfo = this.verifyChatRoomExists(chatRoom);
             if (chatInfo !== null) {
                 this.chatService.chatRoomSelected(chatInfo);
+                this.loadChatRoomsList();
                 this.isSearch = false;
             } else {
-                this.createChatRoom(chatRoom.id);
+                this.createChatRoom(chatRoom);
             }
         }
+        (<HTMLInputElement>document.getElementById('sortedField')).value = '';
     }
 
-    createChatRoom(userToChat: any) {}
+    createChatRoom(userToChat: any) {
+        const chatMembers: Empleado[] = [];
+        const chatMessages: Mensaje[] = [];
+        const newChatRoom = new ChatRoom(null, userToChat.nombre, chatMembers, chatMessages);
+        newChatRoom.miembros.push(userToChat as Empleado);
+        newChatRoom.miembros.push(this.currentUserLogged as Empleado);
+        this.saveAndLoadNewChatRoom(newChatRoom);
+        (<HTMLInputElement>document.getElementById('sortedField')).value = '';
+    }
+
+    saveAndLoadNewChatRoom(newChatRoom: ChatRoom) {
+        this.chatRoomService.create(newChatRoom).subscribe(res => {
+            this.chatService.chatRoomSelected(res.body as ChatRoom);
+            this.isSearch = false;
+            this.currentChatRoomsList.push(res.body as ChatRoom);
+            this.chatRooms = this.currentChatRoomsList;
+        });
+    }
 
     verifyChatRoomExists(chatRoom: any) {
         let chatInfo = null;
