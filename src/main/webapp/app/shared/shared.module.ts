@@ -7,10 +7,12 @@ import { MapComponent } from './map/map.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { AgmCoreModule } from '@agm/core';
 
+import { JhMaterialModule } from 'app/shared/jh-material.module';
 @NgModule({
     imports: [
         GpsAppSharedLibsModule,
         GpsAppSharedCommonModule,
+        JhMaterialModule,
         GooglePlaceModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyA6qPYcS3xkzoGTXEeljg5g_CE3m0wBTlI',
@@ -20,7 +22,7 @@ import { AgmCoreModule } from '@agm/core';
     declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective, MapComponent],
     providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
     entryComponents: [JhiLoginModalComponent],
-    exports: [GpsAppSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective, MapComponent],
+    exports: [JhMaterialModule, GpsAppSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective, MapComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GpsAppSharedModule {

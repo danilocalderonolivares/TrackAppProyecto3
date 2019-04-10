@@ -1,22 +1,20 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-
-import { VERSION } from 'app/app.constants';
+import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { AccountService, LoginModalService, LoginService } from 'app/core';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
-import { faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { ProfileService } from 'app/layouts';
+import { Router } from '@angular/router';
+import { VERSION } from 'app/app.constants';
 
 @Component({
-    selector: 'jhi-navbar',
-    templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.scss']
+    selector: 'jhi-headernav',
+    templateUrl: './headernav.component.html',
+    styles: []
 })
-export class NavbarComponent implements OnInit {
+export class HeadernavComponent implements OnInit {
     @Output() sidenavToggle = new EventEmitter<void>();
     inProduction: boolean;
     isNavbarCollapsed: boolean;
-    languages: any[];
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
@@ -41,33 +39,21 @@ export class NavbarComponent implements OnInit {
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
     }
-
     collapseNavbar() {
         this.isNavbarCollapsed = true;
     }
-
     isAuthenticated() {
         return this.accountService.isAuthenticated();
     }
-
     login() {
         this.modalRef = this.loginModalService.open();
         // this.router.navigate(['/login']);
     }
-
     logout() {
         this.collapseNavbar();
         this.loginService.logout();
         this.router.navigate(['']);
     }
-
-    // toggleNavbar() {
-    //     this.isNavbarCollapsed = !this.isNavbarCollapsed;
-    // }
-    //
-    // getImageUrl() {
-    //     return this.isAuthenticated() ? this.accountService.getImageUrl() : null;
-    // }
     onToolbarMenuToggle() {
         this.sidenavToggle.emit();
     }

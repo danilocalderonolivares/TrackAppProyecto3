@@ -1,58 +1,124 @@
-<div>
-    <h2 id="page-heading">
-        <span>Clientes</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cliente" [routerLink]="['/cliente/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
-           Crear nuevo cliente
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
-    <br/>
-    <div class="table-responsive" *ngIf="clientes">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-            <th><span>Nombre</span></th>
-            <th><span>Cédula</span></th>
-            <th><span>Dirección</span></th>
-            <th><span>Correo</span></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let cliente of clientes ;trackBy: trackId">
-                <td>{{cliente.nombre}}</td>
-                <td>{{cliente.cedula}}</td>
-                <td>{{cliente.direccion}}</td>
-                <td>{{cliente.correo}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/cliente', cliente.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">Ver</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/cliente', cliente.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Editar</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'cliente', { outlets: { popup: cliente.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Eliminar</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+ <div class="container-fluid">
+     <div class="search-div">
+         <button mat-raised-button color="primary" [routerLink]="['/cliente/new']">
+             <mat-icon>add</mat-icon>Crear nuevo cliente
+         </button>
+         <mat-form-field class="search-form-field" floatLabel="never">
+             <input matInput [(ngModel)]="searchKey" placeholder="Buscar" autocomplete="off" (keyup)="applyFilter()">
+             <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+                 <mat-icon>close</mat-icon>
+             </button>
+         </mat-form-field>
+     </div>
+
+     <jhi-alert></jhi-alert>
+     <div class="mat-elevation-z8">
+         <mat-table [dataSource]="dataSource">
+             <!--columna nombre-->
+             <ng-container matColumnDef="nombre">
+                 <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+                 <mat-cell *matCellDef="let cliente">
+                     <p class="text-truncate font-weight-600">{{cliente.nombre}}</p>
+                 </mat-cell>
+             </ng-container>
+             <!--columna cedula-->
+             <ng-container matColumnDef="cedula">
+                 <mat-header-cell *matHeaderCellDef >Cédula</mat-header-cell>
+                 <mat-cell *matCellDef="let cliente"  >
+                     <p class="text-truncate font-weight-600">{{cliente.cedula}}</p>
+                 </mat-cell>
+             </ng-container>
+             <!--columna correo-->
+             <ng-container matColumnDef="correo">
+                 <mat-header-cell *matHeaderCellDef >Correo</mat-header-cell>
+                 <mat-cell *matCellDef="let cliente">
+                     <p class="text-truncate font-weight-600">{{cliente.correo}}</p>
+                 </mat-cell>
+             </ng-container>
+             <!--columna direccion-->
+             <ng-container matColumnDef="direccion">
+                 <mat-header-cell *matHeaderCellDef >Dirección</mat-header-cell>
+                 <mat-cell *matCellDef="let cliente">
+                     <p class="text-truncate font-weight-600">{{cliente.direccion}}</p>
+                 </mat-cell>
+             </ng-container>
+             <!--columna buttons-->
+             <ng-container matColumnDef="buttons">
+                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                 <mat-cell *matCellDef="let cliente">
+                     <div>
+                         <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
+                                 (click)="$event.stopPropagation();">
+                             <mat-icon class="secondary-text">more_vert</mat-icon>
+                         </button>
+
+                         <mat-menu #moreMenu="matMenu">
+                             <button mat-menu-item aria-label="remove" [routerLink]="['/', 'cliente', { outlets: { popup: cliente.id + '/delete'} }]">
+                                 <mat-icon>delete</mat-icon>
+                                 <span>Eliminar</span>
+                             </button>
+                             <button mat-menu-item aria-label="edit" [routerLink]="['/cliente', cliente.id, 'edit']">
+                                 <mat-icon>edit</mat-icon>
+                                 <span>Editar</span>
+                             </button>
+                         </mat-menu>
+                     </div>
+                 </mat-cell>
+             </ng-container>
+             <!--Mat-header-row y mat-row es lo primero que se tiene que incluir para construir la tabla-->
+             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+             <mat-row *matRowDef="let cliente; columns: displayedColumns;"
+                      [routerLink]="['/cliente', cliente.id, 'view']"
+                      matRipple
+                      [@animate]="{value:'*',params:{y:'100%'}}">
+             </mat-row>
+         </mat-table>
+     </div>
+ </div>
+
+
+
+<!--<jhi-alert></jhi-alert>-->
+<!--<table class="table table-striped">-->
+    <!--<thead>-->
+    <!--<tr>-->
+        <!--<th><span>Nombre</span></th>-->
+        <!--<th><span>Cédula</span></th>-->
+        <!--<th><span>Dirección</span></th>-->
+        <!--<th><span>Correo</span></th>-->
+        <!--<th></th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr *ngFor="let cliente of clientes ;trackBy: trackId">-->
+        <!--<td>{{cliente.nombre}}</td>-->
+        <!--<td>{{cliente.cedula}}</td>-->
+        <!--<td>{{cliente.direccion}}</td>-->
+        <!--<td>{{cliente.correo}}</td>-->
+        <!--<td class="text-right">-->
+            <!--<div class="btn-group flex-btn-group-container">-->
+                <!--<button type="submit"-->
+                        <!--[routerLink]="['/cliente', cliente.id, 'view' ]"-->
+                        <!--class="btn btn-info btn-sm">-->
+                    <!--<fa-icon [icon]="'eye'"></fa-icon>-->
+                    <!--<span class="d-none d-md-inline">Ver</span>-->
+                <!--</button>-->
+                <!--<button type="submit"-->
+                        <!--[routerLink]="['/cliente', cliente.id, 'edit']"-->
+                        <!--class="btn btn-primary btn-sm">-->
+                    <!--<fa-icon [icon]="'pencil-alt'"></fa-icon>-->
+                    <!--<span class="d-none d-md-inline">Editar</span>-->
+                <!--</button>-->
+                <!--<button type="submit"-->
+                        <!--[routerLink]="['/', 'cliente', { outlets: { popup: cliente.id + '/delete'} }]"-->
+                        <!--replaceUrl="true"-->
+                        <!--queryParamsHandling="merge"-->
+                        <!--class="btn btn-danger btn-sm">-->
+                    <!--<fa-icon [icon]="'times'"></fa-icon>-->
+                    <!--<span class="d-none d-md-inline">Eliminar</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+<!--</table>-->

@@ -1,8 +1,9 @@
-<div class="modal-header">
-   <div class="container">
-       <h2  class="modal-title" style="text-align: center">GPSApp</h2>
-   </div>
-    <button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="activeModal.dismiss('closed')"><span aria-hidden="true">x</span>
+<div class="modal-header" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+    <div class="container">
+        <h2 class="modal-title" style="text-align: center">GPSApp</h2>
+    </div>
+    <button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="activeModal.dismiss('closed')">
+        <span aria-hidden="true">x</span>
     </button>
 </div>
 <div class="modal-body">
@@ -13,44 +14,39 @@
             </div>
         </div>
         <div class="col-md-8">
-            <form class="form" role="form" (ngSubmit)="login()">
-                <div class="form-group">
-                    <label class="username-label" for="username">Correo*</label>
-                    <input type="text"
-                           class="form-control"
-                           name="username"
-                           id="username"
-                           placeholder="Correo"
-                           minlength=5
-                           maxlength=254
-                    [(ngModel)]="username"
-                           #usuario="ngModel"
-                           required>
-                    <small class="form-text text-danger"
-                    *ngIf="usuario.errors?.required && usuario.touched">
-                        Correo o nombre de usuario es requerida.
-                    </small>
-                </div>
-                <div class="form-group">
-                    <label for="password">Contraseña*</label>
-                    <input type="password"
-                           class="form-control"
-                           name="password"
-                           id="password"
-                           placeholder="Contraseña"
-                           [(ngModel)]="password"
-                           #contrasena="ngModel"
-                            required>
-                    <small class="form-text text-danger"
-                           *ngIf="contrasena.errors?.required && contrasena.touched">
-                       Contraseña es requerida
-                    </small>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+            <form name="loginForm" [formGroup]="loginForm" novalidate (ngSubmit)="login()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Correo*</mat-label>
+                    <input matInput formControlName="email" [(ngModel)]="username">
+                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                    <mat-error *ngIf="loginForm.get('email').hasError('required')">
+                        Correo es requerido
+                    </mat-error>
+                    <mat-error
+                        *ngIf="!loginForm.get('email').hasError('required') &&
+                                loginForm.get('email').hasError('email')">
+                        Ingrese un correo valido.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Contrasaña*</mat-label>
+                    <input matInput type="password" formControlName="password"  [(ngModel)]="password">
+                    <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                    <mat-error>
+                        Contraseña es requerida
+                    </mat-error>
+                </mat-form-field>
+                <button  mat-raised-button color="primary" class="mat-raised-button mat-primary" aria-label="Ingresar"
+                        [disabled]="loginForm.invalid" style="width:100%;">
+                    Ingresar
+                </button>
+
             </form>
             <p></p>
             <div class="form-group">
-              <h6>¿Olvidó su contraseña?</h6>  <a class="text-primary stretched-link" (click)="requestResetPassword()">Recupérala aqui</a>
+                <h6>¿Olvidó su contraseña?</h6>  <a class="text-primary stretched-link"
+                                                    (click)="requestResetPassword()">Recupérala aqui</a>
             </div>
         </div>
     </div>

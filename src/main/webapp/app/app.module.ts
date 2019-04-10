@@ -25,16 +25,21 @@ import { GpsAppEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 import { GpsAppWebCustomModule } from './webcustom/web-custom.module';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+import 'hammerjs';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { LandingComponent } from './layouts/landing/landing.component';
 import { MapService } from './shared/map/map.service';
 import { FormsModule } from '@angular/forms';
+import { HeadernavComponent } from './layouts/headernav/headernav.component';
 
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
         BrowserAnimationsModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         NgJhipsterModule.forRoot({
@@ -59,7 +64,8 @@ import { FormsModule } from '@angular/forms';
         PageRibbonComponent,
         FooterComponent,
         SidebarComponent,
-        LandingComponent
+        LandingComponent,
+        HeadernavComponent
     ],
     providers: [
         {
