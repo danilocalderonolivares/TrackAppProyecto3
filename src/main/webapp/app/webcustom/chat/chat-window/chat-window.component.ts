@@ -3,6 +3,9 @@ import { ChatService } from 'app/webcustom/chat/chat.service';
 import { ChatRoom } from 'app/shared/model/chat-room.model';
 import { Mensaje } from 'app/shared/model/mensaje.model';
 import { User } from 'app/core';
+import { Empleado } from 'app/shared/model/empleado.model';
+import { EmpleadoService } from 'app/entities/empleado';
+import * as moment from 'moment';
 
 @Component({
     selector: 'jhi-chat-window',
@@ -13,10 +16,13 @@ export class ChatWindowComponent implements OnInit {
     message: string;
     chatRoom: ChatRoom;
     isSender: boolean;
+    currentUserLogged: any;
 
-    constructor(private chatService: ChatService) {}
+    constructor(private chatService: ChatService, private empleadosService: EmpleadoService) {}
 
     ngOnInit() {
+        this.message = '';
+        this.findEmployee();
         this.isSender = true;
         this.chatRoom = new ChatRoom();
 
@@ -26,18 +32,31 @@ export class ChatWindowComponent implements OnInit {
     }
 
     sendMessage() {
-        this.chatService.sendMessage(this.message);
+        const messageToSend = new Mensaje(null, this.message, moment(new Date()), false, false, this.currentUserLogged);
+        this.chatService.sendMessage(messageToSend, this.chatRoom);
         this.message = '';
     }
 
     validateIsSender(mensaje: Mensaje) {
         const user = JSON.parse(sessionStorage.getItem('user')) as User;
-        if (mensaje.empleado.idUsuarioRelacion !== user.id) {
-            this.isSender = false;
-        } else {
-            this.isSender = true;
+        if (mensaje !== null) {
+            if (mensaje.empleado.idUsuarioRelacion !== user.id) {
+                this.isSender = false;
+            } else {
+                this.isSender = true;
+            }
         }
 
         return this.isSender;
+    }
+
+    private getCurrentLoggedUser() {
+        return JSON.parse(sessionStorage.getItem('user')) as User;
+    }
+
+    findEmployee() {
+        this.empleadosService.findUserByIdRelationship(this.getCurrentLoggedUser().id).subscribe(res => {
+            this.currentUserLogged = res.body as Empleado;
+        });
     }
 }

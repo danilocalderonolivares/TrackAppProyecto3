@@ -1,27 +1,24 @@
 <div class="container" style="height: 560px;  overflow-y: scroll;">
     <div *ngFor="let mensaje of chatRoom.mensajes">
         <div style="margin-top: 10px; overflow: hidden">
-            <div *ngIf="validateIsSender(mensaje); else otherUser" class="alert alert-success w-50"
-                 style="background-color: #EBEBEB; margin-bottom: 15px; border-radius: 0 15px 15px 15px;">
+            <div *ngIf="validateIsSender(mensaje); else otherUser" class="alert alert-success w-50" style="background-color: #EBEBEB; margin-bottom: 5px; border-radius: 0 15px 15px 15px;">
                 <strong>{{ mensaje.texto }}</strong>
             </div>
         </div>
         <ng-template #otherUser>
             <div style="overflow: hidden">
-                <div class="alert alert-success w-50 float-right"
-                     style="color: #ffffff; background-color: #17a2b8; margin-bottom: 15px; border-radius: 12px 15px 15px 0;">
+                <div class="alert alert-success w-50 float-right" style="color: #ffffff; background-color: #17a2b8; margin-bottom: 5px; border-radius: 12px 15px 15px 0;">
                     <strong>{{ mensaje.texto }}</strong>
                 </div>
             </div>
         </ng-template>
     </div>
-
 </div>
 <div class="input-group">
     <div class="custom-file">
         <input [(ngModel)]="message" type="text" class="form-control" placeholder="Escriba su mensaje aquí..">
     </div>
     <div class="input-group-append">
-        <a (click)="sendMessage()" class="btn btn-primary" style="background-color: #007bff; color: #ffffff;">Enviar</a>
+        <button (click)="sendMessage()" [disabled]="message == ''" class="btn btn-primary" style="background-color: #007bff; color: #ffffff;">Enviar</button>
     </div>
 </div>
