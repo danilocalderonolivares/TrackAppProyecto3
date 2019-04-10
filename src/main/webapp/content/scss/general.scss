@@ -1,3 +1,10 @@
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+}
 mat-form-field {
     width: 100%;
 }
@@ -40,3 +47,4 @@ mat-form-field {
     height: 32px;
     width: 32px;
 }
+/* fin estilos boton buscar en listas */

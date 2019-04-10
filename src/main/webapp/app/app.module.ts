@@ -33,6 +33,7 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { LandingComponent } from './layouts/landing/landing.component';
 import { MapService } from './shared/map/map.service';
 import { FormsModule } from '@angular/forms';
+import { HeadernavComponent } from './layouts/headernav/headernav.component';
 
 @NgModule({
     imports: [
@@ -63,7 +64,8 @@ import { FormsModule } from '@angular/forms';
         PageRibbonComponent,
         FooterComponent,
         SidebarComponent,
-        LandingComponent
+        LandingComponent,
+        HeadernavComponent
     ],
     providers: [
         {

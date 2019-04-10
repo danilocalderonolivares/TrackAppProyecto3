@@ -1,50 +1,41 @@
-<ng-container *ngIf="isAuthenticated() != false; else elseTemplate">
-    <mat-toolbar id="mainToolbar" color="primary">
-        <mat-icon (click)="onToolbarMenuToggle()"
-                  id="toolbarMenu">
-            subject
-        </mat-icon>
-            GPSApp
-        <span class="toolbar-spacer"></span>
-        <mat-icon class="mat-icon material-icons"
-                  (click)="logout()"
-                  role="img"
-                  aria-hidden="true" style="cursor: pointer;">
-            exit_to_app
-        </mat-icon>
-        <span>Salir</span>
-    </mat-toolbar>
-</ng-container>
-<ng-template #elseTemplate>
+<!--<ng-container *ngIf="isAuthenticated() != false; else elseTemplate">-->
+    <!--<mat-toolbar id="mainToolbar" color="primary">-->
+        <!--<mat-icon (click)="onToolbarMenuToggle()"-->
+                  <!--id="toolbarMenu">-->
+            <!--subject-->
+        <!--</mat-icon>-->
+            <!--GPSApp-->
+        <!--<span class="toolbar-spacer"></span>-->
+        <!--<mat-icon class="mat-icon material-icons"-->
+                  <!--(click)="logout()"-->
+                  <!--role="img"-->
+                  <!--aria-hidden="true" style="cursor: pointer;">-->
+            <!--exit_to_app-->
+        <!--</mat-icon>-->
+        <!--<span>Salir</span>-->
+    <!--</mat-toolbar>-->
+<!--</ng-container>-->
+<!--<ng-template #elseTemplate>-->
 
-    <link rel="stylesheet" href="../../content/css/bootstrap.min.css">
-    <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
-        <div class="container">
-            <a class="navbar-brand" routerLink="/">GPSApp</a>
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"></button>
-            <div [ngSwitch]="isAuthenticated()">
-                <div class="collapse navbar-collapse" id="navcol-1" *ngSwitchCase="false">
-                    <a class="btn btn-primary ml-auto" role="button" (click)="login()" style="color: white" id="login">
-                   <span>
-                       <span>
-                           <fa-icon [icon]="entrat"></fa-icon>
-                                    Entrar
-                       </span>
-                   </span>
-                    </a>
-                </div>
-            </div>
+    <!--<link rel="stylesheet" href="../../content/css/bootstrap.min.css">-->
+    <!--<nav class="navbar navbar-light navbar-expand bg-light navigation-clean">-->
+        <!--<div class="container">-->
+            <!--<a class="navbar-brand" routerLink="/">GPSApp</a>-->
+            <!--<button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"></button>-->
+            <!--<div [ngSwitch]="isAuthenticated()">-->
+                <!--<div class="collapse navbar-collapse" id="navcol-1" *ngSwitchCase="false">-->
+                    <!--<a class="btn btn-primary ml-auto" role="button" (click)="login()" style="color: white" id="login">-->
+                   <!--<span>-->
+                       <!--<span>-->
+                           <!--<fa-icon [icon]="entrat"></fa-icon>-->
+                                    <!--Entrar-->
+                       <!--</span>-->
+                   <!--</span>-->
+                    <!--</a>-->
+                <!--</div>-->
+            <!--</div>-->
 
-        </div>
-    </nav>
-</ng-template>
-<!--<div class="collapse navbar-collapse" id="btnLogout" *ngSwitchCase="true">-->
-<!--<a class="btn btn-primary ml-auto" (click)="logout()" style="color: white" id="logout" >-->
-<!--<span>-->
-<!--<span>-->
-<!--<fa-icon [icon]="salir"></fa-icon>-->
-<!--Salir-->
-<!--</span>-->
-<!--</span>-->
-<!--</a>-->
-<!--</div>-->
+        <!--</div>-->
+    <!--</nav>-->
+<!--</ng-template>-->
+

@@ -1,6 +1,18 @@
 <jhi-page-ribbon></jhi-page-ribbon>
-<router-outlet name="navbar"></router-outlet>
-<router-outlet></router-outlet>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav
+                 role="navigation">
+        <p>menu lateral</p>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <jhi-headernav (sidenavToggle)="sidenav.toggle()"></jhi-headernav>
+        <main>
+            <router-outlet></router-outlet>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
 <router-outlet name="popup"></router-outlet>
 
 

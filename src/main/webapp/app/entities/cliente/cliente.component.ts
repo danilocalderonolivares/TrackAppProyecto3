@@ -18,7 +18,7 @@ import { MatTableDataSource } from '@angular/material';
 export class ClienteComponent implements OnInit, OnDestroy {
     clientes: ICliente[];
     clientesBorradoLogico: ICliente[];
-    displayedColumns: string[] = ['nombre', 'cedula', 'correo', 'direccion', 'buttons'];
+    displayedColumns: string[] = ['nombre', 'cedula', 'correo', 'direccion', 'tipo', 'buttons'];
     currentAccount: any;
     eventSubscriber: Subscription;
     dataSource: any;
