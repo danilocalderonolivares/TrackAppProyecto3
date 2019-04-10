@@ -228,18 +228,18 @@
                 </agm-marker>
             </agm-map>
         </div>
-        <!--<div style="margin-top: 10px">-->
-            <!--<h3>Subtareas</h3>-->
-            <!--<input type="text" class="form-control" #box (keyup.enter)="addSubtarea(box.value)"-->
-                   <!--placeholder="Agregar nueva subtarea" [(ngModel)]="nvaSubtarea"/>-->
-            <!--<div style="margin-top: 10px;">-->
-                <!--<ul class="list-group">-->
-                    <!--<li *ngFor="let subtarea of subtareas; index as i; trackBy: trackByFn" class="list-group-item d-flex justify-content-between align-items-center">-->
-                        <!--{{i+1}}. {{subtarea.descripcion}}-->
-                        <!--<fa-icon icon="times" (click)="eliminarSubtarea(i)"></fa-icon>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div style="margin-top: 10px">
+            <h3>Subtareas</h3>
+            <input type="text" class="form-control" #box (keyup.enter)="addSubtarea(box.value)"
+                   placeholder="Agregar nueva subtarea" [(ngModel)]="nvaSubtarea"/>
+            <div style="margin-top: 10px;">
+                <ul class="list-group">
+                    <li *ngFor="let subtarea of subtareas; index as i; trackBy: trackByFn" class="list-group-item d-flex justify-content-between align-items-center">
+                        {{i+1}}. {{subtarea.descripcion}}
+                        <fa-icon icon="times" (click)="eliminarSubtarea(i)"></fa-icon>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
