@@ -3,7 +3,44 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav
                  role="navigation">
-        <p>menu lateral</p>
+        <mat-list>
+            <a mat-list-item routerLink="/tarea" (click)="sidenav.close()">
+                <mat-icon>list</mat-icon>
+                <span class="nav-caption">Tarea</span>
+            </a>
+            <a mat-list-item routerLink="/cliente" (click)="sidenav.close()">
+                <mat-icon>supervisor_account</mat-icon>
+                <span class="nav-caption">Cliente</span>
+            </a>
+            <a mat-list-item routerLink="/admin/user-management" (click)="sidenav.close()">
+                <mat-icon>contacts</mat-icon>
+                <span class="nav-caption">Manejo de usuarios</span>
+            </a>
+            <a mat-list-item routerLink="/ruta" (click)="sidenav.close()">
+                <mat-icon>map</mat-icon>
+                <span class="nav-caption">Ruta</span>
+            </a>
+            <a mat-list-item routerLink="/horario" (click)="sidenav.close()">
+                <mat-icon>calendar_view_day</mat-icon>
+                <span class="nav-caption">Horario</span>
+            </a>
+            <a mat-list-item routerLink="/calendario" (click)="sidenav.close()">
+                <mat-icon>calendar_today</mat-icon>
+                <span class="nav-caption">Calendario</span>
+            </a>
+            <a mat-list-item routerLink="/tipo-empleado" (click)="sidenav.close()">
+                <mat-icon>account_circle</mat-icon>
+                <span class="nav-caption">Tipo Empleado</span>
+            </a>
+            <a mat-list-item routerLink="/empleados" (click)="sidenav.close()">
+                <mat-icon>my_location</mat-icon>
+                <span class="nav-caption">Localización</span>
+            </a>
+            <a mat-list-item routerLink="/" (click)="sidenav.close()">
+                <mat-icon>chat</mat-icon>
+                <span class="nav-caption">Chat</span>
+            </a>
+        </mat-list>
     </mat-sidenav>
     <mat-sidenav-content>
         <jhi-headernav (sidenavToggle)="sidenav.toggle()"></jhi-headernav>

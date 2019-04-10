@@ -1,18 +1,24 @@
 <ng-container *ngIf="isAuthenticated() != false; else elseTemplate">
     <mat-toolbar id="mainToolbar" color="primary">
-        <mat-icon (click)="onToolbarMenuToggle()"
-                  id="toolbarMenu">
-            subject
-        </mat-icon>
-        GPSApp
-        <span class="toolbar-spacer"></span>
-        <mat-icon class="mat-icon material-icons"
-                  (click)="logout()"
-                  role="img"
-                  aria-hidden="true" style="cursor: pointer;">
-            exit_to_app
-        </mat-icon>
-        <span>Salir</span>
+        <div>
+            <button mat-icon-button (click)="onToolbarMenuToggle()">
+                <mat-icon>
+                    menu
+                </mat-icon>
+            </button>
+        </div>
+        <div>
+            <div>
+                <a routerLink="/" style="text-decoration: none;color: white;">GPSApp</a>
+            </div>
+        </div>
+        <div fxFlex fxLayout fxLayoutAlign="flex-end">
+            <button mat-icon-button (click)="logout()">
+                <mat-icon class="mat-icon material-icons">
+                    exit_to_app
+                </mat-icon>
+            </button>
+        </div>
     </mat-toolbar>
 </ng-container>
 <ng-template #elseTemplate>

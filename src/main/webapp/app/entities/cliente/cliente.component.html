@@ -42,18 +42,11 @@
                      <p class="text-truncate font-weight-600">{{cliente.direccion}}</p>
                  </mat-cell>
              </ng-container>
-             <ng-container matColumnDef="tipo">
-                 <mat-header-cell *matHeaderCellDef >Tipo de cliente</mat-header-cell>
-                 <mat-cell *matCellDef="let cliente">
-                     <p class="text-truncate font-weight-600">{{cliente.esEmpresa}}</p>
-                 </mat-cell>
-             </ng-container>
-
              <!--columna buttons-->
              <ng-container matColumnDef="buttons">
                  <mat-header-cell *matHeaderCellDef></mat-header-cell>
                  <mat-cell *matCellDef="let cliente">
-                     <div >
+                     <div>
                          <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
                                  (click)="$event.stopPropagation();">
                              <mat-icon class="secondary-text">more_vert</mat-icon>
