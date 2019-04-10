@@ -79,10 +79,12 @@ export class ChatsListComponent implements OnInit {
         let chatInfo = null;
 
         for (const chat of this.currentChatRoomsList) {
-            for (const miembro of chat.miembros) {
-                if (miembro.id === chatRoom.id) {
-                    chatInfo = chat;
-                    break;
+            if (chat.nombre !== 'General') {
+                for (const miembro of chat.miembros) {
+                    if (miembro.id === chatRoom.id) {
+                        chatInfo = chat;
+                        break;
+                    }
                 }
             }
         }

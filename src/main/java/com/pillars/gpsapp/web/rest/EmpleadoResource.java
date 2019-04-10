@@ -1,8 +1,10 @@
 package com.pillars.gpsapp.web.rest;
 
 import com.pillars.gpsapp.domain.Authority;
+import com.pillars.gpsapp.domain.ChatRoom;
 import com.pillars.gpsapp.domain.Empleado;
 import com.pillars.gpsapp.domain.User;
+import com.pillars.gpsapp.repository.ChatRoomRepository;
 import com.pillars.gpsapp.repository.EmpleadoRepository;
 import com.pillars.gpsapp.repository.UserRepository;
 import com.pillars.gpsapp.web.rest.errors.BadRequestAlertException;
@@ -31,12 +33,12 @@ public class EmpleadoResource {
     private static final String ENTITY_NAME = "empleado";
 
     private final EmpleadoRepository empleadoRepository;
+
     @Autowired
     private UserRepository userRepository;
 
-    private Empleado empleado = new Empleado();
-
-    private User user = new User();
+    @Autowired
+    private ChatRoomRepository chatRoomRepository;
 
     public EmpleadoResource(EmpleadoRepository empleadoRepository) {
         this.empleadoRepository = empleadoRepository;
@@ -57,9 +59,16 @@ public class EmpleadoResource {
             throw new BadRequestAlertException("A new empleado cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Empleado result = empleadoRepository.save(empleado);
+        addEmpleadoToGeneralChat(empleado);
         return ResponseEntity.created(new URI("/api/empleados/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    public void addEmpleadoToGeneralChat(Empleado empleado) {
+        List<ChatRoom> chatRoom = this.chatRoomRepository.findBynombre("General");
+        chatRoom.get(0).addMiembros(empleado);
+        this.chatRoomRepository.save(chatRoom.get(0));
     }
 
     /**
