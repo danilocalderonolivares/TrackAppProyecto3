@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 
 import { GpsAppTestModule } from '../../../test.module';
 import { UserMgmtUpdateComponent } from 'app/admin/user-management/user-management-update.component';
-import { UserService, User, JhiLanguageHelper } from 'app/core';
+import { UserService, User } from 'app/core';
 
 describe('Component Tests', () => {
     describe('User Management Update Component', () => {
@@ -36,7 +36,7 @@ describe('Component Tests', () => {
             fixture = TestBed.createComponent(UserMgmtUpdateComponent);
             comp = fixture.componentInstance;
             service = fixture.debugElement.injector.get(UserService);
-            mockLanguageHelper = fixture.debugElement.injector.get(JhiLanguageHelper);
+            // mockLanguageHelper = fixture.debugElement.injector.get(JhiLanguageHelper);
         });
 
         describe('OnInit', () => {

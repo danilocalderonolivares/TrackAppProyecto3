@@ -29,6 +29,7 @@ export class JhiTrackerComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.trackerService.connect();
         this.trackerService.subscribe();
         this.trackerService.receive().subscribe(activity => {
             this.showActivity(activity);

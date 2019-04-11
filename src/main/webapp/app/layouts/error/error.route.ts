@@ -8,7 +8,7 @@ export const errorRoute: Routes = [
         component: ErrorComponent,
         data: {
             authorities: [],
-            pageTitle: 'error.title'
+            pageTitle: 'GPSApp'
         }
     },
     {
@@ -16,7 +16,7 @@ export const errorRoute: Routes = [
         component: ErrorComponent,
         data: {
             authorities: [],
-            pageTitle: 'error.title',
+            pageTitle: 'GPSApp',
             error403: true
         }
     },
@@ -25,7 +25,7 @@ export const errorRoute: Routes = [
         component: ErrorComponent,
         data: {
             authorities: [],
-            pageTitle: 'error.title',
+            pageTitle: 'GPSApp',
             error404: true
         }
     },

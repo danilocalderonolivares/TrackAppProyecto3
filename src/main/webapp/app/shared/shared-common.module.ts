@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { GpsAppSharedLibsModule, FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent } from './';
+import { GpsAppSharedLibsModule, JhiAlertComponent, JhiAlertErrorComponent } from './';
 
 @NgModule({
     imports: [GpsAppSharedLibsModule],
-    declarations: [FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent],
-    exports: [GpsAppSharedLibsModule, FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent]
+    declarations: [JhiAlertComponent, JhiAlertErrorComponent],
+    exports: [GpsAppSharedLibsModule, JhiAlertComponent, JhiAlertErrorComponent]
 })
 export class GpsAppSharedCommonModule {}

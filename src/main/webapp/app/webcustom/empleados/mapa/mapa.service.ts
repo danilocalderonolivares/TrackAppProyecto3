@@ -6,6 +6,7 @@ import { Empleado, IEmpleado } from 'app/shared/model/empleado.model';
 import { IUbicacion, Ubicacion } from 'app/shared/model/ubicacion.model';
 import { ActivatedRoute } from '@angular/router';
 import { LocalStorage } from 'ngx-webstorage';
+import { UpdateEmployeeServiceService } from 'app/core/ubication/updateEmployee.service';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +19,11 @@ export class MapaService {
     tipos: string[] = new Array();
     ubicaciones: IUbicacion[];
 
-    constructor(public empleadoService: EmpleadoService, private route: ActivatedRoute) {}
+    constructor(
+        public empleadoService: EmpleadoService,
+        private route: ActivatedRoute,
+        protected updateEmployeeService: UpdateEmployeeServiceService
+    ) {}
 
     onAddUbication(lat: number, lng: number) {
         this.lat = lat;
@@ -93,5 +98,18 @@ export class MapaService {
         });
         this.empleados = myEmp;
         localStorage.setItem('currentUser', JSON.stringify(this.empleados));
+    }
+
+    setNewEmp(emp: IEmpleado) {
+        for (let i = 0; i <= this.todosLosEmpleados.length; i++) {
+            if (this.todosLosEmpleados[i].id === emp.id) {
+                this.todosLosEmpleados[i] === emp;
+            }
+        }
+        for (let i = 0; i <= this.empleados.length; i++) {
+            if (this.empleados[i].id === emp.id) {
+                this.empleados[i] === emp;
+            }
+        }
     }
 }
