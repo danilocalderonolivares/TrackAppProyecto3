@@ -1,27 +1,27 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-mensaje-heading">Create or edit a Mensaje</h2>
+            <h2 id="jhi-mensaje-heading" jhiTranslate="gpsApp.mensaje.home.createOrEditLabel">Create or edit a Mensaje</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!mensaje.id">
-                    <label for="id">ID</label>
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="mensaje.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_texto">Texto</label>
+                    <label class="form-control-label" jhiTranslate="gpsApp.mensaje.texto" for="field_texto">Texto</label>
                     <input type="text" class="form-control" name="texto" id="field_texto"
                         [(ngModel)]="mensaje.texto" required/>
                     <div [hidden]="!(editForm.controls.texto?.dirty && editForm.controls.texto?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.texto?.errors?.required">
+                        [hidden]="!editForm.controls.texto?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_fechaEnvio">Fecha Envio</label>
+                    <label class="form-control-label" jhiTranslate="gpsApp.mensaje.fechaEnvio" for="field_fechaEnvio">Fecha Envio</label>
                     <div class="input-group">
                         <input id="field_fechaEnvio" type="text" class="form-control" name="fechaEnvio" ngbDatepicker  #fechaEnvioDp="ngbDatepicker" [(ngModel)]="mensaje.fechaEnvio"
                         required/>
@@ -31,36 +31,41 @@
                     </div>
                     <div [hidden]="!(editForm.controls.fechaEnvio?.dirty && editForm.controls.fechaEnvio?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.fechaEnvio?.errors?.required">
+                        [hidden]="!editForm.controls.fechaEnvio?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_visto">Visto</label>
+                    <label class="form-control-label" jhiTranslate="gpsApp.mensaje.visto" for="field_visto">Visto</label>
                     <input type="checkbox" class="form-control" name="visto" id="field_visto"
                         [(ngModel)]="mensaje.visto" />
                     <div [hidden]="!(editForm.controls.visto?.dirty && editForm.controls.visto?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.visto?.errors?.required">
+                        [hidden]="!editForm.controls.visto?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_borrado">Borrado</label>
+                    <label class="form-control-label" jhiTranslate="gpsApp.mensaje.borrado" for="field_borrado">Borrado</label>
                     <input type="checkbox" class="form-control" name="borrado" id="field_borrado"
                         [(ngModel)]="mensaje.borrado" />
                     <div [hidden]="!(editForm.controls.borrado?.dirty && editForm.controls.borrado?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.borrado?.errors?.required">
+                        [hidden]="!editForm.controls.borrado?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gpsApp.mensaje.numeroMensaje" for="field_numeroMensaje">Numero Mensaje</label>
+                    <input type="number" class="form-control" name="numeroMensaje" id="field_numeroMensaje"
+                        [(ngModel)]="mensaje.numeroMensaje" />
+                </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_empleado">Empleado</label>
+                    <label class="form-control-label" jhiTranslate="gpsApp.mensaje.empleado" for="field_empleado">Empleado</label>
                     <select class="form-control" id="field_empleado" name="empleado" [(ngModel)]="mensaje.empleado">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="empleadoOption.id === mensaje.empleado?.id ? mensaje.empleado : empleadoOption" *ngFor="let empleadoOption of empleados; trackBy: trackEmpleadoById">{{empleadoOption.id}}</option>
@@ -69,10 +74,10 @@
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
         </form>

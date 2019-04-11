@@ -33,8 +33,8 @@ export const mensajeRoute: Routes = [
         path: '',
         component: MensajeComponent,
         data: {
-            authorities: ['ROLE_ADMIN'],
-            pageTitle: 'Mensajes'
+            authorities: ['ROLE_USER'],
+            pageTitle: 'gpsApp.mensaje.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -45,8 +45,8 @@ export const mensajeRoute: Routes = [
             mensaje: MensajeResolve
         },
         data: {
-            authorities: ['ROLE_ADMIN'],
-            pageTitle: 'Mensajes'
+            authorities: ['ROLE_USER'],
+            pageTitle: 'gpsApp.mensaje.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -57,8 +57,8 @@ export const mensajeRoute: Routes = [
             mensaje: MensajeResolve
         },
         data: {
-            authorities: ['ROLE_ADMIN'],
-            pageTitle: 'Mensajes'
+            authorities: ['ROLE_USER'],
+            pageTitle: 'gpsApp.mensaje.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -69,8 +69,8 @@ export const mensajeRoute: Routes = [
             mensaje: MensajeResolve
         },
         data: {
-            authorities: ['ROLE_ADMIN'],
-            pageTitle: 'Mensajes'
+            authorities: ['ROLE_USER'],
+            pageTitle: 'gpsApp.mensaje.home.title'
         },
         canActivate: [UserRouteAccessService]
     }
@@ -84,8 +84,8 @@ export const mensajePopupRoute: Routes = [
             mensaje: MensajeResolve
         },
         data: {
-            authorities: ['ROLE_ADMIN'],
-            pageTitle: 'Mensajes'
+            authorities: ['ROLE_USER'],
+            pageTitle: 'gpsApp.mensaje.home.title'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

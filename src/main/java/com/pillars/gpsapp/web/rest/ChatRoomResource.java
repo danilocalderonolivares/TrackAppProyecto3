@@ -1,5 +1,7 @@
 package com.pillars.gpsapp.web.rest;
+
 import com.pillars.gpsapp.domain.ChatRoom;
+import com.pillars.gpsapp.domain.Mensaje;
 import com.pillars.gpsapp.repository.ChatRoomRepository;
 import com.pillars.gpsapp.web.rest.errors.BadRequestAlertException;
 import com.pillars.gpsapp.web.rest.util.HeaderUtil;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.List;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 /**
  * REST controller for managing ChatRoom.
@@ -114,15 +118,81 @@ public class ChatRoomResource {
     public List<ChatRoom> getByApproximation(@PathVariable String name) {
         List<ChatRoom> chatRooms = chatRoomRepository.findBynombre(".*" + name.toUpperCase() + ".*");
 
-        if(chatRooms.size() < 1) {
+        if (chatRooms.size() < 1) {
             chatRoomRepository.findBynombre(".*" + name.toUpperCase() + ".*");
         }
         return chatRooms;
     }
 
     @GetMapping("/chat-rooms/get-by-user/{id}")
-    public List<ChatRoom> getByUser(@PathVariable String id) {
+    public List<ChatRoom> getByUser(@PathVariable String id) throws Exception {
         List<ChatRoom> chatRooms = chatRoomRepository.findByUser(id);
+
+        for (int i = 0; i < chatRooms.size(); i++) {
+            orderChatMessages(chatRooms.get(i));
+        }
+
         return chatRooms;
+    }
+
+    /*private void orderChatMessagesByDate(ChatRoom chatRoom) throws Exception {
+        List<Mensaje> listaOrdenada = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        List<Mensaje> mensajesChat = new ArrayList<>(chatRoom.getMensajes());
+        int index = 0;
+
+        if (mensajesChat.size() > 0) {
+            for (int j = 0; j <= mensajesChat.size(); j++) {
+                LocalDate fechaMenor = LocalDate.parse("3000-12-31", formatter);
+
+                for (int i = 0; i < mensajesChat.size(); i++) {
+                    if (mensajesChat.get(i).getFechaEnvio().compareTo(fechaMenor) < 0) {
+                        fechaMenor = mensajesChat.get(i).getFechaEnvio();
+                        index = i;
+                    }
+                }
+
+                listaOrdenada.add(mensajesChat.get(index));
+                mensajesChat.remove(index);
+                index = 0;
+                j = 0;
+            }
+
+            Set<Mensaje> set = new LinkedHashSet();
+            for (Mensaje mensaje : listaOrdenada) {
+                set.add(mensaje);
+            }
+            chatRoom.setMensajes(set);
+        }
+    }*/
+
+    private void orderChatMessages(ChatRoom chatRoom) throws Exception {
+        List<Mensaje> listaOrdenada = new ArrayList<>();
+        List<Mensaje> mensajesChat = new ArrayList<>(chatRoom.getMensajes());
+        int index = 0;
+
+        if (mensajesChat.size() > 0) {
+            for (int j = 0; j <= mensajesChat.size(); j++) {
+                int numeroMenor = 1000000;
+
+                for (int i = 0; i < mensajesChat.size(); i++) {
+                    if (mensajesChat.get(i).getNumeroMensaje() < numeroMenor) {
+                        numeroMenor = mensajesChat.get(i).getNumeroMensaje();
+                        index = i;
+                    }
+                }
+
+                listaOrdenada.add(mensajesChat.get(index));
+                mensajesChat.remove(index);
+                index = 0;
+                j = 0;
+            }
+
+            Set<Mensaje> set = new LinkedHashSet();
+            for (Mensaje mensaje : listaOrdenada) {
+                set.add(mensaje);
+            }
+            chatRoom.setMensajes(set);
+        }
     }
 }

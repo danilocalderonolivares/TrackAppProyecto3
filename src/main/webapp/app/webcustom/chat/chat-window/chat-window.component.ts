@@ -32,9 +32,23 @@ export class ChatWindowComponent implements OnInit {
     }
 
     sendMessage() {
-        const messageToSend = new Mensaje(null, this.message, moment(new Date()), false, false, this.currentUserLogged);
+        const messageToSend = new Mensaje(
+            null,
+            this.message,
+            moment(new Date()),
+            false,
+            false,
+            this.chatRoom.mensajes.length + 1,
+            this.currentUserLogged
+        );
         this.chatService.sendMessage(messageToSend, this.chatRoom);
         this.message = '';
+    }
+
+    onKeyPressed(event: any) {
+        if (event.target.value !== '') {
+            this.sendMessage();
+        }
     }
 
     validateIsSender(mensaje: Mensaje) {

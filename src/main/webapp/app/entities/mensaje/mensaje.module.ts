@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { JhiLanguageService } from 'ng-jhipster';
 
 import { GpsAppSharedModule } from 'app/shared';
 import {
@@ -24,6 +25,7 @@ const ENTITY_STATES = [...mensajeRoute, ...mensajePopupRoute];
         MensajeDeletePopupComponent
     ],
     entryComponents: [MensajeComponent, MensajeUpdateComponent, MensajeDeleteDialogComponent, MensajeDeletePopupComponent],
+    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GpsAppMensajeModule {}

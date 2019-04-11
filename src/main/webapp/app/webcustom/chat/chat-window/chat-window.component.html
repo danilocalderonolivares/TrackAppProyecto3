@@ -16,7 +16,7 @@
 </div>
 <div class="input-group">
     <div class="custom-file">
-        <input [(ngModel)]="message" type="text" class="form-control" placeholder="Escriba su mensaje aquí..">
+        <input (keyup.enter)="onKeyPressed($event)" [(ngModel)]="message" type="text" class="form-control" placeholder="Escriba su mensaje aquí..">
     </div>
     <div class="input-group-append">
         <button (click)="sendMessage()" [disabled]="message == ''" class="btn btn-primary" style="background-color: #007bff; color: #ffffff;">Enviar</button>
