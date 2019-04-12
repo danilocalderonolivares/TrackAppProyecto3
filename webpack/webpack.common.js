@@ -77,13 +77,6 @@ module.exports = (options) => ({
             // jhipster-needle-add-assets-to-webpack - JHipster will add/remove third-party resources in this array
             { from: './src/main/webapp/robots.txt', to: 'robots.txt' }
         ]),
-        new MergeJsonWebpackPlugin({
-            output: {
-                groupBy: [
-                    // jhipster-needle-i18n-language-webpack - JHipster will add/remove languages in this array
-                ]
-            }
-        }),
         new HtmlWebpackPlugin({
             template: './src/main/webapp/index.html',
             chunks: ['vendors', 'polyfills', 'main', 'global'],
