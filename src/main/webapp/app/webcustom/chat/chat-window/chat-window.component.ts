@@ -30,9 +30,9 @@ export class ChatWindowComponent implements OnInit {
             this.chatRoom = chatRoom;
         });
 
-        /*this.chatService.getMessages().subscribe((message: Mensaje) => {
+        this.chatService.getMessages().subscribe((message: Mensaje) => {
             this.chatRoom.mensajes.push(message);
-        });*/
+        });
     }
 
     sendMessage() {

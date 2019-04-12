@@ -12,11 +12,7 @@ const socket = io('http://localhost:3000');
 export class ChatService implements OnInit {
     chatSelected = new EventEmitter<ChatRoom>();
 
-    ngOnInit() {
-        socket.on('new-message', res => {
-            console.log(res);
-        });
-    }
+    ngOnInit() {}
 
     constructor(private mensajeService: MensajeService, private chatRoomService: ChatRoomService) {}
 
@@ -38,11 +34,11 @@ export class ChatService implements OnInit {
         });
     }
 
-    /*public getMessages = () => {
+    public getMessages = () => {
         return Observable.create(observer => {
-            socket.on('new-message', message => {
-                observer.emit(message);
+            socket.on('new-message', function(msg) {
+                observer.next(msg);
             });
         });
-    }*/
+    };
 }

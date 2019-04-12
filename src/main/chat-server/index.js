@@ -1,20 +1,14 @@
-const express = require('express');
-const socket = require('socket.io');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const port = process.env.PORT || 3000;
 
-const app = express();
-app.use(cors({origin: '*'}));
-app.use(bodyParser);
-
-const server = app.listen(3000,() => {
-    console.log('Started in 3000');
+http.listen(port, function() {
+    console.log('listening on *:' + port);
 });
 
-const io = socket(server);
-
-io.sockets.on('connection', (socket) => {
-    socket.on('new-message', (message) => {
-        console.log('llegue');
+io.on('connection', function(socket){
+    socket.on('new-message', function(msg){
+        io.emit('new-message', msg);
     });
 });
