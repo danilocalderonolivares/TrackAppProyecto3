@@ -1,13 +1,9 @@
-<div class="row justify-content-center" style="padding: 10px; width: 100%;">
-    <div class="col-6">
+<h2 style="text-align: center; margin-bottom: 30px" id="jhi-tarea-heading">Crear o editar Tarea</h2>
+<div class="d-flex justify-content-around" style="padding: 10px; width: 100%;">
+    <div class="col-4">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-tarea-heading">Crear o editar Tarea</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!tarea.id">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" [(ngModel)]="tarea.id" readonly />
-                </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_title">Titulo</label>
                     <input type="text" class="form-control" name="title" id="field_title"
@@ -25,7 +21,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label">
-                        Inicio
+                       Fecha de inicio
                         <input [(ngModel)]="tarea.inicio"
                                [max]="tarea.fin"
                                [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
@@ -41,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label">
-                        Fin
+                        Fecha de Finalización
                         <input [(ngModel)]="tarea.fin"
                                [min]="tarea.inicio"
                                [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
@@ -85,17 +81,6 @@
                     <div [hidden]="!(editForm.controls.fin?.dirty && editForm.controls.fin?.invalid)">
                         <small class="form-text text-danger" [hidden]="!editForm.controls.fin?.errors?.required">
                             Este campo es requerido
-                        </small>
-                    </div>
-                </div-->
-                <!--div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" name="usarRuta" id="field_usarRuta"
-                           [(ngModel)]="tarea.usarRuta" />
-                    <label class="form-check-label" for="field_usarRuta">Usar Ruta</label>
-                    <div [hidden]="!(editForm.controls.usarRuta?.dirty && editForm.controls.usarRuta?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.usarRuta?.errors?.required">
-                        This field is required.
                         </small>
                     </div>
                 </div-->
@@ -170,28 +155,51 @@
                         <option [ngValue]="subTareaOption.id === tarea.subtarea?.id ? tarea.subtarea : subTareaOption" *ngFor="let subTareaOption of subtareas; trackBy: trackSubTareaById">{{subTareaOption.id}}</option>
                     </select>
                 </div-->
-                <div class="form-group">
-                    <label class="form-control-label" for="field_empleado">Empleado</label>
-                    <!--<select class="form-control" id="field_empleado" name="empleado" (change)="onEmpleadoChangeCustom(empleadoOption)">-->
-                        <!--<option> </option>-->
-                        <!--<option [ngValue]="empleadoOption" *ngFor="let empleadoOption of empleados">{{empleadoOption.nombre}} {{empleadoOption.apellidos}}</option>-->
+
+
+                <!--selects without search bar-->
+
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_empleado">Empleado</label>-->
+                    <!--<select  class="form-control" id="field_empleado" name="empleado" [(ngModel)]="tarea.empleado">-->
+                        <!--<option [ngValue]="empleadoOption.id === tarea.empleado?.id ? tarea.empleado : empleadoOption" *ngFor="let empleadoOption of empleados; trackBy: trackEmpleadoById">{{empleadoOption.nombre}} {{empleadoOption.apellidos}}</option>-->
                     <!--</select>-->
-                    <select  class="form-control" id="field_empleado" name="empleado" [(ngModel)]="tarea.empleado">
-                        <option [ngValue]="empleadoOption.id === tarea.empleado?.id ? tarea.empleado : empleadoOption" *ngFor="let empleadoOption of empleados; trackBy: trackEmpleadoById">{{empleadoOption.nombre}} {{empleadoOption.apellidos}}</option>
-                    </select>
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label class="form-control-label" for="field_cliente">Cliente</label>-->
+                <!--<select class="form-control" id="field_cliente" name="cliente" [(ngModel)]="tarea.cliente">-->
+                <!--<option [ngValue]="clienteOption.id === tarea.cliente?.id ? tarea.cliente : clienteOption" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.nombre}}</option>-->
+                <!--</select>-->
+                <!--</div>-->
+                <!--<div *ngIf="tarea.usarRuta" class="form-group">-->
+                    <!--<label class="form-control-label" for="field_ruta">Ruta</label>-->
+                    <!--<select class="form-control" id="field_ruta" name="ruta" [(ngModel)]="tarea.ruta">-->
+                        <!--<option [ngValue]="rutaOption.id === tarea.ruta?.id ? tarea.ruta : rutaOption" *ngFor="let rutaOption of rutas; trackBy: trackRutaById">{{rutaOption.nombre}}</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+                <ngx-select-dropdown (change)="onEmpleadoChangeCustom($event.value)" [config]="configEmpleados"
+                                     [_value]="tarea.empleado !==null ? onUpdateEmployee(tarea.empleado) : undefined"
+                                     [options]="empleadosList" [multiple]="false"></ngx-select-dropdown>
+                <br>
+                <ngx-select-dropdown  (change)="onClienteChange($event.value)" [config]="configClientes"
+                                      [options]="clientes" [_value]="tarea.cliente !== null? tarea.cliente: undefined"
+                                      [multiple]="false"></ngx-select-dropdown>
+                <br>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" name="usarRuta" id="field_usarRuta"
+                           [(ngModel)]="tarea.usarRuta" />
+                    <label class="form-check-label" for="field_usarRuta">Usar Ruta</label>
+                    <div [hidden]="!(editForm.controls.usarRuta?.dirty && editForm.controls.usarRuta?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.usarRuta?.errors?.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_cliente">Cliente</label>
-                    <select class="form-control" id="field_cliente" name="cliente" [(ngModel)]="tarea.cliente">
-                        <option [ngValue]="clienteOption.id === tarea.cliente?.id ? tarea.cliente : clienteOption" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.nombre}}</option>
-                    </select>
-                </div>
-                <div *ngIf="tarea.usarRuta" class="form-group">
-                    <label class="form-control-label" for="field_ruta">Ruta</label>
-                    <select class="form-control" id="field_ruta" name="ruta" [(ngModel)]="tarea.ruta">
-                        <option [ngValue]="rutaOption.id === tarea.ruta?.id ? tarea.ruta : rutaOption" *ngFor="let rutaOption of rutas; trackBy: trackRutaById">{{rutaOption.nombre}}</option>
-                    </select>
-                </div>
+                <ngx-select-dropdown *ngIf="tarea.usarRuta" (change)="onRutaChange($event.value)" [config]="configRutas"
+                                      [options]="rutas" [_value]="tarea.ruta !== null? tarea.ruta: undefined"
+                                      [multiple]="false"></ngx-select-dropdown>
+                <br>
                 <!--div class="form-group">
                     <label class="form-control-label" for="field_logs">Logs</label>
                     <select class="form-control" id="field_logs" name="logs" [(ngModel)]="tarea.logs">
@@ -210,24 +218,8 @@
             </div>
         </form>
     </div>
-    <div class="col-6">
-        <div>
-            <h3>Ubicación</h3>
-            <input ngx-google-places-autocomplete class="form-control" id="autoComplete"
-                   name="autoComplete" placeholder="Ingrese una ubicación"
-                   #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
-            <br>
-            <agm-map [latitude]="9.935697"
-                     [longitude]="-84.1484506"
-                     [zoom]="zoom"
-                     (mapClick)="onChoseLocation($event)"
-                     style="height: 300px">
-                <agm-marker
-                    [latitude]="tarea.ubicacion.latitud"
-                    [longitude]="tarea.ubicacion.longitud">
-                </agm-marker>
-            </agm-map>
-        </div>
+    <div>
+        <jhi-map></jhi-map>
         <!--<div style="margin-top: 10px">-->
             <!--<h3>Subtareas</h3>-->
             <!--<input type="text" class="form-control" #box (keyup.enter)="addSubtarea(box.value)"-->
