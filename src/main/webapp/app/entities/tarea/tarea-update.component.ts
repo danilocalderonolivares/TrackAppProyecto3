@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { ISubTarea } from 'app/shared/model/sub-tarea.model';
 import { SubTareaService } from 'app/entities/sub-tarea';
 import { Empleado, IEmpleado } from 'app/shared/model/empleado.model';
 import { EmpleadoService } from 'app/entities/empleado';
-import { IUbicacion } from 'app/shared/model/ubicacion.model';
+import { IUbicacion, Ubicacion } from 'app/shared/model/ubicacion.model';
 import { UbicacionService } from 'app/entities/ubicacion';
 import { ICliente } from 'app/shared/model/cliente.model';
 import { ClienteService } from 'app/entities/cliente';
@@ -30,12 +30,13 @@ import { map as _map } from 'lodash';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { UserCustomUser } from 'app/shared/model/user_CustomUser.model';
+import { MapService } from 'app/shared/map/map.service';
 
 @Component({
     selector: 'jhi-tarea-update',
     templateUrl: './tarea-update.component.html'
 })
-export class TareaUpdateComponent implements OnInit {
+export class TareaUpdateComponent implements OnInit, OnDestroy {
     zoom = 12;
     @ViewChild('placesRef') placesRef: GooglePlaceDirective;
     tarea: ITarea;
@@ -53,6 +54,10 @@ export class TareaUpdateComponent implements OnInit {
     nvaSubtarea = '';
     users: User[];
     empleadosBase: UserCustomUser[];
+    empleadosList: any;
+    configEmpleados: any;
+    configClientes: any;
+    configRutas: any;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -63,13 +68,17 @@ export class TareaUpdateComponent implements OnInit {
         protected clienteService: ClienteService,
         protected rutaService: RutaService,
         protected logService: LogService,
-        protected activatedRoute: ActivatedRoute
+        protected activatedRoute: ActivatedRoute,
+        protected mapService: MapService
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ tarea }) => {
             this.tarea = tarea;
+            if (this.tarea.id !== undefined) {
+                this.tarea.usarRuta = false;
+            }
         });
         this.subTareaService
             .query({ filter: 'tarea-is-null' })
@@ -108,6 +117,7 @@ export class TareaUpdateComponent implements OnInit {
             .subscribe(
                 (res: IEmpleado[]) => {
                     this.empleados = res;
+                    this.setEmployeeKey(res);
                 },
                 (res: HttpErrorResponse) => console.log(res.message)
             );
@@ -128,20 +138,46 @@ export class TareaUpdateComponent implements OnInit {
             )
             .subscribe(
                 (res: ICliente[]) => {
-                    if (!this.tarea.cliente || !this.tarea.cliente.id) {
-                        this.clientes = res;
-                    } else {
-                        this.clienteService
-                            .find(this.tarea.cliente.id)
-                            .pipe(
-                                filter((subResMayBeOk: HttpResponse<ICliente>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<ICliente>) => subResponse.body)
-                            )
-                            .subscribe(
-                                (subRes: ICliente) => (this.clientes = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                            );
-                    }
+                    this.clientes = res;
+                    this.configClientes = {
+                        displayKey: 'nombre',
+                        search: true,
+                        height: '210px',
+                        placeholder: 'Cliente',
+                        customComparator: () => {},
+                        limitTo: res.length,
+                        moreText: 'más',
+                        noResultsFound: 'No se encontraron resultados!',
+                        searchPlaceholder: 'ingrese el nombre del cliente',
+                        searchOnKey: 'nombre'
+                    };
+                    // if (!this.tarea.cliente || !this.tarea.cliente.id) {
+                    //     this.clientes = res;
+                    //     this.configClientes = {
+                    //         displayKey: 'nombre',
+                    //         search: true,
+                    //         height: '210px',
+                    //         placeholder: 'Cliente',
+                    //         customComparator: () => {},
+                    //         limitTo: res.length,
+                    //         moreText: 'más',
+                    //         noResultsFound: 'No se encontraron resultados!',
+                    //         searchPlaceholder: 'ingrese el nombre del cliente',
+                    //         searchOnKey: 'nombre'
+                    //     };
+                    //
+                    // } else {
+                    //     this.clienteService
+                    //         .find(this.tarea.cliente.id)
+                    //         .pipe(
+                    //             filter((subResMayBeOk: HttpResponse<ICliente>) => subResMayBeOk.ok),
+                    //             map((subResponse: HttpResponse<ICliente>) => subResponse.body)
+                    //         )
+                    //         .subscribe(
+                    //             (subRes: ICliente) => (this.clientes = [subRes].concat(res)),
+                    //             (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                    //         );
+                    // }
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -153,20 +189,45 @@ export class TareaUpdateComponent implements OnInit {
             )
             .subscribe(
                 (res: IRuta[]) => {
-                    if (!this.tarea.ruta || !this.tarea.ruta.id) {
-                        this.rutas = res;
-                    } else {
-                        this.rutaService
-                            .find(this.tarea.ruta.id)
-                            .pipe(
-                                filter((subResMayBeOk: HttpResponse<IRuta>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<IRuta>) => subResponse.body)
-                            )
-                            .subscribe(
-                                (subRes: IRuta) => (this.rutas = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                            );
-                    }
+                    this.rutas = res;
+                    this.configRutas = {
+                        displayKey: 'nombre',
+                        search: true,
+                        height: '210px',
+                        placeholder: 'Ruta',
+                        customComparator: () => {},
+                        limitTo: res.length,
+                        moreText: 'más',
+                        noResultsFound: 'No se encontraron resultados!',
+                        searchPlaceholder: 'ingrese el nombre de la ruta',
+                        searchOnKey: 'nombre'
+                    };
+                    // if (!this.tarea.ruta || !this.tarea.ruta.id) {
+                    //     this.rutas = res;
+                    //     this.configRutas = {
+                    //         displayKey: 'nombre',
+                    //         search: true,
+                    //         height: '210px',
+                    //         placeholder: 'Ruta',
+                    //         customComparator: () => {},
+                    //         limitTo: res.length,
+                    //         moreText: 'más',
+                    //         noResultsFound: 'No se encontraron resultados!',
+                    //         searchPlaceholder: 'ingrese el nombre de la ruta',
+                    //         searchOnKey: 'nombre'
+                    //     };
+                    // } else {
+                    //     this.rutaService
+                    //         .find(this.tarea.ruta.id)
+                    //         .pipe(
+                    //             filter((subResMayBeOk: HttpResponse<IRuta>) => subResMayBeOk.ok),
+                    //             map((subResponse: HttpResponse<IRuta>) => subResponse.body)
+                    //         )
+                    //         .subscribe(
+                    //             (subRes: IRuta) => (this.rutas = [subRes].concat(res)),
+                    //             (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                    //         );
+                    // }
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -177,6 +238,11 @@ export class TareaUpdateComponent implements OnInit {
                 map((response: HttpResponse<ILog[]>) => response.body)
             )
             .subscribe((res: ILog[]) => (this.logs = res), (res: HttpErrorResponse) => this.onError(res.message));
+    }
+
+    ngOnDestroy() {
+        this.mapService.ubications = new Array();
+        this.mapService.ubication = new Ubicacion();
     }
 
     previousState() {
@@ -287,7 +353,62 @@ export class TareaUpdateComponent implements OnInit {
         this.tarea.empleado = newValue.user;
     }
 
-    onEmpleadoChangeCustom(empleado: IEmpleado) {
-        this.tarea.empleado = empleado;
+    onEmpleadoChangeCustom(emp: any) {
+        if (emp === undefined || emp === null) {
+            this.tarea.empleado = undefined;
+        } else {
+            let empleado = new Empleado();
+            empleado.id = emp.id;
+            empleado.nombre = emp.nombre;
+            empleado.apellidos = emp.apellidos;
+            this.tarea.empleado = empleado;
+        }
+    }
+
+    onClienteChange(cliente: ICliente) {
+        this.tarea.cliente = cliente;
+    }
+
+    onRutaChange(ruta: IRuta) {
+        this.tarea.ruta = ruta;
+    }
+
+    setEmployeeKey(empleados: IEmpleado[]) {
+        let empArray = new Array();
+        empleados.forEach(empleado => {
+            empArray.push({
+                id: empleado.id,
+                nombre: empleado.nombre,
+                apellidos: empleado.apellidos,
+                key: empleado.nombre + ' ' + empleado.apellidos
+            });
+        });
+        this.empleadosList = empArray;
+        this.configEmpleados = {
+            displayKey: 'key',
+            search: true,
+            height: '210px',
+            placeholder: 'Empleado',
+            customComparator: () => {},
+            limitTo: this.empleadosList.length,
+            moreText: 'más',
+            noResultsFound: 'No se encontraron resultados!',
+            searchPlaceholder: 'ingrese el nombre del empleado',
+            searchOnKey: 'key'
+        };
+    }
+
+    onUpdateEmployee(empleado: IEmpleado) {
+        if (empleado === undefined || empleado === null) {
+            return undefined;
+        } else {
+            let customEmp = {
+                id: empleado.id,
+                nombre: empleado.nombre,
+                apellidos: empleado.apellidos,
+                key: empleado.nombre + ' ' + empleado.apellidos
+            };
+            return customEmp;
+        }
     }
 }
