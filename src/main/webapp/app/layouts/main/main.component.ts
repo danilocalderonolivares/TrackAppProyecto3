@@ -15,7 +15,8 @@ import {
 
 @Component({
     selector: 'jhi-main',
-    templateUrl: './main.component.html'
+    templateUrl: './main.component.html',
+    styleUrls: ['./main.scss']
 })
 export class JhiMainComponent implements OnInit {
     location = faLocationArrow;

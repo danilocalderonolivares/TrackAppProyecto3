@@ -22,6 +22,7 @@
             <th><span>Completada</span></th>
             <th><span>Empleado</span></th>
             <th><span>Cliente</span></th>
+                <th><span>Ruta</span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,16 +32,24 @@
                 <td>{{tarea.descripcion}}</td>
                 <td>{{tarea.inicio | date:'mediumDate'}}</td>
                 <td>{{tarea.fin | date:'mediumDate'}}</td>
-                <td>{{tarea.activa}}</td>
-                <td>{{tarea.completada}}</td>
+                <td [innerText]= "tarea.activa ? 'Sí' : 'No'"></td>
+                <td [innerText]= "tarea.completada ? 'Sí' : 'No'"></td>
                 <td>
                     <div *ngIf="tarea.empleado">
-                        <a>{{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</a>
+                        <!--<a [routerLink]="['../empleado', tarea.empleado?.id, 'view']"> {{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</a>-->
+                        <p>{{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</p>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="tarea.cliente">
-                        <a [routerLink]="['../cliente', tarea.cliente?.id, 'view' ]" >{{tarea.cliente?.nombre}}</a>
+                        <!--<a [routerLink]="['../cliente', tarea.cliente?.id, 'view' ]" >{{tarea.cliente?.nombre}}</a>-->
+                        <p>{{tarea.cliente?.nombre}}</p>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tarea.ruta">
+                        <!--<a [routerLink]="['../ruta', tarea.ruta?.id, 'view' ]" >{{tarea.ruta?.nombre}}</a>-->
+                        <p>{{tarea.ruta?.nombre}}</p>
                     </div>
                 </td>
                 <td class="text-right">
