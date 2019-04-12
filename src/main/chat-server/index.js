@@ -1,22 +1,20 @@
-let express = require('express')
-let app = express();
+const express = require('express');
+const socket = require('socket.io');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-let http = require('http');
-let server = http.Server(app);
+const app = express();
+app.use(cors({origin: '*'}));
+app.use(bodyParser);
 
-let socketIO = require('socket.io');
-let io = socketIO(server);
-
-const port = process.env.PORT || 3000;
-
-io.on('connection', (socket) => {
-    console.log('user connected');
-
-    socket.on('new-message', (message) => {
-        console.log(message);
-    });
+const server = app.listen(3000,() => {
+    console.log('Started in 3000');
 });
 
-server.listen(port, () => {
-    console.log(`started on port: ${port}`);
+const io = socket(server);
+
+io.sockets.on('connection', (socket) => {
+    socket.on('new-message', (message) => {
+        console.log('llegue');
+    });
 });

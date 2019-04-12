@@ -29,6 +29,10 @@ export class ChatWindowComponent implements OnInit {
         this.chatService.chatSelected.subscribe((chatRoom: ChatRoom) => {
             this.chatRoom = chatRoom;
         });
+
+        /*this.chatService.getMessages().subscribe((message: Mensaje) => {
+            this.chatRoom.mensajes.push(message);
+        });*/
     }
 
     sendMessage() {
@@ -64,7 +68,7 @@ export class ChatWindowComponent implements OnInit {
         return this.isSender;
     }
 
-    private getCurrentLoggedUser() {
+    getCurrentLoggedUser() {
         return JSON.parse(sessionStorage.getItem('user')) as User;
     }
 

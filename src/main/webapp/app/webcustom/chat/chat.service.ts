@@ -1,28 +1,30 @@
 import * as io from 'socket.io-client';
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, OnInit } from '@angular/core';
 import { ChatRoom } from 'app/shared/model/chat-room.model';
 import { MensajeService } from 'app/entities/mensaje';
 import { ChatRoomService } from 'app/entities/chat-room';
 import { Mensaje } from 'app/shared/model/mensaje.model';
+import { Observable } from 'rxjs';
+
+const socket = io('http://localhost:3000');
 
 @Injectable({ providedIn: 'root' })
-export class ChatService {
-    private url = 'http://localhost:3000';
-    private socket;
+export class ChatService implements OnInit {
     chatSelected = new EventEmitter<ChatRoom>();
 
-    constructor(private mensajeService: MensajeService, private chatRoomService: ChatRoomService) {
-        // this.socket = io(this.url);
+    ngOnInit() {
+        socket.on('new-message', res => {
+            console.log(res);
+        });
     }
 
-    /*public sendMessage(message) {
-        this.socket.emit('new-message', message);
-    }*/
+    constructor(private mensajeService: MensajeService, private chatRoomService: ChatRoomService) {}
 
     public sendMessage(message: Mensaje, chatRoom: ChatRoom) {
         this.mensajeService.create(message).subscribe(res => {
             chatRoom.mensajes.push(res.body as Mensaje);
             this.updateChatRoomMessages(chatRoom);
+            socket.emit('new-message', res.body as Mensaje);
         });
     }
 
@@ -35,4 +37,12 @@ export class ChatService {
             console.log();
         });
     }
+
+    /*public getMessages = () => {
+        return Observable.create(observer => {
+            socket.on('new-message', message => {
+                observer.emit(message);
+            });
+        });
+    }*/
 }
