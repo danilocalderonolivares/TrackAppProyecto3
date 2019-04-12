@@ -41,7 +41,7 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
     @ViewChild('placesRef') placesRef: GooglePlaceDirective;
     tarea: ITarea;
     isSaving: boolean;
-    subtareas: ISubTarea[];
+    subtareas: any;
     empleados: IEmpleado[];
     ubicacions: IUbicacion[];
     clientes: ICliente[];
