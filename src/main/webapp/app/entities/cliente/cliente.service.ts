@@ -5,9 +5,6 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { ICliente } from 'app/shared/model/cliente.model';
-import { UbicacionService } from 'app/entities/ubicacion';
-import { IUbicacion } from 'app/shared/model/ubicacion.model';
-
 type EntityResponseType = HttpResponse<ICliente>;
 type EntityArrayResponseType = HttpResponse<ICliente[]>;
 

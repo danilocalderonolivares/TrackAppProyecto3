@@ -7,6 +7,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { ITarea } from 'app/shared/model/tarea.model';
 import { AccountService } from 'app/core';
 import { TareaService } from './tarea.service';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
     selector: 'jhi-tarea',
@@ -16,6 +17,20 @@ export class TareaComponent implements OnInit, OnDestroy {
     tareas: ITarea[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    searchKey: string;
+    dataSource: any;
+    displayedColumns: string[] = [
+        'titulo',
+        'descripcion',
+        'inicio',
+        'fin',
+        'activa',
+        'completada',
+        'empleado',
+        'cliente',
+        'ruta',
+        'buttons'
+    ];
 
     constructor(
         protected tareaService: TareaService,
@@ -34,6 +49,7 @@ export class TareaComponent implements OnInit, OnDestroy {
             .subscribe(
                 (res: ITarea[]) => {
                     this.tareas = res;
+                    this.dataSource = new MatTableDataSource(this.tareas);
                     res.forEach(tarea => {
                         console.log(tarea.inicio);
                     });
@@ -65,5 +81,13 @@ export class TareaComponent implements OnInit, OnDestroy {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+    onSearchClear() {
+        this.searchKey = '';
+        this.applyFilter();
+    }
+
+    applyFilter() {
+        this.dataSource.filter = this.searchKey.trim().toLowerCase();
     }
 }

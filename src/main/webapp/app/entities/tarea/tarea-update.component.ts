@@ -306,9 +306,9 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
     addSubtarea(value: string) {
         this.subtareas.push(
             new class implements ISubTarea {
-                completado: boolean = false;
-                descripcion: string = value;
                 id: string;
+                descripcion: string = value;
+                completado: false;
             }()
         );
         this.nvaSubtarea = '';

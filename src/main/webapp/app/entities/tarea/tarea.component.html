@@ -1,83 +1,140 @@
-<div style="padding: 10px;">
-    <h2 id="page-heading">
-        <span>Tareas</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-tarea" [routerLink]="['/tarea/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
-            Crear nueva Tarea
-            </span>
+<div class="container-fluid">
+    <div class="search-div">
+        <button mat-raised-button color="primary" [routerLink]="['/tarea/new']">
+            <mat-icon>add</mat-icon>Crear nueva Tarea
         </button>
-    </h2>
+        <mat-form-field class="search-form-field" floatLabel="never">
+            <input matInput [(ngModel)]="searchKey" placeholder="Buscar..." autocomplete="off" (keyup)="applyFilter()">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
     <jhi-alert></jhi-alert>
-    <br/>
-    <div class="table-responsive" *ngIf="tareas">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-            <th><span>Titulo</span></th>
-            <th><span>Descripción</span></th>
-            <th><span>Inicio</span></th>
-            <th><span>Fin</span></th>
-            <th><span>Activa</span></th>
-            <th><span>Completada</span></th>
-            <th><span>Empleado</span></th>
-            <th><span>Cliente</span></th>
-                <th><span>Ruta</span></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let tarea of tareas ;trackBy: trackId">
-                <td>{{tarea.title}}</td>
-                <td>{{tarea.descripcion}}</td>
-                <td>{{tarea.inicio | date:'mediumDate'}}</td>
-                <td>{{tarea.fin | date:'mediumDate'}}</td>
-                <td [innerText]= "tarea.activa ? 'Sí' : 'No'"></td>
-                <td [innerText]= "tarea.completada ? 'Sí' : 'No'"></td>
-                <td>
-                    <div *ngIf="tarea.empleado">
-                        <!--<a [routerLink]="['../empleado', tarea.empleado?.id, 'view']"> {{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</a>-->
-                        <p>{{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</p>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="tarea.cliente">
-                        <!--<a [routerLink]="['../cliente', tarea.cliente?.id, 'view' ]" >{{tarea.cliente?.nombre}}</a>-->
-                        <p>{{tarea.cliente?.nombre}}</p>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="tarea.ruta">
-                        <!--<a [routerLink]="['../ruta', tarea.ruta?.id, 'view' ]" >{{tarea.ruta?.nombre}}</a>-->
-                        <p>{{tarea.ruta?.nombre}}</p>
-                    </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/tarea', tarea.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">Ver</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/tarea', tarea.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Editar</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'tarea', { outlets: { popup: tarea.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Eliminar</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource">
+            <!--columna titulo-->
+            <ng-container matColumnDef="titulo">
+                <mat-header-cell *matHeaderCellDef>Titulo</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <p class="text-truncate font-weight-600">{{tarea.title}}</p>
+                </mat-cell>
+            </ng-container>
+            <!--columna descripcion-->
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        </mat-table>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div style="padding: 10px;">-->
+<!--<h2 id="page-heading">-->
+<!--<span>Tareas</span>-->
+<!--<button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-tarea" [routerLink]="['/tarea/new']">-->
+<!--<fa-icon [icon]="'plus'"></fa-icon>-->
+<!--<span >-->
+<!--Crear nueva Tarea-->
+<!--</span>-->
+<!--</button>-->
+<!--</h2>-->
+<!--<jhi-alert></jhi-alert>-->
+<!--<br/>-->
+<!--<div class="table-responsive" *ngIf="tareas">-->
+<!--<table class="table table-striped">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th><span>Titulo</span></th>-->
+<!--<th><span>Descripción</span></th>-->
+<!--<th><span>Inicio</span></th>-->
+<!--<th><span>Fin</span></th>-->
+<!--<th><span>Activa</span></th>-->
+<!--<th><span>Completada</span></th>-->
+<!--<th><span>Empleado</span></th>-->
+<!--<th><span>Cliente</span></th>-->
+<!--<th><span>Ruta</span></th>-->
+<!--<th></th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr *ngFor="let tarea of tareas ;trackBy: trackId">-->
+<!--<td>{{tarea.title}}</td>-->
+<!--<td>{{tarea.descripcion}}</td>-->
+<!--<td>{{tarea.inicio | date:'mediumDate'}}</td>-->
+<!--<td>{{tarea.fin | date:'mediumDate'}}</td>-->
+<!--<td [innerText]= "tarea.activa ? 'Sí' : 'No'"></td>-->
+<!--<td [innerText]= "tarea.completada ? 'Sí' : 'No'"></td>-->
+<!--<td>-->
+<!--<div *ngIf="tarea.empleado">-->
+<!--&lt;!&ndash;<a [routerLink]="['../empleado', tarea.empleado?.id, 'view']"> {{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</a>&ndash;&gt;-->
+<!--<p>{{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</p>-->
+<!--</div>-->
+<!--</td>-->
+<!--<td>-->
+<!--<div *ngIf="tarea.cliente">-->
+<!--&lt;!&ndash;<a [routerLink]="['../cliente', tarea.cliente?.id, 'view' ]" >{{tarea.cliente?.nombre}}</a>&ndash;&gt;-->
+<!--<p>{{tarea.cliente?.nombre}}</p>-->
+<!--</div>-->
+<!--</td>-->
+<!--<td>-->
+<!--<div *ngIf="tarea.ruta">-->
+<!--&lt;!&ndash;<a [routerLink]="['../ruta', tarea.ruta?.id, 'view' ]" >{{tarea.ruta?.nombre}}</a>&ndash;&gt;-->
+<!--<p>{{tarea.ruta?.nombre}}</p>-->
+<!--</div>-->
+<!--</td>-->
+<!--<td class="text-right">-->
+<!--<div class="btn-group flex-btn-group-container">-->
+<!--<button type="submit"-->
+<!--[routerLink]="['/tarea', tarea.id, 'view' ]"-->
+<!--class="btn btn-info btn-sm">-->
+<!--<fa-icon [icon]="'eye'"></fa-icon>-->
+<!--<span class="d-none d-md-inline">Ver</span>-->
+<!--</button>-->
+<!--<button type="submit"-->
+<!--[routerLink]="['/tarea', tarea.id, 'edit']"-->
+<!--class="btn btn-primary btn-sm">-->
+<!--<fa-icon [icon]="'pencil-alt'"></fa-icon>-->
+<!--<span class="d-none d-md-inline">Editar</span>-->
+<!--</button>-->
+<!--<button type="submit"-->
+<!--[routerLink]="['/', 'tarea', { outlets: { popup: tarea.id + '/delete'} }]"-->
+<!--replaceUrl="true"-->
+<!--queryParamsHandling="merge"-->
+<!--class="btn btn-danger btn-sm">-->
+<!--<fa-icon [icon]="'times'"></fa-icon>-->
+<!--<span class="d-none d-md-inline">Eliminar</span>-->
+<!--</button>-->
+<!--</div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+<!--</div>-->
