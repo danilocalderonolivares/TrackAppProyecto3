@@ -1,0 +1,57 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="saveUbication()" #editForm="ngForm">
+    <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label class="form-control-label" for="field_nombreDireccion">Dirección</label>
+            <input type="text" class="form-control" name="nombreDireccion" id="field_nombreDireccion"
+                   [(ngModel)]="ubicacion.nombreDireccion" required/>
+            <div [hidden]="!(editForm.controls.nombreDireccion?.dirty && editForm.controls.nombreDireccion?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.nombreDireccion?.errors?.required">
+                    Este campo es requerido.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_latitud">Latitud</label>
+            <input type="number" class="form-control" name="latitud" id="field_latitud"
+                   [(ngModel)]="ubicacion.latitud" required/>
+            <div [hidden]="!(editForm.controls.latitud?.dirty && editForm.controls.latitud?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.latitud?.errors?.required">
+                    Este campo es requerido.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_longitud">Longitud</label>
+            <input type="number" class="form-control" name="longitud" id="field_longitud"
+                   [(ngModel)]="ubicacion.longitud" required/>
+            <div [hidden]="!(editForm.controls.longitud?.dirty && editForm.controls.longitud?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.longitud?.errors?.required">
+                    Este campo es requerido.
+                </small>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>
+        </button>
+        <button type="submit" id="save-entity" [disabled]="editForm.form.invalid" class="btn btn-primary">
+            <fa-icon [icon]="'plus'"></fa-icon>&nbsp;<span>Añadir</span>
+        </button>
+    </div>
+</form>
+<br>
+<hr>
+<ul>
+    <li>{{empleado.id}}</li>
+    <li>{{empleado.nombre}}</li>
+    <li>{{empleado.apellidos}}</li>
+    <li>{{empleado.tipo.nombreTipo}}</li>
+    <li>{{empleado.ubicacion.nombreDireccion}}</li>
+    <li>{{empleado.ubicacion.latitud}}</li>
+    <li>{{empleado.ubicacion.longitud}}</li>
+</ul>

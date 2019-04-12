@@ -1,8 +1,8 @@
 package com.pillars.gpsapp.config;
 
-import com.pillars.gpsapp.security.*;
-import com.pillars.gpsapp.security.jwt.*;
-
+import com.pillars.gpsapp.security.AuthoritiesConstants;
+import com.pillars.gpsapp.security.jwt.JWTConfigurer;
+import com.pillars.gpsapp.security.jwt.TokenProvider;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -106,6 +106,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/account/reset-password/init").permitAll()
             .antMatchers("/api/account/reset-password/finish").permitAll()
             .antMatchers("/api/**").authenticated()
+            .antMatchers("/websocket/tracker").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/websocket/**").permitAll()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/info").permitAll()
             .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
