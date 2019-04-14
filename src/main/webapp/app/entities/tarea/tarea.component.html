@@ -21,40 +21,107 @@
                 </mat-cell>
             </ng-container>
             <!--columna descripcion-->
-
+            <ng-container matColumnDef="descripcion">
+                <mat-header-cell *matHeaderCellDef>Descripción</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <p class="text-truncate font-weight-600">{{tarea.descripcion}}</p>
+                </mat-cell>
+            </ng-container>
+            <!--columna inicio-->
+            <ng-container matColumnDef="inicio">
+                <mat-header-cell *matHeaderCellDef>Inicio</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <p class="text-truncate font-weight-600">{{tarea.inicio | date:'mediumDate'}}</p>
+                </mat-cell>
+            </ng-container>
+            <!--columna fin-->
+            <ng-container matColumnDef="fin">
+                <mat-header-cell *matHeaderCellDef>Fin</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <p class="text-truncate font-weight-600">{{tarea.fin | date:'mediumDate'}}</p>
+                </mat-cell>
+            </ng-container>
+            <!--columna activa-->
+            <ng-container matColumnDef="activa">
+                <mat-header-cell *matHeaderCellDef>Activa</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <p class="text-truncate font-weight-600" [innerText]= "tarea.activa ? 'Sí' : 'No'"></p>
+                </mat-cell>
+            </ng-container>
+            <!--columna completado-->
+            <ng-container matColumnDef="completada">
+                <mat-header-cell *matHeaderCellDef>Completada</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <p class="text-truncate font-weight-600" [innerText]= "tarea.completada ? 'Sí' : 'No'"></p>
+                </mat-cell>
+            </ng-container>
+            <!--columna empleado-->
+            <ng-container matColumnDef="empleado">
+                <mat-header-cell *matHeaderCellDef>Empleado</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <ng-container *ngIf="tarea.empleado; else empleadoNo">
+                        <p class="text-truncate font-weight-600">{{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</p>
+                    </ng-container>
+                    <ng-template #empleadoNo>
+                        <p class="text-truncate font-weight-600">Empelado no asignado</p>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+            <!--columna cliente-->
+            <ng-container matColumnDef="cliente">
+                <mat-header-cell *matHeaderCellDef>Cliente</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                        <ng-container *ngIf="tarea.cliente; else clienteNo">
+                            <p class="text-truncate font-weight-600">{{tarea.cliente?.nombre}}</p>
+                        </ng-container>
+                        <ng-template #clienteNo>
+                            <p class="text-truncate font-weight-600">Cliente no asignado</p>
+                        </ng-template>
+                </mat-cell>
+            </ng-container>
+            <!--columna ruta-->
+            <ng-container matColumnDef="ruta">
+                <mat-header-cell *matHeaderCellDef>Ruta</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                        <ng-container *ngIf="tarea.ruta; else rutaNo">
+                            <p class="text-truncate font-weight-600">{{tarea.ruta?.nombre}}</p>
+                        </ng-container>
+                        <ng-template #rutaNo>
+                            <p class="text-truncate font-weight-600">Ruta no asignada</p>
+                        </ng-template>
+                </mat-cell>
+            </ng-container>
+            <!--columna buttons-->
+            <ng-container matColumnDef="buttons">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <div>
+                        <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
+                                (click)="$event.stopPropagation();">
+                            <mat-icon class="secondary-text">more_vert</mat-icon>
+                        </button>
+                        <mat-menu #moreMenu="matMenu">
+                            <button mat-menu-item aria-label="remove" [routerLink]="['/', 'tarea', { outlets: { popup: tarea.id + '/delete'} }]">
+                                <mat-icon>delete</mat-icon>
+                                <span>Eliminar</span>
+                            </button>
+                            <button mat-menu-item aria-label="edit" [routerLink]="['/tarea', tarea.id, 'edit']">
+                                <mat-icon>edit</mat-icon>
+                                <span>Editar</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                </mat-cell>
+            </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let tarea; columns: displayedColumns;"
+                     [routerLink]="['/tarea', tarea.id, 'view']"
+                     matRipple
+                     [@animate]="{value:'*',params:{y:'100%'}}">
+            </mat-row>
         </mat-table>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!--<div style="padding: 10px;">-->
 <!--<h2 id="page-heading">-->
 <!--<span>Tareas</span>-->

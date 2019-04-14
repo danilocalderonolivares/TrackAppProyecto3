@@ -5,9 +5,9 @@ import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
-import { ITarea } from 'app/shared/model/tarea.model';
+import { ITarea, Tarea } from 'app/shared/model/tarea.model';
 import { TareaService } from './tarea.service';
-import { ISubTarea } from 'app/shared/model/sub-tarea.model';
+import { ISubTarea, SubTarea } from 'app/shared/model/sub-tarea.model';
 import { SubTareaService } from 'app/entities/sub-tarea';
 import { Empleado, IEmpleado } from 'app/shared/model/empleado.model';
 import { EmpleadoService } from 'app/entities/empleado';
@@ -41,7 +41,7 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
     @ViewChild('placesRef') placesRef: GooglePlaceDirective;
     tarea: ITarea;
     isSaving: boolean;
-    subtareas: any;
+    subtareas: SubTarea[] = [];
     empleados: IEmpleado[];
     ubicacions: IUbicacion[];
     clientes: ICliente[];
@@ -88,11 +88,11 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
             )
             .subscribe(
                 (res: ISubTarea[]) => {
-                    if (isEmpty(this.tarea.subtarea)) {
+                    if (isEmpty(this.tarea.tareas)) {
                         this.subtareas = res;
                     } else {
                         this.subTareaService
-                            .query({ 'id.in': _map(this.tarea.subtarea, 'id') })
+                            .query({ 'id.in': _map(this.tarea.tareas, 'id') })
                             .pipe(
                                 filter((res2: HttpResponse<ISubTarea[]>) => res2.ok),
                                 map((res3: HttpResponse<ISubTarea[]>) => res3.body)
@@ -251,24 +251,30 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
 
     save() {
         this.isSaving = true;
-        this.tarea.subtarea = this.subtareas;
+        this.tarea.tareas = this.subtareas;
         this.tarea.inicio = moment(this.tarea.inicio);
         this.tarea.fin = moment(this.tarea.fin);
         if (this.tarea.id !== undefined) {
             this.subscribeToSaveResponse(this.tareaService.update(this.tarea));
         } else {
             this.tarea.activa = true;
-            this.subscribeToSaveResponse(this.tareaService.create(this.tarea));
+            this.subscribeToSaveResponse(this.tareaService.create(this.tarea as Tarea));
         }
     }
 
     protected subscribeToSaveResponse(result: Observable<HttpResponse<ITarea>>) {
-        result.subscribe((res: HttpResponse<ITarea>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+        result.subscribe((res: HttpResponse<ITarea>) => this.onSaveSuccess(res), (res: HttpErrorResponse) => this.onSaveError());
+    }
+    testBody(res) {
+        const prueba = res.body as Tarea;
+        prueba.subtarea = this.subtareas;
+        // this.subscribeToSaveResponse(this.tareaService.update(prueba));
     }
 
-    protected onSaveSuccess() {
+    protected onSaveSuccess(data) {
         this.isSaving = false;
         this.previousState();
+        this.testBody(data);
     }
 
     protected onSaveError() {
@@ -304,13 +310,8 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
     }
 
     addSubtarea(value: string) {
-        this.subtareas.push(
-            new class implements ISubTarea {
-                id: string;
-                descripcion: string = value;
-                completado: false;
-            }()
-        );
+        const subtarea = new SubTarea(null, value, false);
+        this.subtareas.push(subtarea as SubTarea);
         this.nvaSubtarea = '';
     }
 

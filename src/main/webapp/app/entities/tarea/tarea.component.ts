@@ -8,10 +8,12 @@ import { ITarea } from 'app/shared/model/tarea.model';
 import { AccountService } from 'app/core';
 import { TareaService } from './tarea.service';
 import { MatTableDataSource } from '@angular/material';
+import { fuseAnimations } from '../../../content/scss/animations';
 
 @Component({
     selector: 'jhi-tarea',
-    templateUrl: './tarea.component.html'
+    templateUrl: './tarea.component.html',
+    animations: fuseAnimations
 })
 export class TareaComponent implements OnInit, OnDestroy {
     tareas: ITarea[];
