@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ChatService } from 'app/webcustom/chat/chat.service';
 import { ChatRoom } from 'app/shared/model/chat-room.model';
 import { Mensaje } from 'app/shared/model/mensaje.model';
@@ -18,7 +18,7 @@ export class ChatWindowComponent implements OnInit {
     isSender: boolean;
     currentUserLogged: any;
 
-    constructor(private chatService: ChatService, private empleadosService: EmpleadoService) {}
+    constructor(private chatService: ChatService, private empleadosService: EmpleadoService, private cdr: ChangeDetectorRef) {}
 
     ngOnInit() {
         this.message = '';
@@ -30,9 +30,14 @@ export class ChatWindowComponent implements OnInit {
             this.chatRoom = chatRoom;
         });
 
-        this.chatService.getMessages().subscribe((message: Mensaje) => {
-            this.chatRoom.mensajes.push(message);
+        this.chatService.getMessages().subscribe((message: any) => {
+            this.test(message);
+            this.cdr.detectChanges();
         });
+    }
+
+    test(mensaje: any) {
+        this.chatRoom.mensajes.push(mensaje as Mensaje);
     }
 
     sendMessage() {

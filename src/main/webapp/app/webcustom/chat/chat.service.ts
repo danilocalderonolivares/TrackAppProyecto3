@@ -20,7 +20,7 @@ export class ChatService implements OnInit {
         this.mensajeService.create(message).subscribe(res => {
             chatRoom.mensajes.push(res.body as Mensaje);
             this.updateChatRoomMessages(chatRoom);
-            socket.broadcast.emit('new-message', res.body as Mensaje);
+            socket.emit('new-message', res.body as Mensaje);
         });
     }
 
