@@ -31,12 +31,12 @@ export class ChatWindowComponent implements OnInit {
         });
 
         this.chatService.getMessages().subscribe((message: any) => {
-            this.test(message);
+            this.addNewMessage(message);
             this.cdr.detectChanges();
         });
     }
 
-    test(mensaje: any) {
+    addNewMessage(mensaje: any) {
         this.chatRoom.mensajes.push(mensaje as Mensaje);
     }
 
