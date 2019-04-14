@@ -9,6 +9,6 @@ http.listen(port, function() {
 
 io.on('connection', function(socket){
     socket.on('new-message', function(msg){
-        io.emit('new-message', msg);
+        socket.broadcast.emit('new-message', msg);
     });
 });
