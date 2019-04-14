@@ -2,13 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IRuta } from 'app/shared/model/ruta.model';
 import { RutaService } from './ruta.service';
 import { IUbicacion } from 'app/shared/model/ubicacion.model';
 import { UbicacionService } from 'app/entities/ubicacion';
 import { MapService } from 'app/shared/map/map.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'jhi-ruta-update',
@@ -18,6 +18,7 @@ export class RutaUpdateComponent implements OnInit, OnDestroy {
     ruta: IRuta;
     isSaving: boolean;
     ubicaciones: IUbicacion[];
+    rutaForm: FormGroup;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -25,10 +26,15 @@ export class RutaUpdateComponent implements OnInit, OnDestroy {
         protected ubicacionService: UbicacionService,
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
-        protected mapService: MapService
+        protected mapService: MapService,
+        private _formBuilder: FormBuilder
     ) {}
 
     ngOnInit() {
+        this.rutaForm = this._formBuilder.group({
+            nombre: ['', Validators.required],
+            descripcion: []
+        });
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ ruta }) => {
             this.ruta = ruta;
