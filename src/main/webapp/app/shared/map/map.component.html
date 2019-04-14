@@ -1,4 +1,8 @@
-<input ngx-google-places-autocomplete class="form-control" id="autoComplete" name="autoComplete" placeholder="Ingrese dirección" #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+<mat-form-field>
+    <mat-label>Ingrese dirección</mat-label>
+    <input ngx-google-places-autocomplete matInput id="autoComplete2" name="autoComplete" placeholder="" #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+    <mat-icon matSuffix class="secondary-text">search</mat-icon>
+</mat-form-field>
 <br>
 <agm-map [latitude]="lat"
          [longitude]="lng"
