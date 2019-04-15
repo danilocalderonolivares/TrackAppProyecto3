@@ -24,7 +24,6 @@ export class ChatWindowComponent implements OnInit {
         this.message = '';
         this.findEmployee();
         this.isSender = true;
-        this.chatRoom = new ChatRoom();
 
         this.chatService.chatSelected.subscribe((chatRoom: ChatRoom) => {
             this.chatRoom = chatRoom;
@@ -38,7 +37,6 @@ export class ChatWindowComponent implements OnInit {
 
     addNewMessage(mensaje: any) {
         this.chatRoom.mensajes.push(mensaje as Mensaje);
-        this.chatService.updateChatRoomMessages(this.chatRoom);
     }
 
     sendMessage() {
@@ -51,7 +49,7 @@ export class ChatWindowComponent implements OnInit {
             this.chatRoom.mensajes.length + 1,
             this.currentUserLogged
         );
-        this.chatService.sendMessage(messageToSend);
+        this.chatService.sendMessage(messageToSend, this.chatRoom);
         this.message = '';
     }
 
