@@ -6,11 +6,13 @@ import { ChatRoomService } from 'app/entities/chat-room';
 import { Mensaje } from 'app/shared/model/mensaje.model';
 import { Observable } from 'rxjs';
 
-const socket = io('http://localhost:3000');
+const io = require('socket.io-client');
+const socket = io.connect('http://localhost:3000');
 
 @Injectable({ providedIn: 'root' })
 export class ChatService implements OnInit {
     chatSelected = new EventEmitter<ChatRoom>();
+    newMessage = new EventEmitter<Mensaje>();
 
     ngOnInit() {}
 
@@ -24,6 +26,10 @@ export class ChatService implements OnInit {
         });
     }
 
+    public endSocketConnection() {
+        socket.emit('disconnect');
+    }
+
     public chatRoomSelected(chat: ChatRoom) {
         this.chatSelected.emit(chat);
     }
@@ -34,11 +40,13 @@ export class ChatService implements OnInit {
         });
     }
 
-    public getMessages = () => {
-        return Observable.create(observer => {
+    public getMessages(): any {
+        const newMessagesListener = new Observable(observer => {
             socket.on('new-message', function(msg) {
                 observer.next(msg);
             });
         });
-    };
+
+        return newMessagesListener;
+    }
 }

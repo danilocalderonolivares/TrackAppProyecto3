@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatRoom } from 'app/shared/model/chat-room.model';
-import { ChatService } from 'app/webcustom/chat/chat.service';
+// import { ChatService } from 'app/webcustom/chat/chat.service';
 import { ChatRoomService } from 'app/entities/chat-room';
 import { EmpleadoService } from 'app/entities/empleado';
 import { User } from 'app/core';
 import { Empleado } from 'app/shared/model/empleado.model';
 import { Mensaje } from 'app/shared/model/mensaje.model';
+import { ChatService } from 'app/chat.service';
 
 @Component({
     selector: 'jhi-chats-list',

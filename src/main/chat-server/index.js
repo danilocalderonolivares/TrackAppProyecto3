@@ -3,12 +3,18 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
 
-http.listen(port, function() {
+http.listen(port, function () {
     console.log('listening on *:' + port);
 });
 
-io.on('connection', function(socket){
-    socket.on('new-message', function(msg){
+io.on('connection', function (socket) {
+    socket.on('new-message', function (msg) {
         this.broadcast.emit('new-message', msg);
     });
+
+    socket.on('disconnect', function(){
+        this.disconnect();
+    });
 });
+
+
