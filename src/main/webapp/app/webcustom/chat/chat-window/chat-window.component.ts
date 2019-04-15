@@ -38,6 +38,7 @@ export class ChatWindowComponent implements OnInit {
 
     addNewMessage(mensaje: any) {
         this.chatRoom.mensajes.push(mensaje as Mensaje);
+        this.chatService.updateChatRoomMessages(this.chatRoom);
     }
 
     sendMessage() {
@@ -50,7 +51,7 @@ export class ChatWindowComponent implements OnInit {
             this.chatRoom.mensajes.length + 1,
             this.currentUserLogged
         );
-        this.chatService.sendMessage(messageToSend, this.chatRoom);
+        this.chatService.sendMessage(messageToSend);
         this.message = '';
     }
 

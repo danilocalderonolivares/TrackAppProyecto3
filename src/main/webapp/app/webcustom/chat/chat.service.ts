@@ -16,10 +16,8 @@ export class ChatService implements OnInit {
 
     constructor(private mensajeService: MensajeService, private chatRoomService: ChatRoomService) {}
 
-    public sendMessage(message: Mensaje, chatRoom: ChatRoom) {
+    public sendMessage(message: Mensaje) {
         this.mensajeService.create(message).subscribe(res => {
-            chatRoom.mensajes.push(res.body as Mensaje);
-            this.updateChatRoomMessages(chatRoom);
             socket.emit('new-message', res.body as Mensaje);
         });
     }
