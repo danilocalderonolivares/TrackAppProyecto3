@@ -231,11 +231,20 @@
             <div style="margin-top: 10px;">
                 <mat-list class="list-group">
                     <mat-list-item *ngFor="let subtarea of subtareas; index as i; trackBy: trackByFn"
-                                   class="list-group-item d-flex justify-content-between align-items-center">
-                        {{i+1}}. {{subtarea.descripcion}}
-                        <button mat-icon-button (click)="eliminarSubtarea(i)">
-                            <mat-icon color="warn">delete_forever</mat-icon>
-                        </button>
+                                   class="list-group-item d-flexS">
+                        <div style="width: 85%;">
+                            {{i+1}}. {{subtarea.descripcion}}
+                        </div>
+                        <ng-container *ngIf="subtarea.id !== null; else elseTemplate">
+                            <button mat-icon-button [routerLink]="['/', 'tarea',tarea.id,'/','edit',{ outlets: { popup: subtarea.id + '/delete'} }]">
+                                <mat-icon color="warn">delete_forever</mat-icon>
+                            </button>
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                            <button mat-icon-button (click)="eliminarListaSubtarea(i)">
+                                <mat-icon color="warn">delete_forever</mat-icon>
+                            </button>
+                        </ng-template>
                     </mat-list-item>
                 </mat-list>
             </div>

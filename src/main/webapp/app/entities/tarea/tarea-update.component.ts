@@ -89,7 +89,6 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
             .subscribe(
                 (res: ISubTarea[]) => {
                     if (isEmpty(this.tarea.tareas)) {
-                        this.subtareas = res;
                     } else {
                         this.subTareaService
                             .query({ 'id.in': _map(this.tarea.tareas, 'id') })
@@ -309,8 +308,11 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
         this.nvaSubtarea = '';
     }
 
-    eliminarSubtarea(index: number) {
+    eliminarListaSubtarea(index: number) {
         this.subtareas = reject(this.subtareas, (e, i) => i === index);
+    }
+    eliminarSubtarea(subtarea: SubTarea) {
+        this.subTareaService.delete(subtarea.id);
     }
 
     onChoseLocation(event) {
