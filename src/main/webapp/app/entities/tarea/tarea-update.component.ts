@@ -258,23 +258,17 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
             this.subscribeToSaveResponse(this.tareaService.update(this.tarea));
         } else {
             this.tarea.activa = true;
-            this.subscribeToSaveResponse(this.tareaService.create(this.tarea as Tarea));
+            this.subscribeToSaveResponse(this.tareaService.create(this.tarea));
         }
     }
 
     protected subscribeToSaveResponse(result: Observable<HttpResponse<ITarea>>) {
-        result.subscribe((res: HttpResponse<ITarea>) => this.onSaveSuccess(res), (res: HttpErrorResponse) => this.onSaveError());
-    }
-    testBody(res) {
-        const prueba = res.body as Tarea;
-        prueba.subtarea = this.subtareas;
-        // this.subscribeToSaveResponse(this.tareaService.update(prueba));
+        result.subscribe((res: HttpResponse<ITarea>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    protected onSaveSuccess(data) {
+    protected onSaveSuccess() {
         this.isSaving = false;
         this.previousState();
-        this.testBody(data);
     }
 
     protected onSaveError() {
