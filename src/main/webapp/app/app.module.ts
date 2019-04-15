@@ -31,6 +31,7 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { LandingComponent } from './layouts/landing/landing.component';
 import { MapService } from './shared/map/map.service';
 import { FormsModule } from '@angular/forms';
+import { SocketService } from 'app/webcustom/chat/SocketService';
 
 @NgModule({
     imports: [
@@ -83,7 +84,8 @@ import { FormsModule } from '@angular/forms';
             multi: true
         },
         MapService,
-        ChatService
+        ChatService,
+        SocketService
     ],
     bootstrap: [JhiMainComponent]
 })

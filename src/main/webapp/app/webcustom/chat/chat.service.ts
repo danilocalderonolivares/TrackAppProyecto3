@@ -1,4 +1,3 @@
-import * as io from 'socket.io-client';
 import { EventEmitter, Injectable, OnInit } from '@angular/core';
 import { ChatRoom } from 'app/shared/model/chat-room.model';
 import { MensajeService } from 'app/entities/mensaje';
@@ -24,10 +23,6 @@ export class ChatService implements OnInit {
             this.updateChatRoomMessages(chat);
             socket.emit('new-message', res.body as Mensaje);
         });
-    }
-
-    public endSocketConnection() {
-        socket.emit('disconnect');
     }
 
     public chatRoomSelected(chat: ChatRoom) {
