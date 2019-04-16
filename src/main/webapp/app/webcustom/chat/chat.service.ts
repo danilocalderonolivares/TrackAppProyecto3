@@ -11,7 +11,6 @@ const socket = io.connect('http://localhost:3000');
 @Injectable({ providedIn: 'root' })
 export class ChatService implements OnInit {
     chatSelected = new EventEmitter<ChatRoom>();
-    newMessage = new EventEmitter<Mensaje>();
 
     ngOnInit() {}
 

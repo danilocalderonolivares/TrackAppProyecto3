@@ -24,6 +24,7 @@ import { GpsAppAccountModule } from './account/account.module';
 import { GpsAppEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 import { GpsAppWebCustomModule } from './webcustom/web-custom.module';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
@@ -31,7 +32,6 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { LandingComponent } from './layouts/landing/landing.component';
 import { MapService } from './shared/map/map.service';
 import { FormsModule } from '@angular/forms';
-import { SocketService } from 'app/webcustom/chat/SocketService';
 
 @NgModule({
     imports: [
@@ -84,8 +84,7 @@ import { SocketService } from 'app/webcustom/chat/SocketService';
             multi: true
         },
         MapService,
-        ChatService,
-        SocketService
+        ChatService
     ],
     bootstrap: [JhiMainComponent]
 })
