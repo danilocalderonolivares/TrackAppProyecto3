@@ -107,8 +107,23 @@ export class ChatsListComponent implements OnInit {
 
     cloneChatRoomsList() {
         this.currentChatRoomsList = [];
+        const currentUser = this.currentUserLogged.nombre + ' ' + this.currentUserLogged.apellidos;
         for (const chat of this.chatRooms) {
+            if (chat.nombre === currentUser) {
+                chat.nombre = this.modifyChatRoomName(chat, currentUser);
+            }
             this.currentChatRoomsList.push(chat);
+        }
+    }
+
+    modifyChatRoomName(chat: any, currentUser: string) {
+        const memberOne = chat.miembros[0].nombre + ' ' + chat.miembros[0].apellidos;
+        const memberTwo = chat.miembros[1].nombre + ' ' + chat.miembros[1].apellidos;
+
+        if (memberOne === currentUser) {
+            return memberTwo;
+        } else {
+            return memberOne;
         }
     }
 
@@ -123,7 +138,7 @@ export class ChatsListComponent implements OnInit {
         }
     }
 
-    private getCurrentLoggedUser() {
+    getCurrentLoggedUser() {
         return JSON.parse(sessionStorage.getItem('user')) as User;
     }
 }

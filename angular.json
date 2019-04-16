@@ -8,6 +8,116 @@
             "sourceRoot": "src/main/webapp",
             "projectType": "application",
             "architect": {}
+        },
+        "chat-server": {
+            "root": "projects/chat-server/",
+            "sourceRoot": "projects/chat-server/src",
+            "projectType": "application",
+            "prefix": "app",
+            "schematics": {},
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/chat-server",
+                        "index": "projects/chat-server/src/index.html",
+                        "main": "projects/chat-server/src/main.ts",
+                        "polyfills": "projects/chat-server/src/polyfills.ts",
+                        "tsConfig": "projects/chat-server/tsconfig.app.json",
+                        "assets": ["projects/chat-server/src/favicon.ico", "projects/chat-server/src/assets"],
+                        "styles": ["projects/chat-server/src/styles.css"],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/chat-server/src/environments/environment.ts",
+                                    "with": "projects/chat-server/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "chat-server:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "chat-server:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "chat-server:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/chat-server/src/test.ts",
+                        "polyfills": "projects/chat-server/src/polyfills.ts",
+                        "tsConfig": "projects/chat-server/tsconfig.spec.json",
+                        "karmaConfig": "projects/chat-server/karma.conf.js",
+                        "styles": ["projects/chat-server/src/styles.css"],
+                        "scripts": [],
+                        "assets": ["projects/chat-server/src/favicon.ico", "projects/chat-server/src/assets"]
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": ["projects/chat-server/tsconfig.app.json", "projects/chat-server/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "chat-server-e2e": {
+            "root": "projects/chat-server-e2e/",
+            "projectType": "application",
+            "prefix": "",
+            "architect": {
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/chat-server-e2e/protractor.conf.js",
+                        "devServerTarget": "chat-server:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "chat-server:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": "projects/chat-server-e2e/tsconfig.e2e.json",
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
         }
     },
     "defaultProject": "gps-app",

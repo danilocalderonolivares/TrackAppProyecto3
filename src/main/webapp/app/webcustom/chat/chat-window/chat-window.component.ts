@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChatService } from 'app/webcustom/chat/chat.service';
 import { ChatRoom } from 'app/shared/model/chat-room.model';
 import { Mensaje } from 'app/shared/model/mensaje.model';
@@ -6,19 +6,21 @@ import { User } from 'app/core';
 import { Empleado } from 'app/shared/model/empleado.model';
 import { EmpleadoService } from 'app/entities/empleado';
 import * as moment from 'moment';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'jhi-chat-window',
     templateUrl: './chat-window.component.html',
     styles: []
 })
-export class ChatWindowComponent implements OnInit {
+export class ChatWindowComponent implements OnInit, OnDestroy {
     message: string;
     chatRoom: ChatRoom;
     isSender: boolean;
     currentUserLogged: any;
+    newMessageSubscription: Subscription;
 
-    constructor(private chatService: ChatService, private empleadosService: EmpleadoService, private cdr: ChangeDetectorRef) {}
+    constructor(private chatService: ChatService, private empleadosService: EmpleadoService) {}
 
     ngOnInit() {
         this.message = '';
@@ -30,10 +32,14 @@ export class ChatWindowComponent implements OnInit {
             this.chatRoom = chatRoom;
         });
 
-        this.chatService.getMessages().subscribe((message: any) => {
-            this.chatRoom.mensajes.push(message as Mensaje);
-            this.cdr.detectChanges();
+        this.newMessageSubscription = this.chatService.getMessages().subscribe(msg => {
+            this.chatRoom.mensajes.push(msg);
+            this.chatService.updateChatRoomMessages(this.chatRoom);
         });
+    }
+
+    ngOnDestroy() {
+        this.newMessageSubscription.unsubscribe();
     }
 
     sendMessage() {

@@ -130,37 +130,6 @@ public class ChatRoomResource {
         return chatRooms;
     }
 
-    /*private void orderChatMessagesByDate(ChatRoom chatRoom) throws Exception {
-        List<Mensaje> listaOrdenada = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        List<Mensaje> mensajesChat = new ArrayList<>(chatRoom.getMensajes());
-        int index = 0;
-
-        if (mensajesChat.size() > 0) {
-            for (int j = 0; j <= mensajesChat.size(); j++) {
-                LocalDate fechaMenor = LocalDate.parse("3000-12-31", formatter);
-
-                for (int i = 0; i < mensajesChat.size(); i++) {
-                    if (mensajesChat.get(i).getFechaEnvio().compareTo(fechaMenor) < 0) {
-                        fechaMenor = mensajesChat.get(i).getFechaEnvio();
-                        index = i;
-                    }
-                }
-
-                listaOrdenada.add(mensajesChat.get(index));
-                mensajesChat.remove(index);
-                index = 0;
-                j = 0;
-            }
-
-            Set<Mensaje> set = new LinkedHashSet();
-            for (Mensaje mensaje : listaOrdenada) {
-                set.add(mensaje);
-            }
-            chatRoom.setMensajes(set);
-        }
-    }*/
-
     private void orderChatMessages(ChatRoom chatRoom) throws Exception {
         List<Mensaje> listaOrdenada = new ArrayList<>();
         List<Mensaje> mensajesChat = new ArrayList<>(chatRoom.getMensajes());
