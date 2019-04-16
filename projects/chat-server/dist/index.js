@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 
 Object.defineProperty(exports, "__esModule", {value: true});
-const server_1 = __importDefault(require("./classes/server"));
+const server_1 = __importDefault(require("./serverjs/server"));
 const router_1 = __importDefault(require("./routes/router"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
