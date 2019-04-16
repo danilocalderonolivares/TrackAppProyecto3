@@ -24,7 +24,6 @@ import { GpsAppAccountModule } from './account/account.module';
 import { GpsAppEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 import { GpsAppWebCustomModule } from './webcustom/web-custom.module';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
