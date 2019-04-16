@@ -312,7 +312,15 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
         this.subtareas = reject(this.subtareas, (e, i) => i === index);
     }
     eliminarSubtarea(subtarea: SubTarea) {
-        this.subTareaService.delete(subtarea.id);
+        this.subTareaService.delete(subtarea.id).subscribe(
+            res => {
+                this.ngOnInit();
+                console.log(res);
+            },
+            err => {
+                console.log(err);
+            }
+        );
     }
 
     onChoseLocation(event) {

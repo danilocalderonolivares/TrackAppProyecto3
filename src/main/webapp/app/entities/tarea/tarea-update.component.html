@@ -236,7 +236,7 @@
                             {{i+1}}. {{subtarea.descripcion}}
                         </div>
                         <ng-container *ngIf="subtarea.id !== null; else elseTemplate">
-                            <button mat-icon-button [routerLink]="['/', 'tarea',tarea.id,'/','edit',{ outlets: { popup: subtarea.id + '/delete'} }]">
+                            <button mat-icon-button (click)="eliminarSubtarea(subtarea)">
                                 <mat-icon color="warn">delete_forever</mat-icon>
                             </button>
                         </ng-container>
