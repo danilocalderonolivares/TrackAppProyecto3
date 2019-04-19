@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ChatRoom } from 'app/shared/model/chat-room.model';
 import { ChatService } from 'app/webcustom/chat/chat.service';
 import { ChatRoomService } from 'app/entities/chat-room';
@@ -6,23 +6,38 @@ import { EmpleadoService } from 'app/entities/empleado';
 import { User } from 'app/core';
 import { Empleado } from 'app/shared/model/empleado.model';
 import { Mensaje } from 'app/shared/model/mensaje.model';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'jhi-chats-list',
     templateUrl: './chats-list.component.html',
     styles: []
 })
-export class ChatsListComponent implements OnInit {
+export class ChatsListComponent implements OnInit, OnDestroy {
     chatRooms: any[];
     currentUserLogged: any;
     isSearch: boolean;
     currentChatRoomsList: ChatRoom[];
+    newMessageSubscription: Subscription;
 
-    constructor(private chatService: ChatService, private chatRoomService: ChatRoomService, private empleadosService: EmpleadoService) {}
+    constructor(
+        private chatService: ChatService,
+        private chatRoomService: ChatRoomService,
+        private empleadosService: EmpleadoService,
+        private cdr: ChangeDetectorRef
+    ) {}
 
     ngOnInit() {
         this.isSearch = false;
         this.findEmployee();
+
+        this.newMessageSubscription = this.chatService.getMessages().subscribe(msg => {
+            this.loadChatRoomsList();
+        });
+    }
+
+    ngOnDestroy() {
+        this.newMessageSubscription.unsubscribe();
     }
 
     findEmployee() {
@@ -35,6 +50,7 @@ export class ChatsListComponent implements OnInit {
     loadChatRoomsList() {
         this.chatRoomService.getChatRoomsByUser(this.currentUserLogged.id).subscribe(res => {
             this.chatRooms = res.body;
+            this.cdr.detectChanges();
             this.cloneChatRoomsList();
         });
     }

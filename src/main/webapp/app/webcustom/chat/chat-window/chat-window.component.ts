@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ChatService } from 'app/webcustom/chat/chat.service';
 import { ChatRoom } from 'app/shared/model/chat-room.model';
 import { Mensaje } from 'app/shared/model/mensaje.model';
@@ -19,22 +19,28 @@ export class ChatWindowComponent implements OnInit, OnDestroy {
     isSender: boolean;
     currentUserLogged: any;
     newMessageSubscription: Subscription;
+    chatRoomSelected: boolean;
 
-    constructor(private chatService: ChatService, private empleadosService: EmpleadoService) {}
+    constructor(private chatService: ChatService, private empleadosService: EmpleadoService, private cdr: ChangeDetectorRef) {}
 
     ngOnInit() {
         this.message = '';
         this.findEmployee();
         this.isSender = true;
         this.chatRoom = new ChatRoom();
+        this.chatRoomSelected = false;
 
         this.chatService.chatSelected.subscribe((chatRoom: ChatRoom) => {
             this.chatRoom = chatRoom;
+            this.chatRoomSelected = true;
         });
 
         this.newMessageSubscription = this.chatService.getMessages().subscribe(msg => {
-            this.chatRoom.mensajes.push(msg);
-            this.chatService.updateChatRoomMessages(this.chatRoom);
+            const chat = msg as ChatRoom;
+            if (this.chatRoomSelected && chat.id === this.chatRoom.id) {
+                this.chatRoom = chat;
+                this.cdr.detectChanges();
+            }
         });
     }
 

@@ -14,7 +14,7 @@
         </ng-template>
     </div>
 </div>
-<div class="input-group">
+<div *ngIf="chatRoomSelected" class="input-group">
     <div class="custom-file">
         <input (keyup.enter)="onKeyPressed($event)" [(ngModel)]="message" type="text" class="form-control" placeholder="Escriba su mensaje aquí..">
     </div>

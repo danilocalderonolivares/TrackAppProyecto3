@@ -8,7 +8,7 @@ const CHAT_ROUTE: Routes = [
         path: 'chat',
         component: ChatComponent,
         data: {
-            authorities: ['ROLE_ADMIN'],
+            authorities: ['ROLE_ADMIN', 'ROLE_USER'],
             pageTitle: 'Chat'
         },
         canActivate: [UserRouteAccessService]
