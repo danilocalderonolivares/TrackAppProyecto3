@@ -1,55 +1,150 @@
+<!--<h2 id="jhi-ubicacion-heading" style="text-align: center; margin-bottom: 30px">Añadir ubicaciones</h2>-->
+<!--<div class="d-flex justify-content-around">-->
+    <!--<div class="col-4">-->
+        <!--<form name="editForm" role="form" novalidate (ngSubmit)="saveUbication()" #editForm="ngForm">-->
+            <!--<div>-->
+                <!--<jhi-alert-error></jhi-alert-error>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_nombreDireccion">Dirección</label>-->
+                    <!--<input type="text" class="form-control" name="nombreDireccion" id="field_nombreDireccion"-->
+                           <!--[(ngModel)]="this.mapService.ubication.nombreDireccion" required/>-->
+                    <!--<div [hidden]="!(editForm.controls.nombreDireccion?.dirty && editForm.controls.nombreDireccion?.invalid)">-->
+                        <!--<small class="form-text text-danger"-->
+                               <!--[hidden]="!editForm.controls.nombreDireccion?.errors?.required">-->
+                            <!--Este campo es requerido.-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<input type="number" class="form-control" name="latitud" id="field_latitud"-->
+                        <!--[(ngModel)]="this.mapService.ubication.latitud" required hidden/>-->
+                    <!--<div [hidden]="!(editForm.controls.latitud?.dirty && editForm.controls.latitud?.invalid)">-->
+                        <!--<small class="form-text text-danger"-->
+                        <!--[hidden]="!editForm.controls.latitud?.errors?.required">-->
+                            <!--Este campo es requerido.-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<input type="number" class="form-control" name="longitud" id="field_longitud"-->
+                        <!--[(ngModel)]="this.mapService.ubication.longitud" required hidden/>-->
+                    <!--<div [hidden]="!(editForm.controls.longitud?.dirty && editForm.controls.longitud?.invalid)">-->
+                        <!--<small class="form-text text-danger"-->
+                        <!--[hidden]="!editForm.controls.longitud?.errors?.required">-->
+                            <!--Este campo es requerido.-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div *ngIf="!editOrDelete,else change">-->
+                <!--<button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">-->
+                    <!--<fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>-->
+                <!--</button>-->
+                <!--<button type="submit" id="save-entity" [disabled]="editForm.form.invalid" class="btn btn-primary">-->
+                    <!--<fa-icon [icon]="'plus'"></fa-icon>&nbsp;<span>Añadir</span>-->
+                <!--</button>-->
+            <!--</div>-->
+            <!--<ng-template #change>-->
+                <!--<div>-->
+                    <!--<button type="button" id="cancel-edit" class="btn btn-secondary"  (click)="previousState()">-->
+                        <!--<fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>-->
+                    <!--</button>-->
+                    <!--<button type="button" id="update-entity" class="btn btn-success" (click)="updateUbication()">-->
+                        <!--<fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span>Actualizar</span>-->
+                    <!--</button>-->
+                    <!--<button type="button" id="delete-entity" class="btn btn-danger" (click)="deleteUbication()">-->
+                        <!--<fa-icon [icon]="'times'"></fa-icon>&nbsp;<span>Eliminar</span>-->
+                    <!--</button>-->
+                <!--</div>-->
+            <!--</ng-template>-->
+        <!--</form>-->
+        <!--<div style="margin-top: 20px;">-->
+            <!--<label for="sel2">Listas de ubicaciones</label>-->
+            <!--<select multiple class="form-control" id="sel2" name="sellist2">-->
+                <!--<option *ngFor="let ubicacion of this.mapService.ubications; let i = index" (click)="onSelectedUbication(ubicacion, i)">{{ubicacion.nombreDireccion}}</option>-->
+            <!--</select>-->
+            <!--<div style="margin-top: 16px;">-->
+                <!--<button type="button" [disabled]="!addedUbication" class="btn btn-primary" (click)="onFillList()">-->
+                    <!--<fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Terminar</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<ngx-select-dropdown (change)="onChangeClient($event.value)" [config]="config" [options]="clientes"-->
+                             <!--[(ngModel)]="cliente" [multiple]="false"></ngx-select-dropdown>-->
+        <!--<br>-->
+        <!--&lt;!&ndash;<jhi-mapa-ruta></jhi-mapa-ruta>&ndash;&gt;-->
+        <!--<jhi-map></jhi-map>-->
+    <!--</div>-->
+
+<!--</div>-->
+
+<!--&lt;!&ndash;modal&ndash;&gt;-->
+<!--<ng-template #content let-c="close" let-d="dismiss">-->
+    <!--<div class="modal-header">-->
+        <!--<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">-->
+            <!--<span aria-hidden="true">&times;</span>-->
+        <!--</button>-->
+    <!--</div>-->
+    <!--<div class="modal-body">-->
+        <!--<p>No se puede agregar ubicaciones repetidas. Agregue una ubicación diferente!</p>-->
+        <!--<p></p>-->
+    <!--</div>-->
+    <!--<div class="modal-footer">-->
+        <!--<button type="button" class="btn btn-outline-dark" (click)="c('Save click')">OK</button>-->
+    <!--</div>-->
+<!--</ng-template>-->
+
 <h2 id="jhi-ubicacion-heading" style="text-align: center; margin-bottom: 30px">Añadir ubicaciones</h2>
 <div class="d-flex justify-content-around">
     <div class="col-4">
-        <form name="editForm" role="form" novalidate (ngSubmit)="saveUbication()" #editForm="ngForm">
+        <form name="editForm" [formGroup]="ubicationForm" novalidate #editForm="ngForm">
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_nombreDireccion">Dirección</label>
-                    <input type="text" class="form-control" name="nombreDireccion" id="field_nombreDireccion"
-                           [(ngModel)]="this.mapService.ubication.nombreDireccion" required/>
-                    <div [hidden]="!(editForm.controls.nombreDireccion?.dirty && editForm.controls.nombreDireccion?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.nombreDireccion?.errors?.required">
-                            Este campo es requerido.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_latitud">Latitud</label>
-                    <input type="number" class="form-control" name="latitud" id="field_latitud"
-                        [(ngModel)]="this.mapService.ubication.latitud" required readonly/>
-                    <div [hidden]="!(editForm.controls.latitud?.dirty && editForm.controls.latitud?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.latitud?.errors?.required">
-                            Este campo es requerido.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_longitud">Longitud</label>
-                    <input type="number" class="form-control" name="longitud" id="field_longitud"
-                        [(ngModel)]="this.mapService.ubication.longitud" required readonly/>
-                    <div [hidden]="!(editForm.controls.longitud?.dirty && editForm.controls.longitud?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.longitud?.errors?.required">
-                            Este campo es requerido.
-                        </small>
-                    </div>
-                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Dirección</mat-label>
+                    <input matInput formControlName="nombreDireccion"
+                           [(ngModel)]="this.mapService.ubication.nombreDireccion">
+                    <mat-icon matSuffix class="secondary-text">room</mat-icon>
+                    <mat-error *ngIf=" ubicationForm.get('nombreDireccion').hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" hidden>
+                    <input type="number" matInput formControlName="latitud"
+                           [(ngModel)]="this.mapService.ubication.latitud" hidden>
+                    <mat-error *ngIf=" ubicationForm.get('latitud').hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" hidden>
+                    <input type="number" matInput formControlName="longitud"
+                           [(ngModel)]="this.mapService.ubication.longitud" hidden>
+                    <mat-error *ngIf=" ubicationForm.get('longitud').hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
             </div>
             <div *ngIf="!editOrDelete,else change">
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>
+                <button type="button" id="cancel-save" mat-raised-button class="btn btn-secondary"
+                        (click)="previousState()">
+                   <mat-icon matSuffix>cancel</mat-icon>
+                    Cancelar
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid" class="btn btn-primary">
-                    <fa-icon [icon]="'plus'"></fa-icon>&nbsp;<span>Añadir</span>
+                <button type="button" mat-raised-button color="primary" class="mat-raised-button mat-primary"
+                        (click)="saveUbication()"[disabled]="ubicationForm.invalid">
+                    <mat-icon matSuffix>add</mat-icon>
+                    Añadir
                 </button>
             </div>
             <ng-template #change>
                 <div>
-                    <button type="button" id="cancel-edit" class="btn btn-secondary"  (click)="previousState()">
-                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>
+                    <button type="button" id="cancel-update" mat-raised-button class="btn btn-secondary"
+                            (click)="previousState()">
+                        <mat-icon matSuffix>cancel</mat-icon>
+                        Cancelar
                     </button>
                     <button type="button" id="update-entity" class="btn btn-success" (click)="updateUbication()">
                         <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span>Actualizar</span>

@@ -7,15 +7,21 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { IRuta } from 'app/shared/model/ruta.model';
 import { AccountService } from 'app/core';
 import { RutaService } from './ruta.service';
+import { fuseAnimations } from '../../../content/scss/animations';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
     selector: 'jhi-ruta',
-    templateUrl: './ruta.component.html'
+    templateUrl: './ruta.component.html',
+    animations: fuseAnimations
 })
 export class RutaComponent implements OnInit, OnDestroy {
     rutas: IRuta[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    displayedColumns: string[] = ['nombre', 'descripción', 'ubicaciones', 'buttons'];
+    dataSource: any;
+    searchKey: string;
 
     constructor(
         protected rutaService: RutaService,
@@ -34,6 +40,7 @@ export class RutaComponent implements OnInit, OnDestroy {
             .subscribe(
                 (res: IRuta[]) => {
                     this.rutas = res;
+                    this.dataSource = new MatTableDataSource(this.rutas);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -63,5 +70,14 @@ export class RutaComponent implements OnInit, OnDestroy {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    onSearchClear() {
+        this.searchKey = '';
+        this.applyFilter();
+    }
+
+    applyFilter() {
+        this.dataSource.filter = this.searchKey.trim().toLowerCase();
     }
 }
