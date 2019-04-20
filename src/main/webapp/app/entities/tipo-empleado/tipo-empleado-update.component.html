@@ -1,34 +1,27 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-tipo-empleado-heading">Crear - editar tipo de empleado</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <!--<div class="form-group" [hidden]="!tipoEmpleado.id">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="tipoEmpleado.id" readonly />
-                </div>-->
-                <div class="form-group">
-                    <label class="form-control-label" for="field_nombreTipo">Nombre Tipo</label>
-                    <input type="text" class="form-control" name="nombreTipo" id="field_nombreTipo"
-                        [(ngModel)]="tipoEmpleado.nombreTipo" required/>
-                    <div [hidden]="!(editForm.controls.nombreTipo?.dirty && editForm.controls.nombreTipo?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.nombreTipo?.errors?.required">
-                        Este campo es requerido
-                        </small>
-                    </div>
+<div class="justify-content-center mt-4">
+    <div class="container">
+        <form name="editForm" [formGroup]="tipoEmpleadoForm" novalidate (ngSubmit)="save()">
+            <div class="row">
+                <div class="col-md-6">
+                    <jhi-alert-error></jhi-alert-error>
+                    <h1 id="jhi-cliente-heading">Nombre tipo empleado</h1>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre Tipo*</mat-label>
+                        <input id="nombre_field" matInput formControlName="nombre" [(ngModel)]="tipoEmpleado.nombreTipo">
+                        <mat-icon matSuffix class="secondary-text">person_outline</mat-icon>
+                        <mat-error>
+                            Nombre del tipo es requerido
+                        </mat-error>
+                    </mat-form-field>
+                    <button type="button" mat-raised-button class="btn btn-secondary" (click)="previousState()">
+                        <mat-icon matSuffix>cancel</mat-icon>
+                        Cancelar
+                    </button>
+                    <button type="submit" mat-raised-button color="primary" class="mat-raised-button mat-primary" [disabled]="tipoEmpleadoForm.invalid">
+                        <mat-icon matSuffix>save</mat-icon>
+                        Guardar
+                    </button>
                 </div>
-
-            </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Guardar</span>
-                </button>
             </div>
         </form>
     </div>

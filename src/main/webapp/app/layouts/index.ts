@@ -10,4 +10,4 @@ export * from './profiles/profile-info.model';
 export * from './landing/landing.component';
 export * from './landing/landing.route';
 export * from './sidebar/sidebar.component';
-export * from './sidebar/sidebar.route';
+export * from './headernav/headernav.component';

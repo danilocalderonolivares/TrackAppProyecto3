@@ -5,7 +5,7 @@ import { IUbicacion } from 'app/shared/model/ubicacion.model';
 import { IRuta } from 'app/shared/model/ruta.model';
 import { RutaService } from '../ruta.service';
 import { Ubicacion } from 'app/shared/model/ubicacion.model';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ICliente } from 'app/shared/model/cliente.model';
 import { ClienteService } from 'app/entities/cliente';
@@ -19,6 +19,7 @@ import { MapService } from 'app/shared/map/map.service';
     providers: [NgbModalConfig, NgbModal]
 })
 export class UbicacionFormComponent implements OnInit, OnDestroy {
+    ubicationForm: FormGroup;
     isSaving: boolean;
     @ViewChild('editForm') form: NgForm;
     public editOrDelete = false;
@@ -37,13 +38,20 @@ export class UbicacionFormComponent implements OnInit, OnDestroy {
         config: NgbModalConfig,
         private modalService: NgbModal,
         protected clienteService: ClienteService,
-        protected mapService: MapService
+        protected mapService: MapService,
+        private _formBuilder: FormBuilder
     ) {
         config.backdrop = 'static';
         config.keyboard = false;
     }
 
     ngOnInit() {
+        this.ubicationForm = this._formBuilder.group({
+            nombreDireccion: ['', Validators.required],
+            latitud: ['', Validators.required],
+            longitud: ['', Validators.required]
+        });
+
         if (this.mapService.ubications.length > 0) {
             this.addedUbication = true;
         }

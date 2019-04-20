@@ -5,11 +5,12 @@ put Sass variables here:
 eg $input-color: red;
 ****************************/
 // Override Boostrap variables
-@import 'bootstrap-variables';
+//@import 'bootstrap-variables';
 // Import Bootstrap source files from node_modules
-@import '~bootstrap/scss/bootstrap';
+//@import '~bootstrap/scss/bootstrap';
 //@import '../css/bootstrap.min.css';
-
+@import '~@sebgroup/seb-angular-material-theme/seb-mat-theme.css';
+@import 'general';
 @import '~angular-calendar/css/angular-calendar.css';
 @import '~ng-pick-datetime/assets/style/picker.min.css';
 @import '~ngx-select-dropdown/dist/assets/style.css';

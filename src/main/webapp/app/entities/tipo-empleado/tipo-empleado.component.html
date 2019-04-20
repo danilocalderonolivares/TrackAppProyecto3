@@ -1,54 +1,49 @@
-<div>
-    <h2 id="page-heading">
-        <span>Tipos de Usuario</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-tipo-empleado" [routerLink]="['/tipo-empleado/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
+<div class="container-fluid">
+    <div class="search-div">
+        <button mat-raised-button color="primary" [routerLink]="['/tipo-empleado/new']">
+            <mat-icon>add</mat-icon>
             Crear nuevo tipo de empleado
-            </span>
         </button>
-    </h2>
+        <mat-form-field class="search-form-field" floatLabel="never">
+            <input matInput [(ngModel)]="searchKey" placeholder="Buscar" autocomplete="off" (keyup)="applyFilter()">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
     <jhi-alert></jhi-alert>
-    <br/>
-    <div class="table-responsive" *ngIf="tipoEmpleados">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-            <!--<th><span>ID</span></th>-->
-            <th><span>Nombre Tipo</span></th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let tipoEmpleado of tipoEmpleados ;trackBy: trackId">
-                <!--<td><a [routerLink]="['/tipo-empleado', tipoEmpleado.id, 'view' ]">{{tipoEmpleado.id}}</a></td>-->
-                <td>{{tipoEmpleado.nombreTipo}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/tipo-empleado', tipoEmpleado.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">Ver</span>
+    <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="nombre">
+                <mat-header-cell *matHeaderCellDef>Nombre Tipo</mat-header-cell>
+                <mat-cell *matCellDef="let tipoEmpleado">
+                    <p class="text-truncate font-weight-600">{{tipoEmpleado.nombreTipo}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="buttons">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let tipoEmpleado">
+                    <div>
+                        <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More" (click)="$event.stopPropagation();">
+                            <mat-icon class="secondary-text">more_vert</mat-icon>
                         </button>
-                        <button type="submit"
-                                [routerLink]="['/tipo-empleado', tipoEmpleado.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Editar</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'tipo-empleado', { outlets: { popup: tipoEmpleado.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Eliminar</span>
-                        </button>
+                        <mat-menu #moreMenu="matMenu">
+                            <button mat-menu-item aria-label="remove" [routerLink]="['/', 'tipo-empleado', { outlets: { popup: tipoEmpleado.id + '/delete'} }]">
+                                <mat-icon>delete</mat-icon>
+                                <span>Eliminar</span>
+                            </button>
+                            <button mat-menu-item aria-label="edit" [routerLink]="['/tipo-empleado', tipoEmpleado.id, 'edit']">
+                                <mat-icon>edit</mat-icon>
+                                <span>Editar</span>
+                            </button>
+                        </mat-menu>
                     </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                </mat-cell>
+            </ng-container>
+            <!--Mat-header-row y mat-row es lo primero que se tiene que incluir para construir la tabla-->
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let tipoEmpleado; columns: displayedColumns;" [routerLink]="['/tipo-empleado', tipoEmpleado.id, 'view' ]" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+            </mat-row>
+        </mat-table>
     </div>
 </div>

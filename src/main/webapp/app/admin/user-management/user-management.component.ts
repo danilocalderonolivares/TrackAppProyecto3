@@ -9,6 +9,7 @@ import { UserMgmtDeleteDialogComponent } from 'app/admin';
 import { Empleado } from 'app/shared/model/empleado.model';
 import { EmpleadoService } from 'app/entities/empleado';
 import { UserCustomUser } from 'app/shared/model/user_CustomUser.model';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
     selector: 'jhi-user-mgmt',
@@ -30,6 +31,18 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     reverse: any;
     fullUserInfo: UserCustomUser[];
     list: any[] = [];
+    dataSource: any;
+    searchKey: string;
+    displayedColumns: string[] = [
+        'user.login',
+        'user.email',
+        'empleado.nombre',
+        'empleado.apellidos',
+        'empleado.tipo',
+        'user.activated',
+        'user.authorities',
+        'buttons'
+    ];
 
     constructor(
         private userService: UserService,
@@ -150,6 +163,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
         this.totalItems = headers.get('X-Total-Count');
         this.users = data;
         this.loadCustomUserInfo();
+        this.dataSource = new MatTableDataSource(this.users);
     }
 
     loadCustomUserInfo() {
@@ -177,5 +191,14 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
 
     private onError(error) {
         this.alertService.error(error.error, error.message, null);
+    }
+
+    applyFilter() {
+        this.dataSource.filter = this.searchKey.trim().toLowerCase();
+    }
+
+    onSearchClear() {
+        this.searchKey = '';
+        this.applyFilter();
     }
 }

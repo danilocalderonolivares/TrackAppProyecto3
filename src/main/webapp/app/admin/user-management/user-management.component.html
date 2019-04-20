@@ -1,88 +1,89 @@
-<div>
-    <h2>
-        <span id="user-management-page-heading">Usuarios</span>
-        <button class="btn btn-primary float-right jh-create-entity" [routerLink]="['./new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span>Crear nuevo usuario</span>
+<div class="container-fluid">
+    <div class="search-div">
+        <button mat-raised-button color="primary" [routerLink]="['/.new']">
+            <mat-icon>add</mat-icon>Crear nuevo usuario
         </button>
-    </h2>
-    <jhi-alert></jhi-alert>
-    <div class="table-responsive" *ngIf="fullUserInfo">
-        <table class="table table-striped">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-                <!--<th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-                <th jhiSortBy="login"><span>Nombre <br /> Usuario</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
-                <th jhiSortBy="email"><span>Email</span>
-                    <fa-icon [icon]="'sort'"></fa-icon>
-                </th>
-                <th jhiSortBy="firstName"><span>Nombre</span>
-
-                </th>
-                <th jhiSortBy="apellidos"><span>Apellido</span>
-
-                </th>
-                <th jhiSortBy="nombreTipo"><span>Tipo <br />Usuario</span>
-
-                </th>
-                <th>Estado</th>
-                <th><span>Accesos</span></th>
-                <!--<th jhiSortBy="createdDate"><span>Created Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-                <!--<th jhiSortBy="lastModifiedBy"><span>Last Modified By</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-                <!--<th jhiSortBy="lastModifiedDate"><span>Last Modified Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
-                <th></th>
-            </tr>
-            </thead>
-            <tbody *ngIf="fullUserInfo">
-            <tr *ngFor="let user of fullUserInfo; trackBy: trackIdentity">
-                <!--<td><a [routerLink]="['./', user.login, 'view']">{{user.id}}</a></td>-->
-                <td><a [routerLink]="['./', user.user.login, 'view']">{{user.user.login}}</a></td>
-                <td>{{user.user.email}}</td>
-                <td>{{user.empleado.nombre}}</td>
-                <td>{{user.empleado.apellidos}}</td>
-                <td>{{user.empleado.tipo.nombreTipo}}</td>
-                <td>
-                    <button class="btn btn-danger btn-sm" (click)="setActive(user.user, true)" *ngIf="!user.user.activated">Desactivado
-                    </button>
-                    <button class="btn btn-success btn-sm" (click)="setActive(user.user, false)" *ngIf="user.user.activated" [disabled]="currentAccount.login === user.user.login">Activado
-                    </button>
-                </td>
-                <td>
-                    <div *ngFor="let authority of user.user.authorities">
-                        <span class="badge badge-info">{{ authority }}</span>
-                    </div>
-                </td>
-                <!--<td>{{user.createdDate | date:'dd/MM/yy HH:mm'}}</td>
-            <td>{{user.lastModifiedBy}}</td>
-            <td>{{user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>-->
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit" [routerLink]="['./', user.user.login, 'view']" class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">Ver</span>
-                        </button>
-                        <button type="submit" [routerLink]="['./', user.user.login, 'edit']" queryParamsHandling="merge" class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Editar</span>
-                        </button>
-                        <button type="button" (click)="deleteUser(user.user)" class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.user.login">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Eliminar</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <mat-form-field class="search-form-field" floatLabel="never">
+            <input matInput [(ngModel)]="searchKey" placeholder="Buscar" autocomplete="off" (keyup)="applyFilter()">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
     </div>
-    <div *ngIf="fullUserInfo">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
-        </div>
+    <jhi-alert></jhi-alert>
+    <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="user.login">
+                <mat-header-cell *matHeaderCellDef>Nombre <br /> Usuario</mat-header-cell>
+                <mat-cell *matCellDef="let usercustomuser">
+                    <p class="text-truncate font-weight-600"><a [routerLink]="['./', usercustomuser.user.login, 'view']">{{usercustomuser.user.login}}</a>
+
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="user.email">
+                <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+                <mat-cell *matCellDef="let usercustomuser">
+                    <p class="text-truncate font-weight-600">{{usercustomuser.user.email}}
+                    </p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="empleado.nombre">
+                <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+                <mat-cell *matCellDef="let user">
+                    <p class="text-truncate font-weight-600">{{user.empleado.nombre}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="empleado.apellidos">
+                <mat-header-cell *matHeaderCellDef>Apellido</mat-header-cell>
+                <mat-cell *matCellDef="let user">
+                    <p class="text-truncate font-weight-600">{{user.empleado.apellidos}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="empleado.tipo">
+                <mat-header-cell *matHeaderCellDef>Tipo <br />Usuario</mat-header-cell>
+                <mat-cell *matCellDef="let user">
+                    <p class="text-truncate font-weight-600">{{user.empleado.tipo.nombreTipo}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="user.activated">
+                <mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+                <mat-cell *matCellDef="let user">
+                    <button mat-button color="primary" (click)="setActive(user.user, true)" *ngIf="!user.user.activated">Desactivado</button>
+                    <button mat-button (click)="setActive(user.user, false)" *ngIf="user.user.activated" [disabled]="currentAccount.login === user.user.login">Activado</button>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="user.authorities">
+                <mat-header-cell *matHeaderCellDef>Accesos</mat-header-cell>
+                <mat-cell *matCellDef="let user">
+                    <span matBadge="4" matBadgeOverlap="false">{{user.authorities}}</span>
+                </mat-cell>
+            </ng-container>
+            <!--columna buttons-->
+            <ng-container matColumnDef="buttons">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let user">
+                    <div>
+                        <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More" (click)="$event.stopPropagation();">
+                            <mat-icon class="secondary-text">more_vert</mat-icon>
+                        </button>
+                        <mat-menu #moreMenu="matMenu">
+                            <button mat-menu-item aria-label="remove" [routerLink]="['/', 'user-management', { outlets: { popup: user.user.id + '/delete'} }]">
+                                <mat-icon>delete</mat-icon>
+                                <span>Eliminar</span>
+                            </button>
+                            <button mat-menu-item aria-label="edit" [routerLink]="['/user-management', user.user.id, 'edit']">
+                                <mat-icon>edit</mat-icon>
+                                <span>Editar</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                </mat-cell>
+            </ng-container>
+            <!--Mat-header-row y mat-row es lo primero que se tiene que incluir para construir la tabla-->
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let user; columns: displayedColumns;" [routerLink]="['/user-management', user.user.id, 'view']" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+            </mat-row>
+        </mat-table>
     </div>
 </div>

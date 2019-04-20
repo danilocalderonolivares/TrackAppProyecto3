@@ -1,109 +1,56 @@
 <jhi-page-ribbon></jhi-page-ribbon>
-<div>
-    <router-outlet name="navbar"></router-outlet>
 
-</div>
-<ng-container *ngIf="isAuthenticated() != false; else elseTemplate">
-    <link rel="stylesheet" href="../../../content/css/sidebar/black-dashboard.css?v=1.0.0">
-<div class="container-fluid">
-    <div class="sidebar">
-        <div class="sidebar-wrapper" style="background-color: #007bff;">
-            <div class="logo text-center">
-                <a routerLink="/" class="simple-text logo-normal">
-                    GPSApp
-                </a>
-            </div>
-            <ul class="nav">
-                <li class="">
-                    <a routerLink="tarea">
-                             <span>
-                                 <fa-icon icon="tasks" style="font-size: 1rem;"></fa-icon>
-                                <span>Tarea</span>
-                            </span>
-                    </a>
-                </li>
-                <li class="">
-                    <a routerLink="cliente">
-                            <span>
-                                 <fa-icon [icon]="clients" style="font-size: 1rem;"></fa-icon>
-                                <span>Cliente</span>
-                            </span>
-                    </a>
-                </li>
-                <li class="">
-                    <a routerLink="admin/user-management">
-                        <span>
-                                  <fa-icon [icon]="usersIcon" style="font-size: 1rem;"></fa-icon>
-                                <span>Manejo Usuarios</span>
-                            </span>
-                    </a>
-                </li>
-                <li class="">
-                    <a routerLink="ruta">
-                              <span>
-                                  <fa-icon [icon]="route" style="font-size: 1rem;"></fa-icon>
-                                <span>Ruta</span>
-                            </span>
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="horario">
-                            <span>
-                                <fa-icon [icon]="schedule" style="font-size: 1rem;"></fa-icon>
-                                <span>Horario</span>
-                            </span>
-
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="calendario">
-                            <span>
-                                <fa-icon icon="calendar-alt" style="font-size: 1rem;"></fa-icon>
-                                 <span>Calendario</span>
-                            </span>
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="tipo-empleado">
-                            <span>
-                                <fa-icon [icon]="userType" style="font-size: 1rem;"></fa-icon>
-                                <span>Tipo Empleado</span>
-                            </span>
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="empleados" >
-                        <span>
-                            <fa-icon icon="user" style="font-size: 1rem;"></fa-icon>
-                            <span>Localización</span>
-                        </span>
-
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="chat" >
-                        <span>
-                            <fa-icon [icon]="chatIcono" style="font-size: 1rem;"></fa-icon>
-                            <span>Chat</span>
-                        </span>
-
-                    </a>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-    <div class="main-panel">
-        <div class="content">
+<mat-sidenav-container>
+    <mat-sidenav #sidenav
+                 role="navigation">
+        <mat-list>
+            <a mat-list-item routerLink="/tarea" (click)="sidenav.close()">
+                <mat-icon>list</mat-icon>
+                <span class="nav-caption">Tarea</span>
+            </a>
+            <a mat-list-item routerLink="/cliente" (click)="sidenav.close()">
+                <mat-icon>supervisor_account</mat-icon>
+                <span class="nav-caption">Cliente</span>
+            </a>
+            <a mat-list-item routerLink="/admin/user-management" (click)="sidenav.close()">
+                <mat-icon>contacts</mat-icon>
+                <span class="nav-caption">Manejo de usuarios</span>
+            </a>
+            <a mat-list-item routerLink="/ruta" (click)="sidenav.close()">
+                <mat-icon>map</mat-icon>
+                <span class="nav-caption">Ruta</span>
+            </a>
+            <a mat-list-item routerLink="/horario" (click)="sidenav.close()">
+                <mat-icon>calendar_view_day</mat-icon>
+                <span class="nav-caption">Horario</span>
+            </a>
+            <a mat-list-item routerLink="/calendario" (click)="sidenav.close()">
+                <mat-icon>calendar_today</mat-icon>
+                <span class="nav-caption">Calendario</span>
+            </a>
+            <a mat-list-item routerLink="/tipo-empleado" (click)="sidenav.close()">
+                <mat-icon>account_circle</mat-icon>
+                <span class="nav-caption">Tipo Empleado</span>
+            </a>
+            <a mat-list-item routerLink="/empleados" (click)="sidenav.close()">
+                <mat-icon>my_location</mat-icon>
+                <span class="nav-caption">Localización</span>
+            </a>
+            <a mat-list-item routerLink="/chat" (click)="sidenav.close()">
+                <mat-icon>chat</mat-icon>
+                <span class="nav-caption">Chat</span>
+            </a>
+        </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <jhi-headernav (sidenavToggle)="sidenav.toggle()"></jhi-headernav>
+        <main>
             <router-outlet></router-outlet>
-        </div>
-    </div>
-</div>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>
 
-</ng-container>
-<ng-template #elseTemplate>
-    <router-outlet></router-outlet>
-</ng-template>
 <router-outlet name="popup"></router-outlet>
+
 
 
