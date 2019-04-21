@@ -10,10 +10,12 @@ import { Empleado } from 'app/shared/model/empleado.model';
 import { EmpleadoService } from 'app/entities/empleado';
 import { UserCustomUser } from 'app/shared/model/user_CustomUser.model';
 import { MatTableDataSource } from '@angular/material';
+import { fuseAnimations } from '../../../content/scss/animations';
 
 @Component({
     selector: 'jhi-user-mgmt',
-    templateUrl: './user-management.component.html'
+    templateUrl: './user-management.component.html',
+    animations: fuseAnimations
 })
 export class UserMgmtComponent implements OnInit, OnDestroy {
     currentAccount: any;
@@ -33,16 +35,7 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
     list: any[] = [];
     dataSource: any;
     searchKey: string;
-    displayedColumns: string[] = [
-        'user.login',
-        'user.email',
-        'empleado.nombre',
-        'empleado.apellidos',
-        'empleado.tipo',
-        'user.activated',
-        'user.authorities',
-        'buttons'
-    ];
+    displayedColumns: string[] = ['login', 'email', 'nombre', 'apellidos', 'tipo', 'activated', 'authorities', 'buttons'];
 
     constructor(
         private userService: UserService,
@@ -163,7 +156,6 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
         this.totalItems = headers.get('X-Total-Count');
         this.users = data;
         this.loadCustomUserInfo();
-        this.dataSource = new MatTableDataSource(this.users);
     }
 
     loadCustomUserInfo() {
@@ -184,21 +176,48 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
             const customUser = this.userCustomInfo.find(currentUser => currentUser.idUsuarioRelacion === user.id);
             if (customUser !== null) {
                 this.fullUserInfo.push(new UserCustomUser(user, customUser));
-            } else {
             }
         }
+
+        this.dataSource = new MatTableDataSource(this.fullUserInfo);
+        this.fillSortedTable();
+    }
+
+    fillSortedTable() {
+        this.dataSource.filterPredicate = (data, filter) => {
+            const dataStr =
+                data.user.login.toLowerCase() +
+                data.user.email.toLowerCase() +
+                data.user.authorities[0].toLowerCase() +
+                data.empleado.nombre.toLowerCase() +
+                data.empleado.apellidos.toLowerCase() +
+                data.empleado.tipo.nombreTipo.toLowerCase();
+            return dataStr.indexOf(filter) !== -1;
+        };
     }
 
     private onError(error) {
         this.alertService.error(error.error, error.message, null);
     }
 
-    applyFilter() {
+    /*applyFilter() {
         this.dataSource.filter = this.searchKey.trim().toLowerCase();
+    }*/
+
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.toLowerCase();
     }
 
     onSearchClear() {
         this.searchKey = '';
-        this.applyFilter();
+        this.applyFilter('');
+    }
+
+    isNotMyself(user: UserCustomUser) {
+        if (this.currentAccount.id !== user.user.id) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

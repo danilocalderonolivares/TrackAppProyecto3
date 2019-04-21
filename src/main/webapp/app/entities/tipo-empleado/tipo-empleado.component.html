@@ -16,8 +16,8 @@
         <mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="nombre">
                 <mat-header-cell *matHeaderCellDef>Nombre Tipo</mat-header-cell>
-                <mat-cell *matCellDef="let tipoEmpleado">
-                    <p class="text-truncate font-weight-600">{{tipoEmpleado.nombreTipo}}</p>
+                <mat-cell class="col-md-11" *matCellDef="let tipoEmpleado">
+                    <p class="text-truncate">{{tipoEmpleado.nombreTipo}}</p>
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="buttons">

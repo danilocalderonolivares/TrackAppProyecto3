@@ -12,6 +12,8 @@ import { UbicacionService } from 'app/entities/ubicacion';
 import { HorarioService } from 'app/entities/horario';
 import { TipoEmpleadoService } from 'app/entities/tipo-empleado';
 import { JhiAlertService } from 'ng-jhipster';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatOptionSelectionChange } from '@angular/material';
 
 @Component({
     selector: 'jhi-user-mgmt-update',
@@ -29,6 +31,7 @@ export class UserMgmtUpdateComponent implements OnInit {
     selectedType: ITipoEmpleado;
     currentAuthority: string;
     selectedAuthority: string;
+    usuariosForm: FormGroup;
 
     constructor(
         private userService: UserService,
@@ -38,10 +41,21 @@ export class UserMgmtUpdateComponent implements OnInit {
         protected horarioService: HorarioService,
         protected tipoEmpleadoService: TipoEmpleadoService,
         protected jhiAlertService: JhiAlertService,
-        protected empleadoService: EmpleadoService
+        protected empleadoService: EmpleadoService,
+        private _formBuilder: FormBuilder
     ) {}
 
     ngOnInit() {
+        this.usuariosForm = this._formBuilder.group({
+            login: ['', Validators.required],
+            nombre: ['', Validators.required],
+            apellido: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            tipoUsuario: ['', Validators.required],
+            horario: ['', Validators.required],
+            accesos: ['', Validators.required]
+        });
+
         this.setCustomUserValues();
         this.isSaving = false;
         this.route.data.subscribe(({ user }) => {
@@ -64,37 +78,12 @@ export class UserMgmtUpdateComponent implements OnInit {
         this.setDropdownsValue();
         const ubicacion = new Ubicacion('', 1, 1, '');
         const empleados: Empleado[] = [];
-        const tipoEmpleado = new TipoEmpleado('', '', empleados);
-        const horario = new Horario('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', empleados);
-        this.customUser = new Empleado('', '', '', '', ubicacion, horario, tipoEmpleado);
+        this.selectedType = new TipoEmpleado('', '', empleados);
+        this.selectedSchedule = new Horario('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', empleados);
+        this.customUser = new Empleado('', '', '', '', ubicacion, this.selectedSchedule, this.selectedType);
     }
 
     setDropdownsValue() {
-        this.ubicacionService
-            .query({ filter: 'empleado-is-null' })
-            .pipe(
-                filter((mayBeOk: HttpResponse<IUbicacion[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IUbicacion[]>) => response.body)
-            )
-            .subscribe(
-                (res: IUbicacion[]) => {
-                    if (!this.customUser.ubicacion || !this.customUser.ubicacion.id) {
-                        this.ubicacions = res;
-                    } else {
-                        this.ubicacionService
-                            .find(this.customUser.ubicacion.id)
-                            .pipe(
-                                filter((subResMayBeOk: HttpResponse<IUbicacion>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<IUbicacion>) => subResponse.body)
-                            )
-                            .subscribe(
-                                (subRes: IUbicacion) => (this.ubicacions = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                            );
-                    }
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
         this.horarioService
             .query()
             .pipe(
@@ -171,5 +160,13 @@ export class UserMgmtUpdateComponent implements OnInit {
                 this.selectedSchedule = this.customUser.horarios;
             });
         }
+    }
+
+    setTypeSelected(tipoEmpleado: string) {
+        this.selectedType = this.tipoempleados.find(tipo => tipo.nombreTipo === tipoEmpleado);
+    }
+
+    setScheduleSelected(horarioSeleccionado: string) {
+        this.selectedSchedule = this.horarios.find(horario => horario.nombre === horarioSeleccionado);
     }
 }

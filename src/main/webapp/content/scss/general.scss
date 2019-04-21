@@ -37,3 +37,14 @@ mat-form-field {
     width: 32px;
 }
 /* fin estilos boton buscar en listas */
+
+/* Estilos lista usuarios*/
+#email_header,
+#email_cell {
+    flex: 7%;
+}
+
+button.buttons {
+    padding: 0;
+}
+/* Fin lista usuarios*/

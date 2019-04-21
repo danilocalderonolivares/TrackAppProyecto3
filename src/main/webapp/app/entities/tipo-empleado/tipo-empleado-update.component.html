@@ -2,9 +2,9 @@
     <div class="container">
         <form name="editForm" [formGroup]="tipoEmpleadoForm" novalidate (ngSubmit)="save()">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <jhi-alert-error></jhi-alert-error>
-                    <h1 id="jhi-cliente-heading">Nombre tipo empleado</h1>
+                    <h1 id="jhi-cliente-heading">Crear - editar tipo de empleado</h1>
                     <mat-form-field appearance="outline">
                         <mat-label>Nombre Tipo*</mat-label>
                         <input id="nombre_field" matInput formControlName="nombre" [(ngModel)]="tipoEmpleado.nombreTipo">
