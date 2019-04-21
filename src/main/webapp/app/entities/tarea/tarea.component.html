@@ -23,6 +23,7 @@
             <th><span>Empleado</span></th>
             <th><span>Cliente</span></th>
                 <th><span>Ruta</span></th>
+                <th><span>Ubicación</span></th>
             <th></th>
             </tr>
             </thead>
@@ -50,6 +51,12 @@
                     <div *ngIf="tarea.ruta">
                         <!--<a [routerLink]="['../ruta', tarea.ruta?.id, 'view' ]" >{{tarea.ruta?.nombre}}</a>-->
                         <p>{{tarea.ruta?.nombre}}</p>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="tarea.ubicacion">
+                        <!--<a [routerLink]="['../ruta', tarea.ruta?.id, 'view' ]" >{{tarea.ruta?.nombre}}</a>-->
+                        <p>{{tarea.ubicacion?.nombreDireccion}}</p>
                     </div>
                 </td>
                 <td class="text-right">
