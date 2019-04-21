@@ -34,9 +34,6 @@ export class TareaComponent implements OnInit, OnDestroy {
             .subscribe(
                 (res: ITarea[]) => {
                     this.tareas = res;
-                    res.forEach(tarea => {
-                        console.log(tarea.inicio);
-                    });
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
