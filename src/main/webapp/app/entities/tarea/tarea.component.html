@@ -60,7 +60,8 @@
                 <mat-header-cell *matHeaderCellDef>Empleado</mat-header-cell>
                 <mat-cell *matCellDef="let tarea">
                     <ng-container *ngIf="tarea.empleado; else empleadoNo">
-                        <p class="text-truncate font-weight-600">{{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</p>
+                        <p class="text-truncate font-weight-600">{{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}
+                        </p>
                     </ng-container>
                     <ng-template #empleadoNo>
                         <p class="text-truncate font-weight-600">Empelado no asignado</p>

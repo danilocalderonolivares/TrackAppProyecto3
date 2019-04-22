@@ -22,6 +22,7 @@ export class HeadernavComponent implements OnInit {
     entrat = faSignInAlt;
     isMenuOpen = true;
     contentMargin = 240;
+    usuarioInfo :any;
     constructor(
         private loginService: LoginService,
         private accountService: AccountService,
@@ -38,6 +39,7 @@ export class HeadernavComponent implements OnInit {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
+        this.obtenerDatosUsuarios();
     }
     collapseNavbar() {
         this.isNavbarCollapsed = true;
@@ -56,5 +58,8 @@ export class HeadernavComponent implements OnInit {
     }
     onToolbarMenuToggle() {
         this.sidenavToggle.emit();
+    }
+    obtenerDatosUsuarios(){
+        this.usuarioInfo = JSON.parse(sessionStorage.getItem('user'));
     }
 }
