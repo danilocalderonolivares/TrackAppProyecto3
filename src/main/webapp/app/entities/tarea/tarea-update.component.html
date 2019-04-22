@@ -347,7 +347,40 @@
             </button>
         </form>
     </div>
-    <jhi-map></jhi-map>
+    <div>
+        <jhi-map></jhi-map>
+        <h3>Objetivos</h3>
+        <div style="margin-top: 10px">
+            <mat-form-field appearance="outline">
+                <mat-label>Objetivo</mat-label>
+                <input type="text" matInput placeholder="Agregar nuevo objetivo"
+                       #box (keyup.enter)="addSubtarea(box.value)"
+                       [(ngModel)]="nvaSubtarea">
+            </mat-form-field>
+            <div>
+                <mat-list class="list-group">
+                    <mat-list-item *ngFor="let subtarea of subtareas; index as i; trackBy: trackByFn"
+                                   class="list-group-item d-flexS">
+                        <div style="width: 85%;">
+                            {{i+1}}. {{subtarea.descripcion}}
+                        </div>
+                        <ng-container *ngIf="subtarea.id !== null; else elseTemplate">
+                            <button mat-icon-button (click)="eliminarListaSubtarea(i)">
+                                <mat-icon color="warn">delete_forever</mat-icon>
+                            </button>
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                            <button mat-icon-button (click)="eliminarListaSubtarea(i)">
+                                <mat-icon color="warn">delete_forever</mat-icon>
+                            </button>
+                        </ng-template>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 <!--modal-->
@@ -358,7 +391,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <p>¿Desea utilizar la ubicación de este clinte?</p>
+        <p>¿Desea utilizar la ubicación de este cliente?</p>
         <p></p>
     </div>
     <div class="modal-footer">
