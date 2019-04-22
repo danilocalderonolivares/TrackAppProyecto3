@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { ITarea } from 'app/shared/model/tarea.model';
+import { ITarea, Tarea } from 'app/shared/model/tarea.model';
 
 type EntityResponseType = HttpResponse<ITarea>;
 type EntityArrayResponseType = HttpResponse<ITarea[]>;
@@ -18,7 +18,7 @@ export class TareaService {
 
     constructor(protected http: HttpClient) {}
 
-    create(tarea: ITarea): Observable<EntityResponseType> {
+    create(tarea: Tarea): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(tarea);
         return this.http
             .post<ITarea>(this.resourceUrl, copy, { observe: 'response' })

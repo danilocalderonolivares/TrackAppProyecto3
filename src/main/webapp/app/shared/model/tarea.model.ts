@@ -20,7 +20,7 @@ export interface ITarea {
     activa?: boolean;
     completada?: boolean;
     borrado?: boolean;
-    subtarea?: ISubTarea[];
+    tareas?: ISubTarea[];
     empleado?: IEmpleado;
     ubicacion?: IUbicacion;
     cliente?: ICliente;
