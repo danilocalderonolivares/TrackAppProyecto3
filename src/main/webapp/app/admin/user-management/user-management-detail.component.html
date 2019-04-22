@@ -1,51 +1,38 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="customUser">
-            <h2>
-                <span>Usuario</span> <b>{{customUser.user.login}}</b>
-            </h2>
-            <dl class="row-md jh-entity-details">
-                <dt><span>Nombre de usuario</span></dt>
-                <dd>
-                    <span>{{customUser.user.login}}</span>
-                    <jhi-boolean
-                        [value]="customUser.user.activated"
-                        textTrue="Activado"
-                        textFalse="Desactivado">
-                    </jhi-boolean>
-                </dd>
-                <dt><span>Nombre</span></dt>
-                <dd>{{customUser.empleado.nombre}}</dd>
-                <dt><span>Apellido</span></dt>
-                <dd>{{customUser.empleado.apellidos}}</dd>
-                <dt><span>Email</span></dt>
-                <dd>{{customUser.user.email}}</dd>
-                <dt><span>Tipo usuario</span></dt>
-                <dd>{{customUser.empleado.tipo.nombreTipo}}</dd>
-                <dt><span>Horario</span></dt>
-                <dd>{{customUser.empleado.horarios.nombre}}</dd>
-                <!--<dt><span>Created By</span></dt>
-                <dd>{{user.createdBy}}</dd>
-                <dt><span>Created Date</span></dt>
-                <dd>{{user.createdDate | date:'dd/MM/yy HH:mm' }}</dd>
-                <dt><span>Last Modified By</span></dt>
-                <dd>{{user.lastModifiedBy}}</dd>
-                <dt><span>Last Modified Date</span></dt>
-                <dd>{{user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</dd>-->
-                <dt><span>Accesos</span></dt>
-                <dd>
-                    <ul class="list-unstyled">
-                        <li *ngFor="let authority of customUser.user.authorities">
-                            <span class="badge badge-info">{{authority}}</span>
-                        </li>
-                    </ul>
-                </dd>
-            </dl>
-            <button type="submit"
-                    routerLink="../../"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Regresar</span>
-            </button>
+<div class="justify-content-center mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div *ngIf="customUser">
+                    <h1 id="jhi-cliente-heading">Usuario {{customUser.user.login}}</h1>
+                    <hr>
+                    <h5 mat-line>Nombre de usuario</h5>
+                    <p mat-line> {{customUser.user.login}}
+                        <jhi-boolean [value]="customUser.user.activated" textTrue="Activado" textFalse="Desactivado">
+                        </jhi-boolean>
+                    </p>
+                    <h5 mat-line>Nombre</h5>
+                    <p mat-line> {{customUser.empleado.nombre}} </p>
+                    <h5 mat-line>Apellido</h5>
+                    <p mat-line> {{customUser.empleado.apellidos}} </p>
+                    <h5 mat-line>Email</h5>
+                    <p mat-line> {{customUser.user.email}} </p>
+                    <h5 mat-line>Tipo usuario</h5>
+                    <p mat-line> {{customUser.empleado.tipo.nombreTipo}} </p>
+                    <h5 mat-line>Horario</h5>
+                    <p mat-line> {{customUser.empleado.horarios.nombre}} </p>
+                    <h5 mat-line>Accesos</h5>
+                    <p mat-line *ngFor="let authority of customUser.user.authorities"> <span class="badge badge-info">{{authority}}</span> </p>
+                    <br />
+                    <button type="button" mat-raised-button class="btn btn-secondary" (click)="previousState()">
+                        <mat-icon matSuffix>arrow_back</mat-icon>
+                        Regresar
+                    </button>
+                    <button type="submit" mat-raised-button color="primary" class="mat-raised-button mat-primary" [routerLink]="['../../', customUser.user.login, 'edit']">
+                        <mat-icon matSuffix>edit</mat-icon>
+                        Editar
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
