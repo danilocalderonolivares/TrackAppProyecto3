@@ -7,7 +7,7 @@ import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { ITarea } from 'app/shared/model/tarea.model';
 import { TareaService } from './tarea.service';
-import { ISubTarea } from 'app/shared/model/sub-tarea.model';
+import {ISubTarea, SubTarea} from 'app/shared/model/sub-tarea.model';
 import { SubTareaService } from 'app/entities/sub-tarea';
 import { Empleado, IEmpleado } from 'app/shared/model/empleado.model';
 import { EmpleadoService } from 'app/entities/empleado';
@@ -44,7 +44,8 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
     @ViewChild('placesRef') placesRef: GooglePlaceDirective;
     tarea: ITarea;
     isSaving: boolean;
-    subtareas: ISubTarea[];
+    NuevasSubtareas: ISubTarea[];
+    subtareas: SubTarea[] = [];
     empleados: IEmpleado[];
     ubicacions: IUbicacion[];
     clientes: ICliente[];
@@ -108,6 +109,7 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
             if (this.tarea.id !== undefined) {
                 this.fechaInicio = new Date(this.tarea.inicio.format('M/D/YYYY h:mm'));
                 this.fechaFin = new Date(this.tarea.fin.format('M/D/YYYY h:mm'));
+                this.subtareas = this.tarea.tareas;
                 // if (!this.tarea.usarRuta) {
                 //     const ubts: IUbicacion[] = new Array();
                 //     ubts.push(this.tarea.ubicacion);
@@ -136,7 +138,7 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
             .subscribe(
                 (res: ISubTarea[]) => {
                     if (isEmpty(this.tarea.tareas)) {
-                        this.subtareas = res;
+
                     } else {
                         this.subTareaService
                             .query({ 'id.in': _map(this.tarea.tareas, 'id') })
@@ -146,7 +148,7 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
                             )
                             .subscribe(
                                 (res4: ISubTarea[]) => {
-                                    this.subtareas = res4;
+                                    // this.subtareas = res4;
                                 },
                                 (res5: HttpErrorResponse) => this.onError(res5.message)
                             );
@@ -298,21 +300,16 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
     trackLogById(index: number, item: ILog) {
         return item.id;
     }
-
     addSubtarea(value: string) {
-        this.subtareas.push(
-            new class implements ISubTarea {
-                // completado: boolean = false;
-                descripcion: string = value;
-                id: string;
-            }()
-        );
+        const subtarea = new SubTarea(null, value, false);
+        this.subtareas.push(subtarea as SubTarea);
         this.nvaSubtarea = '';
     }
 
-    eliminarSubtarea(index: number) {
+    eliminarListaSubtarea(index: number) {
         this.subtareas = reject(this.subtareas, (e, i) => i === index);
     }
+
 
     loadCustomUserInfo() {
         this.empleadoService
