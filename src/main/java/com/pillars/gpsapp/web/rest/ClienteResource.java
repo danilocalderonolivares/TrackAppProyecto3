@@ -123,4 +123,6 @@ public class ClienteResource {
 
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
+
+
 }
