@@ -22,41 +22,30 @@ public class Empleado implements Serializable {
     @Id
     private String id;
 
+    @Field("id_usuario_relacion")
+    private String idUsuarioRelacion;
+
     @NotNull
     @Field("nombre")
     private String nombre;
 
+    @NotNull
     @Field("apellidos")
     private String apellidos;
 
-    @NotNull
-    @Field("correo")
-    private String correo;
-
-    @NotNull
-    @Field("tipo")
-    private String tipo;
-
-    @NotNull
-    @Field("password")
-    private String password;
-
-    @NotNull
-    @Field("borrado")
-    private Boolean borrado;
-
-    @DBRef
-    @Field("admin")
-    private Administrador admin;
-
-    @DBRef
+//    @DBRef
     @Field("ubicacion")
     private Ubicacion ubicacion;
 
     @DBRef
     @Field("horarios")
-    @JsonIgnoreProperties("horarios")
+    @JsonIgnoreProperties("empleados")
     private Horario horarios;
+
+//    @DBRef
+    @Field("tipo")
+    @JsonIgnoreProperties("empleados")
+    private TipoEmpleado tipo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -65,6 +54,19 @@ public class Empleado implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getIdUsuarioRelacion() {
+        return idUsuarioRelacion;
+    }
+
+    public Empleado idUsuarioRelacion(String idUsuarioRelacion) {
+        this.idUsuarioRelacion = idUsuarioRelacion;
+        return this;
+    }
+
+    public void setIdUsuarioRelacion(String idUsuarioRelacion) {
+        this.idUsuarioRelacion = idUsuarioRelacion;
     }
 
     public String getNombre() {
@@ -93,71 +95,6 @@ public class Empleado implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public Empleado correo(String correo) {
-        this.correo = correo;
-        return this;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public Empleado tipo(String tipo) {
-        this.tipo = tipo;
-        return this;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Empleado password(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean isBorrado() {
-        return borrado;
-    }
-
-    public Empleado borrado(Boolean borrado) {
-        this.borrado = borrado;
-        return this;
-    }
-
-    public void setBorrado(Boolean borrado) {
-        this.borrado = borrado;
-    }
-
-    public Administrador getAdmin() {
-        return admin;
-    }
-
-    public Empleado admin(Administrador administrador) {
-        this.admin = administrador;
-        return this;
-    }
-
-    public void setAdmin(Administrador administrador) {
-        this.admin = administrador;
-    }
-
     public Ubicacion getUbicacion() {
         return ubicacion;
     }
@@ -182,6 +119,19 @@ public class Empleado implements Serializable {
 
     public void setHorarios(Horario horario) {
         this.horarios = horario;
+    }
+
+    public TipoEmpleado getTipo() {
+        return tipo;
+    }
+
+    public Empleado tipo(TipoEmpleado tipoEmpleado) {
+        this.tipo = tipoEmpleado;
+        return this;
+    }
+
+    public void setTipo(TipoEmpleado tipoEmpleado) {
+        this.tipo = tipoEmpleado;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -209,12 +159,13 @@ public class Empleado implements Serializable {
     public String toString() {
         return "Empleado{" +
             "id=" + getId() +
+            ", idUsuarioRelacion='" + getIdUsuarioRelacion() + "'" +
             ", nombre='" + getNombre() + "'" +
             ", apellidos='" + getApellidos() + "'" +
-            ", correo='" + getCorreo() + "'" +
-            ", tipo='" + getTipo() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", borrado='" + isBorrado() + "'" +
             "}";
+    }
+
+    public Empleado() {
+
     }
 }

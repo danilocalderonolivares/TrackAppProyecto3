@@ -38,9 +38,8 @@ public class Mensaje implements Serializable {
     @Field("borrado")
     private Boolean borrado;
 
-    @DBRef
-    @Field("admin")
-    private Administrador admin;
+    @Field("numero_mensaje")
+    private Integer numeroMensaje;
 
     @DBRef
     @Field("empleado")
@@ -107,17 +106,17 @@ public class Mensaje implements Serializable {
         this.borrado = borrado;
     }
 
-    public Administrador getAdmin() {
-        return admin;
+    public Integer getNumeroMensaje() {
+        return numeroMensaje;
     }
 
-    public Mensaje admin(Administrador administrador) {
-        this.admin = administrador;
+    public Mensaje numeroMensaje(Integer numeroMensaje) {
+        this.numeroMensaje = numeroMensaje;
         return this;
     }
 
-    public void setAdmin(Administrador administrador) {
-        this.admin = administrador;
+    public void setNumeroMensaje(Integer numeroMensaje) {
+        this.numeroMensaje = numeroMensaje;
     }
 
     public Empleado getEmpleado() {
@@ -162,6 +161,7 @@ public class Mensaje implements Serializable {
             ", fechaEnvio='" + getFechaEnvio() + "'" +
             ", visto='" + isVisto() + "'" +
             ", borrado='" + isBorrado() + "'" +
+            ", numeroMensaje=" + getNumeroMensaje() +
             "}";
     }
 }

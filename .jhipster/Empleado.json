@@ -2,6 +2,10 @@
     "name": "Empleado",
     "fields": [
         {
+            "fieldName": "idUsuarioRelacion",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "nombre",
             "fieldType": "String",
             "fieldValidateRules": [
@@ -10,32 +14,7 @@
         },
         {
             "fieldName": "apellidos",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "correo",
             "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "tipo",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "password",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "borrado",
-            "fieldType": "Boolean",
             "fieldValidateRules": [
                 "required"
             ]
@@ -44,26 +23,25 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "admin",
-            "otherEntityName": "administrador",
-            "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "empleado"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "ubicacion",
             "otherEntityName": "ubicacion",
+            "otherEntityRelationshipName": "empleado",
+            "relationshipName": "ubicacion",
             "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "empleado"
+            "ownerSide": true
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "horarios",
             "otherEntityName": "horario",
-            "otherEntityField": "id",
-            "otherEntityRelationshipName": "horario"
+            "otherEntityRelationshipName": "empleado",
+            "relationshipName": "horarios",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "tipoEmpleado",
+            "otherEntityRelationshipName": "empleado",
+            "relationshipName": "tipo",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190226065454",

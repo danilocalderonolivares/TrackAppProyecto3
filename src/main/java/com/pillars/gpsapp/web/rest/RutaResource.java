@@ -76,12 +76,13 @@ public class RutaResource {
     /**
      * GET  /rutas : get all the rutas.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many)
      * @return the ResponseEntity with status 200 (OK) and the list of rutas in body
      */
     @GetMapping("/rutas")
-    public List<Ruta> getAllRutas() {
+    public List<Ruta> getAllRutas(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Rutas");
-        return rutaRepository.findAll();
+        return rutaRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -93,7 +94,7 @@ public class RutaResource {
     @GetMapping("/rutas/{id}")
     public ResponseEntity<Ruta> getRuta(@PathVariable String id) {
         log.debug("REST request to get Ruta : {}", id);
-        Optional<Ruta> ruta = rutaRepository.findById(id);
+        Optional<Ruta> ruta = rutaRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(ruta);
     }
 

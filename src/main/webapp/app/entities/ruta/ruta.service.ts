@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { IRuta } from 'app/shared/model/ruta.model';
+import { IRuta, Ruta } from 'app/shared/model/ruta.model';
+import { IUbicacion, Ubicacion } from 'app/shared/model/ubicacion.model';
+import { map } from 'rxjs/operators';
 
 type EntityResponseType = HttpResponse<IRuta>;
 type EntityArrayResponseType = HttpResponse<IRuta[]>;
@@ -12,8 +14,12 @@ type EntityArrayResponseType = HttpResponse<IRuta[]>;
 @Injectable({ providedIn: 'root' })
 export class RutaService {
     public resourceUrl = SERVER_API_URL + 'api/rutas';
+    public onEdition: boolean = false;
+    public ruta: IRuta;
 
-    constructor(protected http: HttpClient) {}
+    constructor(protected http: HttpClient) {
+        this.ruta = new Ruta();
+    }
 
     create(ruta: IRuta): Observable<EntityResponseType> {
         return this.http.post<IRuta>(this.resourceUrl, ruta, { observe: 'response' });

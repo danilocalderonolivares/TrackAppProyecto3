@@ -1,0 +1,28 @@
+<div class="justify-content-center mt-4">
+    <div class="container">
+        <form name="editForm" [formGroup]="tipoEmpleadoForm" novalidate (ngSubmit)="save()">
+            <div class="row">
+                <div class="col-md-12">
+                    <jhi-alert-error></jhi-alert-error>
+                    <h1 id="jhi-cliente-heading">Crear - editar tipo de empleado</h1>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre Tipo*</mat-label>
+                        <input id="nombre_field" matInput formControlName="nombre" [(ngModel)]="tipoEmpleado.nombreTipo">
+                        <mat-icon matSuffix class="secondary-text">person_outline</mat-icon>
+                        <mat-error>
+                            Nombre del tipo es requerido
+                        </mat-error>
+                    </mat-form-field>
+                    <button type="button" mat-raised-button class="btn btn-secondary" (click)="previousState()">
+                        <mat-icon matSuffix>cancel</mat-icon>
+                        Cancelar
+                    </button>
+                    <button type="submit" mat-raised-button color="primary" class="mat-raised-button mat-primary" [disabled]="tipoEmpleadoForm.invalid">
+                        <mat-icon matSuffix>save</mat-icon>
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

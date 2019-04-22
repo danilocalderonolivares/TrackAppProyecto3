@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
-import { ITarea } from 'app/shared/model/tarea.model';
+import { ITarea, Tarea } from 'app/shared/model/tarea.model';
 
 type EntityResponseType = HttpResponse<ITarea>;
 type EntityArrayResponseType = HttpResponse<ITarea[]>;
@@ -18,7 +18,7 @@ export class TareaService {
 
     constructor(protected http: HttpClient) {}
 
-    create(tarea: ITarea): Observable<EntityResponseType> {
+    create(tarea: Tarea): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(tarea);
         return this.http
             .post<ITarea>(this.resourceUrl, copy, { observe: 'response' })
@@ -51,10 +51,10 @@ export class TareaService {
 
     protected convertDateFromClient(tarea: ITarea): ITarea {
         const copy: ITarea = Object.assign({}, tarea, {
-            inicio: tarea.inicio != null && tarea.inicio.isValid() ? tarea.inicio.format(DATE_FORMAT) : null,
-            fin: tarea.fin != null && tarea.fin.isValid() ? tarea.fin.format(DATE_FORMAT) : null,
-            horaInicio: tarea.horaInicio != null && tarea.horaInicio.isValid() ? tarea.horaInicio.format(DATE_FORMAT) : null,
-            horaFin: tarea.horaFin != null && tarea.horaFin.isValid() ? tarea.horaFin.format(DATE_FORMAT) : null
+            inicio: tarea.inicio != null && tarea.inicio.isValid() ? tarea.inicio.format(DATE_TIME_FORMAT) : null,
+            fin: tarea.fin != null && tarea.fin.isValid() ? tarea.fin.format(DATE_TIME_FORMAT) : null,
+            horaInicio: tarea.horaInicio != null && tarea.horaInicio.isValid() ? tarea.horaInicio.format(DATE_TIME_FORMAT) : null,
+            horaFin: tarea.horaFin != null && tarea.horaFin.isValid() ? tarea.horaFin.format(DATE_TIME_FORMAT) : null
         });
         return copy;
     }

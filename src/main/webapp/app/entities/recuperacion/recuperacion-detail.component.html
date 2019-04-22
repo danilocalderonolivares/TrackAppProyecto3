@@ -13,12 +13,6 @@
                 <dd>
                     <span>{{recuperacion.borrado}}</span>
                 </dd>
-                <dt><span>Admin</span></dt>
-                <dd>
-                    <div *ngIf="recuperacion.admin">
-                        <a [routerLink]="['/administrador', recuperacion.admin?.id, 'view']">{{recuperacion.admin?.id}}</a>
-                    </div>
-                </dd>
                 <dt><span>Empleado</span></dt>
                 <dd>
                     <div *ngIf="recuperacion.empleado">

@@ -1,0 +1,66 @@
+.backdrop {
+    background: transparentize(darken($negro2, 7%), 0.2);
+    content: '';
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+    overflow-y: auto;
+}
+
+.modal {
+    @extend .animated;
+    @extend .zoomIn;
+    animation-duration: 0.45s !important;
+    background: $blanco;
+    border-radius: 5px;
+    left: 25%;
+    top: 25%;
+    width: 50%;
+    z-index: 21;
+    margin: 5em auto;
+}
+
+.modal--l {
+    left: 15%;
+    top: 15%;
+    width: 70%;
+}
+
+%modal-padding {
+    padding: 0.5em;
+}
+
+.modal__header {
+    @extend %border-radius-top;
+    @extend %modal-padding;
+    background: $grise;
+    border-bottom: 1px solid $grisc;
+    padding: 0.5em;
+}
+
+.modal__header__titulo {
+    @extend %serif;
+    @extend %modal-padding;
+    color: $negro4;
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+}
+
+.modal__body {
+    @extend %modal-padding;
+}
+
+.modal__footer {
+    @extend %border-radius-bottom;
+    @extend %modal-padding;
+    background: $grise;
+    border-top: 1px solid $grisc;
+}
+
+.swal-modal {
+    @extend %serif;
+}

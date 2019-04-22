@@ -1,15 +1,15 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="tarea">
-            <h2><span>Tarea</span> {{tarea.id}}</h2>
+            <h2><span>Tarea</span> {{tarea.title}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Title</span></dt>
+                <dt><span>Titulo</span></dt>
                 <dd>
                     <span>{{tarea.title}}</span>
                 </dd>
-                <dt><span>Descripcion</span></dt>
+                <dt><span>Descripción</span></dt>
                 <dd>
                     <span>{{tarea.descripcion}}</span>
                 </dd>
@@ -21,51 +21,51 @@
                 <dd>
                     <span>{{tarea.fin}}</span>
                 </dd>
-                <dt><span>Usar Ruta</span></dt>
-                <dd>
-                    <span>{{tarea.usarRuta}}</span>
-                </dd>
-                <dt><span>Hora Inicio</span></dt>
-                <dd>
-                    <span>{{tarea.horaInicio}}</span>
-                </dd>
-                <dt><span>Hora Fin</span></dt>
-                <dd>
-                    <span>{{tarea.horaFin}}</span>
-                </dd>
-                <dt><span>Nota Extra</span></dt>
-                <dd>
-                    <span>{{tarea.notaExtra}}</span>
-                </dd>
-                <dt><span>Firma</span></dt>
-                <dd>
-                    <span>{{tarea.firma}}</span>
-                </dd>
+                <!--<dt><span>Usar Ruta</span></dt>-->
+                <!--<dd>-->
+                    <!--<span>{{tarea.usarRuta}}</span>-->
+                <!--</dd>-->
+                <!--<dt><span>Hora Inicio</span></dt>-->
+                <!--<dd>-->
+                    <!--<span>{{tarea.horaInicio}}</span>-->
+                <!--</dd>-->
+                <!--<dt><span>Hora Fin</span></dt>-->
+                <!--<dd>-->
+                    <!--<span>{{tarea.horaFin}}</span>-->
+                <!--</dd>-->
+                <!--<dt><span>Nota Extra</span></dt>-->
+                <!--<dd>-->
+                    <!--<span>{{tarea.notaExtra}}</span>-->
+                <!--</dd>-->
+                <!--<dt><span>Firma</span></dt>-->
+                <!--<dd>-->
+                    <!--<span>{{tarea.firma}}</span>-->
+                <!--</dd>-->
                 <dt><span>Activa</span></dt>
                 <dd>
-                    <span>{{tarea.activa}}</span>
+                    <span [innerText]="tarea.activa ? 'Sí':'No'"></span>
                 </dd>
                 <dt><span>Completada</span></dt>
                 <dd>
-                    <span>{{tarea.completada}}</span>
+                    <span [innerText]="tarea.completada ? 'Sí':'No'"></span>
                 </dd>
-                <dt><span>Borrado</span></dt>
-                <dd>
-                    <span>{{tarea.borrado}}</span>
-                </dd>
-                <dt><span>Subtarea</span></dt>
-                <dd>
-                    <div *ngIf="tarea.subtarea">
-                        <a [routerLink]="['/sub-tarea', tarea.subtarea?.id, 'view']">{{tarea.subtarea?.id}}</a>
-                    </div>
-                </dd>
+                <!--<dt><span>Borrado</span></dt>-->
+                <!--<dd>-->
+                    <!--<span>{{tarea.borrado}}</span>-->
+                <!--</dd>-->
+                <!--<dt><span>Subtarea</span></dt>-->
+                <!--<dd>-->
+                    <!--<div *ngIf="tarea.subtarea">-->
+                        <!--<a [routerLink]="['/sub-tarea', tarea.subtarea?.id, 'view']">{{tarea.subtarea?.id}}</a>-->
+                    <!--</div>-->
+                <!--</dd>-->
                 <dt><span>Empleado</span></dt>
                 <dd>
                     <div *ngIf="tarea.empleado">
-                        <a [routerLink]="['/empleado', tarea.empleado?.id, 'view']">{{tarea.empleado?.id}}</a>
+                        <p>{{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</p>
                     </div>
                 </dd>
-                <dt><span>Ubicacion</span></dt>
+                <dt><span>Ubicación</span></dt>
                 <dd>
                     <div *ngIf="tarea.ubicacion">
                         <a [routerLink]="['/ubicacion', tarea.ubicacion?.id, 'view']">{{tarea.ubicacion?.id}}</a>
@@ -74,33 +74,35 @@
                 <dt><span>Cliente</span></dt>
                 <dd>
                     <div *ngIf="tarea.cliente">
-                        <a [routerLink]="['/cliente', tarea.cliente?.id, 'view']">{{tarea.cliente?.id}}</a>
+                        <!--<a [routerLink]="['/cliente', tarea.cliente?.id, 'view']">{{tarea.cliente?.nombre}}</a>-->
+                        <p>{{tarea.cliente?.nombre}}<p>
                     </div>
                 </dd>
                 <dt><span>Ruta</span></dt>
                 <dd>
                     <div *ngIf="tarea.ruta">
-                        <a [routerLink]="['/ruta', tarea.ruta?.id, 'view']">{{tarea.ruta?.id}}</a>
+                        <!--<a [routerLink]="['/ruta', tarea.ruta?.id, 'view']">{{tarea.ruta?.nombre}}</a>-->
+                        <p>{{tarea.ruta?.nombre}}</p>
                     </div>
                 </dd>
-                <dt><span>Logs</span></dt>
-                <dd>
-                    <div *ngIf="tarea.logs">
-                        <a [routerLink]="['/log', tarea.logs?.id, 'view']">{{tarea.logs?.id}}</a>
-                    </div>
-                </dd>
+                <!--<dt><span>Logs</span></dt>-->
+                <!--<dd>-->
+                    <!--<div *ngIf="tarea.logs">-->
+                        <!--<a [routerLink]="['/log', tarea.logs?.id, 'view']">{{tarea.logs?.id}}</a>-->
+                    <!--</div>-->
+                <!--</dd>-->
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Regresar</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/tarea', tarea.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Editar</span>
             </button>
         </div>
     </div>

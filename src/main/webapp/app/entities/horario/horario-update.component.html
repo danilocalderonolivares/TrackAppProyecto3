@@ -1,163 +1,111 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-horario-heading">Create or edit a Horario</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!horario.id">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="horario.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_lunesInico">Lunes Inico</label>
-                    <div class="input-group">
-                        <input id="field_lunesInico" type="text" class="form-control" name="lunesInico" ngbDatepicker  #lunesInicoDp="ngbDatepicker" [(ngModel)]="horario.lunesInico"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="lunesInicoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_lunesFin">Lunes Fin</label>
-                    <div class="input-group">
-                        <input id="field_lunesFin" type="text" class="form-control" name="lunesFin" ngbDatepicker  #lunesFinDp="ngbDatepicker" [(ngModel)]="horario.lunesFin"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="lunesFinDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_martesInico">Martes Inico</label>
-                    <div class="input-group">
-                        <input id="field_martesInico" type="text" class="form-control" name="martesInico" ngbDatepicker  #martesInicoDp="ngbDatepicker" [(ngModel)]="horario.martesInico"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="martesInicoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_martesFin">Martes Fin</label>
-                    <div class="input-group">
-                        <input id="field_martesFin" type="text" class="form-control" name="martesFin" ngbDatepicker  #martesFinDp="ngbDatepicker" [(ngModel)]="horario.martesFin"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="martesFinDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_miercolesInico">Miercoles Inico</label>
-                    <div class="input-group">
-                        <input id="field_miercolesInico" type="text" class="form-control" name="miercolesInico" ngbDatepicker  #miercolesInicoDp="ngbDatepicker" [(ngModel)]="horario.miercolesInico"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="miercolesInicoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_miercolesFin">Miercoles Fin</label>
-                    <div class="input-group">
-                        <input id="field_miercolesFin" type="text" class="form-control" name="miercolesFin" ngbDatepicker  #miercolesFinDp="ngbDatepicker" [(ngModel)]="horario.miercolesFin"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="miercolesFinDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_juevesInico">Jueves Inico</label>
-                    <div class="input-group">
-                        <input id="field_juevesInico" type="text" class="form-control" name="juevesInico" ngbDatepicker  #juevesInicoDp="ngbDatepicker" [(ngModel)]="horario.juevesInico"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="juevesInicoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_juevesFin">Jueves Fin</label>
-                    <div class="input-group">
-                        <input id="field_juevesFin" type="text" class="form-control" name="juevesFin" ngbDatepicker  #juevesFinDp="ngbDatepicker" [(ngModel)]="horario.juevesFin"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="juevesFinDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_viernesInico">Viernes Inico</label>
-                    <div class="input-group">
-                        <input id="field_viernesInico" type="text" class="form-control" name="viernesInico" ngbDatepicker  #viernesInicoDp="ngbDatepicker" [(ngModel)]="horario.viernesInico"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="viernesInicoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_viernesFin">Viernes Fin</label>
-                    <div class="input-group">
-                        <input id="field_viernesFin" type="text" class="form-control" name="viernesFin" ngbDatepicker  #viernesFinDp="ngbDatepicker" [(ngModel)]="horario.viernesFin"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="viernesFinDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_sabadoInico">Sabado Inico</label>
-                    <div class="input-group">
-                        <input id="field_sabadoInico" type="text" class="form-control" name="sabadoInico" ngbDatepicker  #sabadoInicoDp="ngbDatepicker" [(ngModel)]="horario.sabadoInico"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="sabadoInicoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_sabadoFin">Sabado Fin</label>
-                    <div class="input-group">
-                        <input id="field_sabadoFin" type="text" class="form-control" name="sabadoFin" ngbDatepicker  #sabadoFinDp="ngbDatepicker" [(ngModel)]="horario.sabadoFin"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="sabadoFinDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_domingoInico">Domingo Inico</label>
-                    <div class="input-group">
-                        <input id="field_domingoInico" type="text" class="form-control" name="domingoInico" ngbDatepicker  #domingoInicoDp="ngbDatepicker" [(ngModel)]="horario.domingoInico"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="domingoInicoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_domingoFin">Domingo Fin</label>
-                    <div class="input-group">
-                        <input id="field_domingoFin" type="text" class="form-control" name="domingoFin" ngbDatepicker  #domingoFinDp="ngbDatepicker" [(ngModel)]="horario.domingoFin"
-                        />
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="domingoFinDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                </div>
+<div class="justify-content-center mt-4">
+    <div class="container">
+        <form name="editForm" [formGroup]="horariosForm" novalidate (ngSubmit)="save()">
+            <div class="row">
+                <div class="col-md-12">
+                    <jhi-alert-error></jhi-alert-error>
+                    <h1 id="jhi-cliente-heading">Crear - editar horario</h1>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre horario*</mat-label>
+                        <input  matInput formControlName="nombre" [(ngModel)]="horario.nombre">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+                        <mat-error>
+                            Nombre del horario es requerido
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Lunes Inicio</mat-label>
+                        <input matInput type="time" formControlName="lunesInicio" [(ngModel)]="horario.lunesInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
 
-            </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
-                </button>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Lunes Fin</mat-label>
+                        <input  matInput type="time" formControlName="lunesFin" [(ngModel)]="horario.lunesFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Martes Inicio</mat-label>
+                        <input  matInput type="time" formControlName="martesInicio" [(ngModel)]="horario.martesInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Martes Fin</mat-label>
+                        <input  matInput type="time" formControlName="martesFin" [(ngModel)]="horario.martesFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Miercoles Inicio</mat-label>
+                        <input  matInput type="time" formControlName="miercolesInicio" [(ngModel)]="horario.miercolesInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Miercoles Fin</mat-label>
+                        <input  matInput type="time" formControlName="miercolesFin" [(ngModel)]="horario.miercolesFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Jueves Inicio</mat-label>
+                        <input  matInput type="time" formControlName="juevesInicio" [(ngModel)]="horario.juevesInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Jueves Fin</mat-label>
+                        <input  matInput type="time" formControlName="juevesFin" [(ngModel)]="horario.juevesFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Viernes Inicio</mat-label>
+                        <input  matInput type="time" formControlName="viernesInicio" [(ngModel)]="horario.viernesInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Viernes Fin</mat-label>
+                        <input  matInput type="time" formControlName="viernesFin" [(ngModel)]="horario.viernesFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Sabado Inicio</mat-label>
+                        <input  matInput type="time" formControlName="sabadoInicio" [(ngModel)]="horario.sabadoInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Sabado Fin</mat-label>
+                        <input  matInput type="time" formControlName="sabadoFin" [(ngModel)]="horario.sabadoFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Domingo Inicio</mat-label>
+                        <input  matInput type="time" formControlName="domingoInicio" [(ngModel)]="horario.domingoInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Domingo Fin</mat-label>
+                        <input  matInput type="time" formControlName="domingoFin" [(ngModel)]="horario.domingoFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <button type="button" mat-raised-button class="btn btn-secondary" (click)="previousState()">
+                        <mat-icon matSuffix>cancel</mat-icon>
+                        Cancelar
+                    </button>
+                    <button type="submit" mat-raised-button color="primary" class="mat-raised-button mat-primary" [disabled]="horariosForm.invalid">
+                        <mat-icon matSuffix>save</mat-icon>
+                        Guardar
+                    </button>
+                </div>
             </div>
         </form>
     </div>

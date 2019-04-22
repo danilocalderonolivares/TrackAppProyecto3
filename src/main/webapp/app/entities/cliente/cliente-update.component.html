@@ -1,73 +1,95 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-cliente-heading">Create or edit a Cliente</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!cliente.id">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="cliente.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_nombre">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" id="field_nombre"
-                        [(ngModel)]="cliente.nombre" required/>
-                    <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.nombre?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_cedula">Cedula</label>
-                    <input type="text" class="form-control" name="cedula" id="field_cedula"
-                        [(ngModel)]="cliente.cedula" required/>
-                    <div [hidden]="!(editForm.controls.cedula?.dirty && editForm.controls.cedula?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.cedula?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_direccion">Direccion</label>
-                    <input type="text" class="form-control" name="direccion" id="field_direccion"
-                        [(ngModel)]="cliente.direccion" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_correo">Correo</label>
-                    <input type="text" class="form-control" name="correo" id="field_correo"
-                        [(ngModel)]="cliente.correo" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_esEmpresa">Es Empresa</label>
-                    <input type="checkbox" class="form-control" name="esEmpresa" id="field_esEmpresa"
-                        [(ngModel)]="cliente.esEmpresa" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_borrado">Borrado</label>
-                    <input type="checkbox" class="form-control" name="borrado" id="field_borrado"
-                        [(ngModel)]="cliente.borrado" />
-                </div>
+<div class="justify-content-center mt-4">
+    <div class="container">
+        <div class="alert alert-danger" *ngIf="errorCedulaNotExists">
+            <strong>Este cédula ya se encuentra registrada en la base de datos</strong> Por favos intente otra vez!
+        </div>
+        <form name="editForm"  [formGroup]="clienteForm" novalidate (ngSubmit)="save()">
+        <div class="row">
+            <div class="col-md-6">
 
-                <div class="form-group">
-                    <label class="form-control-label" for="field_ubicacion">Ubicacion</label>
-                    <select class="form-control" id="field_ubicacion" name="ubicacion" [(ngModel)]="cliente.ubicacion">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="ubicacionOption.id === cliente.ubicacion?.id ? cliente.ubicacion : ubicacionOption" *ngFor="let ubicacionOption of ubicacions; trackBy: trackUbicacionById">{{ubicacionOption.id}}</option>
-                    </select>
-                </div>
-            </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                <h1 id="jhi-cliente-heading">Información básica</h1>
+                <mat-checkbox #esEmpesaCheckBox (click)="esEmpresa(esEmpesaCheckBox.value)"
+                              [(ngModel)]="cliente.esEmpresa"
+                              [ngModelOptions]="{standalone: true}">
+                    ¿Es empresa?
+                </mat-checkbox>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{nombreClienteInput}}</mat-label>
+                    <input id="nombre_field" matInput formControlName="nombre" [(ngModel)]="cliente.nombre">
+                     <mat-icon matSuffix class="secondary-text">person_outline</mat-icon>
+                     <mat-error>
+                         Nombre del cliente es requerido
+                     </mat-error>
+                 </mat-form-field>
+                 <mat-form-field appearance="outline">
+                     <mat-label>{{cedulaClienteInput}}</mat-label>
+                     <input matInput formControlName="cedula" [(ngModel)]="cliente.cedula">
+                     <mat-icon matSuffix class="secondary-text">person_outline</mat-icon>
+                     <mat-error>
+                         Cédula del cliente es requerido
+                     </mat-error>
+                 </mat-form-field>
+                 <mat-form-field appearance="outline">
+                     <mat-label>Correo*</mat-label>
+                     <input matInput formControlName="correo" [(ngModel)]="cliente.correo">
+                     <mat-icon matSuffix class="secondary-text">email</mat-icon>
+                     <mat-error *ngIf="clienteForm.get('correo').hasError('required')">
+                         Correo del cliente es requerido
+                     </mat-error>
+                     <mat-error
+                         *ngIf="!clienteForm.get('correo').hasError('required') &&
+                                 clienteForm.get('correo').hasError('email')">
+                         Ingrese un correo valido.
+                     </mat-error>
+                 </mat-form-field>
+                <button type="button"
+                        mat-raised-button
+                        class="btn btn-secondary"
+                        (click)="previousState()">
+                    <mat-icon matSuffix>cancel</mat-icon>
+                    Cancelar
+                </button >
+                <button type="submit"
+                    mat-raised-button color="primary" class="mat-raised-button mat-primary"
+                         [disabled]="clienteForm.invalid">
+                    <mat-icon matSuffix>save</mat-icon>
+                    Guardar
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
+
+             </div>
+             <div class="col-md-6">
+                 <h1>Ubicación</h1>
+                 <mat-form-field appearance="outline">
+
+                     <input matInput formControlName="direccion"
+                            [(ngModel)]="cliente.direccion"
+                            readonly
+                     placeholder="Elija una posición en el mapa para ingresar la dirección">
+                     <mat-icon matSuffix class="secondary-text">directions</mat-icon>
+                     <mat-error>
+                         Dirección es requerida.
+                     </mat-error>
+                 </mat-form-field>
+                 <div class="form-group">
+                     <label class="form-control-label">Ubicación</label>
+                     <agm-map
+                     [latitude]="lat"
+                     [longitude]="lng"
+                     [zoom]="zoom"
+                     (mapClick)="mapClicked($event)">
+                         <agm-marker
+                         [latitude]="lat"
+                         [longitude]="lng"
+                         *ngIf="locationChosen">
+                         </agm-marker>
+
+                     </agm-map>
+
+                 </div>
+
+             </div>
+
+         </div>
+         </form>
+     </div>
+ </div>

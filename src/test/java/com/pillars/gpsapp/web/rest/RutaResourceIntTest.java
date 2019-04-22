@@ -9,9 +9,12 @@ import com.pillars.gpsapp.web.rest.errors.ExceptionTranslator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -20,12 +23,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.Validator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 import static com.pillars.gpsapp.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -49,6 +54,9 @@ public class RutaResourceIntTest {
 
     @Autowired
     private RutaRepository rutaRepository;
+
+    @Mock
+    private RutaRepository rutaRepositoryMock;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -153,23 +161,6 @@ public class RutaResourceIntTest {
     }
 
     @Test
-    public void checkBorradoIsRequired() throws Exception {
-        int databaseSizeBeforeTest = rutaRepository.findAll().size();
-        // set the field null
-        ruta.setBorrado(null);
-
-        // Create the Ruta, which fails.
-
-        restRutaMockMvc.perform(post("/api/rutas")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(ruta)))
-            .andExpect(status().isBadRequest());
-
-        List<Ruta> rutaList = rutaRepository.findAll();
-        assertThat(rutaList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
     public void getAllRutas() throws Exception {
         // Initialize the database
         rutaRepository.save(ruta);
@@ -184,6 +175,39 @@ public class RutaResourceIntTest {
             .andExpect(jsonPath("$.[*].borrado").value(hasItem(DEFAULT_BORRADO.booleanValue())));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllRutasWithEagerRelationshipsIsEnabled() throws Exception {
+        RutaResource rutaResource = new RutaResource(rutaRepositoryMock);
+        when(rutaRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        MockMvc restRutaMockMvc = MockMvcBuilders.standaloneSetup(rutaResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restRutaMockMvc.perform(get("/api/rutas?eagerload=true"))
+        .andExpect(status().isOk());
+
+        verify(rutaRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllRutasWithEagerRelationshipsIsNotEnabled() throws Exception {
+        RutaResource rutaResource = new RutaResource(rutaRepositoryMock);
+            when(rutaRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+            MockMvc restRutaMockMvc = MockMvcBuilders.standaloneSetup(rutaResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restRutaMockMvc.perform(get("/api/rutas?eagerload=true"))
+        .andExpect(status().isOk());
+
+            verify(rutaRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     public void getRuta() throws Exception {
         // Initialize the database

@@ -1,194 +1,403 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-tarea-heading">Create or edit a Tarea</h2>
+<!--<h2 style="text-align: center; margin-bottom: 30px" id="jhi-tarea-heading">Crear o editar Tarea</h2>-->
+<!--<div class="d-flex justify-content-around" style="padding: 10px; width: 100%;">-->
+    <!--<div class="col-4">-->
+        <!--<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">-->
+            <!--<div>-->
+                <!--<jhi-alert-error></jhi-alert-error>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_title">Titulo</label>-->
+                    <!--<input type="text" class="form-control" name="title" id="field_title"-->
+                        <!--[(ngModel)]="tarea.title" required/>-->
+                    <!--<div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">-->
+                        <!--<small class="form-text text-danger" [hidden]="!editForm.controls.title?.errors?.required">-->
+                            <!--Este campo es requerido-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_descripcion">Descripción</label>-->
+                    <!--<input type="text" class="form-control" name="descripcion" id="field_descripcion"-->
+                        <!--[(ngModel)]="tarea.descripcion" />-->
+                <!--</div>-->
+
+
+
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label">-->
+                       <!--Fecha de inicio-->
+                        <!--<input [(ngModel)]="fechaInicio"-->
+                               <!--[max]="fechaFin"-->
+                               <!--[owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"-->
+                               <!--#dateTime="ngModel"-->
+                               <!--name="inicio"-->
+                               <!--required-->
+                               <!--class="form-control">-->
+                        <!--<owl-date-time #dt1></owl-date-time>-->
+                    <!--</label>-->
+                    <!--<div *ngIf="dateTime.invalid && dateTime.errors.owlDateTimeMax">-->
+                        <!--Tiene que escoger una fecha anterior a {{fechaFin| date: 'medium'}}-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label">-->
+                        <!--Fecha de Finalización-->
+                        <!--<input [(ngModel)]="fechaFin"-->
+                               <!--[min]="fechaInicio"-->
+                               <!--[owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"-->
+                               <!--#dateTime="ngModel"-->
+                               <!--name="fin"-->
+                               <!--required-->
+                               <!--class="form-control">-->
+                        <!--<owl-date-time #dt2></owl-date-time>-->
+                    <!--</label>-->
+                    <!--<div *ngIf="dateTime.invalid && dateTime.errors.owlDateTimeMin">-->
+                        <!--Tiene que escoger una fecha posterior a {{fechaInicio| date: 'medium'}}-->
+                    <!--</div>-->
+
+
+                <!--</div>-->
+                <!--&lt;!&ndash;div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_inicio">Inicio</label>-->
+                    <!--<div class="input-group">-->
+                        <!--<input id="field_inicio" type="text" class="form-control" name="inicio" ngbDatepicker  #inicioDp="ngbDatepicker" [(ngModel)]="tarea.inicio"-->
+                        <!--required/>-->
+                        <!--<span class="input-group-append">-->
+                            <!--<button type="button" class="btn btn-secondary" (click)="inicioDp.toggle()">-->
+                                <!--<fa-icon [icon]="'calendar-alt'"></fa-icon>-->
+                            <!--</button>-->
+                        <!--</span>-->
+                    <!--</div>-->
+                    <!--<div [hidden]="!(editForm.controls.inicio?.dirty && editForm.controls.inicio?.invalid)">-->
+                        <!--<small class="form-text text-danger" [hidden]="!editForm.controls.inicio?.errors?.required">-->
+                            <!--Este campo es requerido-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_fin">Fin</label>-->
+                    <!--<div class="input-group">-->
+                        <!--<input id="field_fin" type="text" class="form-control" name="fin" ngbDatepicker #finDp="ngbDatepicker" [(ngModel)]="tarea.fin" required />-->
+                        <!--<span class="input-group-append">-->
+                            <!--<button type="button" class="btn btn-secondary" (click)="finDp.toggle()">-->
+                                <!--<fa-icon [icon]="'calendar-alt'"></fa-icon>-->
+                            <!--</button>-->
+                        <!--</span>-->
+                    <!--</div>-->
+                    <!--<div [hidden]="!(editForm.controls.fin?.dirty && editForm.controls.fin?.invalid)">-->
+                        <!--<small class="form-text text-danger" [hidden]="!editForm.controls.fin?.errors?.required">-->
+                            <!--Este campo es requerido-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div&ndash;&gt;-->
+                <!--&lt;!&ndash;div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_horaInicio">Hora Inicio</label>-->
+                    <!--<div class="input-group">-->
+                        <!--<input id="field_horaInicio" type="text" class="form-control" name="horaInicio" ngbDatepicker #horaInicioDp="ngbDatepicker" [(ngModel)]="tarea.horaInicio" required />-->
+                        <!--<span class="input-group-append">-->
+                            <!--<button type="button" class="btn btn-secondary" (click)="horaInicioDp.toggle()">-->
+                                <!--<fa-icon [icon]="'calendar-alt'"></fa-icon>-->
+                            <!--</button>-->
+                        <!--</span>-->
+                    <!--</div>-->
+                    <!--<div [hidden]="!(editForm.controls.horaInicio?.dirty && editForm.controls.horaInicio?.invalid)">-->
+                        <!--<small class="form-text text-danger" [hidden]="!editForm.controls.horaInicio?.errors?.required">-->
+                            <!--Este campo es requerido-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_horaFin">Hora Fin</label>-->
+                    <!--<div class="input-group">-->
+                        <!--<input id="field_horaFin" type="text" class="form-control" name="horaFin" ngbDatepicker #horaFinDp="ngbDatepicker" [(ngModel)]="tarea.horaFin" required />-->
+                        <!--<span class="input-group-append">-->
+                            <!--<button type="button" class="btn btn-secondary" (click)="horaFinDp.toggle()">-->
+                                <!--<fa-icon [icon]="'calendar-alt'"></fa-icon>-->
+                            <!--</button>-->
+                        <!--</span>-->
+                    <!--</div>-->
+                    <!--<div [hidden]="!(editForm.controls.horaFin?.dirty && editForm.controls.horaFin?.invalid)">-->
+                        <!--<small class="form-text text-danger" [hidden]="!editForm.controls.horaFin?.errors?.required">-->
+                            <!--Este campo es requerido-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_notaExtra">Nota Extra</label>-->
+                    <!--<input type="text" class="form-control" name="notaExtra" id="field_notaExtra" [(ngModel)]="tarea.notaExtra" />-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_firma">Firma</label>-->
+                    <!--<input type="text" class="form-control" name="firma" id="field_firma" [(ngModel)]="tarea.firma" />-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_activa">Activa</label>-->
+                    <!--<input type="checkbox" class="form-control" name="activa" id="field_activa" [(ngModel)]="tarea.activa" />-->
+                    <!--<div [hidden]="!(editForm.controls.activa?.dirty && editForm.controls.activa?.invalid)">-->
+                        <!--<small class="form-text text-danger" [hidden]="!editForm.controls.activa?.errors?.required">-->
+                            <!--Este campo es requerido-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_completada">Completada</label>-->
+                    <!--<input type="checkbox" class="form-control" name="completada" id="field_completada" [(ngModel)]="tarea.completada" />-->
+                    <!--<div [hidden]="!(editForm.controls.completada?.dirty && editForm.controls.completada?.invalid)">-->
+                        <!--<small class="form-text text-danger" [hidden]="!editForm.controls.completada?.errors?.required">-->
+                            <!--Este campo es requerido-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_borrado">Borrado</label>-->
+                    <!--<input type="checkbox" class="form-control" name="borrado" id="field_borrado"-->
+                        <!--[(ngModel)]="tarea.borrado" />-->
+                <!--</div&ndash;&gt;-->
+
+                <!--&lt;!&ndash;div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_subtarea">Subtarea</label>-->
+                    <!--<select class="form-control" id="field_subtarea" name="subtarea" [(ngModel)]="tarea.subtarea">-->
+                        <!--<option [ngValue]="null"></option>-->
+                        <!--<option [ngValue]="subTareaOption.id === tarea.subtarea?.id ? tarea.subtarea : subTareaOption" *ngFor="let subTareaOption of subtareas; trackBy: trackSubTareaById">{{subTareaOption.id}}</option>-->
+                    <!--</select>-->
+                <!--</div&ndash;&gt;-->
+
+
+                <!--&lt;!&ndash;selects without search bar&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<label class="form-control-label" for="field_empleado">Empleado</label>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<select  class="form-control" id="field_empleado" name="empleado" [(ngModel)]="tarea.empleado">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option [ngValue]="empleadoOption.id === tarea.empleado?.id ? tarea.empleado : empleadoOption" *ngFor="let empleadoOption of empleados; trackBy: trackEmpleadoById">{{empleadoOption.nombre}} {{empleadoOption.apellidos}}</option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                <!--&lt;!&ndash;<label class="form-control-label" for="field_cliente">Cliente</label>&ndash;&gt;-->
+                <!--&lt;!&ndash;<select class="form-control" id="field_cliente" name="cliente" [(ngModel)]="tarea.cliente">&ndash;&gt;-->
+                <!--&lt;!&ndash;<option [ngValue]="clienteOption.id === tarea.cliente?.id ? tarea.cliente : clienteOption" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.nombre}}</option>&ndash;&gt;-->
+                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div *ngIf="tarea.usarRuta" class="form-group">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<label class="form-control-label" for="field_ruta">Ruta</label>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<select class="form-control" id="field_ruta" name="ruta" [(ngModel)]="tarea.ruta">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option [ngValue]="rutaOption.id === tarea.ruta?.id ? tarea.ruta : rutaOption" *ngFor="let rutaOption of rutas; trackBy: trackRutaById">{{rutaOption.nombre}}</option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--<ngx-select-dropdown (change)="onEmpleadoChangeCustom($event.value)" [config]="configEmpleados"-->
+                                     <!--[_value]="tarea.empleado !==null ? onUpdateEmployee(tarea.empleado) : undefined"-->
+                                     <!--[options]="empleadosList" [multiple]="false"></ngx-select-dropdown>-->
+                <!--<br>-->
+                <!--<ngx-select-dropdown  (change)="onClienteChange($event.value)" [config]="configClientes"-->
+                                      <!--[options]="clientes" [_value]="tarea.cliente !== null? tarea.cliente: undefined"-->
+                                      <!--[multiple]="false"></ngx-select-dropdown>-->
+                <!--<br>-->
+                <!--<div class="form-group form-check">-->
+                    <!--<input type="checkbox" class="form-check-input" name="usarRuta" id="field_usarRuta"-->
+                           <!--[(ngModel)]="tarea.usarRuta" />-->
+                    <!--<label class="form-check-label" for="field_usarRuta">Usar Ruta</label>-->
+                    <!--<div [hidden]="!(editForm.controls.usarRuta?.dirty && editForm.controls.usarRuta?.invalid)">-->
+                        <!--<small class="form-text text-danger"-->
+                               <!--[hidden]="!editForm.controls.usarRuta?.errors?.required">-->
+                            <!--Este campo es requerido-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<ngx-select-dropdown *ngIf="tarea.usarRuta" (change)="onRutaChange($event.value)" [config]="configRutas"-->
+                                      <!--[options]="rutas" [_value]="tarea.ruta !== null? tarea.ruta: undefined"-->
+                                      <!--[multiple]="false"></ngx-select-dropdown>-->
+                <!--<br>-->
+                <!--&lt;!&ndash;div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_logs">Logs</label>-->
+                    <!--<select class="form-control" id="field_logs" name="logs" [(ngModel)]="tarea.logs">-->
+                        <!--<option [ngValue]="null"></option>-->
+                        <!--<option [ngValue]="logOption.id === tarea.logs?.id ? tarea.logs : logOption" *ngFor="let logOption of logs; trackBy: trackLogById">{{logOption.id}}</option>-->
+                    <!--</select>-->
+                <!--</div&ndash;&gt;-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">-->
+                    <!--<fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>-->
+                <!--</button>-->
+                <!--<button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">-->
+                    <!--<fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Guardar</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</form>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<jhi-map></jhi-map>-->
+        <!--&lt;!&ndash;<div style="margin-top: 10px">&ndash;&gt;-->
+            <!--&lt;!&ndash;<h3>Subtareas</h3>&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="text" class="form-control" #box (keyup.enter)="addSubtarea(box.value)"&ndash;&gt;-->
+                   <!--&lt;!&ndash;placeholder="Agregar nueva subtarea" [(ngModel)]="nvaSubtarea"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div style="margin-top: 10px;">&ndash;&gt;-->
+                <!--&lt;!&ndash;<ul class="list-group">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li *ngFor="let subtarea of subtareas; index as i; trackBy: trackByFn" class="list-group-item d-flex justify-content-between align-items-center">&ndash;&gt;-->
+                        <!--&lt;!&ndash;{{i+1}}. {{subtarea.descripcion}}&ndash;&gt;-->
+                        <!--&lt;!&ndash;<fa-icon icon="times" (click)="eliminarSubtarea(i)"></fa-icon>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--</div>-->
+<!--</div>-->
+
+
+<h2 style="text-align: center; margin-bottom: 30px" id="jhi-tarea-heading">Crear o editar Tarea</h2>
+<div class="d-flex justify-content-around" style="padding: 10px; width: 100%;">
+    <div class="col-4">
+        <form name="editForm" [formGroup]="tareaForm" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!tarea.id">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="tarea.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_title">Title</label>
-                    <input type="text" class="form-control" name="title" id="field_title"
-                        [(ngModel)]="tarea.title" required/>
-                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.title?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_descripcion">Descripcion</label>
-                    <input type="text" class="form-control" name="descripcion" id="field_descripcion"
-                        [(ngModel)]="tarea.descripcion" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_inicio">Inicio</label>
-                    <div class="input-group">
-                        <input id="field_inicio" type="text" class="form-control" name="inicio" ngbDatepicker  #inicioDp="ngbDatepicker" [(ngModel)]="tarea.inicio"
-                        required/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="inicioDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                    <div [hidden]="!(editForm.controls.inicio?.dirty && editForm.controls.inicio?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.inicio?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_fin">Fin</label>
-                    <div class="input-group">
-                        <input id="field_fin" type="text" class="form-control" name="fin" ngbDatepicker  #finDp="ngbDatepicker" [(ngModel)]="tarea.fin"
-                        required/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="finDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                    <div [hidden]="!(editForm.controls.fin?.dirty && editForm.controls.fin?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.fin?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_usarRuta">Usar Ruta</label>
-                    <input type="checkbox" class="form-control" name="usarRuta" id="field_usarRuta"
-                        [(ngModel)]="tarea.usarRuta" />
-                    <div [hidden]="!(editForm.controls.usarRuta?.dirty && editForm.controls.usarRuta?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.usarRuta?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_horaInicio">Hora Inicio</label>
-                    <div class="input-group">
-                        <input id="field_horaInicio" type="text" class="form-control" name="horaInicio" ngbDatepicker  #horaInicioDp="ngbDatepicker" [(ngModel)]="tarea.horaInicio"
-                        required/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="horaInicioDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                    <div [hidden]="!(editForm.controls.horaInicio?.dirty && editForm.controls.horaInicio?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.horaInicio?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_horaFin">Hora Fin</label>
-                    <div class="input-group">
-                        <input id="field_horaFin" type="text" class="form-control" name="horaFin" ngbDatepicker  #horaFinDp="ngbDatepicker" [(ngModel)]="tarea.horaFin"
-                        required/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="horaFinDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                        </span>
-                    </div>
-                    <div [hidden]="!(editForm.controls.horaFin?.dirty && editForm.controls.horaFin?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.horaFin?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_notaExtra">Nota Extra</label>
-                    <input type="text" class="form-control" name="notaExtra" id="field_notaExtra"
-                        [(ngModel)]="tarea.notaExtra" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_firma">Firma</label>
-                    <input type="text" class="form-control" name="firma" id="field_firma"
-                        [(ngModel)]="tarea.firma" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_activa">Activa</label>
-                    <input type="checkbox" class="form-control" name="activa" id="field_activa"
-                        [(ngModel)]="tarea.activa" />
-                    <div [hidden]="!(editForm.controls.activa?.dirty && editForm.controls.activa?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.activa?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_completada">Completada</label>
-                    <input type="checkbox" class="form-control" name="completada" id="field_completada"
-                        [(ngModel)]="tarea.completada" />
-                    <div [hidden]="!(editForm.controls.completada?.dirty && editForm.controls.completada?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.completada?.errors?.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_borrado">Borrado</label>
-                    <input type="checkbox" class="form-control" name="borrado" id="field_borrado"
-                        [(ngModel)]="tarea.borrado" />
-                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Titulo</mat-label>
+                    <input matInput formControlName="titulo" [(ngModel)]="tarea.title">
+                    <mat-icon matSuffix class="secondary-text">assignment</mat-icon>
+                    <mat-error *ngIf="tareaForm.get('titulo').hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Descripción</mat-label>
+                    <input matInput formControlName="descripcion" [(ngModel)]="tarea.descripcion">
+                    <mat-icon matSuffix class="secondary-text">library_books</mat-icon>
+                </mat-form-field>
 
-                <div class="form-group">
-                    <label class="form-control-label" for="field_subtarea">Subtarea</label>
-                    <select class="form-control" id="field_subtarea" name="subtarea" [(ngModel)]="tarea.subtarea">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="subTareaOption.id === tarea.subtarea?.id ? tarea.subtarea : subTareaOption" *ngFor="let subTareaOption of subtareas; trackBy: trackSubTareaById">{{subTareaOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_empleado">Empleado</label>
-                    <select class="form-control" id="field_empleado" name="empleado" [(ngModel)]="tarea.empleado">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="empleadoOption.id === tarea.empleado?.id ? tarea.empleado : empleadoOption" *ngFor="let empleadoOption of empleados; trackBy: trackEmpleadoById">{{empleadoOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_ubicacion">Ubicacion</label>
-                    <select class="form-control" id="field_ubicacion" name="ubicacion" [(ngModel)]="tarea.ubicacion">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="ubicacionOption.id === tarea.ubicacion?.id ? tarea.ubicacion : ubicacionOption" *ngFor="let ubicacionOption of ubicacions; trackBy: trackUbicacionById">{{ubicacionOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_cliente">Cliente</label>
-                    <select class="form-control" id="field_cliente" name="cliente" [(ngModel)]="tarea.cliente">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="clienteOption.id === tarea.cliente?.id ? tarea.cliente : clienteOption" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_ruta">Ruta</label>
-                    <select class="form-control" id="field_ruta" name="ruta" [(ngModel)]="tarea.ruta">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="rutaOption.id === tarea.ruta?.id ? tarea.ruta : rutaOption" *ngFor="let rutaOption of rutas; trackBy: trackRutaById">{{rutaOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_logs">Logs</label>
-                    <select class="form-control" id="field_logs" name="logs" [(ngModel)]="tarea.logs" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="logOption.id === tarea.logs?.id ? tarea.logs : logOption" *ngFor="let logOption of logs; trackBy: trackLogById">{{logOption.id}}</option>
-                    </select>
-                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Fecha de inicio</mat-label>
+                    <input [(ngModel)]="fechaInicio"
+                           [max]="fechaFin"
+                           [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
+                           matInput
+                           formControlName="inicio"
+                           readonly>
+                    <mat-icon matSuffix class="secondary-text" [owlDateTimeTrigger]="dt1">calendar_today</mat-icon>
+                    <mat-error *ngIf="tareaForm.get('inicio').hasError('required')" >
+                        Este campo es requerido
+                    </mat-error>
+                    <owl-date-time #dt1></owl-date-time>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Fecha de Finalización</mat-label>
+                    <input [(ngModel)]="fechaFin"
+                           [min]="fechaInicio"
+                           [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
+                           matInput
+                           formControlName="fin"
+                           readonly>
+                    <mat-icon matSuffix class="secondary-text" [owlDateTimeTrigger]="dt2">calendar_today</mat-icon>
+                    <mat-error *ngIf="tareaForm.get('fin').hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
+                    <owl-date-time #dt2></owl-date-time>
+                </mat-form-field>
+
+                <ngx-select-dropdown (change)="onEmpleadoChangeCustom($event.value)" [config]="configEmpleados"
+                                     [_value]="tarea.empleado !==null ? onUpdateEmployee(tarea.empleado) : undefined"
+                                     [options]="empleadosList" [multiple]="false"></ngx-select-dropdown>
+                <span class="inCheckBox" *ngIf="empValidation">
+                    Este campo es requerido
+                </span>
+
+                <br>
+                <ngx-select-dropdown (change)="onClienteChange($event.value)" [config]="configClientes"
+                                     [options]="clientes" [_value]="tarea.cliente !== null? tarea.cliente: undefined"
+                                     [multiple]="false"></ngx-select-dropdown>
+                <span class="inCheckBox" *ngIf="clienteValidation">
+                    Este campo es requerido
+                </span>
+                <br>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Ubicación</mat-label>
+                    <input matInput formControlName="ubicacion"
+                           [(ngModel)]="this.mapService.ubication.nombreDireccion">
+                    <mat-icon matSuffix class="secondary-text">room</mat-icon>
+                    <mat-error *ngIf="tareaForm.get('ubicacion').hasError('ubicationRequired')">
+                        Ingresar dirección desde el mapa o la barra de busqueda
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-checkbox [(ngModel)]="tarea.usarRuta" (click)="validRoute()"
+                              [ngModelOptions]="{standalone: true}">
+                    Usar Ruta
+                </mat-checkbox>
+
+                <ngx-select-dropdown *ngIf="tarea.usarRuta" (change)="onRutaChange($event.value)" [config]="configRutas"
+                                     [options]="rutas" [_value]="tarea.ruta !== null? tarea.ruta: undefined"
+                                     [multiple]="false"></ngx-select-dropdown>
+                <span class="inCheckBox" *ngIf="rutaValidation">
+                    Este campo es requerido
+                </span>
+
+                <br>
             </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
-                </button>
-            </div>
+            <button type="button"
+                    mat-raised-button
+                    class="btn btn-secondary"
+                    (click)="previousState()">
+                <mat-icon matSuffix>cancel</mat-icon>
+                Cancelar
+            </button >
+            <button type="submit"
+                    mat-raised-button color="primary" class="mat-raised-button mat-primary"
+                    [disabled]="tareaForm.invalid || empValidation || clienteValidation || rutaValidation">
+                <mat-icon matSuffix>save</mat-icon>
+                Guardar
+            </button>
         </form>
     </div>
+    <div>
+        <jhi-map></jhi-map>
+        <h3>Objetivos</h3>
+        <div style="margin-top: 10px">
+            <mat-form-field appearance="outline">
+                <mat-label>Objetivo</mat-label>
+                <input type="text" matInput placeholder="Agregar nuevo objetivo"
+                       #box (keyup.enter)="addSubtarea(box.value)"
+                       [(ngModel)]="nvaSubtarea">
+            </mat-form-field>
+            <div>
+                <mat-list class="list-group">
+                    <mat-list-item *ngFor="let subtarea of subtareas; index as i; trackBy: trackByFn"
+                                   class="list-group-item d-flexS">
+                        <div style="width: 85%;">
+                            {{i+1}}. {{subtarea.descripcion}}
+                        </div>
+                        <ng-container *ngIf="subtarea.id !== null; else elseTemplate">
+                            <button mat-icon-button (click)="eliminarListaSubtarea(i)">
+                                <mat-icon color="warn">delete_forever</mat-icon>
+                            </button>
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                            <button mat-icon-button (click)="eliminarListaSubtarea(i)">
+                                <mat-icon color="warn">delete_forever</mat-icon>
+                            </button>
+                        </ng-template>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </div>
+    </div>
+
+
 </div>
+
+<!--modal-->
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>¿Desea utilizar la ubicación de este cliente?</p>
+        <p></p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c(addClientUbication())">Sí</button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">No</button>
+    </div>
+</ng-template>
+
+

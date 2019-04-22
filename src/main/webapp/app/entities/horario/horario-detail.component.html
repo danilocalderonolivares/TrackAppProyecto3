@@ -1,79 +1,51 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="horario">
-            <h2><span>Horario</span> {{horario.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span>Lunes Inico</span></dt>
-                <dd>
-                    <span>{{horario.lunesInico}}</span>
-                </dd>
-                <dt><span>Lunes Fin</span></dt>
-                <dd>
-                    <span>{{horario.lunesFin}}</span>
-                </dd>
-                <dt><span>Martes Inico</span></dt>
-                <dd>
-                    <span>{{horario.martesInico}}</span>
-                </dd>
-                <dt><span>Martes Fin</span></dt>
-                <dd>
-                    <span>{{horario.martesFin}}</span>
-                </dd>
-                <dt><span>Miercoles Inico</span></dt>
-                <dd>
-                    <span>{{horario.miercolesInico}}</span>
-                </dd>
-                <dt><span>Miercoles Fin</span></dt>
-                <dd>
-                    <span>{{horario.miercolesFin}}</span>
-                </dd>
-                <dt><span>Jueves Inico</span></dt>
-                <dd>
-                    <span>{{horario.juevesInico}}</span>
-                </dd>
-                <dt><span>Jueves Fin</span></dt>
-                <dd>
-                    <span>{{horario.juevesFin}}</span>
-                </dd>
-                <dt><span>Viernes Inico</span></dt>
-                <dd>
-                    <span>{{horario.viernesInico}}</span>
-                </dd>
-                <dt><span>Viernes Fin</span></dt>
-                <dd>
-                    <span>{{horario.viernesFin}}</span>
-                </dd>
-                <dt><span>Sabado Inico</span></dt>
-                <dd>
-                    <span>{{horario.sabadoInico}}</span>
-                </dd>
-                <dt><span>Sabado Fin</span></dt>
-                <dd>
-                    <span>{{horario.sabadoFin}}</span>
-                </dd>
-                <dt><span>Domingo Inico</span></dt>
-                <dd>
-                    <span>{{horario.domingoInico}}</span>
-                </dd>
-                <dt><span>Domingo Fin</span></dt>
-                <dd>
-                    <span>{{horario.domingoFin}}</span>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/horario', horario.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
-            </button>
+<div class="justify-content-center mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div *ngIf="horario">
+                    <h1 id="jhi-cliente-heading">Horario {{horario.nombre}}</h1>
+                    <hr>
+                    <h5 mat-line>Nombre</h5>
+                    <p mat-line> {{horario.nombre}} </p>
+                    <h5 mat-line>Lunes Inicio</h5>
+                    <p mat-line> {{horario.lunesInico}} </p>
+                    <h5 mat-line>Lunes Fin</h5>
+                    <p mat-line> {{horario.lunesFin}} </p>
+                    <h5 mat-line>Martes Inicio</h5>
+                    <p mat-line> {{horario.martesInico}} </p>
+                    <h5 mat-line>Martes Fin</h5>
+                    <p mat-line> {{horario.martesFin}} </p>
+                    <h5 mat-line>Miercoles Inicio</h5>
+                    <p mat-line> {{horario.miercolesInico}} </p>
+                    <h5 mat-line>Miercoles Fin</h5>
+                    <p mat-line> {{horario.miercolesFin}} </p>
+                    <h5 mat-line>Jueves Inicio</h5>
+                    <p mat-line> {{horario.juevesInico}} </p>
+                    <h5 mat-line>Jueves Fin</h5>
+                    <p mat-line> {{horario.juevesFin}} </p>
+                    <h5 mat-line>Viernes Inicio</h5>
+                    <p mat-line> {{horario.viernesInico}} </p>
+                    <h5 mat-line>Viernes Fin</h5>
+                    <p mat-line> {{horario.viernesFin}} </p>
+                    <h5 mat-line>Sabado Inicio</h5>
+                    <p mat-line> {{horario.sabadoInico}} </p>
+                    <h5 mat-line>Sabado Fin</h5>
+                    <p mat-line> {{horario.sabadoFin}} </p>
+                    <h5 mat-line>Domingo Inicio</h5>
+                    <p mat-line> {{horario.domingoInico}} </p>
+                    <h5 mat-line>Domingo Fin</h5>
+                    <p mat-line> {{horario.domingoFin}} </p>
+                    <br />
+                    <button type="button" mat-raised-button class="btn btn-secondary" (click)="previousState()">
+                        <mat-icon matSuffix>arrow_back</mat-icon>
+                        Regresar
+                    </button>
+                    <button type="submit" mat-raised-button color="primary" class="mat-raised-button mat-primary" [routerLink]="['/horario', horario.id, 'edit']">
+                        <mat-icon matSuffix>edit</mat-icon>
+                        Editar
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

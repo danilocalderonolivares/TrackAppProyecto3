@@ -1,9 +1,9 @@
 <div>
     <h2 id="page-heading">
-        <span>Mensajes</span>
+        <span jhiTranslate="gpsApp.mensaje.home.title">Mensajes</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-mensaje" [routerLink]="['/mensaje/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
+            <span  jhiTranslate="gpsApp.mensaje.home.createLabel">
             Create new Mensaje
             </span>
         </button>
@@ -14,13 +14,13 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span>ID</span></th>
-            <th><span>Texto</span></th>
-            <th><span>Fecha Envio</span></th>
-            <th><span>Visto</span></th>
-            <th><span>Borrado</span></th>
-            <th><span>Admin</span></th>
-            <th><span>Empleado</span></th>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="gpsApp.mensaje.texto">Texto</span></th>
+            <th><span jhiTranslate="gpsApp.mensaje.fechaEnvio">Fecha Envio</span></th>
+            <th><span jhiTranslate="gpsApp.mensaje.visto">Visto</span></th>
+            <th><span jhiTranslate="gpsApp.mensaje.borrado">Borrado</span></th>
+            <th><span jhiTranslate="gpsApp.mensaje.numeroMensaje">Numero Mensaje</span></th>
+            <th><span jhiTranslate="gpsApp.mensaje.empleado">Empleado</span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,11 +31,7 @@
                 <td>{{mensaje.fechaEnvio | date:'mediumDate'}}</td>
                 <td>{{mensaje.visto}}</td>
                 <td>{{mensaje.borrado}}</td>
-                <td>
-                    <div *ngIf="mensaje.admin">
-                        <a [routerLink]="['../administrador', mensaje.admin?.id, 'view' ]" >{{mensaje.admin?.id}}</a>
-                    </div>
-                </td>
+                <td>{{mensaje.numeroMensaje}}</td>
                 <td>
                     <div *ngIf="mensaje.empleado">
                         <a [routerLink]="['../empleado', mensaje.empleado?.id, 'view' ]" >{{mensaje.empleado?.id}}</a>
@@ -47,13 +43,13 @@
                                 [routerLink]="['/mensaje', mensaje.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/mensaje', mensaje.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', 'mensaje', { outlets: { popup: mensaje.id + '/delete'} }]"
@@ -61,7 +57,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>
                     </div>
                 </td>

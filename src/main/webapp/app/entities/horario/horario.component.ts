@@ -7,15 +7,38 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { IHorario } from 'app/shared/model/horario.model';
 import { AccountService } from 'app/core';
 import { HorarioService } from './horario.service';
+import { MatTableDataSource } from '@angular/material';
+import { fuseAnimations } from '../../../content/scss/animations';
 
 @Component({
     selector: 'jhi-horario',
-    templateUrl: './horario.component.html'
+    templateUrl: './horario.component.html',
+    animations: fuseAnimations
 })
 export class HorarioComponent implements OnInit, OnDestroy {
     horarios: IHorario[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    displayedColumns: string[] = [
+        'nombre',
+        'lunesI',
+        'lunesF',
+        'martesI',
+        'martesF',
+        'miercolesI',
+        'miercolesF',
+        'juevesI',
+        'juevesF',
+        'viernesI',
+        'viernesF',
+        'sabadoI',
+        'sabadoF',
+        'domingoI',
+        'domingoF',
+        'buttons'
+    ];
+    dataSource: any;
+    searchKey: string;
 
     constructor(
         protected horarioService: HorarioService,
@@ -34,6 +57,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
             .subscribe(
                 (res: IHorario[]) => {
                     this.horarios = res;
+                    this.dataSource = new MatTableDataSource(this.horarios);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -48,6 +72,7 @@ export class HorarioComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.registerChangeInHorarios();
         this.eventManager.destroy(this.eventSubscriber);
     }
 
@@ -61,5 +86,14 @@ export class HorarioComponent implements OnInit, OnDestroy {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    onSearchClear() {
+        this.searchKey = '';
+        this.applyFilter();
+    }
+
+    applyFilter() {
+        this.dataSource.filter = this.searchKey.trim().toLowerCase();
     }
 }

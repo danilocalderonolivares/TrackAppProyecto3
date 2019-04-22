@@ -6,8 +6,6 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IRecuperacion } from 'app/shared/model/recuperacion.model';
 import { RecuperacionService } from './recuperacion.service';
-import { IAdministrador } from 'app/shared/model/administrador.model';
-import { AdministradorService } from 'app/entities/administrador';
 import { IEmpleado } from 'app/shared/model/empleado.model';
 import { EmpleadoService } from 'app/entities/empleado';
 
@@ -19,14 +17,11 @@ export class RecuperacionUpdateComponent implements OnInit {
     recuperacion: IRecuperacion;
     isSaving: boolean;
 
-    admins: IAdministrador[];
-
     empleados: IEmpleado[];
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected recuperacionService: RecuperacionService,
-        protected administradorService: AdministradorService,
         protected empleadoService: EmpleadoService,
         protected activatedRoute: ActivatedRoute
     ) {}
@@ -36,31 +31,6 @@ export class RecuperacionUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ recuperacion }) => {
             this.recuperacion = recuperacion;
         });
-        this.administradorService
-            .query({ filter: 'recuperacion-is-null' })
-            .pipe(
-                filter((mayBeOk: HttpResponse<IAdministrador[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IAdministrador[]>) => response.body)
-            )
-            .subscribe(
-                (res: IAdministrador[]) => {
-                    if (!this.recuperacion.admin || !this.recuperacion.admin.id) {
-                        this.admins = res;
-                    } else {
-                        this.administradorService
-                            .find(this.recuperacion.admin.id)
-                            .pipe(
-                                filter((subResMayBeOk: HttpResponse<IAdministrador>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<IAdministrador>) => subResponse.body)
-                            )
-                            .subscribe(
-                                (subRes: IAdministrador) => (this.admins = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                            );
-                    }
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
         this.empleadoService
             .query({ filter: 'recuperacion-is-null' })
             .pipe(
@@ -116,10 +86,6 @@ export class RecuperacionUpdateComponent implements OnInit {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackAdministradorById(index: number, item: IAdministrador) {
-        return item.id;
     }
 
     trackEmpleadoById(index: number, item: IEmpleado) {

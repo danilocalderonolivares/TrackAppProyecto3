@@ -1,42 +1,52 @@
-<div class="modal-header">
-    <h4 class="modal-title">Sign in</h4>
-    <button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="activeModal.dismiss('closed')"><span aria-hidden="true">x</span>
+<div class="modal-header" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+    <div class="container">
+        <h2 class="modal-title" style="text-align: center">GPSApp</h2>
+    </div>
+    <button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="activeModal.dismiss('closed')">
+        <span aria-hidden="true">x</span>
     </button>
 </div>
 <div class="modal-body">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="alert alert-danger" *ngIf="authenticationError">
-                <strong>Failed to sign in!</strong> Please check your credentials and try again.
+                <strong>Error con las credenciales!</strong> Revise su correo y contraseña e intentelo de nuevo
             </div>
         </div>
         <div class="col-md-8">
-            <form class="form" role="form" (ngSubmit)="login()">
-                <div class="form-group">
-                    <label class="username-label" for="username">Login</label>
-                    <input type="text" class="form-control" name="username" id="username" placeholder="Your username"
-                    [(ngModel)]="username">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Your password"
-                           [(ngModel)]="password">
-                </div>
-                <div class="form-check">
-                    <label class="form-check-label" for="rememberMe">
-                        <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" [(ngModel)]="rememberMe" checked>
-                        <span>Remember me</span>
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary">Sign in</button>
+            <form name="loginForm" [formGroup]="loginForm" novalidate (ngSubmit)="login()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Correo*</mat-label>
+                    <input matInput formControlName="email" [(ngModel)]="username">
+                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                    <mat-error *ngIf="loginForm.get('email').hasError('required')">
+                        Correo es requerido
+                    </mat-error>
+                    <mat-error
+                        *ngIf="!loginForm.get('email').hasError('required') &&
+                                loginForm.get('email').hasError('email')">
+                        Ingrese un correo valido.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Contrasaña*</mat-label>
+                    <input matInput type="password" formControlName="password"  [(ngModel)]="password">
+                    <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                    <mat-error>
+                        Contraseña es requerida
+                    </mat-error>
+                </mat-form-field>
+                <button  mat-raised-button color="primary" class="mat-raised-button mat-primary" aria-label="Ingresar"
+                        [disabled]="loginForm.invalid" style="width:100%;">
+                    Ingresar
+                </button>
+
             </form>
             <p></p>
-            <div class="alert alert-warning">
-                <a class="alert-link" (click)="requestResetPassword()">Did you forget your password?</a>
-            </div>
-            <div class="alert alert-warning">
-                <span>You don't have an account yet?</span>
-                <a class="alert-link" (click)="register()">Register a new account</a>
+            <div class="form-group">
+                <h6>¿Olvidó su contraseña?</h6>  <a class="text-primary stretched-link"
+                                                    (click)="requestResetPassword()">Recupérala aqui</a>
             </div>
         </div>
     </div>

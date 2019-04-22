@@ -1,6 +1,7 @@
 package com.pillars.gpsapp.web.rest;
 import com.pillars.gpsapp.domain.Cliente;
 import com.pillars.gpsapp.repository.ClienteRepository;
+import com.pillars.gpsapp.repository.UbicacionRepository;
 import com.pillars.gpsapp.web.rest.errors.BadRequestAlertException;
 import com.pillars.gpsapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -13,6 +14,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,9 +30,11 @@ public class ClienteResource {
     private static final String ENTITY_NAME = "cliente";
 
     private final ClienteRepository clienteRepository;
+    private final UbicacionRepository ubicacionRepository;
 
-    public ClienteResource(ClienteRepository clienteRepository) {
+    public ClienteResource(ClienteRepository clienteRepository, UbicacionRepository ubicacionRepository) {
         this.clienteRepository = clienteRepository;
+        this.ubicacionRepository = ubicacionRepository;
     }
 
     /**
@@ -46,6 +50,8 @@ public class ClienteResource {
         if (cliente.getId() != null) {
             throw new BadRequestAlertException("A new cliente cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        cliente.setBorrado(false);
+        ubicacionRepository.save(cliente.getUbicacion());
         Cliente result = clienteRepository.save(cliente);
         return ResponseEntity.created(new URI("/api/clientes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -67,6 +73,7 @@ public class ClienteResource {
         if (cliente.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        ubicacionRepository.save(cliente.getUbicacion());
         Cliente result = clienteRepository.save(cliente);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, cliente.getId().toString()))
@@ -80,8 +87,14 @@ public class ClienteResource {
      */
     @GetMapping("/clientes")
     public List<Cliente> getAllClientes() {
-        log.debug("REST request to get all Clientes");
-        return clienteRepository.findAll();
+            List<Cliente> clientes = clienteRepository.findAll();
+             List<Cliente> clientesFiltrados = new ArrayList<>();
+            for (Cliente cliente : clientes){
+                        if (cliente.isBorrado() != true){
+                            clientesFiltrados.add(cliente);
+                        }
+                }
+        return clientesFiltrados;
     }
 
     /**
@@ -107,6 +120,13 @@ public class ClienteResource {
     public ResponseEntity<Void> deleteCliente(@PathVariable String id) {
         log.debug("REST request to delete Cliente : {}", id);
         clienteRepository.deleteById(id);
+
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
+    @GetMapping("/find/{cedula}")
+    public ResponseEntity<Cliente> getClientebyCedula(@PathVariable String cedula) {
+        Optional<Cliente> cliente = clienteRepository.findByCedula(cedula);
+        return ResponseUtil.wrapOrNotFound(cliente);
+    }
+
 }

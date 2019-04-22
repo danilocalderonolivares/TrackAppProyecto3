@@ -1,0 +1,108 @@
+@mixin fondo-color($color) {
+    background: $color !important;
+    background-color: $color !important;
+}
+
+.fondo--lila {
+    @include fondo-color($lila);
+}
+
+.fondo--morado {
+    @include fondo-color($morado);
+}
+
+.fondo--indigo {
+    @include fondo-color($indigo);
+}
+
+.fondo--azul {
+    @include fondo-color($azul);
+}
+
+.fondo--celeste {
+    @include fondo-color($celeste);
+}
+
+.fondo--cyan {
+    @include fondo-color($cyan);
+}
+
+.fondo--turquesa {
+    @include fondo-color($turquesa);
+}
+
+.fondo--verde {
+    @include fondo-color($verde);
+}
+
+.fondo--kiwi {
+    @include fondo-color($kiwi);
+}
+
+.fondo--lima {
+    @include fondo-color($lima);
+}
+
+.fondo--amarillo {
+    @include fondo-color($amarillo);
+}
+
+.fondo--ambar {
+    @include fondo-color($ambar);
+}
+
+.fondo--naranja {
+    @include fondo-color($naranja);
+}
+
+.fondo--tomate {
+    @include fondo-color($tomate);
+}
+
+.fondo--rojo {
+    @include fondo-color($rojo);
+}
+
+.fondo--rosado {
+    @include fondo-color($rosado);
+}
+
+.fondo--negro {
+    @include fondo-color($negro);
+}
+
+.fondo--negro2 {
+    @include fondo-color($negro2);
+}
+
+.fondo--negro4 {
+    @include fondo-color($negro4);
+}
+
+.fondo--gris6 {
+    @include fondo-color($gris6);
+}
+
+.fondo--gris8 {
+    @include fondo-color($gris8);
+}
+
+.fondo--grisa {
+    @include fondo-color($grisa);
+}
+
+.fondo--grisc {
+    @include fondo-color($grisc);
+}
+
+.fondo--grisd {
+    @include fondo-color($grisd);
+}
+
+.fondo--grise {
+    @include fondo-color($grise);
+}
+
+.fondo--blanco {
+    @include fondo-color($blanco);
+}

@@ -1,0 +1,24 @@
+<div class="justify-content-center mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div *ngIf="tipoEmpleado">
+                    <h1 id="jhi-cliente-heading">Tipo Usuario {{tipoEmpleado.nombreTipo}}</h1>
+                    <hr>
+                    <h4 mat-line>Nombre tipo</h4>
+                    <p mat-line> {{tipoEmpleado.nombreTipo}} </p>
+                    <br/>
+                    <button type="button" mat-raised-button class="btn btn-secondary" (click)="previousState()">
+                        <mat-icon matSuffix>arrow_back</mat-icon>
+                        Regresar
+                    </button>
+                    <button type="submit" mat-raised-button color="primary" class="mat-raised-button mat-primary"
+                            [routerLink]="['/tipo-empleado', tipoEmpleado.id, 'edit']">
+                        <mat-icon matSuffix>edit</mat-icon>
+                        Editar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

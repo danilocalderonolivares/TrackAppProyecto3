@@ -1,0 +1,87 @@
+@import '../tema/colores';
+
+.toast-container {
+    position: fixed;
+    top: 0;
+    right: 10px;
+    width: 100%;
+    z-index: 99;
+
+    @media (min-width: $reflex-md) {
+        width: auto;
+    }
+}
+
+.toast {
+    @extend .sombra;
+    @extend .animated;
+    @extend .fadeInDown;
+    animation-duration: 0.45s !important;
+    border-radius: 6px;
+    border: 2px solid lighten($fondo, 10);
+    cursor: pointer;
+    margin: 15px 0;
+    overflow: hidden;
+    padding: 10px;
+    padding-left: 50px;
+    position: relative;
+    width: 100%;
+    z-index: 99;
+
+    @media (min-width: $reflex-md) {
+        width: 300px;
+    }
+}
+
+.toast-title {
+    @extend %sans;
+    font-size: 1.2;
+    font-weight: bold;
+}
+
+.toast-message {
+    @extend %sans;
+    color: $blanco;
+    font-size: small;
+}
+
+@mixin estilo-alerta($color, $icono, $animacion) {
+    background: transparentize($fondo, 0.05);
+
+    &::before {
+        @extend .animated;
+        @extend #{$animacion};
+        @extend %font-awesome;
+        color: $color;
+        content: $icono;
+        font-size: 2em;
+        font-weight: 900;
+        left: 10px;
+        position: absolute;
+        top: 5px;
+    }
+
+    .toast-title {
+        color: $color;
+    }
+}
+
+.toast-success {
+    @include estilo-alerta($verde-vivo, '\f164', '.tada');
+}
+
+.toast-info {
+    @include estilo-alerta($indigo-vivo, '\f30f', '.bounce');
+}
+
+.toast-warning {
+    @include estilo-alerta($ambar-vivo, '\f071', '.shake');
+}
+
+.toast-error {
+    @include estilo-alerta($rosado-vivo, '\f2f0', '.pulse');
+
+    &::before {
+        @extend .infinite;
+    }
+}

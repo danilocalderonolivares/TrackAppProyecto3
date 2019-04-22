@@ -1,80 +1,133 @@
-<div>
-    <h2 id="page-heading">
-        <span>Horarios</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-horario" [routerLink]="['/horario/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
-            Create new Horario
-            </span>
+<div class="container-fluid">
+    <div class="search-div">
+        <button mat-raised-button color="primary" [routerLink]="['/horario/new']">
+            <mat-icon>add</mat-icon>
+            Crear nuevo horario
         </button>
-    </h2>
+        <mat-form-field class="search-form-field" floatLabel="never">
+            <input matInput [(ngModel)]="searchKey" placeholder="Buscar" autocomplete="off" (keyup)="applyFilter()">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
     <jhi-alert></jhi-alert>
-    <br/>
-    <div class="table-responsive" *ngIf="horarios">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-            <th><span>ID</span></th>
-            <th><span>Lunes Inico</span></th>
-            <th><span>Lunes Fin</span></th>
-            <th><span>Martes Inico</span></th>
-            <th><span>Martes Fin</span></th>
-            <th><span>Miercoles Inico</span></th>
-            <th><span>Miercoles Fin</span></th>
-            <th><span>Jueves Inico</span></th>
-            <th><span>Jueves Fin</span></th>
-            <th><span>Viernes Inico</span></th>
-            <th><span>Viernes Fin</span></th>
-            <th><span>Sabado Inico</span></th>
-            <th><span>Sabado Fin</span></th>
-            <th><span>Domingo Inico</span></th>
-            <th><span>Domingo Fin</span></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let horario of horarios ;trackBy: trackId">
-                <td><a [routerLink]="['/horario', horario.id, 'view' ]">{{horario.id}}</a></td>
-                <td>{{horario.lunesInico | date:'mediumDate'}}</td>
-                <td>{{horario.lunesFin | date:'mediumDate'}}</td>
-                <td>{{horario.martesInico | date:'mediumDate'}}</td>
-                <td>{{horario.martesFin | date:'mediumDate'}}</td>
-                <td>{{horario.miercolesInico | date:'mediumDate'}}</td>
-                <td>{{horario.miercolesFin | date:'mediumDate'}}</td>
-                <td>{{horario.juevesInico | date:'mediumDate'}}</td>
-                <td>{{horario.juevesFin | date:'mediumDate'}}</td>
-                <td>{{horario.viernesInico | date:'mediumDate'}}</td>
-                <td>{{horario.viernesFin | date:'mediumDate'}}</td>
-                <td>{{horario.sabadoInico | date:'mediumDate'}}</td>
-                <td>{{horario.sabadoFin | date:'mediumDate'}}</td>
-                <td>{{horario.domingoInico | date:'mediumDate'}}</td>
-                <td>{{horario.domingoFin | date:'mediumDate'}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/horario', horario.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
+    <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="nombre">
+                <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.nombre}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="lunesI">
+                <mat-header-cell *matHeaderCellDef>Lunes <br /> Inicio</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.lunesInico}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="lunesF">
+                <mat-header-cell *matHeaderCellDef>Lunes <br /> Fin</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.lunesFin}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="martesI">
+                <mat-header-cell *matHeaderCellDef>Martes <br /> Inicio</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.martesInico}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="martesF">
+                <mat-header-cell *matHeaderCellDef>Martes <br /> Fin</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.martesFin}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="miercolesI">
+                <mat-header-cell *matHeaderCellDef>Miercoles <br /> Inicio</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.miercolesInico}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="miercolesF">
+                <mat-header-cell *matHeaderCellDef>Miercoles <br /> Fin</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.miercolesFin}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="juevesI">
+                <mat-header-cell *matHeaderCellDef>Jueves <br /> Inicio</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.juevesInico}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="juevesF">
+                <mat-header-cell *matHeaderCellDef>Jueves <br /> Fin</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.juevesFin}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="viernesI">
+                <mat-header-cell *matHeaderCellDef>Viernes <br /> Inicio</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.viernesInico}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="viernesF">
+                <mat-header-cell *matHeaderCellDef>Viernes <br /> Fin</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.viernesFin}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="sabadoI">
+                <mat-header-cell *matHeaderCellDef>Sabado <br /> Inicio</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.sabadoInico}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="sabadoF">
+                <mat-header-cell *matHeaderCellDef>Sabado <br /> Fin</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.sabadoFin}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="domingoI">
+                <mat-header-cell *matHeaderCellDef>Domingo <br /> Inicio</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.domingoInico}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="domingoF">
+                <mat-header-cell *matHeaderCellDef>Domingo <br /> Fin</mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <p class="text-truncate">{{horario.domingoFin}}</p>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="buttons">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let horario">
+                    <div>
+                        <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More" (click)="$event.stopPropagation();">
+                            <mat-icon class="secondary-text">more_vert</mat-icon>
                         </button>
-                        <button type="submit"
-                                [routerLink]="['/horario', horario.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'horario', { outlets: { popup: horario.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
-                        </button>
+                        <mat-menu #moreMenu="matMenu">
+                            <button mat-menu-item aria-label="remove" [routerLink]="['/', 'horario', { outlets: { popup: horario.id + '/delete'} }]">
+                                <mat-icon>delete</mat-icon>
+                                <span>Eliminar</span>
+                            </button>
+                            <button mat-menu-item aria-label="edit" [routerLink]="['/horario', horario.id, 'edit']">
+                                <mat-icon>edit</mat-icon>
+                                <span>Editar</span>
+                            </button>
+                        </mat-menu>
                     </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                </mat-cell>
+            </ng-container>
+            <!--Mat-header-row y mat-row es lo primero que se tiene que incluir para construir la tabla-->
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let horario; columns: displayedColumns;" [routerLink]="['/horario', horario.id, 'view' ]" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+            </mat-row>
+        </mat-table>
     </div>
 </div>

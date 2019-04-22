@@ -1,53 +1,55 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="cliente">
-            <h2><span>Cliente</span> {{cliente.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span>Nombre</span></dt>
-                <dd>
-                    <span>{{cliente.nombre}}</span>
-                </dd>
-                <dt><span>Cedula</span></dt>
-                <dd>
-                    <span>{{cliente.cedula}}</span>
-                </dd>
-                <dt><span>Direccion</span></dt>
-                <dd>
-                    <span>{{cliente.direccion}}</span>
-                </dd>
-                <dt><span>Correo</span></dt>
-                <dd>
-                    <span>{{cliente.correo}}</span>
-                </dd>
-                <dt><span>Es Empresa</span></dt>
-                <dd>
-                    <span>{{cliente.esEmpresa}}</span>
-                </dd>
-                <dt><span>Borrado</span></dt>
-                <dd>
-                    <span>{{cliente.borrado}}</span>
-                </dd>
-                <dt><span>Ubicacion</span></dt>
-                <dd>
-                    <div *ngIf="cliente.ubicacion">
-                        <a [routerLink]="['/ubicacion', cliente.ubicacion?.id, 'view']">{{cliente.ubicacion?.id}}</a>
-                    </div>
-                </dd>
-            </dl>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
-            </button>
-
-            <button type="button"
-                    [routerLink]="['/cliente', cliente.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
-            </button>
+<div class="justify-content-center mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div *ngIf="cliente">
+                    <h1>Cliente {{cliente.nombre}}</h1>
+                    <hr>
+                    <h5 mat-line>Nombre</h5>
+                    <p mat-line>{{cliente.nombre}}</p>
+                    <ng-container *ngIf="empresa != true; else elseTemplate2">
+                        <h5 mat-line>
+                            Cédula
+                        </h5>
+                    </ng-container>
+                    <ng-template #elseTemplate2>
+                         <h5 mat-line>
+                            Cédula Jurídica
+                        </h5>
+                    </ng-template>
+                    <p mat-line>{{cliente.cedula}}</p>
+                    <h5 mat-line>
+                        Dirección
+                    </h5>
+                    <p mat-line>{{cliente.direccion}}</p>
+                    <h5 mat-line>
+                        Correo
+                    </h5>
+                    <p mat-line>{{cliente.correo}}</p>
+                    <h5 mat-line>
+                        Tipo de Cliente
+                    </h5>
+                    <ng-container *ngIf="cliente.esEmpresa != true; else elseTemplate">
+                        <p mat-line>
+                            Cliente
+                        </p>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <p mat-line>
+                            Empresa
+                        </p>
+                    </ng-template>
+                    <br />
+                    <button type="button" mat-raised-button class="btn btn-secondary" (click)="previousState()">
+                        <mat-icon matSuffix>arrow_back</mat-icon>
+                        Regresar
+                    </button>
+                    <button type="submit" mat-raised-button color="primary" class="mat-raised-button mat-primary" [routerLink]="['/cliente', cliente.id, 'edit']">
+                        <mat-icon matSuffix>edit</mat-icon>
+                        Editar
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

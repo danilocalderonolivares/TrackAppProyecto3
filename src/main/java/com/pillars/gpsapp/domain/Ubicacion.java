@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -23,15 +24,23 @@ public class Ubicacion implements Serializable {
     @Id
     private String id;
 
-    @Field("longitud")
-    private Double longitud;
-
+    @NotNull
     @Field("latitud")
     private Double latitud;
 
+    @NotNull
+    @Field("longitud")
+    private Double longitud;
+
+    @NotNull
+    @Field("nombre_direccion")
+    private String nombreDireccion;
+
     @DBRef
-    @Field("ruta")
+    @Field("rutas")
+    @JsonIgnore
     private Set<Ruta> rutas = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -39,19 +48,6 @@ public class Ubicacion implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Double getLongitud() {
-        return longitud;
-    }
-
-    public Ubicacion longitud(Double longitud) {
-        this.longitud = longitud;
-        return this;
-    }
-
-    public void setLongitud(Double longitud) {
-        this.longitud = longitud;
     }
 
     public Double getLatitud() {
@@ -67,6 +63,32 @@ public class Ubicacion implements Serializable {
         this.latitud = latitud;
     }
 
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public Ubicacion longitud(Double longitud) {
+        this.longitud = longitud;
+        return this;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getNombreDireccion() {
+        return nombreDireccion;
+    }
+
+    public Ubicacion nombreDireccion(String nombreDireccion) {
+        this.nombreDireccion = nombreDireccion;
+        return this;
+    }
+
+    public void setNombreDireccion(String nombreDireccion) {
+        this.nombreDireccion = nombreDireccion;
+    }
+
     public Set<Ruta> getRutas() {
         return rutas;
     }
@@ -76,15 +98,15 @@ public class Ubicacion implements Serializable {
         return this;
     }
 
-    public Ubicacion addRuta(Ruta ruta) {
+    public Ubicacion addRutas(Ruta ruta) {
         this.rutas.add(ruta);
-        ruta.setUbicaciones(this);
+        ruta.getUbicaciones().add(this);
         return this;
     }
 
-    public Ubicacion removeRuta(Ruta ruta) {
+    public Ubicacion removeRutas(Ruta ruta) {
         this.rutas.remove(ruta);
-        ruta.setUbicaciones(null);
+        ruta.getUbicaciones().remove(this);
         return this;
     }
 
@@ -117,8 +139,9 @@ public class Ubicacion implements Serializable {
     public String toString() {
         return "Ubicacion{" +
             "id=" + getId() +
-            ", longitud=" + getLongitud() +
             ", latitud=" + getLatitud() +
+            ", longitud=" + getLongitud() +
+            ", nombreDireccion='" + getNombreDireccion() + "'" +
             "}";
     }
 }
