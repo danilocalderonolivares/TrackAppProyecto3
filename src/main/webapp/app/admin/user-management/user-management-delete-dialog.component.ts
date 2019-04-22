@@ -43,7 +43,7 @@ export class UserMgmtDeleteDialogComponent implements OnInit {
         this.activeModal.dismiss('cancel');
     }
 
-    confirmDelete(user: User) {
+    confirmDelete(user) {
         this.verifyUserDependencies(user);
     }
 
