@@ -30,6 +30,7 @@ export class TareaComponent implements OnInit, OnDestroy {
         'completada',
         'empleado',
         'cliente',
+        'ubicacion',
         'ruta',
         'buttons'
     ];
