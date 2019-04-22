@@ -141,14 +141,6 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
                 // Left blank intentionally, nothing to do here
             }
         );
-
-        this.deleteCustomUserInfo(user);
-    }
-
-    deleteCustomUserInfo(user) {
-        this.empleadoService.deleteByIdRelacion(user.id).subscribe(res => {
-            console.log(res);
-        });
     }
 
     private onSuccess(data, headers) {

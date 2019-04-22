@@ -1,11 +1,9 @@
 package com.pillars.gpsapp.web.rest;
 
-import com.pillars.gpsapp.domain.Authority;
-import com.pillars.gpsapp.domain.ChatRoom;
-import com.pillars.gpsapp.domain.Empleado;
-import com.pillars.gpsapp.domain.User;
+import com.pillars.gpsapp.domain.*;
 import com.pillars.gpsapp.repository.ChatRoomRepository;
 import com.pillars.gpsapp.repository.EmpleadoRepository;
+import com.pillars.gpsapp.repository.TareaRepository;
 import com.pillars.gpsapp.repository.UserRepository;
 import com.pillars.gpsapp.web.rest.errors.BadRequestAlertException;
 import com.pillars.gpsapp.web.rest.util.HeaderUtil;
@@ -34,14 +32,17 @@ public class EmpleadoResource {
 
     private final EmpleadoRepository empleadoRepository;
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private ChatRoomRepository chatRoomRepository;
 
-    public EmpleadoResource(EmpleadoRepository empleadoRepository) {
+    private TareaRepository tareaRepository;
+
+    public EmpleadoResource(EmpleadoRepository empleadoRepository, ChatRoomRepository chatRoomRepository, UserRepository userRepository, TareaRepository tareaRepository) {
         this.empleadoRepository = empleadoRepository;
+        this.chatRoomRepository = chatRoomRepository;
+        this.userRepository = userRepository;
+        this.tareaRepository = tareaRepository;
     }
 
 
@@ -67,8 +68,10 @@ public class EmpleadoResource {
 
     public void addEmpleadoToGeneralChat(Empleado empleado) {
         List<ChatRoom> chatRoom = this.chatRoomRepository.findBynombre("General");
-        chatRoom.get(0).addMiembros(empleado);
-        this.chatRoomRepository.save(chatRoom.get(0));
+        if (chatRoom.size() > 0) {
+            chatRoom.get(0).addMiembros(empleado);
+            this.chatRoomRepository.save(chatRoom.get(0));
+        }
     }
 
     /**
@@ -217,9 +220,14 @@ public class EmpleadoResource {
     }
 
     public void filterList(List<Empleado> empleados) {
-        for(int i = 0; i < empleados.size(); i++) {
+        for (int i = 0; i < empleados.size(); i++) {
             Empleado empleado = empleados.get(i);
             empleado.setNombre(empleado.getNombre() + ' ' + empleado.getApellidos());
         }
+    }
+
+    @GetMapping("/empleados/get-tasks-by-employee/{id}")
+    public List<Tarea> getTasksByEmployee(@PathVariable String id) {
+        return tareaRepository.findTasksByEmployee(id);
     }
 }

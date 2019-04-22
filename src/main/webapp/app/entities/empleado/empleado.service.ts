@@ -5,9 +5,11 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IEmpleado } from 'app/shared/model/empleado.model';
 import { UserService } from 'app/core';
+import { ITarea } from 'app/shared/model/tarea.model';
 
 type EntityResponseType = HttpResponse<IEmpleado>;
 type EntityArrayResponseType = HttpResponse<any>;
+
 // Se cambio IEmpleado[] por any, para que el método getEmployeesCustom funcionara apropiadamente
 
 @Injectable({ providedIn: 'root' })
@@ -38,8 +40,7 @@ export class EmpleadoService {
     }
 
     findUserByIdRelationship(id: string): Observable<EntityResponseType> {
-        const test = this.http.get<IEmpleado>(`${this.resourceUrl + '/findByRelationshipId'}/${id}`, { observe: 'response' });
-        return test;
+        return this.http.get<IEmpleado>(`${this.resourceUrl + '/findByRelationshipId'}/${id}`, { observe: 'response' });
     }
 
     findUserByIdType(id: string): Observable<EntityArrayResponseType> {
@@ -62,5 +63,9 @@ export class EmpleadoService {
 
     getEmployeesByApproximation(name: string): Observable<EntityArrayResponseType> {
         return this.http.get<IEmpleado[]>(`${this.resourceUrl + '/get-by-approximation'}/${name}`, { observe: 'response' });
+    }
+
+    findTasksByEmployee(id: string): Observable<EntityArrayResponseType> {
+        return this.http.get<ITarea[]>(`${this.resourceUrl + '/get-tasks-by-employee'}/${id}`, { observe: 'response' });
     }
 }

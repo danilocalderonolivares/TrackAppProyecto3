@@ -3,7 +3,9 @@ package com.pillars.gpsapp.web.rest;
 import com.pillars.gpsapp.GpsApp;
 
 import com.pillars.gpsapp.domain.Empleado;
+import com.pillars.gpsapp.repository.ChatRoomRepository;
 import com.pillars.gpsapp.repository.EmpleadoRepository;
+import com.pillars.gpsapp.repository.TareaRepository;
 import com.pillars.gpsapp.repository.UserRepository;
 import com.pillars.gpsapp.web.rest.errors.ExceptionTranslator;
 
@@ -52,6 +54,15 @@ public class EmpleadoResourceIntTest {
     private EmpleadoRepository empleadoRepository;
 
     @Autowired
+    private ChatRoomRepository chatRoomRepository;
+
+    @Autowired
+    private TareaRepository tareaRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -70,7 +81,7 @@ public class EmpleadoResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final EmpleadoResource empleadoResource = new EmpleadoResource(empleadoRepository);
+        final EmpleadoResource empleadoResource = new EmpleadoResource(empleadoRepository, chatRoomRepository, userRepository, tareaRepository);
         this.restEmpleadoMockMvc = MockMvcBuilders.standaloneSetup(empleadoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
