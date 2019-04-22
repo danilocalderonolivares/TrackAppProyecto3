@@ -13,7 +13,6 @@ import { HorarioService } from 'app/entities/horario';
 import { TipoEmpleadoService } from 'app/entities/tipo-empleado';
 import { JhiAlertService } from 'ng-jhipster';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatOptionSelectionChange } from '@angular/material';
 
 @Component({
     selector: 'jhi-user-mgmt-update',

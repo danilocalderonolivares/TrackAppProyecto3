@@ -1,13 +1,15 @@
-<div class="container" style="height: 560px;  overflow-y: scroll;">
+<div class="chat-window">
     <div *ngFor="let mensaje of chatRoom.mensajes">
-        <div style="margin-top: 10px; overflow: hidden">
-            <div *ngIf="validateIsSender(mensaje); else otherUser" class="alert alert-success w-50" style="background-color: #EBEBEB; margin-bottom: 5px; border-radius: 0 15px 15px 15px;">
+        <div class="messages sender">
+            <div *ngIf="validateIsSender(mensaje); else otherUser" class="alert w-50 outgoing-messages"
+                 >
                 <strong>{{ mensaje.texto }}</strong>
             </div>
         </div>
         <ng-template #otherUser>
-            <div style="overflow: hidden">
-                <div class="alert alert-success w-50 float-right" style="color: #ffffff; background-color: #17a2b8; margin-bottom: 5px; border-radius: 12px 15px 15px 0;">
+            <div class="messages" style="overflow: hidden">
+                <div class="alert w-50 float-right incoming-messages"
+                     >
                     <strong>{{ mensaje.texto }}</strong>
                 </div>
             </div>
@@ -15,10 +17,12 @@
     </div>
 </div>
 <div *ngIf="chatRoomSelected" class="input-group">
-    <div class="custom-file">
-        <input (keyup.enter)="onKeyPressed($event)" [(ngModel)]="message" type="text" class="form-control" placeholder="Escriba su mensaje aquí..">
+    <div class="custom-file messages-input">
+        <input (keyup.enter)="onKeyPressed($event)" [(ngModel)]="message" type="text" class="form-control"
+               placeholder="Escriba su mensaje aquí..">
     </div>
     <div class="input-group-append">
-        <button (click)="sendMessage()" [disabled]="message == ''" class="btn btn-primary" style="background-color: #007bff; color: #ffffff;">Enviar</button>
+        <button mat-raised-button color="primary" (click)="sendMessage()" [disabled]="message == ''">Enviar</button>
     </div>
 </div>
+

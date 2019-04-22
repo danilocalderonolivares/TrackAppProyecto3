@@ -6,6 +6,7 @@ import { ChatsListComponent } from 'app/webcustom/chat/chats-list/chats-list.com
 import { ChatWindowComponent } from 'app/webcustom/chat/chat-window/chat-window.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'app/app.constants';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const config: SocketIoConfig = {
     url: environment.wsUrl,
@@ -13,7 +14,7 @@ const config: SocketIoConfig = {
 };
 
 @NgModule({
-    imports: [GpsAppSharedModule, GpsAppChatRouting, SocketIoModule.forRoot(config)],
+    imports: [GpsAppSharedModule, GpsAppChatRouting, SocketIoModule.forRoot(config), FlexLayoutModule],
     declarations: [ChatComponent, ChatsListComponent, ChatWindowComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
