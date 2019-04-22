@@ -409,11 +409,12 @@
                                                 <td align="left" style="padding-left: 10px !important; color: #444444; font-family: calibri, arial, sans-serif; font-size: 16px; line-height: 24px;" class="main-body">
                                                     <div style="color: #444444; font-size: 20px; font-weight: bold; line-height: 150%;" th:text="#{email.activation.headline}">
                                                     </div>
-                                                    <p th:text="#{email.activation.text1}">
-                                                    </p>
                                                     <p th:text="#{email.activation.greeting(${user.login})}">
                                                     </p>
-                                                    <p>Su nombre de usuario es <span th:text="(${user.login})"></span>, tambi&eacute;n puede ingresar con su correo electr&oacute;nico</p>
+                                                    <p th:text="#{email.activation.text1}">
+                                                    </p>
+
+                                                    <p>Su nombre de usuario es <span th:text="(${user.email})"></span>, que le permitira ingresar a GPSApp</p>
 
                                                     <p>
                                                         <a style="text-decoration: none; color: #f99d1c;" th:with="url=(@{|${baseUrl}/#/reset/finish?key=${user.resetKey}|})" th:href="${url}">Presione aqu&iacute; para activar su cuenta</a>

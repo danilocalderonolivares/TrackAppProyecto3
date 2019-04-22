@@ -52,6 +52,9 @@ public class MensajeResourceIntTest {
     private static final Boolean DEFAULT_BORRADO = false;
     private static final Boolean UPDATED_BORRADO = true;
 
+    private static final Integer DEFAULT_NUMERO_MENSAJE = 1;
+    private static final Integer UPDATED_NUMERO_MENSAJE = 2;
+
     @Autowired
     private MensajeRepository mensajeRepository;
 
@@ -94,7 +97,8 @@ public class MensajeResourceIntTest {
             .texto(DEFAULT_TEXTO)
             .fechaEnvio(DEFAULT_FECHA_ENVIO)
             .visto(DEFAULT_VISTO)
-            .borrado(DEFAULT_BORRADO);
+            .borrado(DEFAULT_BORRADO)
+            .numeroMensaje(DEFAULT_NUMERO_MENSAJE);
         return mensaje;
     }
 
@@ -122,6 +126,7 @@ public class MensajeResourceIntTest {
         assertThat(testMensaje.getFechaEnvio()).isEqualTo(DEFAULT_FECHA_ENVIO);
         assertThat(testMensaje.isVisto()).isEqualTo(DEFAULT_VISTO);
         assertThat(testMensaje.isBorrado()).isEqualTo(DEFAULT_BORRADO);
+        assertThat(testMensaje.getNumeroMensaje()).isEqualTo(DEFAULT_NUMERO_MENSAJE);
     }
 
     @Test
@@ -223,7 +228,8 @@ public class MensajeResourceIntTest {
             .andExpect(jsonPath("$.[*].texto").value(hasItem(DEFAULT_TEXTO.toString())))
             .andExpect(jsonPath("$.[*].fechaEnvio").value(hasItem(DEFAULT_FECHA_ENVIO.toString())))
             .andExpect(jsonPath("$.[*].visto").value(hasItem(DEFAULT_VISTO.booleanValue())))
-            .andExpect(jsonPath("$.[*].borrado").value(hasItem(DEFAULT_BORRADO.booleanValue())));
+            .andExpect(jsonPath("$.[*].borrado").value(hasItem(DEFAULT_BORRADO.booleanValue())))
+            .andExpect(jsonPath("$.[*].numeroMensaje").value(hasItem(DEFAULT_NUMERO_MENSAJE)));
     }
     
     @Test
@@ -239,7 +245,8 @@ public class MensajeResourceIntTest {
             .andExpect(jsonPath("$.texto").value(DEFAULT_TEXTO.toString()))
             .andExpect(jsonPath("$.fechaEnvio").value(DEFAULT_FECHA_ENVIO.toString()))
             .andExpect(jsonPath("$.visto").value(DEFAULT_VISTO.booleanValue()))
-            .andExpect(jsonPath("$.borrado").value(DEFAULT_BORRADO.booleanValue()));
+            .andExpect(jsonPath("$.borrado").value(DEFAULT_BORRADO.booleanValue()))
+            .andExpect(jsonPath("$.numeroMensaje").value(DEFAULT_NUMERO_MENSAJE));
     }
 
     @Test
@@ -262,7 +269,8 @@ public class MensajeResourceIntTest {
             .texto(UPDATED_TEXTO)
             .fechaEnvio(UPDATED_FECHA_ENVIO)
             .visto(UPDATED_VISTO)
-            .borrado(UPDATED_BORRADO);
+            .borrado(UPDATED_BORRADO)
+            .numeroMensaje(UPDATED_NUMERO_MENSAJE);
 
         restMensajeMockMvc.perform(put("/api/mensajes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -277,6 +285,7 @@ public class MensajeResourceIntTest {
         assertThat(testMensaje.getFechaEnvio()).isEqualTo(UPDATED_FECHA_ENVIO);
         assertThat(testMensaje.isVisto()).isEqualTo(UPDATED_VISTO);
         assertThat(testMensaje.isBorrado()).isEqualTo(UPDATED_BORRADO);
+        assertThat(testMensaje.getNumeroMensaje()).isEqualTo(UPDATED_NUMERO_MENSAJE);
     }
 
     @Test
