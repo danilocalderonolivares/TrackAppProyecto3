@@ -178,8 +178,25 @@ public class EmpleadoResource {
                 }
             }
         }
-        return listEmpFinal;
+        return ExtractEmployeesWithLocation(listEmpFinal);
     }
+
+    /**
+     *  This method extract all the employees with ubication
+     *
+     * @param listEmp
+     * @return listEmpWithUbication
+     */
+    private List<Empleado> ExtractEmployeesWithLocation(List<Empleado> listEmp) {
+        List<Empleado> listEmpWithUbication = new ArrayList<>();
+        for(Empleado empleado: listEmp){
+            if(empleado.getUbicacion() != null){
+                listEmpWithUbication.add(empleado);
+            }
+        }
+        return listEmpWithUbication;
+    }
+
 
     @GetMapping("/empleados/empleado-customized/{username}")
     public Map<String, Object> getEmployeesCustom(@PathVariable String username) {

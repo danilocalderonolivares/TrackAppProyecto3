@@ -62,7 +62,7 @@ export class UserMgmtUpdateComponent implements OnInit {
 
     setCustomUserValues() {
         this.setDropdownsValue();
-        const ubicacion = new Ubicacion('', 1, 1, '');
+        const ubicacion = undefined;
         const empleados: Empleado[] = [];
         const tipoEmpleado = new TipoEmpleado('', '', empleados);
         const horario = new Horario('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', empleados);
