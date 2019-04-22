@@ -3,6 +3,14 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav
                  role="navigation">
+        <div class="mdc-drawer__header">
+            <h3 class="mdc-drawer__title">
+               </h3>
+            <h6 class="mdc-drawer__subtitle" style="margin-top: 10px;">
+                {{usuarioInfo.email}}
+            </h6>
+
+        </div>
         <mat-list>
             <a mat-list-item routerLink="/tarea" (click)="sidenav.close()">
                 <mat-icon>list</mat-icon>
