@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { AccountService } from 'app/core/auth/account.service';
 import { AuthServerProvider } from 'app/core/auth/auth-jwt.service';
 
@@ -14,6 +13,7 @@ export class LoginService {
             this.authServerProvider.login(credentials).subscribe(
                 data => {
                     this.accountService.identity(true).then(account => {
+                        sessionStorage.setItem('user', JSON.stringify(account));
                         resolve(data);
                     });
                     return cb();

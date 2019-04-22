@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "miembros",
+            "otherEntityName": "empleado",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "miembros"
+        },
+        {
+            "relationshipName": "mensajes",
+            "otherEntityName": "mensaje",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "mensajes"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nombre",
+            "fieldType": "String"
+        }
+    ],
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "chat_room",
+    "databaseType": "mongodb",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

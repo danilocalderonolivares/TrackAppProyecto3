@@ -1,0 +1,28 @@
+<div class="chat-window">
+    <div *ngFor="let mensaje of chatRoom.mensajes">
+        <div class="messages sender">
+            <div *ngIf="validateIsSender(mensaje); else otherUser" class="alert w-50 outgoing-messages"
+                 >
+                <strong>{{ mensaje.texto }}</strong>
+            </div>
+        </div>
+        <ng-template #otherUser>
+            <div class="messages" style="overflow: hidden">
+                <div class="alert w-50 float-right incoming-messages"
+                     >
+                    <strong>{{ mensaje.texto }}</strong>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
+<div *ngIf="chatRoomSelected" class="input-group">
+    <div class="custom-file messages-input">
+        <input (keyup.enter)="onKeyPressed($event)" [(ngModel)]="message" type="text" class="form-control"
+               placeholder="Escriba su mensaje aquí..">
+    </div>
+    <div class="input-group-append">
+        <button mat-raised-button color="primary" (click)="sendMessage()" [disabled]="message == ''">Enviar</button>
+    </div>
+</div>
+

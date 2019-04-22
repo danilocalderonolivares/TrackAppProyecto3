@@ -1,0 +1,12 @@
+<div clas="chatRoomsContainer">
+    <div class="searcherContainer">
+        <input (keyup)="onKeyPressed($event)" type="text" id="sortedField"
+               class="form-control mb-3 searcher" placeholder="Buscar empleado..."></input>
+    </div>
+</div>
+<div class="container chatRoomsList">
+    <div *ngFor="let chatRoom of chatRooms" class="chatRoom">
+        <a class="chatRoomLink" (click)="loadChatRoomsMessages(chatRoom)">
+            <h6>{{ chatRoom.nombre }}</h6></a></div>
+</div>
+

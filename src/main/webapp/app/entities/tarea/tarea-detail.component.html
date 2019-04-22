@@ -65,12 +65,12 @@
                         <p>{{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</p>
                     </div>
                 </dd>
-                <!--<dt><span>Ubicación</span></dt>-->
-                <!--<dd>-->
-                    <!--<div *ngIf="tarea.ubicacion">-->
-                        <!--<a [routerLink]="['/ubicacion', tarea.ubicacion?.id, 'view']">{{tarea.ubicacion?.id}}</a>-->
-                    <!--</div>-->
-                <!--</dd>-->
+                <dt><span>Ubicación</span></dt>
+                <dd>
+                    <div *ngIf="tarea.ubicacion">
+                        <a [routerLink]="['/ubicacion', tarea.ubicacion?.id, 'view']">{{tarea.ubicacion?.id}}</a>
+                    </div>
+                </dd>
                 <dt><span>Cliente</span></dt>
                 <dd>
                     <div *ngIf="tarea.cliente">

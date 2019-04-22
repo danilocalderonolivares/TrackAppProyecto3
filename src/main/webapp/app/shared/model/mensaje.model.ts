@@ -7,6 +7,7 @@ export interface IMensaje {
     fechaEnvio?: Moment;
     visto?: boolean;
     borrado?: boolean;
+    numeroMensaje?: number;
     empleado?: IEmpleado;
 }
 
@@ -17,6 +18,7 @@ export class Mensaje implements IMensaje {
         public fechaEnvio?: Moment,
         public visto?: boolean,
         public borrado?: boolean,
+        public numeroMensaje?: number,
         public empleado?: IEmpleado
     ) {
         this.visto = this.visto || false;
