@@ -89,25 +89,35 @@ export class ClienteUpdateComponent implements OnInit {
     }
 
     save() {
-        var i;
-        this.clienteService.query().subscribe(
+        this.clienteService.findbyCedula(this.cliente.cedula).subscribe(
             res => {
-                this.clientes = res.body;
-
-                for (i = 0; i < this.clientes.length; i++) {
-                    if (this.cliente.cedula === this.clientes[i].cedula) {
-                        this.clienteExite = true;
-                    } else {
-                        this.clienteExite = false;
-                    }
-                }
-
+                this.clienteExite = true;
                 this.realSave();
             },
             err => {
-                console.log(err);
+                this.clienteExite = false;
+                this.realSave();
             }
         );
+        // var i;
+        // this.clienteService.query().subscribe(
+        //     res => {
+        //         this.clientes = res.body;
+        //
+        //         for (i = 0; i < this.clientes.length; i++) {
+        //             if (this.cliente.cedula === this.clientes[i].cedula) {
+        //                 this.clienteExite = true;
+        //             } else {
+        //                 this.clienteExite = false;
+        //             }
+        //         }
+        //
+        //         this.realSave();
+        //     },
+        //     err => {
+        //         console.log(err);
+        //     }
+        // );
     }
     realSave() {
         this.isSaving = true;
@@ -115,7 +125,7 @@ export class ClienteUpdateComponent implements OnInit {
             this.cliente.ubicacion.id = this.idUbucacion;
             this.subscribeToSaveResponse(this.clienteService.update(this.cliente));
         } else {
-            if (this.clienteExite !== true) {
+            if (this.clienteExite === false) {
                 this.subscribeToSaveResponse(this.clienteService.create(this.cliente));
             } else {
                 this.errorCedulaNotExists = 'ERROR';

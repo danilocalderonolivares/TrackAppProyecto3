@@ -11,6 +11,7 @@ type EntityArrayResponseType = HttpResponse<ICliente[]>;
 @Injectable({ providedIn: 'root' })
 export class ClienteService {
     public resourceUrl = SERVER_API_URL + 'api/clientes';
+    public resourceUrlCela = SERVER_API_URL + 'api/find';
     private googleMapsKey: 'AIzaSyCyVrHRb3_HIueNx4GBBJFAWAfSg1GqVj8';
 
     constructor(protected http: HttpClient) {}
@@ -29,6 +30,9 @@ export class ClienteService {
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<ICliente[]>(this.resourceUrl, { params: options, observe: 'response' });
+    }
+    findbyCedula(cedula: string) {
+        return this.http.get<ICliente>(`${this.resourceUrlCela}/${cedula}`, { observe: 'response' });
     }
     delete(id: string): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
