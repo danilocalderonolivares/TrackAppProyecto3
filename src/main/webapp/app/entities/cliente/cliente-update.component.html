@@ -1,11 +1,16 @@
 <div class="justify-content-center mt-4">
     <div class="container">
+        <div class="alert alert-danger" *ngIf="errorCedulaNotExists">
+            <strong>Este cédula ya se encuentra registrada en la base de datos</strong> Por favos intente otra vez!
+        </div>
         <form name="editForm"  [formGroup]="clienteForm" novalidate (ngSubmit)="save()">
         <div class="row">
             <div class="col-md-6">
-                <jhi-alert-error></jhi-alert-error>
+
                 <h1 id="jhi-cliente-heading">Información básica</h1>
-                <mat-checkbox #esEmpesaCheckBox (click)="esEmpresa(esEmpesaCheckBox)" [(ngModel)]="cliente.esEmpresa" [ngModelOptions]="{standalone: true}">
+                <mat-checkbox #esEmpesaCheckBox (click)="esEmpresa(esEmpesaCheckBox.value)"
+                              [(ngModel)]="cliente.esEmpresa"
+                              [ngModelOptions]="{standalone: true}">
                     ¿Es empresa?
                 </mat-checkbox>
                 <mat-form-field appearance="outline">
@@ -88,111 +93,3 @@
          </form>
      </div>
  </div>
-
- <!--<div class="form-group">-->
-    <!--<label class="form-control-label" for="field_direccion">Dirección*</label>-->
-    <!--<input type="text"-->
-           <!--class="form-control"-->
-           <!--name="direccion" id="field_direccion"-->
-           <!--[(ngModel)]="cliente.direccion"-->
-           <!--placeholder="Elija una posición en el mapa para ingresar la dirección"-->
-           <!--readonly required/>-->
-    <!--<div [hidden]="!(editForm.controls.direccion?.dirty && editForm.controls.direccion?.invalid)">-->
-        <!--<small class="form-text text-danger"-->
-               <!--[hidden]="!editForm.controls.direccion?.errors?.required">-->
-            <!--Ubicación requerida.-->
-        <!--</small>-->
-    <!--</div>-->
-<!--</div>-->
-<!--<div class="form-group">-->
-    <!--<label class="form-control-label">Ubicación</label>-->
-    <!--<agm-map-->
-        <!--[latitude]="lat"-->
-        <!--[longitude]="lng"-->
-        <!--[zoom]="zoom"-->
-        <!--(mapClick)="mapClicked($event)">-->
-        <!--<agm-marker-->
-            <!--[latitude]="lat"-->
-            <!--[longitude]="lng"-->
-            <!--*ngIf="locationChosen">-->
-        <!--</agm-marker>-->
-
-
-    <!--</agm-map>-->
-
-<!--</div>-->
-
-<!--<div>-->
-    <!--<jhi-alert-error></jhi-alert-error>-->
-    <!--<div class="form-group">-->
-        <!--<label class="form-control-label" for="field_esEmpresa">¿Es una empresa?</label>-->
-        <!--<input type="checkbox" style="width: 18px;height: 15px;" name="esEmpresa" id="field_esEmpresa"-->
-               <!--[(ngModel)]="cliente.esEmpresa" />-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-        <!--<ng-container *ngIf="cliente.esEmpresa != false; else elseTemplate1">-->
-            <!--<label class="form-control-label" for="field_nombre">Nombre de la empresa*</label>-->
-        <!--</ng-container>-->
-        <!--<ng-template #elseTemplate1>-->
-            <!--<label class="form-control-label" for="field_nombre">Nombre*</label>-->
-        <!--</ng-template>-->
-        <!--<input type="text" class="form-control" name="nombre" id="field_nombre"-->
-               <!--[(ngModel)]="cliente.nombre" required/>-->
-        <!--<div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">-->
-            <!--<small class="form-text text-danger"-->
-                   <!--[hidden]="!editForm.controls.nombre?.errors?.required">-->
-                <!--Nombre requerido.-->
-            <!--</small>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<mat-form-field appearance="outline">-->
-        <!--<mat-label>Nombre*</mat-label>-->
-        <!--<input matInput formControlName="nombre" [(ngModel)]="cliente.nombre">-->
-        <!--<mat-icon matSuffix class="secondary-text">person_outline</mat-icon>-->
-        <!--<mat-error>-->
-            <!--Nombre es requerido.-->
-        <!--</mat-error>-->
-    <!--</mat-form-field>-->
-    <!--<div class="form-group">-->
-        <!--<ng-container *ngIf="cliente.esEmpresa != false; else elseTemplate">-->
-            <!--<label class="form-control-label" for="field_cedula">Cédula Jurídica*</label>-->
-        <!--</ng-container>-->
-        <!--<ng-template #elseTemplate>-->
-            <!--<label class="form-control-label" for="field_cedula">Cédula*</label>-->
-        <!--</ng-template>-->
-        <!--<input type="text" class="form-control" name="cedula" id="field_cedula"-->
-               <!--[(ngModel)]="cliente.cedula" required  pattern="[0-9]*" maxlength="15"/>-->
-        <!--<div [hidden]="!(editForm.controls.cedula?.dirty && editForm.controls.cedula?.invalid)">-->
-            <!--<small class="form-text text-danger"-->
-                   <!--[hidden]="!editForm.controls.cedula?.errors?.required">-->
-                <!--Cédula requerida.-->
-            <!--</small>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="form-group">-->
-        <!--<label class="form-control-label" for="field_correo">Correo*</label>-->
-        <!--<input type="email" class="form-control" name="correo" id="field_correo"-->
-               <!--[(ngModel)]="cliente.correo" required email>-->
-        <!--<div [hidden]="!(editForm.controls.correo?.dirty && editForm.controls.correo?.invalid)">-->
-            <!--<small class="form-text text-danger"-->
-                   <!--[hidden]="!editForm.controls.correo?.errors?.required">-->
-                <!--Correo requerido.-->
-            <!--</small>-->
-            <!--<small class="form-text text-danger"-->
-                   <!--[hidden]="!editForm.controls.correo?.errors?.email">-->
-                <!--Este correo es inválido.-->
-            <!--</small>-->
-
-        <!--</div>-->
-
-    <!--</div>-->
-<!--</div>-->
-<!--<div>-->
-    <!--<button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">-->
-        <!--<fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>-->
-    <!--</button>-->
-    <!--<button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">-->
-        <!--<fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Guardar</span>-->
-    <!--</button>-->
-<!--</div>-->

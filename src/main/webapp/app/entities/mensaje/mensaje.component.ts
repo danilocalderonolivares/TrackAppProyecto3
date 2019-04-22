@@ -48,7 +48,6 @@ export class MensajeComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.registerChangeInMensajes();
         this.eventManager.destroy(this.eventSubscriber);
     }
 

@@ -45,4 +45,8 @@ export class UserMgmtDetailComponent implements OnInit {
             });
         }
     }
+
+    previousState() {
+        window.history.back();
+    }
 }

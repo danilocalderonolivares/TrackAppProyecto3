@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Mensaje('ID', 'AAAAAAA', currentDate, false, false);
+            elemDefault = new Mensaje('ID', 'AAAAAAA', currentDate, false, false, 0);
         });
 
         describe('Service methods', async () => {
@@ -73,7 +73,8 @@ describe('Service Tests', () => {
                         texto: 'BBBBBB',
                         fechaEnvio: currentDate.format(DATE_FORMAT),
                         visto: true,
-                        borrado: true
+                        borrado: true,
+                        numeroMensaje: 1
                     },
                     elemDefault
                 );
@@ -98,7 +99,8 @@ describe('Service Tests', () => {
                         texto: 'BBBBBB',
                         fechaEnvio: currentDate.format(DATE_FORMAT),
                         visto: true,
-                        borrado: true
+                        borrado: true,
+                        numeroMensaje: 1
                     },
                     elemDefault
                 );

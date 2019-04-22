@@ -1,5 +1,7 @@
 package com.pillars.gpsapp.web.rest;
+import com.pillars.gpsapp.domain.SubTarea;
 import com.pillars.gpsapp.domain.Tarea;
+import com.pillars.gpsapp.repository.SubTareaRepository;
 import com.pillars.gpsapp.repository.TareaRepository;
 import com.pillars.gpsapp.web.rest.errors.BadRequestAlertException;
 import com.pillars.gpsapp.web.rest.util.HeaderUtil;
@@ -28,9 +30,11 @@ public class TareaResource {
     private static final String ENTITY_NAME = "tarea";
 
     private final TareaRepository tareaRepository;
+    private final SubTareaRepository subTareaRepository;
 
-    public TareaResource(TareaRepository tareaRepository) {
+    public TareaResource(TareaRepository tareaRepository, SubTareaRepository subTareaRepository) {
         this.tareaRepository = tareaRepository;
+        this.subTareaRepository = subTareaRepository;
     }
 
     /**
@@ -45,6 +49,9 @@ public class TareaResource {
         log.debug("REST request to save Tarea : {}", tarea);
         if (tarea.getId() != null) {
             throw new BadRequestAlertException("A new tarea cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        for (SubTarea subTarea : tarea.getTareas()){
+            subTareaRepository.save(subTarea);
         }
         Tarea result = tareaRepository.save(tarea);
         return ResponseEntity.created(new URI("/api/tareas/" + result.getId()))
@@ -66,6 +73,9 @@ public class TareaResource {
         log.debug("REST request to update Tarea : {}", tarea);
         if (tarea.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        for (SubTarea subTarea: tarea.getTareas()){
+            subTareaRepository.save(subTarea);
         }
         Tarea result = tareaRepository.save(tarea);
         return ResponseEntity.ok()

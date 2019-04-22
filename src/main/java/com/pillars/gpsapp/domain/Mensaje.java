@@ -38,6 +38,9 @@ public class Mensaje implements Serializable {
     @Field("borrado")
     private Boolean borrado;
 
+    @Field("numero_mensaje")
+    private Integer numeroMensaje;
+
     @DBRef
     @Field("empleado")
     private Empleado empleado;
@@ -103,6 +106,19 @@ public class Mensaje implements Serializable {
         this.borrado = borrado;
     }
 
+    public Integer getNumeroMensaje() {
+        return numeroMensaje;
+    }
+
+    public Mensaje numeroMensaje(Integer numeroMensaje) {
+        this.numeroMensaje = numeroMensaje;
+        return this;
+    }
+
+    public void setNumeroMensaje(Integer numeroMensaje) {
+        this.numeroMensaje = numeroMensaje;
+    }
+
     public Empleado getEmpleado() {
         return empleado;
     }
@@ -145,6 +161,7 @@ public class Mensaje implements Serializable {
             ", fechaEnvio='" + getFechaEnvio() + "'" +
             ", visto='" + isVisto() + "'" +
             ", borrado='" + isBorrado() + "'" +
+            ", numeroMensaje=" + getNumeroMensaje() +
             "}";
     }
 }

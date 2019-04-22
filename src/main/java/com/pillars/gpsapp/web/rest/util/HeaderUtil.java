@@ -24,15 +24,15 @@ public final class HeaderUtil {
     }
 
     public static HttpHeaders createEntityCreationAlert(String entityName, String param) {
-        return createAlert("Un(a) nuevo(a) " + entityName + " es creado(a) con el identificador " + param, param);
+        return createAlert("Un(a) nuevo(a) " + entityName + " ha sido creado(a) existosamente", param);
     }
 
     public static HttpHeaders createEntityUpdateAlert(String entityName, String param) {
-        return createAlert("Un(a) " + entityName + " es actualizado(a) con el identificador " + param, param);
+        return createAlert("Un(a) " + entityName + " ha sido actualizado(a) exitosamente", param);
     }
 
     public static HttpHeaders createEntityDeletionAlert(String entityName, String param) {
-        return createAlert("Un(a) " + entityName + " es eliminado(a) con el identificador " + param, param);
+        return createAlert("Un(a) " + entityName + " ha sido eliminado(a) existosamente", param);
     }
 
     public static HttpHeaders createFailureAlert(String entityName, String errorKey, String defaultMessage) {

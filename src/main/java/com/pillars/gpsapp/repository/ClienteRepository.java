@@ -1,9 +1,10 @@
 package com.pillars.gpsapp.repository;
 
 import com.pillars.gpsapp.domain.Cliente;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 
 /**
@@ -12,5 +13,5 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface ClienteRepository extends MongoRepository<Cliente, String> {
-
+    Optional<Cliente> findByCedula(String cedula);
 }

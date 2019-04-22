@@ -78,6 +78,8 @@ export class JhiLoginModalComponent implements AfterViewInit, OnInit {
                     this.stateStorageService.storeUrl(null);
                     this.router.navigate([redirect]);
                 }
+
+                this.router.navigate(['calendario']);
             })
             .catch(() => {
                 this.authenticationError = true;

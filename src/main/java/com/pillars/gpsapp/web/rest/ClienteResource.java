@@ -123,4 +123,10 @@ public class ClienteResource {
 
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
+    @GetMapping("/find/{cedula}")
+    public ResponseEntity<Cliente> getClientebyCedula(@PathVariable String cedula) {
+        Optional<Cliente> cliente = clienteRepository.findByCedula(cedula);
+        return ResponseUtil.wrapOrNotFound(cliente);
+    }
+
 }
