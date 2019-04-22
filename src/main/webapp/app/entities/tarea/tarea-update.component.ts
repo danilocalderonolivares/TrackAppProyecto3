@@ -5,9 +5,9 @@ import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
-import { ITarea, Tarea } from 'app/shared/model/tarea.model';
+import { ITarea } from 'app/shared/model/tarea.model';
 import { TareaService } from './tarea.service';
-import { ISubTarea, SubTarea } from 'app/shared/model/sub-tarea.model';
+import { ISubTarea } from 'app/shared/model/sub-tarea.model';
 import { SubTareaService } from 'app/entities/sub-tarea';
 import { Empleado, IEmpleado } from 'app/shared/model/empleado.model';
 import { EmpleadoService } from 'app/entities/empleado';
@@ -44,7 +44,7 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
     @ViewChild('placesRef') placesRef: GooglePlaceDirective;
     tarea: ITarea;
     isSaving: boolean;
-    subtareas: SubTarea[] = [];
+    subtareas: ISubTarea[];
     empleados: IEmpleado[];
     ubicacions: IUbicacion[];
     clientes: ICliente[];
@@ -136,6 +136,7 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
             .subscribe(
                 (res: ISubTarea[]) => {
                     if (isEmpty(this.tarea.tareas)) {
+                        this.subtareas = res;
                     } else {
                         this.subTareaService
                             .query({ 'id.in': _map(this.tarea.tareas, 'id') })
@@ -237,8 +238,18 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
     save() {
         this.isSaving = true;
         this.tarea.tareas = this.subtareas;
-        this.tarea.inicio = moment(this.tarea.inicio);
-        this.tarea.fin = moment(this.tarea.fin);
+        this.tarea.inicio = moment(this.fechaInicio);
+        this.tarea.fin = moment(this.fechaFin);
+        this.tarea.ubicacion = this.mapService.ubication;
+        if (!this.tarea.usarRuta) {
+            this.tarea.ruta = undefined;
+        }
+        // if (!this.tarea.usarRuta) {
+        //
+        //    this.tarea.ruta = undefined;
+        // } else {
+        //     this.tarea.ubicacion = undefined;
+        // }
         if (this.tarea.id !== undefined) {
             this.subscribeToSaveResponse(this.tareaService.update(this.tarea));
         } else {
@@ -299,19 +310,8 @@ export class TareaUpdateComponent implements OnInit, OnDestroy {
         this.nvaSubtarea = '';
     }
 
-    eliminarListaSubtarea(index: number) {
+    eliminarSubtarea(index: number) {
         this.subtareas = reject(this.subtareas, (e, i) => i === index);
-    }
-    eliminarSubtarea(subtarea: SubTarea) {
-        this.subTareaService.delete(subtarea.id).subscribe(
-            res => {
-                this.ngOnInit();
-                console.log(res);
-            },
-            err => {
-                console.log(err);
-            }
-        );
     }
 
     loadCustomUserInfo() {

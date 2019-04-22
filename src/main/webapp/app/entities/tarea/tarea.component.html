@@ -11,77 +11,94 @@
         </mat-form-field>
     </div>
     <jhi-alert></jhi-alert>
-    <br/>
-    <div class="table-responsive" *ngIf="tareas">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-            <th><span>Titulo</span></th>
-            <th><span>Descripción</span></th>
-            <th><span>Inicio</span></th>
-            <th><span>Fin</span></th>
-            <th><span>Activa</span></th>
-            <th><span>Completada</span></th>
-            <th><span>Empleado</span></th>
-            <th><span>Cliente</span></th>
-                <th><span>Ruta</span></th>
-                <th><span>Ubicación</span></th>
-            <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let tarea of tareas ;trackBy: trackId">
-                <td>{{tarea.title}}</td>
-                <td>{{tarea.descripcion}}</td>
-                <td>{{tarea.inicio | date:'mediumDate'}}</td>
-                <td>{{tarea.fin | date:'mediumDate'}}</td>
-                <td [innerText]= "tarea.activa ? 'Sí' : 'No'"></td>
-                <td [innerText]= "tarea.completada ? 'Sí' : 'No'"></td>
-                <td>
-                    <div *ngIf="tarea.empleado">
-                        <!--<a [routerLink]="['../empleado', tarea.empleado?.id, 'view']"> {{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</a>-->
-                        <p>{{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</p>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="tarea.cliente">
-                        <!--<a [routerLink]="['../cliente', tarea.cliente?.id, 'view' ]" >{{tarea.cliente?.nombre}}</a>-->
-                        <p>{{tarea.cliente?.nombre}}</p>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="tarea.ruta">
-                        <!--<a [routerLink]="['../ruta', tarea.ruta?.id, 'view' ]" >{{tarea.ruta?.nombre}}</a>-->
-                        <p>{{tarea.ruta?.nombre}}</p>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="tarea.ubicacion">
-                        <!--<a [routerLink]="['../ruta', tarea.ruta?.id, 'view' ]" >{{tarea.ruta?.nombre}}</a>-->
-                        <p>{{tarea.ubicacion?.nombreDireccion}}</p>
-                    </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/tarea', tarea.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">Ver</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/tarea', tarea.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Editar</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', 'tarea', { outlets: { popup: tarea.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Eliminar</span>
+    <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource">
+            <!--columna titulo-->
+            <ng-container matColumnDef="titulo">
+                <mat-header-cell *matHeaderCellDef>Titulo</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <p class="text-truncate font-weight-600">{{tarea.title}}</p>
+                </mat-cell>
+            </ng-container>
+            <!--columna descripcion-->
+            <ng-container matColumnDef="descripcion">
+                <mat-header-cell *matHeaderCellDef>Descripción</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <p class="text-truncate font-weight-600">{{tarea.descripcion}}</p>
+                </mat-cell>
+            </ng-container>
+            <!--columna inicio-->
+            <ng-container matColumnDef="inicio">
+                <mat-header-cell *matHeaderCellDef>Inicio</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <p class="text-truncate font-weight-600">{{tarea.inicio | date:'mediumDate'}}</p>
+                </mat-cell>
+            </ng-container>
+            <!--columna fin-->
+            <ng-container matColumnDef="fin">
+                <mat-header-cell *matHeaderCellDef>Fin</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <p class="text-truncate font-weight-600">{{tarea.fin | date:'mediumDate'}}</p>
+                </mat-cell>
+            </ng-container>
+            <!--columna activa-->
+            <ng-container matColumnDef="activa">
+                <mat-header-cell *matHeaderCellDef>Activa</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <p class="text-truncate font-weight-600" [innerText]= "tarea.activa ? 'Sí' : 'No'"></p>
+                </mat-cell>
+            </ng-container>
+            <!--columna completado-->
+            <ng-container matColumnDef="completada">
+                <mat-header-cell *matHeaderCellDef>Completada</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <p class="text-truncate font-weight-600" [innerText]= "tarea.completada ? 'Sí' : 'No'"></p>
+                </mat-cell>
+            </ng-container>
+            <!--columna empleado-->
+            <ng-container matColumnDef="empleado">
+                <mat-header-cell *matHeaderCellDef>Empleado</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <ng-container *ngIf="tarea.empleado; else empleadoNo">
+                        <p class="text-truncate font-weight-600">{{tarea.empleado?.nombre}} {{tarea.empleado?.apellidos}}</p>
+                    </ng-container>
+                    <ng-template #empleadoNo>
+                        <p class="text-truncate font-weight-600">Empelado no asignado</p>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+            <!--columna cliente-->
+            <ng-container matColumnDef="cliente">
+                <mat-header-cell *matHeaderCellDef>Cliente</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <ng-container *ngIf="tarea.cliente; else clienteNo">
+                        <p class="text-truncate font-weight-600">{{tarea.cliente?.nombre}}</p>
+                    </ng-container>
+                    <ng-template #clienteNo>
+                        <p class="text-truncate font-weight-600">Cliente no asignado</p>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+            <!--columna ruta-->
+            <ng-container matColumnDef="ruta">
+                <mat-header-cell *matHeaderCellDef>Ruta</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <ng-container *ngIf="tarea.ruta; else rutaNo">
+                        <p class="text-truncate font-weight-600">{{tarea.ruta?.nombre}}</p>
+                    </ng-container>
+                    <ng-template #rutaNo>
+                        <p class="text-truncate font-weight-600">Ruta no asignada</p>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+            <!--columna buttons-->
+            <ng-container matColumnDef="buttons">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <div>
+                        <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
+                                (click)="$event.stopPropagation();">
+                            <mat-icon class="secondary-text">more_vert</mat-icon>
                         </button>
                         <mat-menu #moreMenu="matMenu">
                             <button mat-menu-item aria-label="remove" [routerLink]="['/', 'tarea', { outlets: { popup: tarea.id + '/delete'} }]">
