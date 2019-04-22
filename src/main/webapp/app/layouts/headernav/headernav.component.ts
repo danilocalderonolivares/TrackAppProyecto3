@@ -35,6 +35,7 @@ export class HeadernavComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.obtenerDatosUsuarios();
         this.profileService.getProfileInfo().then(profileInfo => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;

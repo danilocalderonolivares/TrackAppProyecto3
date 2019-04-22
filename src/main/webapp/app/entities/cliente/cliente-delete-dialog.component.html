@@ -6,14 +6,23 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <p id="jhi-delete-cliente-heading">¿Esta seguro que quiere eliminar este cliente?</p>
+        <ng-container *ngIf="esPosibleBorrar === true; else elseTemplate">
+            <p id="jhi-delete-cliente-heading">¿Esta seguro que quiere eliminar este cliente?</p>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <p id="jhi-delete-cliente-heading2">Este cliente no puede ser borrar porque esta asociado a una Tarea</p>
+        </ng-template>
+
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
             <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>
         </button>
-        <button id="jhi-confirm-delete-cliente" type="submit" class="btn btn-danger">
-            <fa-icon [icon]="'times'"></fa-icon>&nbsp;<span>Eliminar</span>
-        </button>
+        <ng-container *ngIf="esPosibleBorrar === true">
+            <button id="jhi-confirm-delete-cliente" type="submit" class="btn btn-danger">
+                <fa-icon [icon]="'times'"></fa-icon>&nbsp;<span>Eliminar</span>
+            </button>
+        </ng-container>
     </div>
 </form>

@@ -26,7 +26,7 @@ export class JhiMainComponent implements OnInit {
     chatIcono = faCommentDots;
     usersIcon = faUsersCog;
     userType = faUsers;
-
+    usuarioInfo :any;
     constructor(private titleService: Title, private router: Router, private accountService: AccountService) {}
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
@@ -38,6 +38,7 @@ export class JhiMainComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.obtenerDatosUsuarios();
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 this.titleService.setTitle(this.getPageTitle(this.router.routerState.snapshot.root));
@@ -49,5 +50,8 @@ export class JhiMainComponent implements OnInit {
     }
     isAuthenticated() {
         return this.accountService.isAuthenticated();
+    }
+    obtenerDatosUsuarios(){
+        this.usuarioInfo = JSON.parse(sessionStorage.getItem('user'));
     }
 }
