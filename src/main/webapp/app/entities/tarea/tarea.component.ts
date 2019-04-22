@@ -51,6 +51,10 @@ export class TareaComponent implements OnInit, OnDestroy {
             .subscribe(
                 (res: ITarea[]) => {
                     this.tareas = res;
+                    this.dataSource = new MatTableDataSource(this.tareas);
+                    res.forEach(tarea => {
+                        console.log(tarea.inicio);
+                    });
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
