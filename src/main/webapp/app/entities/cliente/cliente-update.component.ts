@@ -99,25 +99,6 @@ export class ClienteUpdateComponent implements OnInit {
                 this.realSave();
             }
         );
-        // var i;
-        // this.clienteService.query().subscribe(
-        //     res => {
-        //         this.clientes = res.body;
-        //
-        //         for (i = 0; i < this.clientes.length; i++) {
-        //             if (this.cliente.cedula === this.clientes[i].cedula) {
-        //                 this.clienteExite = true;
-        //             } else {
-        //                 this.clienteExite = false;
-        //             }
-        //         }
-        //
-        //         this.realSave();
-        //     },
-        //     err => {
-        //         console.log(err);
-        //     }
-        // );
     }
     realSave() {
         this.isSaving = true;
