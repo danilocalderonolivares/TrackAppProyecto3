@@ -1,8 +1,9 @@
 package com.pillars.gpsapp.web.rest;
-import com.pillars.gpsapp.domain.Authority;
-import com.pillars.gpsapp.domain.Empleado;
-import com.pillars.gpsapp.domain.User;
+
+import com.pillars.gpsapp.domain.*;
+import com.pillars.gpsapp.repository.ChatRoomRepository;
 import com.pillars.gpsapp.repository.EmpleadoRepository;
+import com.pillars.gpsapp.repository.TareaRepository;
 import com.pillars.gpsapp.repository.UserRepository;
 import com.pillars.gpsapp.web.rest.errors.BadRequestAlertException;
 import com.pillars.gpsapp.web.rest.util.HeaderUtil;
@@ -16,10 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * REST controller for managing Empleado.
@@ -33,17 +31,19 @@ public class EmpleadoResource {
     private static final String ENTITY_NAME = "empleado";
 
     private final EmpleadoRepository empleadoRepository;
-    @Autowired
+
     private UserRepository userRepository;
 
-    private Empleado empleado = new Empleado();
+    private ChatRoomRepository chatRoomRepository;
 
-    private User user = new User();
+    private TareaRepository tareaRepository;
 
-    public EmpleadoResource(EmpleadoRepository empleadoRepository) {
+    public EmpleadoResource(EmpleadoRepository empleadoRepository, ChatRoomRepository chatRoomRepository, UserRepository userRepository, TareaRepository tareaRepository) {
         this.empleadoRepository = empleadoRepository;
+        this.chatRoomRepository = chatRoomRepository;
+        this.userRepository = userRepository;
+        this.tareaRepository = tareaRepository;
     }
-
 
 
     /**
@@ -60,9 +60,18 @@ public class EmpleadoResource {
             throw new BadRequestAlertException("A new empleado cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Empleado result = empleadoRepository.save(empleado);
+        addEmpleadoToGeneralChat(empleado);
         return ResponseEntity.created(new URI("/api/empleados/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    public void addEmpleadoToGeneralChat(Empleado empleado) {
+        List<ChatRoom> chatRoom = this.chatRoomRepository.findBynombre("General");
+        if (chatRoom.size() > 0) {
+            chatRoom.get(0).addMiembros(empleado);
+            this.chatRoomRepository.save(chatRoom.get(0));
+        }
     }
 
     /**
@@ -127,7 +136,7 @@ public class EmpleadoResource {
     public ResponseEntity<Void> deleteByRelationId(@PathVariable String id) {
         log.debug("REST request to delete Empleado : {}", id);
         empleadoRepository.deleteByRelationshipId(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME,id)).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
     }
 
     @GetMapping("/empleados/findByRelationshipId/{id}")
@@ -165,18 +174,19 @@ public class EmpleadoResource {
     }
 
     /**
-     *  This method extract all the employees in the system
+     * This method extract all the employees in the system
+     *
      * @param listEmp
      * @param listUsers
      * @return listEmp
      */
     private List<Empleado> ExtractEmployees(List<Empleado> listEmp, List<User> listUsers) {
         List<Empleado> listEmpFinal = new ArrayList<>();
-        for(int i = 0; i <= listUsers.size() - 1; i++){
+        for (int i = 0; i <= listUsers.size() - 1; i++) {
             User user = listUsers.get(i);
             Set<Authority> Authorities = user.getAuthorities();
-            for(Authority authority: Authorities){
-                if(authority.getName().equals("ROLE_USER")){
+            for (Authority authority : Authorities) {
+                if (authority.getName().equals("ROLE_USER")) {
                     listEmpFinal.add(listEmp.get(i));
                 }
             }
@@ -184,4 +194,40 @@ public class EmpleadoResource {
         return listEmpFinal;
     }
 
+    @GetMapping("/empleados/empleado-customized/{username}")
+    public Map<String, Object> getEmployeesCustom(@PathVariable String username) {
+        Optional user = userRepository.findOneByLogin(username);
+        User userFound = (User) user.get();
+        Optional empleado = empleadoRepository.findByRelationshipId(userFound.getId());
+
+        Map<String, Object> fullUserInfo = new HashMap<>();
+        fullUserInfo.put("user", userFound);
+        fullUserInfo.put("empleado", empleado.get());
+
+        return fullUserInfo;
+    }
+
+    @GetMapping("/empleados/get-by-approximation/{name}")
+    public List<Empleado> getByApproximation(@PathVariable String name) {
+        List<Empleado> empleados = empleadoRepository.findBynombre(".*" + name.toUpperCase() + ".*");
+
+        if (empleados.size() < 1) {
+            empleadoRepository.findBynombre(".*" + name.toLowerCase() + ".*");
+        }
+
+        filterList(empleados);
+        return empleados;
+    }
+
+    public void filterList(List<Empleado> empleados) {
+        for (int i = 0; i < empleados.size(); i++) {
+            Empleado empleado = empleados.get(i);
+            empleado.setNombre(empleado.getNombre() + ' ' + empleado.getApellidos());
+        }
+    }
+
+    @GetMapping("/empleados/get-tasks-by-employee/{id}")
+    public List<Tarea> getTasksByEmployee(@PathVariable String id) {
+        return tareaRepository.findTasksByEmployee(id);
+    }
 }

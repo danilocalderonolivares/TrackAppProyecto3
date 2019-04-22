@@ -413,6 +413,9 @@
                                                     </p>
                                                     <p th:text="#{email.activation.text1}">
                                                     </p>
+
+                                                    <p>Su nombre de usuario es <span th:text="(${user.email})"></span>, que le permitira ingresar a GPSApp</p>
+
                                                     <p>
                                                         <a style="text-decoration: none; color: #f99d1c;" th:with="url=(@{|${baseUrl}/#/reset/finish?key=${user.resetKey}|})" th:href="${url}">Presione aqu&iacute; para activar su cuenta</a>
                                                     </p>

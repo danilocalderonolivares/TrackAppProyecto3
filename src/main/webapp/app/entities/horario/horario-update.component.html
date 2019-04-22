@@ -1,104 +1,111 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-horario-heading">Crear - editar horario</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <!--<div class="form-group" [hidden]="!horario.id">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="horario.id" readonly />
-                </div>-->
-                <div class="form-group">
-                    <label class="form-control-label" for="field_nombre">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" id="field_nombre"
-                        [(ngModel)]="horario.nombre" required/>
-                    <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.nombre?.errors?.required">
-                        Este campo es requerido
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_lunesInico">Lunes Inicio</label>
-                    <input type="time" class="form-control" name="lunesInico" id="field_lunesInico"
-                        [(ngModel)]="horario.lunesInico" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_lunesFin">Lunes Fin</label>
-                    <input type="time" class="form-control" name="lunesFin" id="field_lunesFin"
-                        [(ngModel)]="horario.lunesFin" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_martesInico">Martes Inicio</label>
-                    <input type="time" class="form-control" name="martesInico" id="field_martesInico"
-                        [(ngModel)]="horario.martesInico" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_martesFin">Martes Fin</label>
-                    <input type="time" class="form-control" name="martesFin" id="field_martesFin"
-                        [(ngModel)]="horario.martesFin" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_miercolesInico">Miercoles Inicio</label>
-                    <input type="time" class="form-control" name="miercolesInico" id="field_miercolesInico"
-                        [(ngModel)]="horario.miercolesInico" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_miercolesFin">Miercoles Fin</label>
-                    <input type="time" class="form-control" name="miercolesFin" id="field_miercolesFin"
-                        [(ngModel)]="horario.miercolesFin" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_juevesInico">Jueves Inicio</label>
-                    <input type="time" class="form-control" name="juevesInico" id="field_juevesInico"
-                        [(ngModel)]="horario.juevesInico" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_juevesFin">Jueves Fin</label>
-                    <input type="time" class="form-control" name="juevesFin" id="field_juevesFin"
-                        [(ngModel)]="horario.juevesFin" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_viernesInico">Viernes Inicio</label>
-                    <input type="time" class="form-control" name="viernesInico" id="field_viernesInico"
-                        [(ngModel)]="horario.viernesInico" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_viernesFin">Viernes Fin</label>
-                    <input type="time" class="form-control" name="viernesFin" id="field_viernesFin"
-                        [(ngModel)]="horario.viernesFin" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_sabadoInico">Sabado Inicio</label>
-                    <input type="time" class="form-control" name="sabadoInico" id="field_sabadoInico"
-                        [(ngModel)]="horario.sabadoInico" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_sabadoFin">Sabado Fin</label>
-                    <input type="time" class="form-control" name="sabadoFin" id="field_sabadoFin"
-                        [(ngModel)]="horario.sabadoFin" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_domingoInico">Domingo Inicio</label>
-                    <input type="time" class="form-control" name="domingoInico" id="field_domingoInico"
-                        [(ngModel)]="horario.domingoInico" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_domingoFin">Domingo Fin</label>
-                    <input type="time" class="form-control" name="domingoFin" id="field_domingoFin"
-                        [(ngModel)]="horario.domingoFin" />
-                </div>
+<div class="justify-content-center mt-4">
+    <div class="container">
+        <form name="editForm" [formGroup]="horariosForm" novalidate (ngSubmit)="save()">
+            <div class="row">
+                <div class="col-md-12">
+                    <jhi-alert-error></jhi-alert-error>
+                    <h1 id="jhi-cliente-heading">Crear - editar horario</h1>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre horario*</mat-label>
+                        <input  matInput formControlName="nombre" [(ngModel)]="horario.nombre">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+                        <mat-error>
+                            Nombre del horario es requerido
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Lunes Inicio</mat-label>
+                        <input matInput type="time" formControlName="lunesInicio" [(ngModel)]="horario.lunesInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
 
-            </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Guardar</span>
-                </button>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Lunes Fin</mat-label>
+                        <input  matInput type="time" formControlName="lunesFin" [(ngModel)]="horario.lunesFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Martes Inicio</mat-label>
+                        <input  matInput type="time" formControlName="martesInicio" [(ngModel)]="horario.martesInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Martes Fin</mat-label>
+                        <input  matInput type="time" formControlName="martesFin" [(ngModel)]="horario.martesFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Miercoles Inicio</mat-label>
+                        <input  matInput type="time" formControlName="miercolesInicio" [(ngModel)]="horario.miercolesInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Miercoles Fin</mat-label>
+                        <input  matInput type="time" formControlName="miercolesFin" [(ngModel)]="horario.miercolesFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Jueves Inicio</mat-label>
+                        <input  matInput type="time" formControlName="juevesInicio" [(ngModel)]="horario.juevesInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Jueves Fin</mat-label>
+                        <input  matInput type="time" formControlName="juevesFin" [(ngModel)]="horario.juevesFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Viernes Inicio</mat-label>
+                        <input  matInput type="time" formControlName="viernesInicio" [(ngModel)]="horario.viernesInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Viernes Fin</mat-label>
+                        <input  matInput type="time" formControlName="viernesFin" [(ngModel)]="horario.viernesFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Sabado Inicio</mat-label>
+                        <input  matInput type="time" formControlName="sabadoInicio" [(ngModel)]="horario.sabadoInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Sabado Fin</mat-label>
+                        <input  matInput type="time" formControlName="sabadoFin" [(ngModel)]="horario.sabadoFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Domingo Inicio</mat-label>
+                        <input  matInput type="time" formControlName="domingoInicio" [(ngModel)]="horario.domingoInico">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Domingo Fin</mat-label>
+                        <input  matInput type="time" formControlName="domingoFin" [(ngModel)]="horario.domingoFin">
+                        <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+
+                    </mat-form-field>
+                    <button type="button" mat-raised-button class="btn btn-secondary" (click)="previousState()">
+                        <mat-icon matSuffix>cancel</mat-icon>
+                        Cancelar
+                    </button>
+                    <button type="submit" mat-raised-button color="primary" class="mat-raised-button mat-primary" [disabled]="horariosForm.invalid">
+                        <mat-icon matSuffix>save</mat-icon>
+                        Guardar
+                    </button>
+                </div>
             </div>
         </form>
     </div>

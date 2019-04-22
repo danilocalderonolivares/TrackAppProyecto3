@@ -15,6 +15,7 @@ import { UbicacionFormComponent } from './ubicacion/ubicacion-form.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { AgmCoreModule } from '@agm/core';
 import { MapaRutaComponent } from './mapaRutas/mapa-ruta.component';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 
 const ENTITY_STATES = [...rutaRoute, ...rutaPopupRoute];
 
@@ -26,7 +27,8 @@ const ENTITY_STATES = [...rutaRoute, ...rutaPopupRoute];
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyA6qPYcS3xkzoGTXEeljg5g_CE3m0wBTlI',
             libraries: ['places']
-        })
+        }),
+        SelectDropDownModule
     ],
     declarations: [
         RutaComponent,

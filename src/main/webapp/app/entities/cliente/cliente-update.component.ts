@@ -4,10 +4,12 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
-import { ICliente } from 'app/shared/model/cliente.model';
+import { Cliente, ICliente } from 'app/shared/model/cliente.model';
 import { ClienteService } from './cliente.service';
 import { IUbicacion } from 'app/shared/model/ubicacion.model';
 import { UbicacionService } from 'app/entities/ubicacion';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
     selector: 'jhi-cliente-update',
@@ -15,6 +17,12 @@ import { UbicacionService } from 'app/entities/ubicacion';
     styleUrls: ['./cliente.css']
 })
 export class ClienteUpdateComponent implements OnInit {
+    clienteBuscar: Cliente;
+    cedulaBuscar: string;
+    clientes: Cliente[];
+    clienteExite: boolean;
+    errorCedulaNotExists: string;
+    clienteForm: FormGroup;
     cliente: ICliente;
     isSaving: boolean;
     ubicacions: IUbicacion[];
@@ -22,6 +30,8 @@ export class ClienteUpdateComponent implements OnInit {
     // google maps zoom level
     zoom: number = 15;
     nombDireccion: string;
+    nombreClienteInput: string = 'Nombre*';
+    cedulaClienteInput: string = 'Cédula*';
 
     lat: number = 9.9359219;
     lng: number = -84.0919663761358;
@@ -31,10 +41,17 @@ export class ClienteUpdateComponent implements OnInit {
         protected jhiAlertService: JhiAlertService,
         protected clienteService: ClienteService,
         protected ubicacionService: UbicacionService,
-        protected activatedRoute: ActivatedRoute
+        protected activatedRoute: ActivatedRoute,
+        private _formBuilder: FormBuilder
     ) {}
 
     ngOnInit() {
+        this.clienteForm = this._formBuilder.group({
+            nombre: ['', Validators.required],
+            cedula: ['', Validators.required],
+            correo: ['', [Validators.required, Validators.email]],
+            direccion: ['', Validators.required]
+        });
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ cliente }) => {
             this.cliente = cliente;
@@ -64,6 +81,7 @@ export class ClienteUpdateComponent implements OnInit {
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
+        this.esEmpresaUpdate();
     }
 
     previousState() {
@@ -71,15 +89,30 @@ export class ClienteUpdateComponent implements OnInit {
     }
 
     save() {
+        this.clienteService.findbyCedula(this.cliente.cedula).subscribe(
+            res => {
+                this.clienteExite = true;
+                this.realSave();
+            },
+            err => {
+                this.clienteExite = false;
+                this.realSave();
+            }
+        );
+    }
+    realSave() {
         this.isSaving = true;
         if (this.cliente.id !== undefined) {
             this.cliente.ubicacion.id = this.idUbucacion;
             this.subscribeToSaveResponse(this.clienteService.update(this.cliente));
         } else {
-            this.subscribeToSaveResponse(this.clienteService.create(this.cliente));
+            if (this.clienteExite === false) {
+                this.subscribeToSaveResponse(this.clienteService.create(this.cliente));
+            } else {
+                this.errorCedulaNotExists = 'ERROR';
+            }
         }
     }
-
     protected subscribeToSaveResponse(result: Observable<HttpResponse<ICliente>>) {
         result.subscribe((res: HttpResponse<ICliente>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
@@ -128,6 +161,26 @@ export class ClienteUpdateComponent implements OnInit {
             (this.idUbucacion = clienteData.ubicacion.id), (this.lat = clienteData.ubicacion.latitud);
             this.lng = clienteData.ubicacion.longitud;
             this.locationChosen = true;
+        }
+    }
+    esEmpresa(result: boolean) {
+        if (result !== true) {
+            this.nombreClienteInput = 'Nombre de la empresa*';
+            this.cedulaClienteInput = 'Cédula Jurídica';
+        } else {
+            this.nombreClienteInput = 'Nombre*';
+            this.cedulaClienteInput = 'Cédula';
+        }
+    }
+    esEmpresaUpdate() {
+        if (this.cliente.id !== undefined) {
+            if (this.cliente.esEmpresa !== false) {
+                this.nombreClienteInput = 'Nombre de la empresa*';
+                this.cedulaClienteInput = 'Cédula Jurídica';
+            } else {
+                this.nombreClienteInput = 'Nombre*';
+                this.cedulaClienteInput = 'Cédula';
+            }
         }
     }
 }

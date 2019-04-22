@@ -1,30 +1,63 @@
+<!--<div class="row justify-content-center">-->
+    <!--<div class="col-8">-->
+        <!--<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">-->
+            <!--<h2 id="jhi-ruta-heading">Crear o editar rutas</h2>-->
+            <!--<div>-->
+                <!--<jhi-alert-error></jhi-alert-error>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_nombre">Nombre</label>-->
+                    <!--<input type="text" class="form-control" name="nombre" id="field_nombre"-->
+                           <!--[(ngModel)]="ruta.nombre" required/>-->
+                    <!--<div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">-->
+                        <!--<small class="form-text text-danger"-->
+                               <!--[hidden]="!editForm.controls.nombre?.errors?.required">-->
+                            <!--Este campo es requerido.-->
+                        <!--</small>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" for="field_descripcion">Descripción</label>-->
+                    <!--<input type="text" class="form-control" name="descripcion" id="field_descripcion"-->
+                           <!--[(ngModel)]="ruta.descripcion" />-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="field_ubicaciones">Ubicaciones</label>-->
+                    <!--<select class="form-control" id="field_ubicaciones" multiple name="ubicaciones">-->
+                        <!--<option *ngFor="let ubicacionOption of ubicaciones" (click)="onUbicationClicked()">{{ubicacionOption.nombreDireccion}}</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">-->
+                    <!--<fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>-->
+                <!--</button>-->
+                <!--<button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">-->
+                    <!--<fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Guardar</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</form>-->
+    <!--</div>-->
+<!--</div>-->
+
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+        <form name="editForm" [formGroup]="rutaForm" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <h2 id="jhi-ruta-heading">Crear o editar rutas</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <!--<div class="form-group" [hidden]="!ruta.id">-->
-                    <!--<label for="id">ID</label>-->
-                    <!--<input type="text" class="form-control" id="id" name="id"-->
-                           <!--[(ngModel)]="ruta.id" readonly />-->
-                <!--</div>-->
-                <div class="form-group">
-                    <label class="form-control-label" for="field_nombre">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" id="field_nombre"
-                           [(ngModel)]="ruta.nombre" required/>
-                    <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
-                        <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.nombre?.errors?.required">
-                            Este campo es requerido.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_descripcion">Descripción</label>
-                    <input type="text" class="form-control" name="descripcion" id="field_descripcion"
-                           [(ngModel)]="ruta.descripcion" />
-                </div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre" [(ngModel)]="ruta.nombre">
+                    <mat-icon matSuffix class="secondary-text">location_city</mat-icon>
+                    <mat-error *ngIf="rutaForm.get('nombre').hasError('required')">
+                        Este campo es requerido
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Descripción</mat-label>
+                    <input matInput formControlName="descripcion" [(ngModel)]="ruta.descripcion">
+                    <mat-icon matSuffix class="secondary-text">library_books</mat-icon>
+                </mat-form-field>
                 <div class="form-group">
                     <label for="field_ubicaciones">Ubicaciones</label>
                     <select class="form-control" id="field_ubicaciones" multiple name="ubicaciones">
@@ -32,14 +65,19 @@
                     </select>
                 </div>
             </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Guardar</span>
-                </button>
-            </div>
+            <button type="button"
+                    mat-raised-button
+                    class="btn btn-secondary"
+                    (click)="previousState()">
+                <mat-icon matSuffix>cancel</mat-icon>
+                Cancelar
+            </button >
+            <button type="submit"
+                    mat-raised-button color="primary" class="mat-raised-button mat-primary"
+                    [disabled]="rutaForm.invalid">
+                <mat-icon matSuffix>save</mat-icon>
+                Guardar
+            </button>
         </form>
     </div>
 </div>

@@ -5,8 +5,13 @@ import { IUbicacion } from 'app/shared/model/ubicacion.model';
 import { IRuta } from 'app/shared/model/ruta.model';
 import { RutaService } from '../ruta.service';
 import { Ubicacion } from 'app/shared/model/ubicacion.model';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ICliente } from 'app/shared/model/cliente.model';
+import { ClienteService } from 'app/entities/cliente';
+import { filter, map } from 'rxjs/operators';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { MapService } from 'app/shared/map/map.service';
 
 @Component({
     selector: 'jhi-ubicacion-form',
@@ -14,12 +19,16 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
     providers: [NgbModalConfig, NgbModal]
 })
 export class UbicacionFormComponent implements OnInit, OnDestroy {
+    ubicationForm: FormGroup;
     isSaving: boolean;
     @ViewChild('editForm') form: NgForm;
     public editOrDelete = false;
     addedUbication = false;
     index: number = 0;
     @ViewChild('content') modal: HTMLElement;
+    clientes: ICliente[];
+    cliente: ICliente;
+    config: any;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
@@ -27,36 +36,49 @@ export class UbicacionFormComponent implements OnInit, OnDestroy {
         protected activatedRoute: ActivatedRoute,
         protected router: Router,
         config: NgbModalConfig,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        protected clienteService: ClienteService,
+        protected mapService: MapService,
+        private _formBuilder: FormBuilder
     ) {
         config.backdrop = 'static';
         config.keyboard = false;
     }
 
     ngOnInit() {
-        if (this.rutaService.ubicaciones.length > 0) {
+        this.ubicationForm = this._formBuilder.group({
+            nombreDireccion: ['', Validators.required],
+            latitud: ['', Validators.required],
+            longitud: ['', Validators.required]
+        });
+
+        if (this.mapService.ubications.length > 0) {
             this.addedUbication = true;
         }
+        this.setClientes();
     }
 
     ngOnDestroy() {
         this.form.reset();
-        this.rutaService.ubication = new Ubicacion();
+        this.mapService.ubication = new Ubicacion();
+        this.mapService.ubications = new Array();
         this.editOrDelete = false;
     }
 
     previousState() {
-        localStorage.setItem('currentUbications', JSON.stringify(this.rutaService.ubicaciones));
+        localStorage.setItem('currentUbications', JSON.stringify(this.mapService.ubications));
         this.form.reset();
-        this.rutaService.ubicaciones = JSON.parse(localStorage.getItem('currentUbications'));
-        this.rutaService.ubication = new Ubicacion();
+        this.mapService.ubications = JSON.parse(localStorage.getItem('currentUbications'));
+        localStorage.removeItem('currentUbications');
+        this.mapService.ubication = new Ubicacion();
         this.editOrDelete = false;
+        this.cliente = null;
     }
 
     protected saveUbication() {
         this.isSaving = false;
         if (!this.checkIfExist()) {
-            this.rutaService.ubicaciones.push(this.rutaService.ubication);
+            this.mapService.ubications.push(this.mapService.ubication);
             this.previousState();
             this.addedUbication = true;
         }
@@ -87,11 +109,11 @@ export class UbicacionFormComponent implements OnInit, OnDestroy {
 
     checkIfExist() {
         let exist = false;
-        if (this.rutaService.ubicaciones !== null) {
-            this.rutaService.ubicaciones.forEach(myUbication => {
+        if (this.mapService.ubications !== null) {
+            this.mapService.ubications.forEach(myUbication => {
                 if (
-                    myUbication.latitud === this.rutaService.ubication.latitud &&
-                    myUbication.longitud === this.rutaService.ubication.longitud
+                    myUbication.latitud === this.mapService.ubication.latitud &&
+                    myUbication.longitud === this.mapService.ubication.longitud
                 ) {
                     exist = true;
                     this.modalService.open(this.modal);
@@ -102,45 +124,83 @@ export class UbicacionFormComponent implements OnInit, OnDestroy {
     }
 
     onSelectedUbication(ubi: IUbicacion, i: number) {
-        this.rutaService.ubication.latitud = ubi.latitud;
-        this.rutaService.ubication.longitud = ubi.longitud;
-        this.rutaService.ubication.nombreDireccion = ubi.nombreDireccion;
+        this.mapService.ubication.latitud = ubi.latitud;
+        this.mapService.ubication.longitud = ubi.longitud;
+        this.mapService.ubication.nombreDireccion = ubi.nombreDireccion;
         this.index = i;
         this.editOrDelete = true;
     }
 
     protected updateUbication() {
-        this.rutaService.ubicaciones[this.index] = this.rutaService.ubication;
+        this.mapService.ubications[this.index] = this.mapService.ubication;
         this.previousState();
         this.editOrDelete = false;
     }
 
     deleteUbication() {
-        for (let i = 0; i <= this.rutaService.ubicaciones.length; i++) {
+        for (let i = 0; i <= this.mapService.ubications.length; i++) {
             if (
-                this.rutaService.ubicaciones[i].nombreDireccion === this.rutaService.ubication.nombreDireccion &&
-                this.rutaService.ubicaciones[i].latitud === this.rutaService.ubication.latitud &&
-                this.rutaService.ubicaciones[i].longitud === this.rutaService.ubication.longitud
+                this.mapService.ubications[i].nombreDireccion === this.mapService.ubication.nombreDireccion &&
+                this.mapService.ubications[i].latitud === this.mapService.ubication.latitud &&
+                this.mapService.ubications[i].longitud === this.mapService.ubication.longitud
             ) {
-                this.rutaService.ubicaciones.splice(i, 1);
+                this.mapService.ubications.splice(i, 1);
                 break;
             }
         }
 
         this.previousState();
         this.editOrDelete = false;
-        if (this.rutaService.ubicaciones.length === 0 || this.rutaService.ubicaciones === null) {
+        if (this.mapService.ubications.length === 0 || this.mapService.ubications === null) {
             this.addedUbication = false;
         }
     }
 
     onFillList() {
-        localStorage.setItem('currentUbications', JSON.stringify(this.rutaService.ubicaciones));
-        this.rutaService.ubicaciones = new Array();
+        localStorage.setItem('currentUbications', JSON.stringify(this.mapService.ubications));
+        this.mapService.ubications = new Array();
         if (this.rutaService.onEdition) {
             window.history.back();
         } else {
             this.router.navigate(['/ruta/new']);
         }
+    }
+
+    setClientes() {
+        this.clienteService
+            .query({ filter: 'tarea-is-null' })
+            .pipe(
+                filter((mayBeOk: HttpResponse<ICliente[]>) => mayBeOk.ok),
+                map((response: HttpResponse<ICliente[]>) => response.body)
+            )
+            .subscribe(
+                (res: ICliente[]) => {
+                    this.clientes = res;
+                    this.config = {
+                        displayKey: 'nombre',
+                        search: true,
+                        height: '210px',
+                        placeholder: 'dirección cliente',
+                        customComparator: () => {},
+                        limitTo: this.clientes.length,
+                        moreText: 'más',
+                        noResultsFound: 'No se encontraron resultados!',
+                        searchPlaceholder: 'ingrese el nombre del cliente',
+                        searchOnKey: 'nombre'
+                    };
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+
+    trackClienteById(index: number, item: ICliente) {
+        return item.id;
+    }
+
+    onChangeClient(cliente: ICliente) {
+        this.cliente = cliente;
+        this.mapService.ubication.latitud = cliente.ubicacion.latitud;
+        this.mapService.ubication.longitud = cliente.ubicacion.longitud;
+        this.mapService.ubication.nombreDireccion = cliente.ubicacion.nombreDireccion;
     }
 }

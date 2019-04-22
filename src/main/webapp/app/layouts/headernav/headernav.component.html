@@ -1,0 +1,62 @@
+<ng-container *ngIf="isAuthenticated() != false; else elseTemplate">
+    <mat-toolbar id="mainToolbar" color="primary">
+        <div>
+            <button mat-icon-button (click)="onToolbarMenuToggle()">
+                <mat-icon>
+                    menu
+                </mat-icon>
+            </button>
+        </div>
+        <div>
+            <div>
+                <a routerLink="/" style="text-decoration: none;color: white;">GPSApp</a>
+            </div>
+        </div>
+        <div fxFlex fxLayout fxLayoutAlign="flex-end">
+            <button mat-button [matMenuTriggerFor]="userMenu"
+                    class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <mat-icon>account_circle</mat-icon>
+                    <span class="mr-12" fxHide fxShow.gt-sm>{{usuarioInfo.login}}</span>
+                    <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+                </div>
+            </button>
+            <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+                <button mat-menu-item routerLink="/chat">
+                    <mat-icon>chat</mat-icon>
+                    <span>Chat</span>
+                </button>
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>
+                        exit_to_app
+                    </mat-icon>
+                    <span>Salir</span>
+                </button>
+            </mat-menu>
+
+        </div>
+    </mat-toolbar>
+</ng-container>
+<ng-template #elseTemplate>
+
+    <link rel="stylesheet" href="../../content/css/bootstrap.min.css">
+    <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+        <div class="container">
+            <a class="navbar-brand" routerLink="/">GPSApp</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"></button>
+            <div [ngSwitch]="isAuthenticated()">
+                <div class="collapse navbar-collapse" id="navcol-1" *ngSwitchCase="false">
+                    <a class="btn btn-primary ml-auto" role="button" (click)="login()" style="color: white" id="login">
+                   <span>
+                       <span>
+                           <fa-icon [icon]="entrat"></fa-icon>
+                                    Entrar
+                       </span>
+                   </span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+</ng-template>

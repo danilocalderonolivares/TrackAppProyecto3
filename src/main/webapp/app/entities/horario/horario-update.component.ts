@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { IHorario } from 'app/shared/model/horario.model';
 import { HorarioService } from './horario.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'jhi-horario-update',
@@ -13,10 +13,29 @@ import { HorarioService } from './horario.service';
 export class HorarioUpdateComponent implements OnInit {
     horario: IHorario;
     isSaving: boolean;
+    horariosForm: FormGroup;
 
-    constructor(protected horarioService: HorarioService, protected activatedRoute: ActivatedRoute) {}
+    constructor(protected horarioService: HorarioService, protected activatedRoute: ActivatedRoute, private _formBuilder: FormBuilder) {}
 
     ngOnInit() {
+        this.horariosForm = this._formBuilder.group({
+            nombre: ['', Validators.required],
+            lunesInicio: [''],
+            lunesFin: [''],
+            martesInicio: [''],
+            martesFin: [''],
+            miercolesInicio: [''],
+            miercolesFin: [''],
+            juevesInicio: [''],
+            juevesFin: [''],
+            viernesInicio: [''],
+            viernesFin: [''],
+            sabadoInicio: [''],
+            sabadoFin: [''],
+            domingoInicio: [''],
+            domingoFin: ['']
+        });
+
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ horario }) => {
             this.horario = horario;

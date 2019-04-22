@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-
 import { VERSION } from 'app/app.constants';
 import { AccountService, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
@@ -10,9 +9,10 @@ import { faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 @Component({
     selector: 'jhi-navbar',
     templateUrl: './navbar.component.html',
-    styleUrls: ['navbar.scss']
+    styleUrls: ['./navbar.scss']
 })
 export class NavbarComponent implements OnInit {
+    @Output() sidenavToggle = new EventEmitter<void>();
     inProduction: boolean;
     isNavbarCollapsed: boolean;
     languages: any[];
@@ -21,6 +21,8 @@ export class NavbarComponent implements OnInit {
     version: string;
     salir = faSignOutAlt;
     entrat = faSignInAlt;
+    isMenuOpen = true;
+    contentMargin = 240;
     constructor(
         private loginService: LoginService,
         private accountService: AccountService,
@@ -58,11 +60,14 @@ export class NavbarComponent implements OnInit {
         this.router.navigate(['']);
     }
 
-    toggleNavbar() {
-        this.isNavbarCollapsed = !this.isNavbarCollapsed;
-    }
-
-    getImageUrl() {
-        return this.isAuthenticated() ? this.accountService.getImageUrl() : null;
+    // toggleNavbar() {
+    //     this.isNavbarCollapsed = !this.isNavbarCollapsed;
+    // }
+    //
+    // getImageUrl() {
+    //     return this.isAuthenticated() ? this.accountService.getImageUrl() : null;
+    // }
+    onToolbarMenuToggle() {
+        this.sidenavToggle.emit();
     }
 }

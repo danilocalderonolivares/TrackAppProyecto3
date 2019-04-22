@@ -2,12 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
-import { IRuta, Ruta } from 'app/shared/model/ruta.model';
+import { IRuta } from 'app/shared/model/ruta.model';
 import { RutaService } from './ruta.service';
 import { IUbicacion } from 'app/shared/model/ubicacion.model';
 import { UbicacionService } from 'app/entities/ubicacion';
+import { MapService } from 'app/shared/map/map.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'jhi-ruta-update',
@@ -17,16 +18,23 @@ export class RutaUpdateComponent implements OnInit, OnDestroy {
     ruta: IRuta;
     isSaving: boolean;
     ubicaciones: IUbicacion[];
+    rutaForm: FormGroup;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected rutaService: RutaService,
         protected ubicacionService: UbicacionService,
         protected activatedRoute: ActivatedRoute,
-        protected router: Router
+        protected router: Router,
+        protected mapService: MapService,
+        private _formBuilder: FormBuilder
     ) {}
 
     ngOnInit() {
+        this.rutaForm = this._formBuilder.group({
+            nombre: ['', Validators.required],
+            descripcion: []
+        });
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ ruta }) => {
             this.ruta = ruta;
@@ -35,7 +43,7 @@ export class RutaUpdateComponent implements OnInit, OnDestroy {
             this.ubicaciones = this.ruta.ubicaciones;
             this.rutaService.onEdition = true;
             if (JSON.parse(localStorage.getItem('currentUbications')) !== null) {
-                this.ubicaciones = this.ubicaciones = JSON.parse(localStorage.getItem('currentUbications'));
+                this.ubicaciones = JSON.parse(localStorage.getItem('currentUbications'));
             }
         } else {
             if (JSON.parse(localStorage.getItem('currentUbications')) === null) {
@@ -92,7 +100,7 @@ export class RutaUpdateComponent implements OnInit, OnDestroy {
     }
 
     onUbicationClicked() {
-        this.rutaService.ubicaciones = this.ubicaciones;
+        this.mapService.ubications = this.ubicaciones;
         this.router.navigate(['ruta/add-ubications']);
     }
 }

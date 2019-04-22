@@ -3,7 +3,6 @@ import 'core-js/es6/reflect';
 import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,7 +10,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { NgJhipsterModule } from 'ng-jhipster';
-
+import { ChatService } from 'app/webcustom/chat/chat.service';
 import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
 import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
 import { ErrorHandlerInterceptor } from './blocks/interceptor/errorhandler.interceptor';
@@ -25,16 +24,21 @@ import { GpsAppEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 import { GpsAppWebCustomModule } from './webcustom/web-custom.module';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+import 'hammerjs';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { LandingComponent } from './layouts/landing/landing.component';
-import { MapaService } from './webcustom/empleados/mapa/mapa.service';
+import { MapService } from './shared/map/map.service';
 import { FormsModule } from '@angular/forms';
+import { HeadernavComponent } from './layouts/headernav/headernav.component';
 
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
         BrowserAnimationsModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-' }),
         NgJhipsterModule.forRoot({
@@ -59,7 +63,8 @@ import { FormsModule } from '@angular/forms';
         PageRibbonComponent,
         FooterComponent,
         SidebarComponent,
-        LandingComponent
+        LandingComponent,
+        HeadernavComponent
     ],
     providers: [
         {
@@ -82,7 +87,8 @@ import { FormsModule } from '@angular/forms';
             useClass: NotificationInterceptor,
             multi: true
         },
-        MapaService
+        MapService,
+        ChatService
     ],
     bootstrap: [JhiMainComponent]
 })

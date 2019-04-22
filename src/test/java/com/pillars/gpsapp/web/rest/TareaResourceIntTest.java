@@ -3,6 +3,7 @@ package com.pillars.gpsapp.web.rest;
 import com.pillars.gpsapp.GpsApp;
 
 import com.pillars.gpsapp.domain.Tarea;
+import com.pillars.gpsapp.repository.SubTareaRepository;
 import com.pillars.gpsapp.repository.TareaRepository;
 import com.pillars.gpsapp.web.rest.errors.ExceptionTranslator;
 
@@ -78,6 +79,7 @@ public class TareaResourceIntTest {
 
     @Autowired
     private TareaRepository tareaRepository;
+    private SubTareaRepository subTareaRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -98,7 +100,7 @@ public class TareaResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final TareaResource tareaResource = new TareaResource(tareaRepository);
+        final TareaResource tareaResource = new TareaResource(tareaRepository,subTareaRepository);
         this.restTareaMockMvc = MockMvcBuilders.standaloneSetup(tareaResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
