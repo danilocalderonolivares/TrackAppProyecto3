@@ -8,6 +8,7 @@ import { colors } from './colors';
 import { ITarea } from 'app/shared/model/tarea.model';
 import { TareaService } from 'app/entities/tarea/tarea.service';
 import { JhiAlertService } from 'ng-jhipster';
+import * as moment from 'moment';
 
 import { SERVER_API_URL } from 'app/app.constants';
 
@@ -65,10 +66,14 @@ export class CalendarComponent implements OnInit {
             map((res: ITarea[]) => {
                 if (res) {
                     return res.map((tarea: ITarea) => {
+                        const inicioMoment = moment(tarea.inicio);
+                        const inicio = inicioMoment.toDate();
+                        const finMoment = moment(tarea.fin);
+                        const fin = finMoment.toDate();
                         const calendarEventToAdd: CalendarEvent = {
                             title: tarea.title,
-                            start: new Date(tarea.inicio + getTimezoneOffsetString(this.viewDate)),
-                            end: new Date(tarea.fin + getTimezoneOffsetString(this.viewDate)),
+                            start: inicio,
+                            end: fin,
                             color: colors.yellow,
                             meta: {
                                 tarea

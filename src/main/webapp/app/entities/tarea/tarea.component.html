@@ -80,6 +80,18 @@
                     </ng-template>
                 </mat-cell>
             </ng-container>
+            <!--columna ubicacion-->
+            <ng-container matColumnDef="ubicacion">
+                <mat-header-cell *matHeaderCellDef>Ubicación</mat-header-cell>
+                <mat-cell *matCellDef="let tarea">
+                    <ng-container *ngIf="tarea.ubicacion; else rutaNo">
+                        <p class="text-truncate font-weight-600">{{tarea.ubicacion?.nombreDireccion}}</p>
+                    </ng-container>
+                    <ng-template #rutaNo>
+                        <p class="text-truncate font-weight-600">Ubicacion no asignada</p>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
             <!--columna ruta-->
             <ng-container matColumnDef="ruta">
                 <mat-header-cell *matHeaderCellDef>Ruta</mat-header-cell>
