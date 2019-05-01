@@ -91,7 +91,7 @@ jhipster:
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: GPSApp@localhost
-        base-url: http://50.116.45.115:8080
+        base-url: http://localhost:8080
     metrics:
         logs: # Reports metrics in the logs
             enabled: false

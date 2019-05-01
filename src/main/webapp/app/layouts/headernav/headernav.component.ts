@@ -22,7 +22,8 @@ export class HeadernavComponent implements OnInit {
     entrat = faSignInAlt;
     isMenuOpen = true;
     contentMargin = 240;
-    usuarioInfo :any;
+    usuarioInfo: any = '';
+
     constructor(
         private loginService: LoginService,
         private accountService: AccountService,
@@ -35,32 +36,38 @@ export class HeadernavComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.obtenerDatosUsuarios();
+        this.usuarioInfo = JSON.parse(sessionStorage.getItem('user'));
         this.profileService.getProfileInfo().then(profileInfo => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
-        this.obtenerDatosUsuarios();
+        // this.obtenerDatosUsuarios();
     }
+
     collapseNavbar() {
         this.isNavbarCollapsed = true;
     }
+
     isAuthenticated() {
         return this.accountService.isAuthenticated();
     }
+
     login() {
         this.modalRef = this.loginModalService.open();
         // this.router.navigate(['/login']);
     }
+
     logout() {
         this.collapseNavbar();
         this.loginService.logout();
         this.router.navigate(['']);
     }
+
     onToolbarMenuToggle() {
         this.sidenavToggle.emit();
     }
-    obtenerDatosUsuarios(){
+
+    obtenerDatosUsuarios() {
         this.usuarioInfo = JSON.parse(sessionStorage.getItem('user'));
     }
 }
