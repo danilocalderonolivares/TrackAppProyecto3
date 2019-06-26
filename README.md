@@ -1,5 +1,5 @@
 # GPSApp
-this proyect will be develop by Pillars.
+this proyect will be developed by Pillars.
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
